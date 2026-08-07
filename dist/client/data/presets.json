@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "presets": [
+    {
+      "id": "preset-office-fresh",
+      "name": "办公室清爽版",
+      "description": "办公场景 · 坐姿 · 轻松自然",
+      "selectedIds": ["office", "sitting", "casual", "high-angle", "centered", "look-camera", "loose-hair", "clean-background"],
+      "fixedIds": ["natural-proportions", "real-texture"],
+      "order": 1
+    },
+    {
+      "id": "preset-home-overhead",
+      "name": "居家俯拍版",
+      "description": "卧室场景 · 俯拍 · 松弛感",
+      "selectedIds": ["bedroom", "sitting", "tshirt", "overhead", "portrait", "relaxed", "natural-flyaway", "real-texture"],
+      "fixedIds": ["natural-proportions", "keep-face-shape"],
+      "order": 2
+    },
+    {
+      "id": "preset-outdoor-full",
+      "name": "户外全身版",
+      "description": "户外场景 · 全身 · 主体突出",
+      "selectedIds": ["outdoors", "standing", "casual", "full-body", "full-body-in-frame", "subject-90", "natural-face", "ponytail"],
+      "fixedIds": ["natural-proportions", "real-texture"],
+      "order": 3
+    },
+    {
+      "id": "preset-kitchen-life",
+      "name": "厨房生活感",
+      "description": "厨房场景 · 亲近视角 · 日常记录",
+      "selectedIds": ["kitchen", "standing", "tshirt", "boyfriend", "centered", "natural-face", "loose-hair", "lived-in"],
+      "fixedIds": ["natural-proportions", "real-texture", "clean-background"],
+      "order": 4
+    }
+  ]
+}
