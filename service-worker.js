@@ -1,18 +1,54 @@
-const CACHE_NAME = "prompt-library-v1.1.2";
+const CACHE_NAME = "prompt-library-v1.1.3";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./css/app.css",
-  "./js/app.js",
+  "./css/app.css?v=1.1.3",
+  "./js/app.js?v=1.1.3",
   "./js/db.js",
   "./js/prompt-builder.js",
   "./js/templates.js",
   "./js/settings.js",
-  "./data/keywords.json",
-  "./data/presets.json",
-  "./manifest.json",
+  "./data/keywords.json?v=1.1.3",
+  "./data/presets.json?v=1.1.3",
+  "./manifest.json?v=1.1.3",
   "./icons/icon.svg"
 ];
+
+const NETWORK_FIRST_PATHS = [
+  "/index.html",
+  "/data/keywords.json",
+  "/data/presets.json",
+  "/manifest.json"
+];
+
+async function rememberResponse(request, response) {
+  if (response?.ok) {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.put(request, response.clone());
+  }
+  return response;
+}
+
+async function networkFirst(request) {
+  try {
+    return await rememberResponse(request, await fetch(request, { cache: "no-store" }));
+  } catch {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    if (request.mode === "navigate") return caches.match("./index.html");
+    return Response.error();
+  }
+}
+
+async function cacheFirst(request) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+  try {
+    return await rememberResponse(request, await fetch(request));
+  } catch {
+    return caches.match("./index.html");
+  }
+}
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -35,18 +71,8 @@ self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
   if (requestUrl.origin !== self.location.origin) return;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((response) => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-          }
-          return response;
-        })
-        .catch(() => caches.match("./index.html"));
-    })
-  );
+  const useNetworkFirst = event.request.mode === "navigate"
+    || NETWORK_FIRST_PATHS.some((path) => requestUrl.pathname.endsWith(path));
+
+  event.respondWith(useNetworkFirst ? networkFirst(event.request) : cacheFirst(event.request));
 });

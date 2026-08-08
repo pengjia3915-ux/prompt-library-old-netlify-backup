@@ -11,6 +11,7 @@ import {
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
+const APP_ASSET_VERSION = "1.1.3";
 
 const app = {
   config: { groups: [] },
@@ -670,8 +671,8 @@ function updateConnectionStatus() {
 
 async function loadConfig() {
   const [keywordsResponse, presetsResponse] = await Promise.all([
-    fetch("data/keywords.json"),
-    fetch("data/presets.json")
+    fetch(`data/keywords.json?v=${APP_ASSET_VERSION}`),
+    fetch(`data/presets.json?v=${APP_ASSET_VERSION}`)
   ]);
   if (!keywordsResponse.ok || !presetsResponse.ok) throw new Error("配置文件加载失败");
   const [keywords, presets] = await Promise.all([keywordsResponse.json(), presetsResponse.json()]);
@@ -682,7 +683,18 @@ async function loadConfig() {
 async function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
   try {
-    await navigator.serviceWorker.register("service-worker.js");
+    const hadController = Boolean(navigator.serviceWorker.controller);
+    let reloadingForUpdate = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!hadController || reloadingForUpdate) return;
+      reloadingForUpdate = true;
+      window.location.reload();
+    });
+
+    const registration = await navigator.serviceWorker.register(`service-worker.js?v=${APP_ASSET_VERSION}`, {
+      updateViaCache: "none"
+    });
+    await registration.update();
   } catch {
     // 本地 file:// 或不支持 Service Worker 的环境不影响核心组合功能。
   }
