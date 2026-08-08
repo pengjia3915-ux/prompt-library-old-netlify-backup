@@ -38,14 +38,17 @@
       "multiple": false,
       "items": [
         { "id": "body-natural", "label": "自然身形", "text": "人物保持自然真实、比例协调的身形，身体轮廓健康自然，不刻意夸张", "featured": false, "order": 1 },
-        { "id": "body-balanced", "label": "匀称身形", "text": "人物呈自然匀称的身形，肩、腰、胯与四肢比例协调，体态健康真实", "featured": true, "order": 2 },
+        { "id": "body-balanced", "label": "匀称身形", "text": "人物呈自然匀称的身形，肩、腰、胯与四肢比例协调，体态健康真实", "featured": false, "order": 2 },
         { "id": "body-slim", "label": "纤细身形", "text": "人物呈自然纤细的身形，肩腰胯比例协调，避免过度消瘦和不真实变形", "featured": false, "order": 3 },
         { "id": "body-long-limbed", "label": "修长身形", "text": "人物呈自然修长的身形，头身比和四肢长度协调，避免不合理拉伸", "featured": false, "order": 4 },
         { "id": "body-tall", "label": "高挑身形", "text": "人物整体身形自然高挑，头身比与腿身比例协调，保持真实透视关系", "featured": false, "order": 5 },
         { "id": "body-petite", "label": "娇小身形", "text": "人物身形自然娇小，四肢与身体比例协调，保持真实轻盈的体态", "featured": false, "order": 6 },
-        { "id": "body-curvy", "label": "自然曲线", "text": "人物身材曲线自然柔和，腰胯比例真实，不过度强调或夸张塑形", "featured": false, "order": 7 },
-        { "id": "body-soft", "label": "柔和微肉", "text": "人物呈自然柔和的微肉身形，身体轮廓真实自然，不刻意削瘦或夸大", "featured": false, "order": 8 },
-        { "id": "body-athletic", "label": "运动健美", "text": "人物呈自然健康、紧实有力量感的运动身形，肌肉线条适度真实", "featured": false, "order": 9 }
+        { "id": "body-voluptuous", "label": "健康丰腴", "text": "主体为20岁以上成年女性模特，整体身形健康丰腴、圆润匀称，上半身轮廓自然饱满，腰线清晰，身体曲线流畅，比例协调，呈现成熟自信的商业时尚气质", "featured": true, "order": 7 },
+        { "id": "body-hourglass", "label": "沙漏轮廓", "text": "主体为20岁以上成年女性模特，肩、腰、胯形成自然流畅的沙漏型整体轮廓，腰线清晰、曲线圆润协调，保持真实人体结构", "featured": false, "order": 8 },
+        { "id": "body-mature-curves", "label": "成熟曲线", "text": "主体为20岁以上成年女性模特，整体体态成熟丰润，曲线感清晰但表达克制，肩颈舒展、腰线自然，呈现高级女性美", "featured": false, "order": 9 },
+        { "id": "body-curvy", "label": "自然曲线", "text": "主体为20岁以上成年女性模特，身体呈自然柔和的 S 型整体节奏，肩、腰、胯比例协调，姿态优雅从容，不以身体局部作为画面焦点", "featured": false, "order": 10 },
+        { "id": "body-soft", "label": "柔和微肉", "text": "人物呈自然柔和的微肉身形，身体轮廓真实自然，不刻意削瘦或夸大", "featured": false, "order": 11 },
+        { "id": "body-athletic", "label": "运动健美", "text": "人物呈自然健康、紧实有力量感的运动身形，肌肉线条适度真实", "featured": false, "order": 12 }
       ]
     },
     {
@@ -125,7 +128,8 @@
         { "id": "real-texture", "label": "保持真实摄影质感", "text": "保持真实摄影质感、自然光影和可信的材质细节", "featured": false, "order": 4 },
         { "id": "natural-proportions", "label": "保持人体比例", "text": "保持自然真实的人体比例，避免肢体变形", "featured": false, "order": 5 },
         { "id": "keep-face-shape", "label": "保持人物脸型", "text": "保持人物原有脸型和五官比例，不做明显改变", "featured": false, "order": 6 },
-        { "id": "clean-background", "label": "优化背景干净度", "text": "适度优化背景干净度，但不要抹去真实环境层次", "featured": false, "order": 7 }
+        { "id": "clean-background", "label": "优化背景干净度", "text": "适度优化背景干净度，但不要抹去真实环境层次", "featured": false, "order": 7 },
+        { "id": "commercial-fashion", "label": "商业时尚表达", "text": "画面采用得体克制的商业时尚摄影表达，服装剪裁合身但不过度暴露，重点表现人物整体气质、姿态和服装质感，避免挑逗动作、低机位凝视视角和身体部位特写", "featured": false, "order": 8 }
       ]
     },
     {
