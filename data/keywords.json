@@ -33,6 +33,22 @@
       ]
     },
     {
+      "id": "body",
+      "name": "身材",
+      "multiple": false,
+      "items": [
+        { "id": "body-natural", "label": "自然身形", "text": "人物保持自然真实、比例协调的身形，身体轮廓健康自然，不刻意夸张", "featured": false, "order": 1 },
+        { "id": "body-balanced", "label": "匀称身形", "text": "人物呈自然匀称的身形，肩、腰、胯与四肢比例协调，体态健康真实", "featured": true, "order": 2 },
+        { "id": "body-slim", "label": "纤细身形", "text": "人物呈自然纤细的身形，肩腰胯比例协调，避免过度消瘦和不真实变形", "featured": false, "order": 3 },
+        { "id": "body-long-limbed", "label": "修长身形", "text": "人物呈自然修长的身形，头身比和四肢长度协调，避免不合理拉伸", "featured": false, "order": 4 },
+        { "id": "body-tall", "label": "高挑身形", "text": "人物整体身形自然高挑，头身比与腿身比例协调，保持真实透视关系", "featured": false, "order": 5 },
+        { "id": "body-petite", "label": "娇小身形", "text": "人物身形自然娇小，四肢与身体比例协调，保持真实轻盈的体态", "featured": false, "order": 6 },
+        { "id": "body-curvy", "label": "自然曲线", "text": "人物身材曲线自然柔和，腰胯比例真实，不过度强调或夸张塑形", "featured": false, "order": 7 },
+        { "id": "body-soft", "label": "柔和微肉", "text": "人物呈自然柔和的微肉身形，身体轮廓真实自然，不刻意削瘦或夸大", "featured": false, "order": 8 },
+        { "id": "body-athletic", "label": "运动健美", "text": "人物呈自然健康、紧实有力量感的运动身形，肌肉线条适度真实", "featured": false, "order": 9 }
+      ]
+    },
+    {
       "id": "outfit",
       "name": "穿搭",
       "multiple": true,

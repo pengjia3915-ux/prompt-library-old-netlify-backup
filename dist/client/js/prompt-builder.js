@@ -3,6 +3,7 @@ export const BASE_SUBJECT_TEXT = "主体为一名人物，整体画面自然真�
 const GROUP_ORDER = [
   "scene",
   "pose",
+  "body",
   "outfit",
   "camera",
   "composition",
