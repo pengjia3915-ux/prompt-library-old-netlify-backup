@@ -636,6 +636,13 @@ button:disabled {
   margin: 10px 0 24px;
 }
 
+.page-heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .page-heading h2 {
   font-size: clamp(1.7rem, 5vw, 2.2rem);
 }
@@ -700,6 +707,71 @@ button:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+}
+
+.knowledge-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  align-items: start;
+  gap: 14px;
+}
+
+.knowledge-card {
+  display: flex;
+  min-height: 250px;
+  flex-direction: column;
+  padding: 17px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 252, 247, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.knowledge-card.is-pinned {
+  border-color: #d8a58f;
+  background: #fffaf4;
+}
+
+.knowledge-card-header,
+.knowledge-card-footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.knowledge-card-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.knowledge-card-meta {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.knowledge-card-prompt {
+  display: -webkit-box;
+  overflow: hidden;
+  flex: 1;
+  margin: 17px 0;
+  color: #4a433d;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+}
+
+.knowledge-card-footer {
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
 }
 
 .row-action-button {
@@ -770,6 +842,18 @@ button:disabled {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
   margin-top: 12px;
+}
+
+.sync-code-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sync-actions {
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .field-input {
@@ -904,7 +988,7 @@ button:disabled {
   bottom: 0;
   left: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   min-height: 67px;
   padding: 7px 12px calc(7px + env(safe-area-inset-bottom));
   border-top: 1px solid rgba(231, 224, 216, 0.92);
@@ -1065,7 +1149,7 @@ button:disabled {
     right: 50%;
     bottom: 17px;
     left: auto;
-    width: min(300px, calc(100% - 32px));
+    width: min(340px, calc(100% - 32px));
     min-height: 54px;
     padding: 5px;
     border: 1px solid var(--border);
@@ -1134,6 +1218,14 @@ button:disabled {
     align-items: flex-start;
     flex-direction: column;
     gap: 14px;
+  }
+
+  .page-heading-actions {
+    width: 100%;
+  }
+
+  .page-heading-actions > button {
+    flex: 1 1 0;
   }
 
   .page-heading > .primary-button {

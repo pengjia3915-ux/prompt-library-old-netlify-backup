@@ -8,10 +8,18 @@ import {
   validateBackup,
   mergeBackup
 } from "./settings.js";
+import {
+  createSyncCode,
+  formatSyncCode,
+  isValidSyncCode,
+  mergeKnowledgeEntries,
+  normalizeSyncCode,
+  syncKnowledge
+} from "./sync.js";
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
-const APP_ASSET_VERSION = "1.1.3";
+const APP_ASSET_VERSION = "1.2.0";
 
 const app = {
   config: { groups: [] },
@@ -22,6 +30,8 @@ const app = {
   promptExpanded: false,
   editingTemplateId: null,
   editingKeywordId: null,
+  editingKnowledgeId: null,
+  syncBusy: false,
   toastTimer: null
 };
 
@@ -294,6 +304,60 @@ function renderKeywordManager() {
     : `<div class="empty-state">没有可管理的关键词。</div>`;
 }
 
+function currentKnowledgeEntries() {
+  return (app.user?.knowledgeEntries || [])
+    .filter((entry) => entry?.id && entry.title && entry.prompt && !entry.deletedAt)
+    .sort((a, b) => {
+      const pinned = Number(Boolean(b.pinned)) - Number(Boolean(a.pinned));
+      const favorite = Number(Boolean(b.favorite)) - Number(Boolean(a.favorite));
+      return pinned || favorite || new Date(b.updatedAt || b.createdAt || 0) - new Date(a.updatedAt || a.createdAt || 0);
+    });
+}
+
+function renderKnowledge() {
+  const container = $("#knowledge-list");
+  if (!container) return;
+  const entries = currentKnowledgeEntries();
+  container.innerHTML = entries.length
+    ? entries.map((entry) => `<article class="knowledge-card ${entry.pinned ? "is-pinned" : ""}">
+        <div class="knowledge-card-header">
+          <div>
+            <h3 class="knowledge-card-title">${entry.pinned ? "📌 " : ""}${escapeHtml(entry.title)}</h3>
+            <p class="knowledge-card-meta">${entry.favorite ? "★ 已收藏 · " : ""}更新于 ${escapeHtml(formatDate(entry.updatedAt || entry.createdAt))}</p>
+          </div>
+          <span class="template-source">自定义</span>
+        </div>
+        <p class="knowledge-card-prompt">${escapeHtml(entry.prompt)}</p>
+        <div class="knowledge-card-footer">
+          <button class="primary-button" type="button" data-action="copy-knowledge" data-id="${escapeHtml(entry.id)}">复制完整 Prompt</button>
+          <div class="template-card-actions">
+            <button class="row-action-button ${entry.favorite ? "is-active" : ""}" type="button" data-action="toggle-knowledge-favorite" data-id="${escapeHtml(entry.id)}">${entry.favorite ? "★ 已收藏" : "☆ 收藏"}</button>
+            <button class="row-action-button ${entry.pinned ? "is-active" : ""}" type="button" data-action="toggle-knowledge-pin" data-id="${escapeHtml(entry.id)}">${entry.pinned ? "取消置顶" : "置顶"}</button>
+            <button class="row-action-button" type="button" data-action="edit-knowledge" data-id="${escapeHtml(entry.id)}">编辑</button>
+            <button class="row-action-button" type="button" data-action="delete-knowledge" data-id="${escapeHtml(entry.id)}">删除</button>
+          </div>
+        </div>
+      </article>`).join("")
+    : `<div class="empty-state">还没有知识库内容。点击“新增完整 Prompt”，把以后想直接复制的内容保存下来。</div>`;
+}
+
+function renderSyncSettings() {
+  const code = normalizeSyncCode(app.user?.sync?.code);
+  const input = $("#sync-code");
+  const status = $("#sync-status");
+  if (input && document.activeElement !== input) input.value = formatSyncCode(code);
+  if (!status) return;
+  if (!code) {
+    status.textContent = "尚未设置同步码。先生成一个，再在另一台设备输入同一个同步码。";
+  } else if (app.syncBusy) {
+    status.textContent = "正在合并两台设备的知识库……";
+  } else if (app.user?.sync?.lastSyncedAt) {
+    status.textContent = `已启用同步 · 上次更新 ${formatDate(app.user.sync.lastSyncedAt)}`;
+  } else {
+    status.textContent = "已设置同步码，打开知识库后点击“同步更新”即可。";
+  }
+}
+
 function renderAll() {
   renderFeatured();
   renderRecent();
@@ -304,10 +368,12 @@ function renderAll() {
   renderFixedRequirements();
   renderTemplatesPage();
   renderKeywordManager();
+  renderKnowledge();
+  renderSyncSettings();
 }
 
 function setView(view) {
-  const nextView = ["home", "templates", "settings"].includes(view) ? view : "home";
+  const nextView = ["home", "templates", "knowledge", "settings"].includes(view) ? view : "home";
   app.view = nextView;
   $$(".view").forEach((element) => {
     const active = element.id === `view-${nextView}`;
@@ -388,13 +454,12 @@ function recordRecent() {
   app.user.recent = [record, ...(app.user.recent || []).filter((entry) => entry.signature !== signature)].slice(0, 12);
 }
 
-async function copyPrompt() {
-  const prompt = currentPrompt();
+async function copyText(value) {
   try {
-    await navigator.clipboard.writeText(prompt);
+    await navigator.clipboard.writeText(value);
   } catch {
     const textarea = document.createElement("textarea");
-    textarea.value = prompt;
+    textarea.value = value;
     textarea.style.position = "fixed";
     textarea.style.opacity = "0";
     document.body.appendChild(textarea);
@@ -402,6 +467,11 @@ async function copyPrompt() {
     document.execCommand("copy");
     textarea.remove();
   }
+}
+
+async function copyPrompt() {
+  const prompt = currentPrompt();
+  await copyText(prompt);
   recordRecent();
   renderRecent();
   persist();
@@ -594,6 +664,137 @@ function saveKeywordForm() {
   showToast("关键词已保存");
 }
 
+function openKnowledgeDialog(entryId = null) {
+  app.editingKnowledgeId = entryId;
+  const entry = entryId ? (app.user.knowledgeEntries || []).find((item) => item.id === entryId) : null;
+  $("#knowledge-dialog-title").textContent = entry ? "编辑知识库内容" : "新增完整 Prompt";
+  $("#knowledge-title").value = entry?.title || "";
+  $("#knowledge-prompt").value = entry?.prompt || "";
+  const dialog = $("#knowledge-dialog");
+  if (typeof dialog.showModal === "function") dialog.showModal();
+  else dialog.setAttribute("open", "");
+  window.setTimeout(() => $("#knowledge-title").focus(), 0);
+}
+
+function saveKnowledgeForm() {
+  const title = $("#knowledge-title").value.trim();
+  const prompt = $("#knowledge-prompt").value.trim();
+  if (!title || !prompt) return;
+  const now = new Date().toISOString();
+  app.user.knowledgeEntries = Array.isArray(app.user.knowledgeEntries) ? app.user.knowledgeEntries : [];
+  if (app.editingKnowledgeId) {
+    const target = app.user.knowledgeEntries.find((entry) => entry.id === app.editingKnowledgeId);
+    if (!target) return;
+    target.title = title;
+    target.prompt = prompt;
+    target.updatedAt = now;
+    delete target.deletedAt;
+    showToast("知识库内容已更新");
+  } else {
+    app.user.knowledgeEntries.push({
+      id: `knowledge-${Date.now()}`,
+      title,
+      prompt,
+      favorite: false,
+      pinned: false,
+      createdAt: now,
+      updatedAt: now
+    });
+    showToast("知识库内容已保存");
+  }
+  $("#knowledge-dialog").close?.();
+  app.editingKnowledgeId = null;
+  renderAll();
+  persist();
+}
+
+function updateKnowledgeFlag(entryId, field) {
+  const entry = (app.user.knowledgeEntries || []).find((item) => item.id === entryId && !item.deletedAt);
+  if (!entry) return;
+  entry[field] = !Boolean(entry[field]);
+  entry.updatedAt = new Date().toISOString();
+  renderKnowledge();
+  persist();
+}
+
+async function copyKnowledge(entryId) {
+  const entry = currentKnowledgeEntries().find((item) => item.id === entryId);
+  if (!entry) return;
+  await copyText(entry.prompt);
+  showToast("完整 Prompt 已复制");
+}
+
+function deleteKnowledge(entryId) {
+  const entry = (app.user.knowledgeEntries || []).find((item) => item.id === entryId && !item.deletedAt);
+  if (!entry || !window.confirm(`确定删除「${entry.title}」吗？`)) return;
+  entry.deletedAt = new Date().toISOString();
+  entry.updatedAt = entry.deletedAt;
+  renderKnowledge();
+  persist();
+  showToast("知识库内容已删除");
+}
+
+function saveSyncCode() {
+  const rawCode = $("#sync-code").value;
+  const code = normalizeSyncCode(rawCode);
+  if (!isValidSyncCode(code)) {
+    showToast("同步码应为 32 位字符，请检查后再保存");
+    return;
+  }
+  app.user.sync = { ...(app.user.sync || {}), code, lastSyncedAt: app.user.sync?.lastSyncedAt || null };
+  renderSyncSettings();
+  persist();
+  showToast("同步码已保存");
+}
+
+function generateSyncCode() {
+  app.user.sync = { ...(app.user.sync || {}), code: createSyncCode(), lastSyncedAt: null };
+  renderSyncSettings();
+  persist();
+  showToast("已生成同步码，请复制到另一台设备");
+}
+
+async function copySyncCode() {
+  const code = normalizeSyncCode(app.user.sync?.code);
+  if (!isValidSyncCode(code)) {
+    showToast("请先生成或保存同步码");
+    return;
+  }
+  await copyText(formatSyncCode(code));
+  showToast("同步码已复制");
+}
+
+async function syncKnowledgeNow() {
+  if (app.syncBusy) return;
+  const code = normalizeSyncCode(app.user.sync?.code);
+  if (!isValidSyncCode(code)) {
+    setView("settings");
+    showToast("请先在设置中生成或填写同步码");
+    return;
+  }
+  if (!navigator.onLine) {
+    showToast("当前离线，知识库仍可本地使用；联网后再点同步更新");
+    return;
+  }
+  app.syncBusy = true;
+  renderKnowledge();
+  renderSyncSettings();
+  try {
+    const result = await syncKnowledge({ code, entries: app.user.knowledgeEntries || [] });
+    app.user.knowledgeEntries = mergeKnowledgeEntries(app.user.knowledgeEntries || [], result.entries);
+    app.user.sync = { ...(app.user.sync || {}), code, lastSyncedAt: result.syncedAt };
+    renderAll();
+    persist();
+    showToast("知识库已同步更新");
+  } catch (error) {
+    showToast(error.message || "同步失败，请稍后重试");
+  } finally {
+    app.syncBusy = false;
+    renderKnowledge();
+    renderSyncSettings();
+  }
+}
+
 function deleteFixed(id) {
   const requirement = currentFixedRequirements().find((item) => item.id === id);
   if (!requirement || requirement.builtIn || !window.confirm(`确定删除固定要求「${requirement.label}」吗？`)) return;
@@ -775,8 +976,35 @@ function bindEvents() {
       case "delete-keyword":
         deleteKeyword(target.dataset.id);
         break;
+      case "add-knowledge":
+        openKnowledgeDialog();
+        break;
+      case "edit-knowledge":
+        openKnowledgeDialog(target.dataset.id);
+        break;
+      case "copy-knowledge":
+        copyKnowledge(target.dataset.id);
+        break;
+      case "toggle-knowledge-favorite":
+        updateKnowledgeFlag(target.dataset.id, "favorite");
+        break;
+      case "toggle-knowledge-pin":
+        updateKnowledgeFlag(target.dataset.id, "pinned");
+        break;
+      case "delete-knowledge":
+        deleteKnowledge(target.dataset.id);
+        break;
       case "delete-fixed":
         deleteFixed(target.dataset.id);
+        break;
+      case "sync-knowledge":
+        syncKnowledgeNow();
+        break;
+      case "generate-sync-code":
+        generateSyncCode();
+        break;
+      case "copy-sync-code":
+        copySyncCode();
         break;
       case "export-backup":
         exportBackup();
@@ -800,6 +1028,16 @@ function bindEvents() {
   $("#keyword-form").addEventListener("submit", (event) => {
     event.preventDefault();
     saveKeywordForm();
+  });
+
+  $("#knowledge-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    saveKnowledgeForm();
+  });
+
+  $("#sync-code-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    saveSyncCode();
   });
 
   $("#fixed-requirement-form").addEventListener("submit", (event) => {

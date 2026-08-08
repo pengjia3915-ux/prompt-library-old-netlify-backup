@@ -15,9 +15,14 @@ export const EMPTY_STATE = {
   templateOverrides: {},
   deletedTemplateIds: [],
   recent: [],
+  knowledgeEntries: [],
   currentSelection: [],
   currentFixedIds: [],
-  settings: {}
+  settings: {},
+  sync: {
+    code: "",
+    lastSyncedAt: null
+  }
 };
 
 let databasePromise;
@@ -39,9 +44,16 @@ function normalizeState(value) {
   state.templateOverrides = source.templateOverrides && typeof source.templateOverrides === "object" ? source.templateOverrides : {};
   state.deletedTemplateIds = Array.isArray(source.deletedTemplateIds) ? source.deletedTemplateIds : [];
   state.recent = Array.isArray(source.recent) ? source.recent : [];
+  state.knowledgeEntries = Array.isArray(source.knowledgeEntries) ? source.knowledgeEntries : [];
   state.currentSelection = Array.isArray(source.currentSelection) ? source.currentSelection : [];
   state.currentFixedIds = Array.isArray(source.currentFixedIds) ? source.currentFixedIds : [];
   state.settings = source.settings && typeof source.settings === "object" ? source.settings : {};
+  state.sync = source.sync && typeof source.sync === "object"
+    ? {
+        code: typeof source.sync.code === "string" ? source.sync.code : "",
+        lastSyncedAt: source.sync.lastSyncedAt || null
+      }
+    : clone(EMPTY_STATE.sync);
   return state;
 }
 

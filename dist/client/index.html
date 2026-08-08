@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#F7F4EF" />
     <meta name="description" content="一个轻量、离线可用的个人 Prompt 组合工作台" />
-    <link rel="manifest" href="manifest.json?v=1.1.3" />
+    <link rel="manifest" href="manifest.json?v=1.2.0" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/app.css?v=1.1.3" />
+    <link rel="stylesheet" href="css/app.css?v=1.2.0" />
     <title>Prompt 库</title>
   </head>
   <body>
@@ -145,6 +145,21 @@
           <div id="template-list" class="template-list"></div>
         </section>
 
+        <section id="view-knowledge" class="view" aria-labelledby="knowledge-page-title" hidden>
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">自己的完整提示词</p>
+              <h2 id="knowledge-page-title">知识库</h2>
+              <p>把不适合拆成关键词、但以后想直接复制的完整 Prompt 保存下来。</p>
+            </div>
+            <div class="page-heading-actions">
+              <button class="secondary-button" type="button" data-action="sync-knowledge"><span aria-hidden="true">↻</span> 同步更新</button>
+              <button class="primary-button" type="button" data-action="add-knowledge"><span aria-hidden="true">＋</span> 新增完整 Prompt</button>
+            </div>
+          </div>
+          <div id="knowledge-list" class="knowledge-list"></div>
+        </section>
+
         <section id="view-settings" class="view" aria-labelledby="settings-title" hidden>
           <div class="page-heading">
             <div>
@@ -191,6 +206,28 @@
               </div>
               <input id="import-file" class="sr-only" type="file" accept="application/json,.json" />
             </section>
+
+            <section class="settings-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="section-kicker">免费设备同步</p>
+                  <h3>知识库同步码</h3>
+                </div>
+                <span class="section-hint">仅同步知识库</span>
+              </div>
+              <p class="settings-copy">生成一次同步码，在手机和电脑分别保存同一个码。数据会先在浏览器端加密，再通过免费同步接口传输；不会同步关键词、模板和固定要求。</p>
+              <form id="sync-code-form" class="sync-code-form">
+                <label class="sr-only" for="sync-code">同步码</label>
+                <input id="sync-code" class="field-input" type="text" inputmode="text" autocomplete="off" maxlength="39" placeholder="例如：a1b2-c3d4-…" />
+                <button class="secondary-button" type="submit">保存</button>
+              </form>
+              <div class="backup-actions sync-actions">
+                <button class="secondary-button" type="button" data-action="generate-sync-code">生成新码</button>
+                <button class="secondary-button" type="button" data-action="copy-sync-code">复制同步码</button>
+                <button class="primary-button" type="button" data-action="sync-knowledge">立即同步</button>
+              </div>
+              <p id="sync-status" class="dialog-note" aria-live="polite">尚未设置同步码。</p>
+            </section>
           </div>
 
           <section class="settings-panel keyword-management-panel">
@@ -220,6 +257,10 @@
           <span class="nav-icon" aria-hidden="true">▤</span>
           <span>模板</span>
         </button>
+        <button class="nav-button" type="button" data-view="knowledge">
+          <span class="nav-icon" aria-hidden="true">▣</span>
+          <span>知识库</span>
+        </button>
         <button class="nav-button" type="button" data-view="settings">
           <span class="nav-icon" aria-hidden="true">⚙</span>
           <span>设置</span>
@@ -241,6 +282,27 @@
         <label class="field-label" for="template-name">模板名称</label>
         <input id="template-name" class="field-input" type="text" maxlength="40" required placeholder="例如：办公室清爽版" />
         <p class="dialog-note">会保存当前关键词选择和固定要求状态。</p>
+        <div class="dialog-actions">
+          <button class="secondary-button" type="button" data-action="close-dialog">取消</button>
+          <button class="primary-button" type="submit">保存</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="knowledge-dialog" class="app-dialog knowledge-dialog">
+      <form id="knowledge-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="section-kicker">保存可直接复用的内容</p>
+            <h2 id="knowledge-dialog-title">新增完整 Prompt</h2>
+          </div>
+          <button class="dialog-close" type="button" data-action="close-dialog" aria-label="关闭">×</button>
+        </div>
+        <label class="field-label" for="knowledge-title">名称</label>
+        <input id="knowledge-title" class="field-input" type="text" maxlength="60" required placeholder="例如：图生图自然身材修正" />
+        <label class="field-label" for="knowledge-prompt">完整 Prompt</label>
+        <textarea id="knowledge-prompt" class="field-input field-textarea knowledge-prompt-input" maxlength="5000" required placeholder="输入以后想直接复制使用的完整提示词……"></textarea>
+        <p class="dialog-note">内容保存在本机；设置同步码后，可以在手机和电脑之间同步这一栏。</p>
         <div class="dialog-actions">
           <button class="secondary-button" type="button" data-action="close-dialog">取消</button>
           <button class="primary-button" type="submit">保存</button>
@@ -284,6 +346,6 @@
       </form>
     </dialog>
 
-    <script type="module" src="js/app.js?v=1.1.3"></script>
+    <script type="module" src="js/app.js?v=1.2.0"></script>
   </body>
 </html>

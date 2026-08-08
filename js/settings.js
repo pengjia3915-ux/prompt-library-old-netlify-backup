@@ -63,6 +63,7 @@ export function createBackup(state) {
       templateOverrides: state.templateOverrides || {},
       deletedTemplateIds: state.deletedTemplateIds || [],
       recent: state.recent || [],
+      knowledgeEntries: state.knowledgeEntries || [],
       currentSelection: state.currentSelection || [],
       currentFixedIds: state.currentFixedIds || [],
       settings: state.settings || {}
@@ -110,6 +111,7 @@ export function mergeBackup(current, incoming, mode = "merge") {
     templateOverrides: { ...(current.templateOverrides || {}), ...(incoming.templateOverrides || {}) },
     deletedTemplateIds: [...new Set([...(current.deletedTemplateIds || []), ...(incoming.deletedTemplateIds || [])])],
     recent: mergeById(current.recent, incoming.recent).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0)).slice(0, 12),
+    knowledgeEntries: mergeById(current.knowledgeEntries, incoming.knowledgeEntries),
     currentSelection: incoming.currentSelection || current.currentSelection || [],
     currentFixedIds: incoming.currentFixedIds || current.currentFixedIds || [],
     settings: { ...(current.settings || {}), ...(incoming.settings || {}) }
