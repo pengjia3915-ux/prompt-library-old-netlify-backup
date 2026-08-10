@@ -1,0 +1,8 @@
+{
+  "name": "prompt-library-pwa-netlify",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^10.7.12"
+  }
+}

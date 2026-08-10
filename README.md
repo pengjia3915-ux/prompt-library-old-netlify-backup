@@ -48,6 +48,10 @@ js/sync.js                   知识库加密与跨设备同步
 data/keywords.json           默认关键词配置
 data/presets.json            默认模板配置
 drizzle/0000_prompt_sync.sql 知识库同步表结构
+netlify.toml                  Netlify 发布目录、Functions 和 API 路由
+netlify/functions/sync.mjs    Netlify 免费同步接口
+package.json                  Netlify Functions 依赖
+package-lock.json             依赖锁定
 manifest.json                PWA 安装信息
 service-worker.js            离线缓存
 icons/icon.svg               App 图标
@@ -160,6 +164,12 @@ icons/icon.svg               App 图标
 更新网页时，替换 HTML、CSS、JS、JSON、`dist/server/index.js` 和 `service-worker.js` 等对应文件；同时更新 `service-worker.js` 的 `CACHE_NAME` 和资源版本号，让手机重新缓存新版本。不要清除浏览器站点数据，也不要改动 IndexedDB 的数据库名称和已有字段。IndexedDB 数据和程序文件分开，程序升级不会覆盖用户数据。正式更新前建议先在设置中导出一次 JSON 备份。
 
 本项目当前通过 Sites 发布：先把修改后的源文件提交，再保存新的 Site 版本并发布；`drizzle/0000_prompt_sync.sql` 用于初始化同步表。发布后首次点击同步时，接口会自动确认表存在。不要切换到付费计划；免费额度不足时只会影响跨设备同步，不会删除本地数据。
+
+### Netlify Free 备用发布方式
+
+如果当前 `chatgpt.site` 地址被某个手机网络拦截，可以把同一套代码发布到 Netlify Free。Netlify 的发布目录是 `dist/client`，Functions 目录是 `netlify/functions`，`netlify.toml` 已经配置好 `/api/sync` 路由。Netlify 会自动给站点分配一个 `*.netlify.app` 地址；知识库同步使用 Netlify Function 和 Blobs，不需要修改手机端的同步按钮。
+
+Netlify Free 按 credits 计算用量，额度用完后站点暂停到下一个计费周期，不会自动充值。修改代码后可以连接 Git 自动发布，也可以手动上传；每次正式发布前建议把多个小改动合并，减少发布次数。部署后如更新 PWA 资源，同时提高 `service-worker.js` 的缓存版本号。
 
 ## 验收建议
 

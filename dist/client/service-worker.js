@@ -1,17 +1,17 @@
-const CACHE_NAME = "prompt-library-v1.2.0";
+const CACHE_NAME = "prompt-library-v1.2.1";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./css/app.css?v=1.2.0",
-  "./js/app.js?v=1.2.0",
+  "./css/app.css?v=1.2.1",
+  "./js/app.js?v=1.2.1",
   "./js/db.js",
   "./js/prompt-builder.js",
   "./js/templates.js",
   "./js/settings.js",
   "./js/sync.js",
-  "./data/keywords.json?v=1.2.0",
-  "./data/presets.json?v=1.2.0",
-  "./manifest.json?v=1.2.0",
+  "./data/keywords.json?v=1.2.1",
+  "./data/presets.json?v=1.2.1",
+  "./manifest.json?v=1.2.1",
   "./icons/icon.svg"
 ];
 
@@ -71,6 +71,7 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   const requestUrl = new URL(event.request.url);
   if (requestUrl.origin !== self.location.origin) return;
+  if (requestUrl.pathname.startsWith("/api/")) return;
 
   const useNetworkFirst = event.request.mode === "navigate"
     || NETWORK_FIRST_PATHS.some((path) => requestUrl.pathname.endsWith(path));

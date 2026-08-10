@@ -19,7 +19,7 @@ import {
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
-const APP_ASSET_VERSION = "1.2.0";
+const APP_ASSET_VERSION = "1.2.1";
 
 const app = {
   config: { groups: [] },
