@@ -418,6 +418,28 @@ function openThemeDialog() {
   $("#theme-dialog").showModal();
 }
 
+async function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+
+  try {
+    const hadController = Boolean(navigator.serviceWorker.controller);
+    let reloadingForUpdate = false;
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!hadController || reloadingForUpdate) return;
+      reloadingForUpdate = true;
+      window.location.reload();
+    });
+
+    const registration = await navigator.serviceWorker.register("service-worker.js?v=2.0.2", {
+      updateViaCache: "none"
+    });
+    await registration.update();
+  } catch {
+    // Service Worker 更新失败不影响在线使用与本地数据。
+  }
+}
+
 async function initialize() {
   const [defaults, stored] = await Promise.all([
     fetch("data/img2img-prompts.json", { cache: "no-store" }).then((response) => {
@@ -439,7 +461,7 @@ async function initialize() {
 
   await writeState();
   render();
-  if ("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js").catch(() => {});
+  registerServiceWorker();
 }
 
 document.addEventListener("click", async (event) => {

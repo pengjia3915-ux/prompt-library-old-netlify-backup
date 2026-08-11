@@ -1,12 +1,12 @@
-const CACHE_NAME = "prompt-library-v2.0.1";
+const CACHE_NAME = "prompt-library-v2.0.2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./css/prototype.css?v=2.0.1",
-  "./js/prototype.js?v=2.0.1",
+  "./css/prototype.css?v=2.0.2",
+  "./js/prototype.js?v=2.0.2",
   "./js/sync.js",
-  "./data/img2img-prompts.json?v=2.0.1",
-  "./manifest.json?v=2.0.1",
+  "./data/img2img-prompts.json?v=2.0.2",
+  "./manifest.json?v=2.0.2",
   "./icons/icon.svg"
 ];
 
