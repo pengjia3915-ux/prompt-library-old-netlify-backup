@@ -30,8 +30,11 @@ function normalizeEntry(entry) {
     id: String(entry.id),
     title: String(entry.title),
     prompt: String(entry.prompt),
+    categoryId: String(entry.categoryId || "image-edit"),
+    negativePrompt: String(entry.negativePrompt || ""),
     favorite: Boolean(entry.favorite),
     pinned: Boolean(entry.pinned),
+    pinOrder: Number(entry.pinOrder || 0),
     createdAt: entry.createdAt || new Date(0).toISOString(),
     updatedAt: entry.updatedAt || entry.createdAt || new Date(0).toISOString(),
     ...(entry.deletedAt ? { deletedAt: entry.deletedAt } : {})

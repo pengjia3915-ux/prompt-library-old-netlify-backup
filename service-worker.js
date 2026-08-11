@@ -1,24 +1,18 @@
-const CACHE_NAME = "prompt-library-v1.2.1";
+const CACHE_NAME = "prompt-library-v2.0.1";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./css/app.css?v=1.2.1",
-  "./js/app.js?v=1.2.1",
-  "./js/db.js",
-  "./js/prompt-builder.js",
-  "./js/templates.js",
-  "./js/settings.js",
+  "./css/prototype.css?v=2.0.1",
+  "./js/prototype.js?v=2.0.1",
   "./js/sync.js",
-  "./data/keywords.json?v=1.2.1",
-  "./data/presets.json?v=1.2.1",
-  "./manifest.json?v=1.2.1",
+  "./data/img2img-prompts.json?v=2.0.1",
+  "./manifest.json?v=2.0.1",
   "./icons/icon.svg"
 ];
 
 const NETWORK_FIRST_PATHS = [
   "/index.html",
-  "/data/keywords.json",
-  "/data/presets.json",
+  "/data/img2img-prompts.json",
   "/manifest.json"
 ];
 

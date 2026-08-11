@@ -4,348 +4,163 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#F7F4EF" />
-    <meta name="description" content="一个轻量、离线可用的个人 Prompt 组合工作台" />
-    <link rel="manifest" href="manifest.json?v=1.2.1" />
+    <meta name="description" content="专为 img2img 设计的极简个人 Prompt 卡片库" />
+    <link rel="manifest" href="manifest.json?v=2.0.1" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/app.css?v=1.2.1" />
-    <title>Prompt 库</title>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("prompt-library-prototype-theme");
+        if (["sage", "wine", "blue", "studio"].includes(savedTheme)) {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch {}
+    </script>
+    <link rel="stylesheet" href="css/prototype.css?v=2.0.1" />
+    <title>Img2Img Prompt 库</title>
   </head>
   <body>
-    <div class="app-shell">
-      <header class="app-header page-width">
-        <div>
-          <p class="eyebrow">PERSONAL PROMPT WORKBENCH</p>
-          <h1>Prompt 库</h1>
-          <p class="app-subtitle">把常用的描述，组合成顺手可用的一段话。</p>
+    <div class="prototype-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark" aria-hidden="true">P</div>
+          <div>
+            <h1>Prompt 库</h1>
+            <p>Img2Img · 完整提示词卡片</p>
+          </div>
         </div>
-        <button class="icon-button" type="button" data-action="navigate" data-view="settings" aria-label="打开设置">
-          <span aria-hidden="true">⚙</span>
-          <span>设置</span>
-        </button>
+        <div class="topbar-actions">
+          <button class="quiet-button" type="button" data-action="open-sync" aria-label="打开同步设置">
+            <span aria-hidden="true">↻</span><span>同步</span>
+          </button>
+          <button class="quiet-button" type="button" data-action="open-theme" aria-label="选择配色主题">
+            <span aria-hidden="true">◐</span><span>主题</span>
+          </button>
+          <button class="primary-button" type="button" data-action="add-prompt">
+            <span aria-hidden="true">＋</span><span>新增</span>
+          </button>
+        </div>
       </header>
 
-      <main class="page-width app-main">
-        <section id="view-home" class="view is-active" aria-labelledby="home-title">
-          <div class="workspace-grid">
-            <div class="workspace-left">
-              <section class="intro-panel">
-                <div>
-                  <p class="eyebrow">今天的工作台</p>
-                  <h2 id="home-title">点几下，开始组合</h2>
-                  <p class="intro-copy">选择短关键词，完整描述会自动排好顺序。日常使用不需要输入文字。</p>
-                </div>
-                <div class="status-pill" id="connection-status" aria-live="polite">
-                  <span class="status-dot" aria-hidden="true"></span>
-                  <span>本地可用</span>
-                </div>
-              </section>
-
-              <section class="content-section" aria-labelledby="featured-title">
-                <div class="section-heading">
-                  <div>
-                    <p class="section-kicker">快捷入口</p>
-                    <h2 id="featured-title">主关键词</h2>
-                  </div>
-                  <span class="section-hint">常用的放这里</span>
-                </div>
-                <div id="featured-keywords" class="chip-row chip-row-large"></div>
-              </section>
-
-              <section class="content-section" aria-labelledby="recent-title">
-                <div class="section-heading">
-                  <div>
-                    <p class="section-kicker">一键恢复</p>
-                    <h2 id="recent-title">最近使用</h2>
-                  </div>
-                  <button class="text-button is-muted" type="button" data-action="clear-recent">清空</button>
-                </div>
-                <div id="recent-list" class="recent-list"></div>
-              </section>
-
-              <section class="content-section" aria-labelledby="shortcut-title">
-                <div class="section-heading">
-                  <div>
-                    <p class="section-kicker">少做几次选择</p>
-                    <h2 id="shortcut-title">常用模板</h2>
-                  </div>
-                  <button class="text-button" type="button" data-action="navigate" data-view="templates">查看全部</button>
-                </div>
-                <div id="template-shortcuts" class="template-shortcuts"></div>
-              </section>
-
-              <section class="content-section categories-section" aria-labelledby="categories-title">
-                <div class="section-heading section-heading-stacked-mobile">
-                  <div>
-                    <p class="section-kicker">按分类选择</p>
-                    <h2 id="categories-title">分类关键词</h2>
-                  </div>
-                  <span class="section-hint">单选 / 多选由配置决定</span>
-                </div>
-                <div id="category-groups" class="category-groups"></div>
-              </section>
-            </div>
-
-            <aside class="workspace-right" aria-label="Prompt 预览区">
-              <section class="prompt-card" id="prompt-station">
-                <div class="prompt-card-header">
-                  <div>
-                    <p class="section-kicker">实时生成</p>
-                    <h2>当前 Prompt</h2>
-                  </div>
-                  <span class="prompt-count" id="prompt-count">0 项选择</span>
-                </div>
-                <div class="prompt-preview-wrap">
-                  <p id="prompt-preview" class="prompt-preview is-collapsed" aria-live="polite"></p>
-                  <button id="expand-prompt" class="text-button prompt-expand" type="button" data-action="toggle-prompt">展开全文</button>
-                </div>
-                <div class="prompt-action-row">
-                  <button class="primary-button" type="button" data-action="copy-prompt">
-                    <span aria-hidden="true">⧉</span>
-                    <span>复制 Prompt</span>
-                  </button>
-                  <button class="secondary-button" type="button" data-action="save-template">
-                    <span aria-hidden="true">＋</span>
-                    <span>保存为模板</span>
-                  </button>
-                </div>
-              </section>
-
-              <section class="selection-card">
-                <div class="section-heading">
-                  <div>
-                    <p class="section-kicker">组合状态</p>
-                    <h2>当前选择</h2>
-                  </div>
-                  <button class="text-button is-muted" type="button" data-action="clear-selection">清空</button>
-                </div>
-                <div id="selection-summary" class="selection-summary"></div>
-              </section>
-
-              <section class="fixed-summary-card">
-                <div class="fixed-summary-icon" aria-hidden="true">✦</div>
-                <div>
-                  <p class="fixed-summary-label">固定要求</p>
-                  <p id="fixed-summary">已启用 0 项</p>
-                </div>
-                <button class="text-button" type="button" data-action="navigate" data-view="settings">管理</button>
-              </section>
-            </aside>
+      <main>
+        <section class="intro-strip" aria-label="使用说明">
+          <div>
+            <strong>选一个栏目，复制一条完整 Prompt。</strong>
+            <p>四个栏目共 251 条完整 Prompt，点开即可复制，也可以新增自己的内容。</p>
           </div>
+          <span class="local-badge"><i aria-hidden="true"></i> 离线可用</span>
         </section>
 
-        <section id="view-templates" class="view" aria-labelledby="templates-title" hidden>
-          <div class="page-heading">
-            <div>
-              <p class="eyebrow">可复用组合</p>
-              <h2 id="templates-title">模板</h2>
-              <p>把一套选择保存下来，下次直接恢复。</p>
-            </div>
-            <button class="primary-button" type="button" data-action="save-template"><span aria-hidden="true">＋</span> 新建模板</button>
+        <nav id="category-tabs" class="category-tabs" aria-label="Prompt 栏目"></nav>
+
+        <section class="category-heading" aria-live="polite">
+          <div>
+            <p id="category-eyebrow" class="eyebrow">当前栏目</p>
+            <h2 id="category-title">原图处理</h2>
+            <p id="category-description"></p>
           </div>
-          <div id="template-list" class="template-list"></div>
+          <span id="category-count" class="count-badge">0 条</span>
         </section>
 
-        <section id="view-knowledge" class="view" aria-labelledby="knowledge-page-title" hidden>
-          <div class="page-heading">
-            <div>
-              <p class="eyebrow">自己的完整提示词</p>
-              <h2 id="knowledge-page-title">知识库</h2>
-              <p>把不适合拆成关键词、但以后想直接复制的完整 Prompt 保存下来。</p>
-            </div>
-            <div class="page-heading-actions">
-              <button class="secondary-button" type="button" data-action="sync-knowledge"><span aria-hidden="true">↻</span> 同步更新</button>
-              <button class="primary-button" type="button" data-action="add-knowledge"><span aria-hidden="true">＋</span> 新增完整 Prompt</button>
-            </div>
-          </div>
-          <div id="knowledge-list" class="knowledge-list"></div>
-        </section>
+        <div id="prompt-sections" class="prompt-sections"></div>
 
-        <section id="view-settings" class="view" aria-labelledby="settings-title" hidden>
-          <div class="page-heading">
-            <div>
-              <p class="eyebrow">只在需要时维护</p>
-              <h2 id="settings-title">设置</h2>
-              <p>本机数据默认保存在浏览器里，不需要账号。</p>
-            </div>
-          </div>
-
-          <div class="settings-grid">
-            <section class="settings-panel">
-              <div class="section-heading">
-                <div>
-                  <p class="section-kicker">自动加入</p>
-                  <h3>固定要求</h3>
-                </div>
-                <span class="section-hint">每次生成都会加入</span>
-              </div>
-              <div id="fixed-requirements-list" class="fixed-requirements-list"></div>
-              <form id="fixed-requirement-form" class="inline-form">
-                <label class="sr-only" for="new-fixed-requirement">新增固定要求</label>
-                <input id="new-fixed-requirement" type="text" maxlength="80" placeholder="新增一条固定要求" />
-                <button class="secondary-button" type="submit">添加</button>
-              </form>
-            </section>
-
-            <section class="settings-panel">
-              <div class="section-heading">
-                <div>
-                  <p class="section-kicker">本地安全</p>
-                  <h3>备份与恢复</h3>
-                </div>
-                <span class="section-hint">JSON 文件</span>
-              </div>
-              <p class="settings-copy">手机和电脑的数据默认独立。需要迁移时，在一台设备导出，再在另一台设备导入。</p>
-              <div class="backup-actions">
-                <button class="secondary-button" type="button" data-action="export-backup">导出备份</button>
-                <button class="secondary-button" type="button" data-action="trigger-import">导入备份</button>
-              </div>
-              <div class="import-mode-row">
-                <span>导入方式</span>
-                <label><input type="radio" name="import-mode" value="merge" checked /> 合并</label>
-                <label><input type="radio" name="import-mode" value="replace" /> 覆盖</label>
-              </div>
-              <input id="import-file" class="sr-only" type="file" accept="application/json,.json" />
-            </section>
-
-            <section class="settings-panel">
-              <div class="section-heading">
-                <div>
-                  <p class="section-kicker">免费设备同步</p>
-                  <h3>知识库同步码</h3>
-                </div>
-                <span class="section-hint">仅同步知识库</span>
-              </div>
-              <p class="settings-copy">生成一次同步码，在手机和电脑分别保存同一个码。数据会先在浏览器端加密，再通过免费同步接口传输；不会同步关键词、模板和固定要求。</p>
-              <form id="sync-code-form" class="sync-code-form">
-                <label class="sr-only" for="sync-code">同步码</label>
-                <input id="sync-code" class="field-input" type="text" inputmode="text" autocomplete="off" maxlength="39" placeholder="例如：a1b2-c3d4-…" />
-                <button class="secondary-button" type="submit">保存</button>
-              </form>
-              <div class="backup-actions sync-actions">
-                <button class="secondary-button" type="button" data-action="generate-sync-code">生成新码</button>
-                <button class="secondary-button" type="button" data-action="copy-sync-code">复制同步码</button>
-                <button class="primary-button" type="button" data-action="sync-knowledge">立即同步</button>
-              </div>
-              <p id="sync-status" class="dialog-note" aria-live="polite">尚未设置同步码。</p>
-            </section>
-          </div>
-
-          <section class="settings-panel keyword-management-panel">
-            <div class="section-heading">
-              <div>
-                <p class="section-kicker">低频维护</p>
-                <h3>关键词管理</h3>
-              </div>
-              <button class="primary-button" type="button" data-action="add-keyword"><span aria-hidden="true">＋</span> 新增关键词</button>
-            </div>
-            <p class="settings-copy">日常首页只显示 Chip。需要改名称、完整 Prompt、分类、排序或主关键词状态时，再到这里维护。</p>
-            <div id="keyword-manager-list" class="keyword-manager-list"></div>
-          </section>
-        </section>
+        <footer class="prototype-footer">个人 Prompt 库 · 数据默认保存在当前设备</footer>
       </main>
-
-      <div class="mobile-copy-bar">
-        <button class="primary-button" type="button" data-action="copy-prompt"><span aria-hidden="true">⧉</span> 复制 Prompt</button>
-      </div>
-
-      <nav class="bottom-nav" aria-label="主导航">
-        <button class="nav-button is-active" type="button" data-view="home">
-          <span class="nav-icon" aria-hidden="true">⌂</span>
-          <span>首页</span>
-        </button>
-        <button class="nav-button" type="button" data-view="templates">
-          <span class="nav-icon" aria-hidden="true">▤</span>
-          <span>模板</span>
-        </button>
-        <button class="nav-button" type="button" data-view="knowledge">
-          <span class="nav-icon" aria-hidden="true">▣</span>
-          <span>知识库</span>
-        </button>
-        <button class="nav-button" type="button" data-view="settings">
-          <span class="nav-icon" aria-hidden="true">⚙</span>
-          <span>设置</span>
-        </button>
-      </nav>
     </div>
+
+    <dialog id="prompt-dialog" class="sheet-dialog">
+      <form id="prompt-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">完整 Prompt</p>
+            <h2 id="prompt-dialog-title">新增 Prompt</h2>
+          </div>
+          <button class="icon-button" type="button" data-action="close-dialog" aria-label="关闭">×</button>
+        </div>
+
+        <input id="prompt-id" type="hidden" />
+
+        <label class="field-label" for="prompt-title">名称</label>
+        <input id="prompt-title" class="field-control" type="text" maxlength="60" required placeholder="例如：清理遮挡物并保留人物" />
+
+        <label class="field-label" for="prompt-category">所属栏目</label>
+        <select id="prompt-category" class="field-control" required></select>
+
+        <label class="field-label" for="prompt-positive">完整 Prompt</label>
+        <textarea id="prompt-positive" class="field-control field-textarea" maxlength="6000" required placeholder="输入正向提示词……"></textarea>
+
+        <label class="field-label" for="prompt-negative">反向提示词 <span>选填</span></label>
+        <textarea id="prompt-negative" class="field-control field-textarea field-textarea-small" maxlength="2500" placeholder="例如：避免身体拉伸变形、避免额外肢体……"></textarea>
+
+        <label class="pin-checkbox">
+          <input id="prompt-pinned" type="checkbox" />
+          <span>置顶在当前栏目</span>
+        </label>
+
+        <div class="dialog-actions">
+          <button class="quiet-button" type="button" data-action="close-dialog">取消</button>
+          <button class="primary-button" type="submit">保存 Prompt</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="theme-dialog" class="sheet-dialog theme-dialog">
+      <div class="dialog-form">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">只保存在当前设备</p>
+            <h2>选择配色主题</h2>
+          </div>
+          <button class="icon-button" type="button" data-action="close-dialog" aria-label="关闭">×</button>
+        </div>
+        <div class="theme-grid" role="radiogroup" aria-label="配色主题">
+          <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="sage">
+            <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span><strong>石墨灰＋鼠尾草绿</strong><small>克制、专业、耐看</small></span>
+            <b aria-hidden="true">✓</b>
+          </button>
+          <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="wine">
+            <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span><strong>象牙白＋暗酒红</strong><small>成熟、时尚、偏画报</small></span>
+            <b aria-hidden="true">✓</b>
+          </button>
+          <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="blue">
+            <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span><strong>雾蓝灰＋深靛青</strong><small>清爽、理性、工具感</small></span>
+            <b aria-hidden="true">✓</b>
+          </button>
+          <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="studio">
+            <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span><strong>深色摄影棚</strong><small>沉浸、适合夜间使用</small></span>
+            <b aria-hidden="true">✓</b>
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="sync-dialog" class="sheet-dialog sync-dialog">
+      <form id="sync-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">手机与电脑</p>
+            <h2>同步更新</h2>
+          </div>
+          <button class="icon-button" type="button" data-action="close-dialog" aria-label="关闭">×</button>
+        </div>
+        <p class="dialog-copy">手机和电脑保存同一个同步码后，点击“立即同步”即可合并两端新增、编辑、置顶和删除的 Prompt。内容会先在设备端加密。</p>
+        <label class="field-label" for="sync-code">同步码</label>
+        <input id="sync-code" class="field-control" type="text" maxlength="39" autocomplete="off" placeholder="输入手机和电脑共用的同步码" />
+        <p id="sync-status" class="dialog-copy" aria-live="polite">尚未设置同步码。</p>
+        <div class="dialog-actions dialog-actions-wrap">
+          <button class="quiet-button" type="button" data-action="generate-sync-code">生成新码</button>
+          <button class="quiet-button" type="button" data-action="copy-sync-code">复制同步码</button>
+          <button class="quiet-button" type="submit">保存</button>
+          <button class="primary-button" type="button" data-action="sync-now">立即同步</button>
+        </div>
+      </form>
+    </dialog>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <dialog id="template-dialog" class="app-dialog">
-      <form id="template-form" method="dialog">
-        <div class="dialog-heading">
-          <div>
-            <p class="section-kicker">保存当前组合</p>
-            <h2 id="template-dialog-title">新建模板</h2>
-          </div>
-          <button class="dialog-close" type="button" data-action="close-dialog" aria-label="关闭">×</button>
-        </div>
-        <label class="field-label" for="template-name">模板名称</label>
-        <input id="template-name" class="field-input" type="text" maxlength="40" required placeholder="例如：办公室清爽版" />
-        <p class="dialog-note">会保存当前关键词选择和固定要求状态。</p>
-        <div class="dialog-actions">
-          <button class="secondary-button" type="button" data-action="close-dialog">取消</button>
-          <button class="primary-button" type="submit">保存</button>
-        </div>
-      </form>
-    </dialog>
-
-    <dialog id="knowledge-dialog" class="app-dialog knowledge-dialog">
-      <form id="knowledge-form" method="dialog">
-        <div class="dialog-heading">
-          <div>
-            <p class="section-kicker">保存可直接复用的内容</p>
-            <h2 id="knowledge-dialog-title">新增完整 Prompt</h2>
-          </div>
-          <button class="dialog-close" type="button" data-action="close-dialog" aria-label="关闭">×</button>
-        </div>
-        <label class="field-label" for="knowledge-title">名称</label>
-        <input id="knowledge-title" class="field-input" type="text" maxlength="60" required placeholder="例如：图生图自然身材修正" />
-        <label class="field-label" for="knowledge-prompt">完整 Prompt</label>
-        <textarea id="knowledge-prompt" class="field-input field-textarea knowledge-prompt-input" maxlength="5000" required placeholder="输入以后想直接复制使用的完整提示词……"></textarea>
-        <p class="dialog-note">内容保存在本机；设置同步码后，可以在手机和电脑之间同步这一栏。</p>
-        <div class="dialog-actions">
-          <button class="secondary-button" type="button" data-action="close-dialog">取消</button>
-          <button class="primary-button" type="submit">保存</button>
-        </div>
-      </form>
-    </dialog>
-
-    <dialog id="keyword-dialog" class="app-dialog keyword-dialog">
-      <form id="keyword-form" method="dialog">
-        <div class="dialog-heading">
-          <div>
-            <p class="section-kicker">维护词库</p>
-            <h2 id="keyword-dialog-title">新增关键词</h2>
-          </div>
-          <button class="dialog-close" type="button" data-action="close-dialog">×</button>
-        </div>
-        <div class="form-grid">
-          <div>
-            <label class="field-label" for="keyword-label">显示名称</label>
-            <input id="keyword-label" class="field-input" type="text" maxlength="30" required placeholder="例如：窗边" />
-          </div>
-          <div>
-            <label class="field-label" for="keyword-group">所属分类</label>
-            <select id="keyword-group" class="field-input" required></select>
-          </div>
-        </div>
-        <label class="field-label" for="keyword-text">完整 Prompt</label>
-        <textarea id="keyword-text" class="field-input field-textarea" maxlength="500" required placeholder="人物处于……"></textarea>
-        <div class="form-grid form-grid-small">
-          <div>
-            <label class="field-label" for="keyword-order">排序</label>
-            <input id="keyword-order" class="field-input" type="number" min="0" max="999" value="50" />
-          </div>
-          <label class="checkbox-field"><input id="keyword-featured" type="checkbox" /> 设为主关键词</label>
-          <label class="checkbox-field"><input id="keyword-hidden" type="checkbox" /> 暂时隐藏</label>
-        </div>
-        <div class="dialog-actions">
-          <button class="secondary-button" type="button" data-action="close-dialog">取消</button>
-          <button class="primary-button" type="submit">保存关键词</button>
-        </div>
-      </form>
-    </dialog>
-
-    <script type="module" src="js/app.js?v=1.2.1"></script>
+    <script type="module" src="js/prototype.js?v=2.0.1"></script>
   </body>
 </html>
