@@ -17,8 +17,11 @@ for (const file of [
   "service-worker.js",
   "css/prototype.css",
   "js/prototype.js",
+  "js/suite-utils.js",
+  "js/storage.js",
   "js/sync.js",
   "data/img2img-prompts.json",
+  "data/bangyan-data.json",
   "icons/icon.svg",
 ]) {
   const destination = path.join(client, file);

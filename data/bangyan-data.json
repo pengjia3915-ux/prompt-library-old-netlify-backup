@@ -1,0 +1,2144 @@
+{
+  "schemaVersion": "1.0.0",
+  "suite": "bangyan",
+  "generatedAt": "2026-08-20",
+  "counts": {
+    "components": 90,
+    "presets": 24
+  },
+  "categories": {
+    "原图处理": {
+      "components": 18
+    },
+    "发型发色": {
+      "components": 36,
+      "presets": 12
+    },
+    "姿势穿搭场景": {
+      "components": 36,
+      "presets": 12
+    }
+  },
+  "components": [
+    {
+      "id": "orig_bust_01",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "胸型调整",
+      "type": "component",
+      "title": "自然丰满",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。在不改变人物身份与整体体型的前提下，将上身轮廓调整为自然丰满、重心合理的状态，服装褶皱和阴影符合真实重力。",
+      "negative": "避免反重力隆起、球状轮廓、位置过高、左右完全镜像和塑料感。",
+      "keywords": [
+        "丰满",
+        "自然重力"
+      ],
+      "composeText": "将上身轮廓调整为自然丰满、重心合理，服装褶皱与阴影符合真实重力。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_bust_02",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "胸型调整",
+      "type": "component",
+      "title": "自然外扩",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。将上身前侧轮廓调整为轻微自然外扩，左右存在细小差异，与躯干连续过渡，保持真实穿衣状态。",
+      "negative": "避免左右对称复制、过度外扩、边缘突兀、身体与服装分离。",
+      "keywords": [
+        "外扩",
+        "自然差异"
+      ],
+      "composeText": "将上身前侧轮廓调整为轻微自然外扩，并保留左右细小差异。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_bust_03",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "胸型调整",
+      "type": "component",
+      "title": "自然下垂",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。将上身轮廓调整为符合重力的自然下垂感，整体位置与躯干、肩颈和衣料关系真实。",
+      "negative": "避免位置异常偏低、形状塌陷、反重力、布料悬空。",
+      "keywords": [
+        "自然下垂",
+        "重力"
+      ],
+      "composeText": "将上身轮廓调整为符合重力的自然下垂感。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_bust_04",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "胸型调整",
+      "type": "component",
+      "title": "左右轻微不对称",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保留自然人体左右差异，让两侧轮廓、褶皱和阴影略有不同，避免人工镜像感。",
+      "negative": "避免明显大小失衡、左右复制、轮廓断裂和结构错误。",
+      "keywords": [
+        "不对称",
+        "自然差异"
+      ],
+      "composeText": "保留自然人体左右差异，使两侧轮廓、褶皱和阴影略有不同。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_bust_05",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "胸型调整",
+      "type": "component",
+      "title": "轮廓更柔和",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。将上身轮廓与躯干连接处处理得更柔和，曲线连续、过渡平缓，符合自然穿衣状态。",
+      "negative": "避免尖锐边缘、独立球状、硬塑料感和身体断层。",
+      "keywords": [
+        "柔和",
+        "过渡"
+      ],
+      "composeText": "让上身轮廓与躯干连接更柔和、连续。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_bust_06",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "胸型调整",
+      "type": "component",
+      "title": "基础自然型",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅做基础自然化修正：保持丰满体型，恢复合理重力、左右差异、衣物褶皱与真实光影。",
+      "negative": "避免夸张塑形、反重力、过度对称、比例失真。",
+      "keywords": [
+        "基础",
+        "自然化"
+      ],
+      "composeText": "对上身轮廓做基础自然化修正，保持丰满体型与真实重力。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_clean_01",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "画面清理",
+      "type": "component",
+      "title": "去除电脑与桌面遮挡",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。去除电脑屏幕、桌板、挡板及人物身前遮挡物，合理补全被遮挡区域，只保留人物、必要座椅与背景。",
+      "negative": "避免补全区域结构错误、背景断裂、残留桌角、重复肢体。",
+      "keywords": [
+        "电脑",
+        "桌板",
+        "遮挡"
+      ],
+      "composeText": "去除电脑屏幕、桌板、挡板和人物身前遮挡，并自然补全原遮挡区域。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_clean_02",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "画面清理",
+      "type": "component",
+      "title": "去除旁边人物",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。清除画面中的其他人物，只保留主要成年女性人物，同时自然恢复被遮挡背景。",
+      "negative": "避免残留肢体、幽灵人物、背景重复和主人物变化。",
+      "keywords": [
+        "旁人",
+        "单人"
+      ],
+      "composeText": "去除旁边其他人物，只保留主要人物并自然补全背景。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_clean_03",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "画面清理",
+      "type": "component",
+      "title": "去除柜体与杂物",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。去除画面右下角或周围柜体、收纳物、线材及无关杂物，使背景更干净。",
+      "negative": "避免背景大面积涂抹、结构塌陷、物体残影。",
+      "keywords": [
+        "柜体",
+        "杂物"
+      ],
+      "composeText": "去除柜体、收纳物、线材及其他无关杂物。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_clean_04",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "画面清理",
+      "type": "component",
+      "title": "只留人物座椅背景",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。清理所有非必要前景和办公杂物，画面仅保留主要人物、必要座椅和自然背景。",
+      "negative": "避免背景空洞、座椅变形、人物被误删或边缘破损。",
+      "keywords": [
+        "极简",
+        "人物座椅背景"
+      ],
+      "composeText": "清理非必要物体，只保留人物、必要座椅和自然背景。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_clean_05",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "画面清理",
+      "type": "component",
+      "title": "清除线材与小物件",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。清除耳机线、电线、纸张、小盒子、桌面零碎物品等干扰元素，同时保持场景真实。",
+      "negative": "避免误删服装配件、人物轮廓损坏、背景纹理重复。",
+      "keywords": [
+        "线材",
+        "小物件"
+      ],
+      "composeText": "清除耳机线、电线、纸张和其他零碎小物件。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_fix_01",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "人物修复",
+      "type": "component",
+      "title": "脸型五官回原图",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。将生成后偏移的脸型、五官比例、年龄感与原图重新对齐，保持人物身份稳定。",
+      "negative": "避免换脸、幼化、过度美颜、五官重塑。",
+      "keywords": [
+        "脸型",
+        "五官",
+        "身份"
+      ],
+      "composeText": "将脸型、五官比例和年龄感恢复到原图人物特征。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_fix_02",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "人物修复",
+      "type": "component",
+      "title": "头身比例校正",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。校正人物头身比例，使头部尺寸、肩宽、躯干和整体身高关系自然协调。",
+      "negative": "避免头小身大、头大身小、颈部过长、躯干拉伸。",
+      "keywords": [
+        "头身比例",
+        "结构"
+      ],
+      "composeText": "校正头身比例，使头部、肩宽和躯干关系自然协调。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_fix_03",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "人物修复",
+      "type": "component",
+      "title": "四肢长度与关节",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。修复手臂、腿部长度和肘膝关节结构，使四肢比例与姿势符合真实人体。",
+      "negative": "避免多肢、断肢、关节反折、手脚尺寸异常。",
+      "keywords": [
+        "四肢",
+        "关节"
+      ],
+      "composeText": "修复四肢长度与肘膝关节结构，使比例符合真实人体。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_fix_04",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "人物修复",
+      "type": "component",
+      "title": "手指与手部结构",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。修复手掌、手指数量、长度和关节，让手部动作自然并与原姿势一致。",
+      "negative": "避免多指、缺指、粘连、扭曲和手掌尺寸异常。",
+      "keywords": [
+        "手指",
+        "手部"
+      ],
+      "composeText": "修复手掌、手指数量、长度与关节结构。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_fix_05",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "人物修复",
+      "type": "component",
+      "title": "皮肤与纹理恢复",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。恢复自然皮肤纹理、毛孔与光影层次，降低塑料磨皮和局部模糊。",
+      "negative": "避免蜡像皮肤、过度磨皮、锐化边缘、肤色断层。",
+      "keywords": [
+        "皮肤",
+        "纹理"
+      ],
+      "composeText": "恢复自然皮肤纹理、毛孔与真实光影层次。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_fix_06",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "人物修复",
+      "type": "component",
+      "title": "脸身匹配",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。调整脸部与身体在肤色、光线、比例和清晰度上的一致性，使人物整体自然匹配。",
+      "negative": "避免脸和身体色差、光向冲突、清晰度割裂。",
+      "keywords": [
+        "脸身匹配",
+        "一致"
+      ],
+      "composeText": "统一脸部与身体的肤色、光线、比例和清晰度。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "orig_fix_07",
+      "suite": "bangyan",
+      "category": "原图处理",
+      "subcategory": "人物修复",
+      "type": "component",
+      "title": "整体高清自然化",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。在不改变人物身份、姿势和构图的情况下提升整体清晰度与真实摄影质感，保留自然纹理。",
+      "negative": "避免过度锐化、HDR感、假脸、塑料皮肤和纹理涂抹。",
+      "keywords": [
+        "高清",
+        "自然化",
+        "2K"
+      ],
+      "composeText": "提升整体清晰度与真实摄影质感，同时保留自然纹理。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": null
+    },
+    {
+      "id": "hair_01",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "自然高马尾",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为自然高马尾，位置略高于后脑勺中部，保留少量耳侧碎发，整体利落自然。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "自然高马尾"
+      ],
+      "composeText": "将发型调整为自然高马尾，位置略高于后脑勺中部，保留少量耳侧碎发。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_02",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "自然低马尾",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为自然低马尾，发束在后颈附近收拢，整体松弛温柔。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "自然低马尾"
+      ],
+      "composeText": "将发型调整为自然低马尾，发束在后颈附近收拢。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_03",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "黑长直",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为自然黑长直，发丝顺直但不过度僵硬，发尾保留自然弧度。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "黑长直"
+      ],
+      "composeText": "将发型调整为自然黑长直，发丝顺直并保留自然发尾弧度。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_04",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "长发大波浪",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为长发大波浪，卷度从耳下开始，卷形自然、有层次。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "长发大波浪"
+      ],
+      "composeText": "将发型调整为长发大波浪，卷度从耳下开始并保持自然层次。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_05",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "法式松弛卷发",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为法式松弛卷发，卷度柔和、不规则，头顶保留轻微蓬松度。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "法式松弛卷发"
+      ],
+      "composeText": "将发型调整为法式松弛卷发，卷度柔和不规则并保留轻微蓬松。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_06",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "锁骨发·发尾外翻",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为锁骨长度，发尾轻微自然外翻，整体清爽利落。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "锁骨发·发尾外翻"
+      ],
+      "composeText": "将发型调整为锁骨发，发尾轻微自然外翻。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_07",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "中短波波头",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为自然中短波波头，长度位于下巴至颈部之间，轮廓贴合头型。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "中短波波头"
+      ],
+      "composeText": "将发型调整为中短波波头，长度位于下巴至颈部之间。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_08",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "侧分中长发",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为自然侧分中长发，一侧发量略多，耳侧和脸颊附近保留自然碎发。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "侧分中长发"
+      ],
+      "composeText": "将发型调整为自然侧分中长发，并保留少量耳侧碎发。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_09",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "半扎发",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为自然半扎发，上半部分轻轻收拢，下半部分自然披散。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "半扎发"
+      ],
+      "composeText": "将发型调整为自然半扎发，上半部分收拢，下半部分披散。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_10",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "侧编发",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将一侧头发整理为自然松散的侧编发，另一侧自然垂落，整体不过度造型。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "侧编发"
+      ],
+      "composeText": "将一侧头发整理为自然松散的侧编发。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_11",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "自然双马尾",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为中低位自然双马尾，发束松紧自然，整体保持成年女性气质。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "自然双马尾"
+      ],
+      "composeText": "将发型调整为中低位自然双马尾，保持成年女性气质。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "hair_12",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发型",
+      "type": "component",
+      "title": "自然披肩微卷",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发色不变，仅将发型调整为自然披肩微卷，中长发发尾带柔和弧度，整体松弛自然。",
+      "negative": "避免假发感、头型异常、发量失真、发丝塑料感、发色被自动改变和脸部特征变化。",
+      "keywords": [
+        "发型",
+        "自然披肩微卷"
+      ],
+      "composeText": "将发型调整为自然披肩微卷，发尾保持柔和弧度。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_01",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "黑茶色",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为自然黑茶色，室内接近深黑棕，受光处带柔和茶棕层次。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "黑茶色"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为自然黑茶色，室内接近深黑棕，受光处带柔和茶棕层次。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_02",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "深巧克力棕",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为低饱和深巧克力棕，暗部深棕，受光区域呈温和巧克力色层次。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "深巧克力棕"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为低饱和深巧克力棕，暗部深棕，受光区域呈温和巧克力色层次。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_03",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "栗棕色",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为自然栗棕色，整体偏深，受光时带柔和棕红层次。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "栗棕色"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为自然栗棕色，整体偏深，受光时带柔和棕红层次。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_04",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "焦糖橘棕",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为低饱和焦糖橘棕，以棕色为底，受光处带柔和焦糖调。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "焦糖橘棕"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为低饱和焦糖橘棕，以棕色为底，受光处带柔和焦糖调。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_05",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "酒红色",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为低饱和深酒红，暗部接近深棕红，光线下显色克制。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "酒红色"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为低饱和深酒红，暗部接近深棕红，光线下显色克制。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_06",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "树莓红",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为克制的树莓红，以深红棕为底，受光处带轻微莓果红调。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "树莓红"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为克制的树莓红，以深红棕为底，受光处带轻微莓果红调。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_07",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "黑蓝色",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为自然黑蓝色，正常光下接近黑色，侧光下有轻微冷蓝调。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "黑蓝色"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为自然黑蓝色，正常光下接近黑色，侧光下有轻微冷蓝调。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_08",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "深紫黑",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为低饱和深紫黑，暗处接近黑色，受光处才显轻微紫调。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "深紫黑"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为低饱和深紫黑，暗处接近黑色，受光处才显轻微紫调。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_09",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "奶茶灰棕",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为低饱和奶茶灰棕，灰棕柔和但不发白。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "奶茶灰棕"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为低饱和奶茶灰棕，灰棕柔和但不发白。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_10",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "青木亚麻灰",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为低饱和青木亚麻灰，以灰棕为主并带轻微冷调。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "青木亚麻灰"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为低饱和青木亚麻灰，以灰棕为主并带轻微冷调。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_11",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "玫瑰金棕",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为克制的玫瑰金棕，以浅棕为主并带轻微玫瑰粉金调。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "玫瑰金棕"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为克制的玫瑰金棕，以浅棕为主并带轻微玫瑰粉金调。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "color_12",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "发色",
+      "type": "component",
+      "title": "自然浅棕",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保持原有发型长度、卷度、发量和结构不变，仅将发色调整为自然浅棕色，发根略深，发中与发尾随光线自然变亮。",
+      "negative": "避免发型结构变化、荧光色、高饱和失真、发色断层、头发塑料感、发根与发尾颜色不协调。",
+      "keywords": [
+        "发色",
+        "自然浅棕"
+      ],
+      "composeText": "保持当前发型结构不变，将发色调整为自然浅棕色，发根略深，发中与发尾随光线自然变亮。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_01",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "黑色细框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。增加一副黑色细框眼镜，镜框自然贴合鼻梁与耳部，不过度遮挡眼睛，镜片减少强反光。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "黑色细框眼镜"
+      ],
+      "composeText": "增加一副黑色细框眼镜，镜框自然贴合鼻梁与耳部，不过度遮挡眼睛，镜片减少强反光。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_02",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "银色金属细框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。增加一副银色金属细框眼镜，整体轻盈知性，镜片减少强反光。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "银色金属细框眼镜"
+      ],
+      "composeText": "增加一副银色金属细框眼镜，整体轻盈知性，镜片减少强反光。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_03",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "黑色方框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。增加一副黑色方框眼镜，边框清晰利落，整体偏通勤知性。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "黑色方框眼镜"
+      ],
+      "composeText": "增加一副黑色方框眼镜，边框清晰利落，整体偏通勤知性。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_04",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "轻薄圆框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。增加一副轻薄圆框眼镜，镜框自然贴合脸部，整体更有书卷气。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "轻薄圆框眼镜"
+      ],
+      "composeText": "增加一副轻薄圆框眼镜，镜框自然贴合脸部，整体更有书卷气。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_05",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "无框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。增加一副简洁无框眼镜，佩戴轻盈，尽量减少对五官的遮挡。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "无框眼镜"
+      ],
+      "composeText": "增加一副简洁无框眼镜，佩戴轻盈，尽量减少对五官的遮挡。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_06",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "透明浅框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。增加一副透明浅框眼镜，整体轻薄柔和，镜片减少明显反光。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "透明浅框眼镜"
+      ],
+      "composeText": "增加一副透明浅框眼镜，整体轻薄柔和，镜片减少明显反光。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_07",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "眼镜自然贴合脸部",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保留当前眼镜款式，仅调整为自然贴合鼻梁与耳部，镜腿结构合理，不歪斜、不悬空。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "眼镜自然贴合脸部"
+      ],
+      "composeText": "保留当前眼镜款式，仅调整为自然贴合鼻梁与耳部，镜腿结构合理，不歪斜、不悬空。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_08",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "减少镜片反光·露出眼睛",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。保留当前眼镜款式，仅减少镜片强反光，让眼睛与眉眼神态清楚可见。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "减少镜片反光·露出眼睛"
+      ],
+      "composeText": "保留当前眼镜款式，仅减少镜片强反光，让眼睛与眉眼神态清楚可见。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_09",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "高马尾搭配黑色细框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。在自然高马尾基础上增加一副黑色细框眼镜，整体利落清爽，镜片减少强反光。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "高马尾搭配黑色细框眼镜"
+      ],
+      "composeText": "在自然高马尾基础上增加一副黑色细框眼镜，整体利落清爽，镜片减少强反光。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_10",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "黑长直搭配黑色方框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。在自然黑长直基础上增加一副黑色方框眼镜，整体更显知性。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "黑长直搭配黑色方框眼镜"
+      ],
+      "composeText": "在自然黑长直基础上增加一副黑色方框眼镜，整体更显知性。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_11",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "低马尾搭配金属圆框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。在自然低马尾基础上增加一副轻薄金属圆框眼镜，整体柔和知性。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "低马尾搭配金属圆框眼镜"
+      ],
+      "composeText": "在自然低马尾基础上增加一副轻薄金属圆框眼镜，整体柔和知性。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "glasses_12",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "subcategory": "眼镜",
+      "type": "component",
+      "title": "自然卷发搭配轻薄方框眼镜",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。在自然卷发基础上增加一副轻薄方框眼镜，整体轻熟自然。",
+      "negative": "避免眼镜歪斜、镜片强反光遮挡眼睛、镜框穿模、鼻梁位置错误、五官变化和比例不自然。",
+      "keywords": [
+        "眼镜",
+        "自然卷发搭配轻薄方框眼镜"
+      ],
+      "composeText": "在自然卷发基础上增加一副轻薄方框眼镜，整体轻熟自然。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "pose_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "姿势",
+      "type": "component",
+      "title": "自然站立·一腿略前",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整姿势。人物自然站立，一条腿略向前，另一条腿承担主要重心，肩膀放松，身体线条自然展开，构图中可自然看到大腿区域。",
+      "negative": "避免重心不稳、颈肩扭曲、腿部比例失真、关节角度异常、过度摆拍和肢体穿模。",
+      "keywords": [
+        "姿势",
+        "自然站立·一腿略前"
+      ],
+      "composeText": "人物自然站立，一条腿略向前，另一条腿承担主要重心，肩膀放松。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "pose_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "姿势",
+      "type": "component",
+      "title": "身体微微前倾",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整姿势。人物身体微微前倾，肩颈和胸前角度自然打开，双腿保持稳定，能够更自然呈现上半身与大腿比例。",
+      "negative": "避免重心不稳、颈肩扭曲、腿部比例失真、关节角度异常、过度摆拍和肢体穿模。",
+      "keywords": [
+        "姿势",
+        "身体微微前倾"
+      ],
+      "composeText": "人物身体微微前倾，肩颈自然打开，双腿保持稳定。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "pose_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "姿势",
+      "type": "component",
+      "title": "窗边倚靠站姿",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整姿势。人物轻松倚靠窗边或窗框附近，一侧肩膀自然放松，身体微侧向镜头，双腿姿态自然。",
+      "negative": "避免重心不稳、颈肩扭曲、腿部比例失真、关节角度异常、过度摆拍和肢体穿模。",
+      "keywords": [
+        "姿势",
+        "窗边倚靠站姿"
+      ],
+      "composeText": "人物轻松倚靠窗边，一侧肩膀放松，身体微侧向镜头。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "pose_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "姿势",
+      "type": "component",
+      "title": "自然坐姿·双腿自然放置",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整为自然坐姿。人物坐姿稳定，双腿自然放置，不过度并拢也不过度夸张分开，大腿区域清楚可见。",
+      "negative": "避免重心不稳、颈肩扭曲、腿部比例失真、关节角度异常、过度摆拍和肢体穿模。",
+      "keywords": [
+        "姿势",
+        "自然坐姿·双腿自然放置"
+      ],
+      "composeText": "人物自然坐姿，双腿自然放置，大腿区域清楚可见。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "pose_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "姿势",
+      "type": "component",
+      "title": "沙发侧坐",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整为沙发侧坐姿势。人物坐在沙发边缘或中段，双腿自然偏向一侧，大腿线条清楚，肩颈与上身保持放松。",
+      "negative": "避免重心不稳、颈肩扭曲、腿部比例失真、关节角度异常、过度摆拍和肢体穿模。",
+      "keywords": [
+        "姿势",
+        "沙发侧坐"
+      ],
+      "composeText": "人物采用沙发侧坐姿势，双腿自然偏向一侧，肩颈放松。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "pose_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "姿势",
+      "type": "component",
+      "title": "回头抓拍",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整为向前移动时自然回头看向镜头的姿势。头部转向镜头，肩膀略滞后，胸前与腰线形成轻微转动关系。",
+      "negative": "避免重心不稳、颈肩扭曲、腿部比例失真、关节角度异常、过度摆拍和肢体穿模。",
+      "keywords": [
+        "姿势",
+        "回头抓拍"
+      ],
+      "composeText": "人物向前移动时自然回头看向镜头，头部先转、肩膀略滞后。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "pose_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "姿势",
+      "type": "component",
+      "title": "行走抓拍",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整为自然行走中的抓拍姿势。步伐轻松稳定，裙摆或下装产生轻微动态，大腿比例自然清楚。",
+      "negative": "避免重心不稳、颈肩扭曲、腿部比例失真、关节角度异常、过度摆拍和肢体穿模。",
+      "keywords": [
+        "姿势",
+        "行走抓拍"
+      ],
+      "composeText": "人物处于自然行走中的抓拍状态，步伐轻松稳定，下装有轻微动态。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "pose_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "姿势",
+      "type": "component",
+      "title": "靠墙站姿",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整为自然靠墙站姿。背部或肩部轻贴墙面，一条腿承担重心，另一条腿轻微放松弯曲。",
+      "negative": "避免重心不稳、颈肩扭曲、腿部比例失真、关节角度异常、过度摆拍和肢体穿模。",
+      "keywords": [
+        "姿势",
+        "靠墙站姿"
+      ],
+      "composeText": "人物自然靠墙站立，一条腿承担重心，另一条腿轻微放松弯曲。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "outfit_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "穿搭",
+      "type": "component",
+      "title": "修身针织上衣 + 高腰短裙",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅更换服装。更换为修身针织上衣与高腰短裙，针织面料贴合自然，高腰短裙长度利于自然展现大腿区域。",
+      "negative": "避免衣物透明、走光失控、面料塑料感、裙摆结构错误、身体比例夸张和衣物穿模。",
+      "keywords": [
+        "穿搭",
+        "修身针织上衣 + 高腰短裙"
+      ],
+      "composeText": "穿修身针织上衣与高腰短裙，下装自然展现大腿区域。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "outfit_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "穿搭",
+      "type": "component",
+      "title": "无袖上衣 + 包臀短裙",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅更换服装。更换为无袖上衣与包臀短裙，上身线条利落，下身包臀短裙自然贴合腰臀和大腿比例。",
+      "negative": "避免衣物透明、走光失控、面料塑料感、裙摆结构错误、身体比例夸张和衣物穿模。",
+      "keywords": [
+        "穿搭",
+        "无袖上衣 + 包臀短裙"
+      ],
+      "composeText": "穿无袖上衣与包臀短裙，整体修身利落并自然展现大腿。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "outfit_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "穿搭",
+      "type": "component",
+      "title": "吊带上衣 + 高腰短裙",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅更换服装。更换为吊带上衣与高腰短裙，肩带纤细自然，下装长度适合自然展现大腿区域。",
+      "negative": "避免衣物透明、走光失控、面料塑料感、裙摆结构错误、身体比例夸张和衣物穿模。",
+      "keywords": [
+        "穿搭",
+        "吊带上衣 + 高腰短裙"
+      ],
+      "composeText": "穿吊带上衣与高腰短裙，肩带纤细自然，下装展现大腿区域。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "outfit_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "穿搭",
+      "type": "component",
+      "title": "短款连衣裙",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅更换服装。更换为修身但自然的短款连衣裙，裙长在大腿区域，整体轻熟、利落，方便后续叠加不同领口设计。",
+      "negative": "避免衣物透明、走光失控、面料塑料感、裙摆结构错误、身体比例夸张和衣物穿模。",
+      "keywords": [
+        "穿搭",
+        "短款连衣裙"
+      ],
+      "composeText": "穿修身自然的短款连衣裙，裙长位于大腿区域。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "outfit_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "穿搭",
+      "type": "component",
+      "title": "短款连衣包臀裙",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅更换服装。更换为短款连衣包臀裙，裙身自然贴合但不过度紧绷，腰臀和腿部比例真实。",
+      "negative": "避免衣物透明、走光失控、面料塑料感、裙摆结构错误、身体比例夸张和衣物穿模。",
+      "keywords": [
+        "穿搭",
+        "短款连衣包臀裙"
+      ],
+      "composeText": "穿短款连衣包臀裙，裙身自然贴合并展现大腿区域。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "outfit_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "穿搭",
+      "type": "component",
+      "title": "轻薄开衫 + 低领内搭 + 短裙",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅更换服装。更换为轻薄开衫、低领内搭和短裙，外层开衫增加层次感，下装自然露出大腿区域。",
+      "negative": "避免衣物透明、走光失控、面料塑料感、裙摆结构错误、身体比例夸张和衣物穿模。",
+      "keywords": [
+        "穿搭",
+        "轻薄开衫 + 低领内搭 + 短裙"
+      ],
+      "composeText": "穿轻薄开衫、低领内搭与短裙，保留层次感并自然展现大腿。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "outfit_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "穿搭",
+      "type": "component",
+      "title": "改良短旗袍",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅更换服装。更换为现代改良短旗袍，整体修身利落，裙长偏短，可自然看到大腿区域，领口允许后续用独立领口组件覆盖。",
+      "negative": "避免衣物透明、走光失控、面料塑料感、裙摆结构错误、身体比例夸张和衣物穿模。",
+      "keywords": [
+        "穿搭",
+        "改良短旗袍"
+      ],
+      "composeText": "穿现代改良短旗袍，整体修身利落，裙长偏短并自然展现大腿。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "outfit_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "穿搭",
+      "type": "component",
+      "title": "通勤衬衫 + 窄短裙",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅更换服装。更换为轻熟通勤衬衫与窄短裙，衬衫版型自然，下身窄短裙利于自然展现大腿比例。",
+      "negative": "避免衣物透明、走光失控、面料塑料感、裙摆结构错误、身体比例夸张和衣物穿模。",
+      "keywords": [
+        "穿搭",
+        "通勤衬衫 + 窄短裙"
+      ],
+      "composeText": "穿轻熟通勤衬衫与窄短裙，下装自然展现大腿比例。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "neck_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "深V领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为深V领，开口自然向下延伸，可明显呈现胸前区域与自然乳沟。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "深V领",
+        "Plunging V",
+        "strong"
+      ],
+      "composeText": "将领口调整为深V领，开口自然向下延伸，可明显呈现胸前区域与自然乳沟。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "strong",
+      "englishName": "Plunging V"
+    },
+    {
+      "id": "neck_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "V领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为自然V领，开口清晰，可自然呈现胸前线条与适度乳沟。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "V领",
+        "V-neck",
+        "medium"
+      ],
+      "composeText": "将领口调整为自然V领，开口清晰，可自然呈现胸前线条与适度乳沟。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "medium",
+      "englishName": "V-neck"
+    },
+    {
+      "id": "neck_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "心形领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为心形领，胸口上缘形成柔和双弧曲线，自然呈现胸前线条。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "心形领",
+        "Sweetheart",
+        "medium"
+      ],
+      "composeText": "将领口调整为心形领，胸口上缘形成柔和双弧曲线，自然呈现胸前线条。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "medium",
+      "englishName": "Sweetheart"
+    },
+    {
+      "id": "neck_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "方领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为方领，方形开口自然露出锁骨、上胸与胸前线条。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "方领",
+        "Square Neckline",
+        "medium"
+      ],
+      "composeText": "将领口调整为方领，方形开口自然露出锁骨、上胸与胸前线条。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "medium",
+      "englishName": "Square Neckline"
+    },
+    {
+      "id": "neck_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "挂脖领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为挂脖领，颈部系带结构自然成立，胸前视觉集中，可清楚呈现胸前线条与乳沟。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "挂脖领",
+        "Halter Neck",
+        "strong"
+      ],
+      "composeText": "将领口调整为挂脖领，颈部系带结构自然成立，胸前视觉集中，可清楚呈现胸前线条与乳沟。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "strong",
+      "englishName": "Halter Neck"
+    },
+    {
+      "id": "neck_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "一字肩",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为一字肩，肩线自然露出，领口横向打开上胸区域。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "一字肩",
+        "Off-shoulder",
+        "medium"
+      ],
+      "composeText": "将领口调整为一字肩，肩线自然露出，领口横向打开上胸区域。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "medium",
+      "englishName": "Off-shoulder"
+    },
+    {
+      "id": "neck_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "裹身交叉领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为裹身交叉领，胸前两片布料自然交叠，形成清楚的交叉线与胸前层次。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "裹身交叉领",
+        "Wrap",
+        "strong"
+      ],
+      "composeText": "将领口调整为裹身交叉领，胸前两片布料自然交叠，形成清楚的交叉线与胸前层次。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "strong",
+      "englishName": "Wrap"
+    },
+    {
+      "id": "neck_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "抹胸",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为抹胸设计，上缘自然贴合胸部上方曲线，胸前区域与乳沟清楚可见。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "抹胸",
+        "Strapless",
+        "strong"
+      ],
+      "composeText": "将领口调整为抹胸设计，上缘自然贴合胸部上方曲线，胸前区域与乳沟清楚可见。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "strong",
+      "englishName": "Strapless"
+    },
+    {
+      "id": "neck_09",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "细吊带领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为细吊带设计，肩带纤细，胸前开口自然，可见明显胸前区域与乳沟。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "细吊带领",
+        "Spaghetti Strap",
+        "strong"
+      ],
+      "composeText": "将领口调整为细吊带设计，肩带纤细，胸前开口自然，可见明显胸前区域与乳沟。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "strong",
+      "englishName": "Spaghetti Strap"
+    },
+    {
+      "id": "neck_10",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "荡领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为荡领，胸前布料自然垂坠堆叠，形成柔和但明显的胸前层次。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "荡领",
+        "Cowl Neck",
+        "medium"
+      ],
+      "composeText": "将领口调整为荡领，胸前布料自然垂坠堆叠，形成柔和但明显的胸前层次。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "medium",
+      "englishName": "Cowl Neck"
+    },
+    {
+      "id": "neck_11",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "交叉绑带领",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为交叉绑带领，胸前由绑带与布料形成清楚分割，呈现明显胸前区域。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "交叉绑带领",
+        "Criss-cross",
+        "strong"
+      ],
+      "composeText": "将领口调整为交叉绑带领，胸前由绑带与布料形成清楚分割，呈现明显胸前区域。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "strong",
+      "englishName": "Criss-cross"
+    },
+    {
+      "id": "neck_12",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "领口",
+      "type": "component",
+      "title": "不对称单肩",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅调整服装领口设计。将领口调整为不对称单肩，仅一侧肩颈自然露出，领口斜向展开上胸区域。",
+      "negative": "避免领口结构错位、面料穿模、边缘异常、走光失控、人体结构变化和低俗化特写。",
+      "keywords": [
+        "领口",
+        "不对称单肩",
+        "One-shoulder",
+        "medium"
+      ],
+      "composeText": "将领口调整为不对称单肩，仅一侧肩颈自然露出，领口斜向展开上胸区域。",
+      "combinable": true,
+      "enabled": true,
+      "exposureLevel": "medium",
+      "englishName": "One-shoulder"
+    },
+    {
+      "id": "scene_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "场景",
+      "type": "component",
+      "title": "办公室窗边 / 办公椅区域",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅将场景调整为整洁办公室窗边或办公椅区域，自然侧光进入画面，环境简洁、真实、带轻熟通勤感。",
+      "negative": "避免背景透视错误、重复物体、环境比例失真、人物与背景割裂、反射异常和杂乱干扰。",
+      "keywords": [
+        "场景",
+        "办公室窗边 / 办公椅区域"
+      ],
+      "composeText": "场景为整洁办公室窗边或办公椅区域，自然侧光、背景简洁。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "scene_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "场景",
+      "type": "component",
+      "title": "文件柜旁",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅将场景调整为办公室文件柜旁，背景整齐有秩序，具备自然职场感。",
+      "negative": "避免背景透视错误、重复物体、环境比例失真、人物与背景割裂、反射异常和杂乱干扰。",
+      "keywords": [
+        "场景",
+        "文件柜旁"
+      ],
+      "composeText": "场景为办公室文件柜旁，背景整齐有秩序。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "scene_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "场景",
+      "type": "component",
+      "title": "电梯厅",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅将场景调整为写字楼或酒店电梯厅，背景干净利落，空间线条简洁明确。",
+      "negative": "避免背景透视错误、重复物体、环境比例失真、人物与背景割裂、反射异常和杂乱干扰。",
+      "keywords": [
+        "场景",
+        "电梯厅"
+      ],
+      "composeText": "场景为干净利落的电梯厅，空间线条简洁。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "scene_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "场景",
+      "type": "component",
+      "title": "酒店走廊 / 室内通道",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅将场景调整为酒店走廊或简洁室内通道，空间具有纵深感，灯光柔和均匀。",
+      "negative": "避免背景透视错误、重复物体、环境比例失真、人物与背景割裂、反射异常和杂乱干扰。",
+      "keywords": [
+        "场景",
+        "酒店走廊 / 室内通道"
+      ],
+      "composeText": "场景为酒店走廊或简洁室内通道，具有自然纵深感。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "scene_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "场景",
+      "type": "component",
+      "title": "酒店大堂",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅将场景调整为酒店大堂，空间开阔、灯光柔和、背景简洁有质感。",
+      "negative": "避免背景透视错误、重复物体、环境比例失真、人物与背景割裂、反射异常和杂乱干扰。",
+      "keywords": [
+        "场景",
+        "酒店大堂"
+      ],
+      "composeText": "场景为开阔简洁的酒店大堂，灯光柔和。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "scene_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "场景",
+      "type": "component",
+      "title": "客厅沙发边",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅将场景调整为客厅沙发边，环境柔和生活化，光线自然。",
+      "negative": "避免背景透视错误、重复物体、环境比例失真、人物与背景割裂、反射异常和杂乱干扰。",
+      "keywords": [
+        "场景",
+        "客厅沙发边"
+      ],
+      "composeText": "场景为生活化客厅沙发边，光线自然柔和。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "scene_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "场景",
+      "type": "component",
+      "title": "卧室镜前 / 落地窗边",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅将场景调整为卧室镜前或落地窗边，空间柔和安静，自然光线干净。",
+      "negative": "避免背景透视错误、重复物体、环境比例失真、人物与背景割裂、反射异常和杂乱干扰。",
+      "keywords": [
+        "场景",
+        "卧室镜前 / 落地窗边"
+      ],
+      "composeText": "场景为卧室镜前或落地窗边，空间柔和安静。",
+      "combinable": true,
+      "enabled": true
+    },
+    {
+      "id": "scene_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "场景",
+      "type": "component",
+      "title": "车边户外",
+      "positive": "保持原图成年女性人物身份、脸型、五官、年龄感、整体气质、姿势基础和场景关系自然一致。仅将场景调整为车边户外环境，车辆作为辅助背景，光线清楚自然。",
+      "negative": "避免背景透视错误、重复物体、环境比例失真、人物与背景割裂、反射异常和杂乱干扰。",
+      "keywords": [
+        "场景",
+        "车边户外"
+      ],
+      "composeText": "场景为车边户外环境，车辆作为辅助背景，光线自然。",
+      "combinable": true,
+      "enabled": true
+    }
+  ],
+  "presets": [
+    {
+      "id": "hairpreset_01",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "高马尾 + 细框眼镜",
+      "slots": {
+        "hairstyle": "hair_01",
+        "hairColor": null,
+        "glasses": "glasses_01"
+      },
+      "keywords": [
+        "高马尾",
+        "细框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_02",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "高马尾 + 无框眼镜",
+      "slots": {
+        "hairstyle": "hair_01",
+        "hairColor": null,
+        "glasses": "glasses_05"
+      },
+      "keywords": [
+        "高马尾",
+        "无框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_03",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "低马尾 + 圆框眼镜",
+      "slots": {
+        "hairstyle": "hair_02",
+        "hairColor": null,
+        "glasses": "glasses_04"
+      },
+      "keywords": [
+        "低马尾",
+        "圆框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_04",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "黑长直 + 黑框眼镜",
+      "slots": {
+        "hairstyle": "hair_03",
+        "hairColor": null,
+        "glasses": "glasses_03"
+      },
+      "keywords": [
+        "黑长直",
+        "黑框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_05",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "黑长直 + 无框眼镜",
+      "slots": {
+        "hairstyle": "hair_03",
+        "hairColor": null,
+        "glasses": "glasses_05"
+      },
+      "keywords": [
+        "黑长直",
+        "无框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_06",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "法式卷 + 透明浅框眼镜",
+      "slots": {
+        "hairstyle": "hair_05",
+        "hairColor": null,
+        "glasses": "glasses_06"
+      },
+      "keywords": [
+        "法式卷",
+        "透明浅框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_07",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "大波浪 + 金属细框眼镜",
+      "slots": {
+        "hairstyle": "hair_04",
+        "hairColor": null,
+        "glasses": "glasses_02"
+      },
+      "keywords": [
+        "大波浪",
+        "金属细框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_08",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "锁骨发 + 方框眼镜",
+      "slots": {
+        "hairstyle": "hair_06",
+        "hairColor": null,
+        "glasses": "glasses_03"
+      },
+      "keywords": [
+        "锁骨发",
+        "方框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_09",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "波波头 + 圆框眼镜",
+      "slots": {
+        "hairstyle": "hair_07",
+        "hairColor": null,
+        "glasses": "glasses_04"
+      },
+      "keywords": [
+        "波波头",
+        "圆框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_10",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "侧分中长发 + 细框眼镜",
+      "slots": {
+        "hairstyle": "hair_08",
+        "hairColor": null,
+        "glasses": "glasses_01"
+      },
+      "keywords": [
+        "侧分中长发",
+        "细框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_11",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "高马尾 + 焦糖橘棕 + 细框眼镜",
+      "slots": {
+        "hairstyle": "hair_01",
+        "hairColor": "color_04",
+        "glasses": "glasses_01"
+      },
+      "keywords": [
+        "高马尾",
+        "焦糖橘棕",
+        "细框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hairpreset_12",
+      "suite": "bangyan",
+      "category": "发型发色",
+      "type": "preset",
+      "title": "低马尾 + 深巧克力棕 + 圆框眼镜",
+      "slots": {
+        "hairstyle": "hair_02",
+        "hairColor": "color_02",
+        "glasses": "glasses_04"
+      },
+      "keywords": [
+        "低马尾",
+        "深巧克力棕",
+        "圆框眼镜"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "窗边站姿 + 深V针织 + 高腰短裙 + 办公室窗边",
+      "slots": {
+        "pose": "pose_03",
+        "outfit": "outfit_01",
+        "neckline": "neck_01",
+        "scene": "scene_01"
+      },
+      "keywords": [
+        "窗边站姿",
+        "深V针织",
+        "高腰短裙",
+        "办公室窗边"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "自然坐姿 + 心形领修身上衣 + 包臀短裙 + 办公区域",
+      "slots": {
+        "pose": "pose_04",
+        "outfit": "outfit_02",
+        "neckline": "neck_03",
+        "scene": "scene_01"
+      },
+      "keywords": [
+        "自然坐姿",
+        "心形领修身上衣",
+        "包臀短裙",
+        "办公区域"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "倚靠站姿 + 方领无袖上衣 + A字短裙 + 电梯厅",
+      "slots": {
+        "pose": "pose_08",
+        "outfit": "outfit_02",
+        "neckline": "neck_04",
+        "scene": "scene_03"
+      },
+      "keywords": [
+        "倚靠站姿",
+        "方领无袖上衣",
+        "A字短裙",
+        "电梯厅"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "回头抓拍 + 细吊带连衣短裙 + 酒店走廊",
+      "slots": {
+        "pose": "pose_06",
+        "outfit": "outfit_04",
+        "neckline": "neck_09",
+        "scene": "scene_04"
+      },
+      "keywords": [
+        "回头抓拍",
+        "细吊带连衣短裙",
+        "酒店走廊"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "沙发侧坐 + 荡领针织连衣短裙 + 客厅",
+      "slots": {
+        "pose": "pose_05",
+        "outfit": "outfit_04",
+        "neckline": "neck_10",
+        "scene": "scene_06"
+      },
+      "keywords": [
+        "沙发侧坐",
+        "荡领针织连衣短裙",
+        "客厅"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "微微前倾 + 裹身交叉领上衣 + 短裙 + 车边户外",
+      "slots": {
+        "pose": "pose_02",
+        "outfit": "outfit_01",
+        "neckline": "neck_07",
+        "scene": "scene_08"
+      },
+      "keywords": [
+        "微微前倾",
+        "裹身交叉领上衣",
+        "短裙",
+        "车边户外"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "行走抓拍 + 挂脖上衣 + 包臀短裙 + 室内通道",
+      "slots": {
+        "pose": "pose_07",
+        "outfit": "outfit_02",
+        "neckline": "neck_05",
+        "scene": "scene_04"
+      },
+      "keywords": [
+        "行走抓拍",
+        "挂脖上衣",
+        "包臀短裙",
+        "室内通道"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "自然站立 + 一字肩上衣 + 高腰短裙 + 酒店大堂",
+      "slots": {
+        "pose": "pose_01",
+        "outfit": "outfit_01",
+        "neckline": "neck_06",
+        "scene": "scene_05"
+      },
+      "keywords": [
+        "自然站立",
+        "一字肩上衣",
+        "高腰短裙",
+        "酒店大堂"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_09",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "窗边倚靠 + 抹胸连衣短裙 + 卧室落地窗",
+      "slots": {
+        "pose": "pose_03",
+        "outfit": "outfit_04",
+        "neckline": "neck_08",
+        "scene": "scene_07"
+      },
+      "keywords": [
+        "窗边倚靠",
+        "抹胸连衣短裙",
+        "卧室落地窗"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_10",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "沙发侧坐 + 细吊带上衣 + 短裙 + 客厅",
+      "slots": {
+        "pose": "pose_05",
+        "outfit": "outfit_03",
+        "neckline": "neck_09",
+        "scene": "scene_06"
+      },
+      "keywords": [
+        "沙发侧坐",
+        "细吊带上衣",
+        "短裙",
+        "客厅"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_11",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "回眸站姿 + 交叉绑带领 + 包臀短裙 + 酒店大堂",
+      "slots": {
+        "pose": "pose_06",
+        "outfit": "outfit_02",
+        "neckline": "neck_11",
+        "scene": "scene_05"
+      },
+      "keywords": [
+        "回眸站姿",
+        "交叉绑带领",
+        "包臀短裙",
+        "酒店大堂"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "stylepreset_12",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "type": "preset",
+      "title": "靠墙站姿 + 不对称单肩 + 短裙 + 电梯厅",
+      "slots": {
+        "pose": "pose_08",
+        "outfit": "outfit_02",
+        "neckline": "neck_12",
+        "scene": "scene_03"
+      },
+      "keywords": [
+        "靠墙站姿",
+        "不对称单肩",
+        "短裙",
+        "电梯厅"
+      ],
+      "enabled": true
+    }
+  ],
+  "compositionRules": {
+    "commonPrefix": "保持原图成年女性人物身份、脸型、五官、年龄感和整体气质一致。人物默认为成年女性、身材丰满；除用户主动选择的修改项外，其余内容保持不变。",
+    "commonSuffix": "保持真实人体比例、自然衣物褶皱和真实摄影光影，画面可根据所选穿搭与领口自然呈现胸前线条，也可自然包含大腿区域；避免走光失控和低俗化特写。",
+    "commonNegative": "避免人物身份漂移、脸型五官变化、人体结构错误、头身比例异常、肢体穿模、衣物结构错误、走光失控、过度磨皮和明显AI痕迹。",
+    "slots": {
+      "hairStyle": {
+        "max": 1,
+        "subcategory": "发型",
+        "replaceSameSlot": true
+      },
+      "hairColor": {
+        "max": 1,
+        "subcategory": "发色",
+        "nullable": true,
+        "replaceSameSlot": true
+      },
+      "glasses": {
+        "max": 1,
+        "subcategory": "眼镜",
+        "nullable": true,
+        "replaceSameSlot": true
+      },
+      "pose": {
+        "max": 1,
+        "subcategory": "姿势",
+        "replaceSameSlot": true
+      },
+      "outfit": {
+        "max": 1,
+        "subcategory": "穿搭",
+        "replaceSameSlot": true
+      },
+      "neckline": {
+        "max": 1,
+        "subcategory": "领口",
+        "nullable": true,
+        "replaceSameSlot": true,
+        "priorityOverOutfitNeckline": true
+      },
+      "scene": {
+        "max": 1,
+        "subcategory": "场景",
+        "replaceSameSlot": true
+      }
+    },
+    "mergeOrder": [
+      "commonPrefix",
+      "pose",
+      "outfit",
+      "neckline",
+      "scene",
+      "hairStyle",
+      "hairColor",
+      "glasses",
+      "commonSuffix"
+    ],
+    "conflictRules": [
+      "发型组件只改发型，不自动改变发色、脸型、服装、姿势或场景。",
+      "发色组件只改颜色，保持当前发型长度、卷度、发量和结构。",
+      "眼镜组件只增加或调整眼镜，不改变五官；减少强反光并确保自然贴合。",
+      "如果穿搭组件自身包含领口描述，而用户另外选择了领口组件，则独立领口组件优先。",
+      "推荐组合只是 preset，不限制用户继续修改任何 slot。",
+      "不建立主观审美禁配关系，仅处理明确语义冲突。"
+    ]
+  },
+  "storageRules": {
+    "namespace": {
+      "zhuangyuan": "promptLibrary.zhuangyuan.*",
+      "bangyan": "promptLibrary.bangyan.*"
+    },
+    "migration": {
+      "required": true,
+      "migrationVersionKey": "promptLibrary.migrationVersion",
+      "strategy": "首次升级检测旧版 localStorage keys，将旧收藏、最近复制、自定义 Prompt 等复制/迁移到 promptLibrary.zhuangyuan.*；第一阶段保留旧 key，不写入榜眼；迁移仅执行一次。"
+    }
+  }
+}

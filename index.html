@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#F7F4EF" />
     <meta name="description" content="专为 img2img 设计的极简个人 Prompt 卡片库" />
-    <link rel="manifest" href="manifest.json?v=2.0.2" />
+    <link rel="manifest" href="manifest.json?v=2.1.0" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
     <script>
       try {
@@ -15,7 +15,7 @@
         }
       } catch {}
     </script>
-    <link rel="stylesheet" href="css/prototype.css?v=2.0.2" />
+    <link rel="stylesheet" href="css/prototype.css?v=2.1.0" />
     <title>Img2Img Prompt 库</title>
   </head>
   <body>
@@ -41,13 +41,31 @@
         </div>
       </header>
 
+      <nav class="suite-tabs" role="tablist" aria-label="Prompt 版本">
+        <button class="suite-tab is-active" type="button" role="tab" data-suite-tab="zhuangyuan" aria-selected="true">
+          <span>状元</span><small>旧站 251 条</small>
+        </button>
+        <button class="suite-tab" type="button" role="tab" data-suite-tab="bangyan" aria-selected="false">
+          <span>榜眼</span><small>90 组件 · 24 组合</small>
+        </button>
+      </nav>
+
       <main>
         <section class="intro-strip" aria-label="使用说明">
           <div>
-            <strong>选一个栏目，复制一条完整 Prompt。</strong>
-            <p>四个栏目共 251 条完整 Prompt，点开即可复制，也可以新增自己的内容。</p>
+            <strong id="intro-title">状元：选一条旧站 Prompt，打开详情后复制。</strong>
+            <p id="intro-description">保留原站 251 条默认 Prompt，并与榜眼的组件、收藏和最近复制数据隔离。</p>
           </div>
           <span class="local-badge"><i aria-hidden="true"></i> 离线可用</span>
+        </section>
+
+        <section class="workspace-toolbar" aria-label="搜索和模式">
+          <label class="search-control" for="search-input">
+            <span aria-hidden="true">⌕</span>
+            <input id="search-input" type="search" autocomplete="off" placeholder="搜索标题、分类、关键词或 Prompt" />
+            <button id="clear-search" type="button" aria-label="清空搜索">清除</button>
+          </label>
+          <nav id="mode-tabs" class="mode-tabs" aria-label="榜眼模式" hidden></nav>
         </section>
 
         <nav id="category-tabs" class="category-tabs" aria-label="Prompt 栏目"></nav>
@@ -63,6 +81,11 @@
 
         <div id="prompt-sections" class="prompt-sections"></div>
 
+        <section id="recent-panel" class="recent-panel" hidden>
+          <div class="section-title-row"><h3>最近复制</h3><button class="text-action" type="button" data-action="clear-recent">清空</button></div>
+          <div id="recent-list" class="recent-list"></div>
+        </section>
+
         <footer class="prototype-footer">个人 Prompt 库 · 数据默认保存在当前设备</footer>
       </main>
     </div>
@@ -71,13 +94,14 @@
       <form id="prompt-form" method="dialog">
         <div class="dialog-heading">
           <div>
-            <p class="eyebrow">完整 Prompt</p>
+            <p id="prompt-suite-hint" class="eyebrow">状元自定义内容</p>
             <h2 id="prompt-dialog-title">新增 Prompt</h2>
           </div>
           <button class="icon-button" type="button" data-action="close-dialog" aria-label="关闭">×</button>
         </div>
 
         <input id="prompt-id" type="hidden" />
+        <input id="prompt-kind" type="hidden" value="prompt" />
 
         <label class="field-label" for="prompt-title">名称</label>
         <input id="prompt-title" class="field-control" type="text" maxlength="60" required placeholder="例如：清理遮挡物并保留人物" />
@@ -101,6 +125,28 @@
           <button class="primary-button" type="submit">保存 Prompt</button>
         </div>
       </form>
+    </dialog>
+
+    <dialog id="detail-dialog" class="sheet-dialog detail-dialog">
+      <div class="dialog-form">
+        <div class="dialog-heading">
+          <div>
+            <p id="detail-eyebrow" class="eyebrow">Prompt 详情</p>
+            <h2 id="detail-title">Prompt 详情</h2>
+          </div>
+          <button class="icon-button" type="button" data-action="close-dialog" aria-label="关闭">×</button>
+        </div>
+        <p id="detail-meta" class="dialog-copy"></p>
+        <div class="prompt-block">
+          <strong>正向 Prompt</strong>
+          <p id="detail-positive"></p>
+        </div>
+        <div id="detail-negative-block" class="prompt-block is-negative">
+          <strong>反向提示词</strong>
+          <p id="detail-negative"></p>
+        </div>
+        <div id="detail-actions" class="dialog-actions dialog-actions-wrap"></div>
+      </div>
     </dialog>
 
     <dialog id="theme-dialog" class="sheet-dialog theme-dialog">
@@ -161,6 +207,6 @@
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script type="module" src="js/prototype.js?v=2.0.2"></script>
+    <script type="module" src="js/prototype.js?v=2.1.0"></script>
   </body>
 </html>
