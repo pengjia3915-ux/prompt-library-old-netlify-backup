@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#F7F4EF" />
+    <meta name="theme-color" content="#F2F4F5" />
     <meta name="description" content="专为 img2img 设计的极简个人 Prompt 卡片库" />
-    <link rel="manifest" href="manifest.json?v=2.1.0" />
+    <link rel="manifest" href="manifest.json?v=2.6.2" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
     <script>
       try {
@@ -15,7 +15,7 @@
         }
       } catch {}
     </script>
-    <link rel="stylesheet" href="css/prototype.css?v=2.1.0" />
+    <link rel="stylesheet" href="css/prototype.css?v=2.6.2" />
     <title>Img2Img Prompt 库</title>
   </head>
   <body>
@@ -43,32 +43,25 @@
 
       <nav class="suite-tabs" role="tablist" aria-label="Prompt 版本">
         <button class="suite-tab is-active" type="button" role="tab" data-suite-tab="zhuangyuan" aria-selected="true">
-          <span>状元</span><small>旧站 251 条</small>
+          <span>状元</span><small>251 条</small>
         </button>
         <button class="suite-tab" type="button" role="tab" data-suite-tab="bangyan" aria-selected="false">
-          <span>榜眼</span><small>90 组件 · 24 组合</small>
+          <span>榜眼</span><small>组件 / 组合</small>
         </button>
       </nav>
 
       <main>
-        <section class="intro-strip" aria-label="使用说明">
-          <div>
-            <strong id="intro-title">状元：选一条旧站 Prompt，打开详情后复制。</strong>
-            <p id="intro-description">保留原站 251 条默认 Prompt，并与榜眼的组件、收藏和最近复制数据隔离。</p>
-          </div>
-          <span class="local-badge"><i aria-hidden="true"></i> 离线可用</span>
-        </section>
+        <nav id="category-tabs" class="category-tabs" aria-label="Prompt 一级分类"></nav>
+        <nav id="mode-tabs" class="mode-tabs" aria-label="榜眼模式" hidden></nav>
+        <nav id="subcategory-tabs" class="subcategory-tabs" aria-label="单项库子分类" hidden></nav>
 
-        <section class="workspace-toolbar" aria-label="搜索和模式">
+        <section class="search-row" aria-label="搜索">
           <label class="search-control" for="search-input">
             <span aria-hidden="true">⌕</span>
             <input id="search-input" type="search" autocomplete="off" placeholder="搜索标题、分类、关键词或 Prompt" />
             <button id="clear-search" type="button" aria-label="清空搜索">清除</button>
           </label>
-          <nav id="mode-tabs" class="mode-tabs" aria-label="榜眼模式" hidden></nav>
         </section>
-
-        <nav id="category-tabs" class="category-tabs" aria-label="Prompt 栏目"></nav>
 
         <section class="category-heading" aria-live="polite">
           <div>
@@ -109,7 +102,7 @@
         <label class="field-label" for="prompt-category">所属栏目</label>
         <select id="prompt-category" class="field-control" required></select>
 
-        <label class="field-label" for="prompt-positive">完整 Prompt</label>
+        <label id="prompt-positive-label" class="field-label" for="prompt-positive">完整 Prompt</label>
         <textarea id="prompt-positive" class="field-control field-textarea" maxlength="6000" required placeholder="输入正向提示词……"></textarea>
 
         <label class="field-label" for="prompt-negative">反向提示词 <span>选填</span></label>
@@ -121,8 +114,9 @@
         </label>
 
         <div class="dialog-actions">
+          <button id="prompt-reset-edit" class="quiet-button is-danger" type="button" data-action="reset-edit" hidden>恢复正式内容</button>
           <button class="quiet-button" type="button" data-action="close-dialog">取消</button>
-          <button class="primary-button" type="submit">保存 Prompt</button>
+          <button id="prompt-save-button" class="primary-button" type="submit">保存 Prompt</button>
         </div>
       </form>
     </dialog>
@@ -161,12 +155,12 @@
         <div class="theme-grid" role="radiogroup" aria-label="配色主题">
           <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="sage">
             <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-            <span><strong>石墨灰＋鼠尾草绿</strong><small>克制、专业、耐看</small></span>
+            <span><strong>冷白＋石墨灰</strong><small>克制、清晰、耐看</small></span>
             <b aria-hidden="true">✓</b>
           </button>
           <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="wine">
             <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-            <span><strong>象牙白＋暗酒红</strong><small>成熟、时尚、偏画报</small></span>
+            <span><strong>冷白＋石墨黑</strong><small>清晰、克制、适合长时间使用</small></span>
             <b aria-hidden="true">✓</b>
           </button>
           <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="blue">
@@ -192,13 +186,14 @@
           </div>
           <button class="icon-button" type="button" data-action="close-dialog" aria-label="关闭">×</button>
         </div>
-        <p class="dialog-copy">手机和电脑保存同一个同步码后，点击“立即同步”即可合并两端新增、编辑、置顶和删除的 Prompt。内容会先在设备端加密。</p>
+        <p class="dialog-copy">手机和电脑保存同一个同步码后，点击“立即同步”即可合并 Prompt 的新增、编辑、置顶和删除，以及榜眼自由拼装和颜色方案。内容会先在设备端加密。</p>
         <label class="field-label" for="sync-code">同步码</label>
         <input id="sync-code" class="field-control" type="text" maxlength="39" autocomplete="off" placeholder="输入手机和电脑共用的同步码" />
         <p id="sync-status" class="dialog-copy" aria-live="polite">尚未设置同步码。</p>
         <div class="dialog-actions dialog-actions-wrap">
           <button class="quiet-button" type="button" data-action="generate-sync-code">生成新码</button>
           <button class="quiet-button" type="button" data-action="copy-sync-code">复制同步码</button>
+          <button class="quiet-button" type="button" data-action="export-state">导出本机数据</button>
           <button class="quiet-button" type="submit">保存</button>
           <button class="primary-button" type="button" data-action="sync-now">立即同步</button>
         </div>
@@ -207,6 +202,6 @@
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script type="module" src="js/prototype.js?v=2.1.0"></script>
+    <script type="module" src="js/prototype.js?v=2.6.2"></script>
   </body>
 </html>

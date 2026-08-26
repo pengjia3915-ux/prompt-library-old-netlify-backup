@@ -14,22 +14,26 @@ import {
   componentSlot,
   emptyBuilder,
   favoriteKey,
+  isDisplayOnlyComponent,
   migrateLegacyPrototypeState,
   normalizeBuilder,
   normalizeFavoriteIds,
+  normalizePromptEdits,
   normalizeRecent,
+  normalizeSavedComposition,
+  normalizeSavedCompositions,
   searchMatches,
   selectBuilderComponent,
   removeBuilderComponent
 } from "./suite-utils.js";
 
-const APP_ASSET_VERSION = "2.1.0";
+const APP_ASSET_VERSION = "2.6.2";
 const PAGE_SIZE = 48;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
 const THEME_COLORS = {
-  sage: "#F3F5F2",
-  wine: "#F5F2F2",
+  sage: "#F2F4F5",
+  wine: "#F2F4F5",
   blue: "#F3F5F7",
   studio: "#181B1A"
 };
@@ -37,7 +41,7 @@ const THEME_COLORS = {
 const BANGYAN_CATEGORIES = [
   { id: "原图处理", name: "原图处理", shortName: "原图处理", description: "保持人物身份与场景关系，处理原图中的遮挡、结构和画面问题。", order: 1 },
   { id: "发型发色", name: "发型发色", shortName: "发型发色", description: "按发型、发色和眼镜 slot 自由选择，不改变未选择的项目。", order: 2 },
-  { id: "姿势穿搭场景", name: "姿势穿搭场景", shortName: "姿势穿搭场景", description: "姿势、穿搭、领口和环境完全由用户自由组合。", order: 3 }
+  { id: "姿势穿搭场景", name: "姿势穿搭场景", shortName: "姿势穿搭场景", description: "表情、姿势、穿搭、领口、场景、机位和视角完全由用户自由组合。", order: 3 }
 ];
 
 const BANGYAN_MODES = [
@@ -46,11 +50,87 @@ const BANGYAN_MODES = [
   { id: "components", label: "单项库" }
 ];
 
+const BANGYAN_SUBCATEGORIES = Object.freeze({
+  "原图处理": [],
+  "发型发色": ["全部", "发型", "发色", "眼镜"],
+  "姿势穿搭场景": ["全部", "表情", "姿势", "穿搭", "领口", "场景", "机位", "视角"]
+});
+
+const BUILDER_SLOT_GROUPS = Object.freeze({
+  "原图处理": [{ slot: "original", label: "原图处理组件" }],
+  "发型发色": [
+    { slot: "hairstyle", label: "发型" },
+    { slot: "hairColor", label: "发色" },
+    { slot: "glasses", label: "眼镜" }
+  ],
+  "姿势穿搭场景": [
+    { slot: "expression", label: "表情" },
+    { slot: "pose", label: "姿势" },
+    { slot: "outfit", label: "穿搭" },
+    { slot: "neckline", label: "领口" },
+    { slot: "scene", label: "场景" },
+    { slot: "cameraPosition", label: "机位" },
+    { slot: "cameraView", label: "视角" }
+  ]
+});
+
+const BANGYAN_COLOR_MODES = Object.freeze([
+  { id: "uniform", label: "全套统一色" },
+  { id: "matching", label: "搭配色" }
+]);
+
+const BANGYAN_UNIFORM_COLORS = Object.freeze([
+  { id: "black", label: "黑色 · 经典利落", name: "黑色", tone: "成熟、利落" },
+  { id: "white", label: "白色 · 纯净清爽", name: "白色", tone: "清爽、干净" },
+  { id: "cream", label: "奶油白 · 柔和明亮", name: "奶油白", tone: "柔和、明亮" },
+  { id: "light-gray", label: "浅灰 · 低调轻盈", name: "浅灰色", tone: "克制、轻盈" },
+  { id: "graphite", label: "石墨灰 · 高级沉稳", name: "石墨灰", tone: "沉稳、高级" },
+  { id: "beige", label: "米色 · 自然温和", name: "米色", tone: "自然、温和" },
+  { id: "camel", label: "驼色 · 温暖成熟", name: "驼色", tone: "温暖、成熟" },
+  { id: "coffee", label: "咖棕 · 复古沉稳", name: "咖棕色", tone: "沉稳、复古" },
+  { id: "burgundy", label: "酒红 · 成熟吸引力", name: "深酒红", tone: "成熟、自信的高级女性美" },
+  { id: "red", label: "正红 · 明快自信", name: "正红色", tone: "明快、自信" },
+  { id: "rose", label: "玫瑰粉 · 浪漫柔和", name: "玫瑰粉", tone: "柔和、浪漫" },
+  { id: "blush", label: "粉彩粉 · 甜美轻盈", name: "粉彩粉", tone: "甜美、轻盈但不幼态" },
+  { id: "coral", label: "珊瑚橙 · 明亮活力", name: "珊瑚橙", tone: "明亮、活力" },
+  { id: "apricot", label: "杏色 · 温柔亲和", name: "杏色", tone: "温柔、亲和" },
+  { id: "mint", label: "薄荷绿 · 清新轻盈", name: "薄荷绿", tone: "清新、轻盈" },
+  { id: "olive", label: "橄榄绿 · 自然从容", name: "橄榄绿", tone: "自然、从容" },
+  { id: "forest", label: "墨绿 · 精致沉稳", name: "墨绿色", tone: "沉稳、精致" },
+  { id: "mist-blue", label: "雾蓝 · 清爽理性", name: "雾蓝色", tone: "清爽、理性" },
+  { id: "navy", label: "海军蓝 · 经典端庄", name: "海军蓝", tone: "经典、端庄" },
+  { id: "denim", label: "牛仔蓝 · 休闲利落", name: "牛仔蓝", tone: "轻松、利落" }
+]);
+
+const BANGYAN_MATCHING_PALETTES = Object.freeze([
+  { id: "classic-contrast", label: "黑 + 白 + 灰 · 经典清晰", colors: ["黑色", "白色", "灰色"], tone: "经典、清晰、利落" },
+  { id: "burgundy-neutral", label: "酒红 + 黑 + 米白 · 成熟吸引力", colors: ["深酒红", "黑色", "米白色"], tone: "成熟、自信、克制" },
+  { id: "burgundy-rose", label: "酒红 + 玫瑰粉 + 奶油白 · 浪漫成熟", colors: ["深酒红", "玫瑰粉", "奶油白"], tone: "成熟与柔和自然平衡" },
+  { id: "black-camel", label: "黑 + 驼 + 米白 · 稳重温暖", colors: ["黑色", "驼色", "米白色"], tone: "稳重、温暖、耐看" },
+  { id: "black-forest", label: "黑 + 墨绿 + 米色 · 高级自然", colors: ["黑色", "墨绿色", "米色"], tone: "沉稳、高级、自然" },
+  { id: "graphite-white", label: "石墨灰 + 白 + 浅灰 · 冷静干净", colors: ["石墨灰", "白色", "浅灰色"], tone: "冷静、干净、克制" },
+  { id: "cream-oat", label: "奶油白 + 燕麦 + 浅棕 · 柔和自然", colors: ["奶油白", "燕麦色", "浅棕色"], tone: "柔和、自然、明亮" },
+  { id: "beige-brown", label: "米色 + 咖棕 + 奶油白 · 复古温和", colors: ["米色", "咖棕色", "奶油白"], tone: "自然、复古、温和" },
+  { id: "camel-forest", label: "驼色 + 墨绿 + 米白 · 温暖高级", colors: ["驼色", "墨绿色", "米白色"], tone: "温暖、自然、沉稳" },
+  { id: "navy-white", label: "海军蓝 + 白 + 浅灰 · 经典清爽", colors: ["海军蓝", "白色", "浅灰色"], tone: "经典、清爽、端庄" },
+  { id: "denim-white", label: "牛仔蓝 + 白 + 浅灰 · 休闲清爽", colors: ["牛仔蓝", "白色", "浅灰色"], tone: "休闲、清爽、利落" },
+  { id: "mist-blue-white", label: "雾蓝 + 白 + 浅灰 · 轻盈理性", colors: ["雾蓝色", "白色", "浅灰色"], tone: "轻盈、理性、干净" },
+  { id: "denim-camel", label: "牛仔蓝 + 驼色 + 白 · 日常利落", colors: ["牛仔蓝", "驼色", "白色"], tone: "日常、利落、自然" },
+  { id: "pink-cream", label: "粉彩粉 + 奶油白 + 浅灰 · 甜美柔和", colors: ["粉彩粉", "奶油白", "浅灰色"], tone: "甜美、柔和但不幼态" },
+  { id: "rose-blush", label: "玫瑰粉 + 粉彩粉 + 米白 · 浪漫温柔", colors: ["玫瑰粉", "粉彩粉", "米白色"], tone: "浪漫、温柔、轻盈" },
+  { id: "pink-mint", label: "粉彩粉 + 薄荷绿 + 奶油白 · 清新甜美", colors: ["粉彩粉", "薄荷绿", "奶油白"], tone: "轻快、清新、甜美" },
+  { id: "coral-cream", label: "珊瑚橙 + 米色 + 白 · 明亮活力", colors: ["珊瑚橙", "米色", "白色"], tone: "明亮、活力、亲和" },
+  { id: "olive-cream", label: "橄榄绿 + 奶油白 + 驼色 · 自然沉稳", colors: ["橄榄绿", "奶油白", "驼色"], tone: "自然、沉稳、温和" },
+  { id: "red-navy-white", label: "正红 + 海军蓝 + 白 · 明快经典", colors: ["正红色", "海军蓝", "白色"], tone: "明快、经典、自信" },
+  { id: "mint-mist-blue", label: "薄荷绿 + 雾蓝 + 白 · 清新轻盈", colors: ["薄荷绿", "雾蓝色", "白色"], tone: "清新、轻盈、明亮" }
+]);
+
 const app = {
   defaults: { zhuangyuan: null, bangyan: null },
   states: { zhuangyuan: null, bangyan: null },
   meta: { schemaVersion: 2, migrationVersion: 0, activeSuite: "zhuangyuan", syncCode: "", lastSyncedAt: "" },
   activeSuite: "zhuangyuan",
+  subcategoryFilter: "全部",
   searchQuery: "",
   visibleLimit: PAGE_SIZE,
   detail: null,
@@ -137,6 +217,7 @@ function normalizeZhuangyuanState(defaultData, stored) {
     ...(source.favoriteIds || []),
     ...storedPrompts.filter((entry) => entry.favorite).map((entry) => favoriteKey("prompt", entry.id))
   ]);
+  const promptEdits = normalizePromptEdits(source.promptEdits).filter((entry) => entry.kind === "prompt");
   return {
     version: 2,
     suite: "zhuangyuan",
@@ -145,6 +226,8 @@ function normalizeZhuangyuanState(defaultData, stored) {
     customPrompts,
     activeCategoryId: validCategoryIds.has(source.activeCategoryId) ? source.activeCategoryId : defaultData?.categories?.[0]?.id || "",
     defaultDataVersion: defaultVersion,
+    promptEdits,
+    savedCompositions: normalizeSavedCompositions(source.savedCompositions),
     favoriteIds,
     recent: normalizeRecent(source.recent),
     syncCode: typeof source.syncCode === "string" ? source.syncCode : "",
@@ -159,13 +242,17 @@ function normalizeBangyanState(stored) {
     .filter(Boolean);
   const validCategoryIds = new Set(BANGYAN_CATEGORIES.map((category) => category.id));
   const activeMode = BANGYAN_MODES.some((mode) => mode.id === source.activeMode) ? source.activeMode : "presets";
+  const promptEdits = normalizePromptEdits(source.promptEdits).filter((entry) => entry.kind === "component" || entry.kind === "preset");
   return {
     version: 2,
     suite: "bangyan",
     customPrompts,
     activeCategoryId: validCategoryIds.has(source.activeCategoryId) ? source.activeCategoryId : BANGYAN_CATEGORIES[0].id,
     activeMode,
+    promptEdits,
+    savedCompositions: normalizeSavedCompositions(source.savedCompositions),
     builder: normalizeBuilder(source.builder),
+    builderUpdatedAt: typeof source.builderUpdatedAt === "string" ? source.builderUpdatedAt : "",
     favoriteIds: normalizeFavoriteIds(source.favoriteIds),
     recent: normalizeRecent(source.recent),
     syncCode: typeof source.syncCode === "string" ? source.syncCode : "",
@@ -192,12 +279,20 @@ function bangyanComponents() {
   return (app.defaults.bangyan?.components || []).filter((entry) => entry.enabled !== false);
 }
 
+function bangyanComponentsForDisplay() {
+  return bangyanComponents().map((entry) => effectiveEntry("component", entry));
+}
+
 function bangyanPresets() {
   return (app.defaults.bangyan?.presets || []).filter((entry) => entry.enabled !== false);
 }
 
 function bangyanCustomPrompts() {
   return (app.states.bangyan?.customPrompts || []).filter((entry) => !entry.deletedAt);
+}
+
+function savedCompositionEntries(suite = app.activeSuite) {
+  return (app.states[suite]?.savedCompositions || []).filter((entry) => !entry.deletedAt);
 }
 
 function syncZhuangyuanCustomPrompts() {
@@ -212,19 +307,67 @@ function findEntry(kind, id) {
   if (kind === "component") return bangyanComponents().find((entry) => entry.id === id);
   if (kind === "preset") return bangyanPresets().find((entry) => entry.id === id);
   if (kind === "custom") return bangyanCustomPrompts().find((entry) => entry.id === id);
+  if (kind === "composition") return savedCompositionEntries().find((entry) => entry.id === id);
   return null;
+}
+
+function promptEditFor(kind, id) {
+  return currentState()?.promptEdits?.find((entry) => entry.kind === kind && entry.id === id && !entry.deletedAt) || null;
+}
+
+function hasPromptEdit(kind, id) {
+  return Boolean(promptEditFor(kind, id));
+}
+
+function isStaticEditable(kind, id) {
+  if (!id) return false;
+  if (kind === "prompt") return Boolean(app.defaults.zhuangyuan?.prompts?.some((entry) => entry.id === id));
+  if (kind === "component") return Boolean(app.defaults.bangyan?.components?.some((entry) => entry.id === id));
+  if (kind === "preset") return Boolean(app.defaults.bangyan?.presets?.some((entry) => entry.id === id));
+  return false;
+}
+
+function effectiveEntry(kind, entry) {
+  if (!entry) return entry;
+  const edit = promptEditFor(kind, entry.id);
+  if (!edit) return entry;
+  if (kind === "prompt") {
+    return {
+      ...entry,
+      title: edit.title,
+      categoryId: edit.categoryId || entry.categoryId,
+      prompt: edit.positive,
+      negativePrompt: edit.negative,
+      updatedAt: edit.updatedAt
+    };
+  }
+  if (kind === "component") {
+    return { ...entry, title: edit.title, positive: edit.positive, negative: edit.negative, updatedAt: edit.updatedAt };
+  }
+  if (kind === "preset") return { ...entry, title: edit.title, updatedAt: edit.updatedAt };
+  return entry;
 }
 
 function displayFor(kind, entry) {
   if (!entry) return { title: "", positive: "", negative: "", all: "" };
+  const edit = promptEditFor(kind, entry.id);
   if (kind === "preset") {
-    const composed = composeBangyanPreset(entry, bangyanComponents());
+    if (edit) {
+      return {
+        title: edit.title,
+        positive: edit.positive,
+        negative: edit.negative,
+        all: edit.negative ? `${edit.positive}\n\n反向提示词：${edit.negative}` : edit.positive
+      };
+    }
+    const composed = composeBangyanPreset(entry, bangyanComponentsForDisplay(), app.defaults.bangyan?.compositionRules);
     return { ...composed, all: composed.negative ? `${composed.positive}\n\n反向提示词：${composed.negative}` : composed.positive };
   }
-  const positive = kind === "component" ? entry.positive : entry.prompt;
-  const negative = kind === "component" ? entry.negative : entry.negativePrompt;
+  const view = effectiveEntry(kind, entry);
+  const positive = kind === "component" || kind === "composition" ? view.positive : view.prompt;
+  const negative = kind === "component" || kind === "composition" ? view.negative : view.negativePrompt;
   return {
-    title: entry.title,
+    title: view.title,
     positive: String(positive || ""),
     negative: String(negative || ""),
     all: negative ? `${positive}\n\n反向提示词：${negative}` : String(positive || "")
@@ -233,31 +376,49 @@ function displayFor(kind, entry) {
 
 function categoryNameFor(kind, entry) {
   if (!entry) return "";
-  if (kind === "prompt") return categoryById(entry.categoryId, "zhuangyuan")?.name || entry.categoryId;
-  if (kind === "custom") return categoryById(entry.categoryId, "bangyan")?.name || entry.categoryId;
-  return entry.category || "";
+  const view = effectiveEntry(kind, entry);
+  if (kind === "prompt") return categoryById(view.categoryId, "zhuangyuan")?.name || view.categoryId;
+  if (kind === "custom" || kind === "composition") return categoryById(view.categoryId, "bangyan")?.name || view.categoryId;
+  return view.category || "";
 }
 
 function subcategoryFor(kind, entry) {
   if (kind === "component") return entry.subcategory || "单项组件";
   if (kind === "preset") return "推荐组合";
+  if (kind === "composition") return "已收藏组合";
   return kind === "custom" ? "自定义 Prompt" : "完整 Prompt";
 }
 
 function searchEntry(kind, entry) {
   const display = displayFor(kind, entry);
+  const view = effectiveEntry(kind, entry);
   const extra = kind === "preset"
-    ? Object.values(entry.slots || {}).map((id) => bangyanComponents().find((component) => component.id === id)).filter(Boolean).flatMap((component) => [component.title, component.subcategory, ...(component.keywords || [])]).join(" ")
+    ? Object.values(entry.slots || {}).map((id) => bangyanComponentsForDisplay().find((component) => component.id === id)).filter(Boolean).flatMap((component) => [component.title, component.subcategory, ...(component.keywords || [])]).join(" ")
     : "";
   return searchMatches({
-    ...entry,
+    ...view,
     category: categoryNameFor(kind, entry),
     positive: display.positive,
     negative: display.negative
   }, app.searchQuery, extra);
 }
 
+function compactSummary(value, limit = 68) {
+  const normalized = String(value || "").replace(/\s+/g, " ").trim();
+  if (!normalized) return "";
+  const firstSentence = normalized.split(/(?<=[。！？.!?])/u)[0].trim();
+  const chars = Array.from(firstSentence);
+  return chars.length > limit ? `${chars.slice(0, limit).join("")}…` : firstSentence;
+}
+
+function entrySummary(kind, entry, display) {
+  if (kind === "preset" && !hasPromptEdit(kind, entry.id)) return "可继续调整各 slot 的组件选择";
+  if (kind === "component") return compactSummary(entry.composeText || entry.positive);
+  return compactSummary(display.positive);
+}
+
 function isFavorite(kind, id) {
+  if (kind === "composition") return Boolean(findEntry(kind, id));
   return currentState().favoriteIds.includes(favoriteKey(kind, id));
 }
 
@@ -270,8 +431,10 @@ function sortEntries(items) {
     const leftPinned = Number(isPinned(left.kind, left.entry));
     const rightPinned = Number(isPinned(right.kind, right.entry));
     if (leftPinned !== rightPinned) return rightPinned - leftPinned;
-    const leftDate = new Date(left.entry.updatedAt || left.entry.createdAt || 0).getTime();
-    const rightDate = new Date(right.entry.updatedAt || right.entry.createdAt || 0).getTime();
+    const leftView = effectiveEntry(left.kind, left.entry);
+    const rightView = effectiveEntry(right.kind, right.entry);
+    const leftDate = new Date(leftView.updatedAt || leftView.createdAt || 0).getTime();
+    const rightDate = new Date(rightView.updatedAt || rightView.createdAt || 0).getTime();
     return rightDate - leftDate || String(left.entry.id).localeCompare(String(right.entry.id));
   });
 }
@@ -321,8 +484,39 @@ async function persist() {
   }
 }
 
+function exportUserState() {
+  const withoutSyncSecrets = (state) => {
+    if (!state) return null;
+    const { syncCode, lastSyncedAt, ...safeState } = state;
+    return safeState;
+  };
+  const payload = {
+    format: "prompt-library-user-state",
+    version: 1,
+    exportedAt: nowIso(),
+    suites: {
+      zhuangyuan: withoutSyncSecrets(app.states.zhuangyuan),
+      bangyan: withoutSyncSecrets(app.states.bangyan)
+    }
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = "prompt-library-user-state-" + new Date().toISOString().slice(0, 10) + ".json";
+  document.body.append(anchor);
+  anchor.click();
+  anchor.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 500);
+  showToast("本机编辑和收藏已导出");
+}
+
 async function copyEntry(kind, id, copyType = "all") {
   const entry = findEntry(kind, id);
+  if (kind === "component" && isDisplayOnlyComponent(entry)) {
+    showToast("该项仅供辨认，不会复制到 Prompt 正文");
+    return;
+  }
   const display = displayFor(kind, entry);
   if (!entry || !display.positive) return;
   const content = copyType === "positive" ? display.positive : copyType === "negative" ? display.negative : display.all;
@@ -360,18 +554,6 @@ function renderSuiteTabs() {
   });
 }
 
-function renderIntro() {
-  const title = $("#intro-title");
-  const description = $("#intro-description");
-  if (app.activeSuite === "bangyan") {
-    title.textContent = "榜眼：组件、组合与自由拼装。";
-    description.textContent = "正式数据包含 90 个组件和 24 个推荐组合；preset 只引用组件，不复制成静态 Prompt。";
-  } else {
-    title.textContent = "状元：选一条旧站 Prompt，打开详情后复制。";
-    description.textContent = "保留原站 251 条默认 Prompt，并与榜眼的组件、收藏和最近复制数据隔离。";
-  }
-}
-
 function modeCount(mode, categoryId) {
   if (mode === "presets") return bangyanPresets().filter((entry) => entry.category === categoryId).length;
   return bangyanComponents().filter((entry) => entry.category === categoryId).length;
@@ -393,13 +575,32 @@ function renderModeTabs() {
   `).join("");
 }
 
+function renderSubcategoryTabs() {
+  const container = $("#subcategory-tabs");
+  if (!container) return;
+  const options = BANGYAN_SUBCATEGORIES[app.states.bangyan?.activeCategoryId] || [];
+  const visible = app.activeSuite === "bangyan" && app.states.bangyan?.activeMode === "components" && options.length > 1;
+  container.hidden = !visible;
+  if (!visible) {
+    container.innerHTML = "";
+    app.subcategoryFilter = "全部";
+    return;
+  }
+  if (!options.includes(app.subcategoryFilter)) app.subcategoryFilter = "全部";
+  container.innerHTML = options.map((subcategory) => `
+    <button class="subcategory-button ${subcategory === app.subcategoryFilter ? "is-active" : ""}" type="button" data-action="change-subcategory" data-subcategory="${escapeHtml(subcategory)}" aria-pressed="${subcategory === app.subcategoryFilter}">
+      ${escapeHtml(subcategory)}
+    </button>
+  `).join("");
+}
+
 function renderCategoryTabs() {
   const state = currentState();
   const categories = categoryList();
   $("#category-tabs").innerHTML = categories
     .sort((left, right) => Number(left.order || 0) - Number(right.order || 0))
     .map((category) => {
-      const count = app.activeSuite === "bangyan" ? modeCount(app.states.bangyan.activeMode, category.id) : zhuangyuanEntries().filter((entry) => entry.categoryId === category.id).length;
+      const count = app.activeSuite === "bangyan" ? modeCount(app.states.bangyan.activeMode, category.id) : zhuangyuanEntries().filter((entry) => effectiveEntry("prompt", entry).categoryId === category.id).length;
       return `
         <button class="tab-button ${category.id === state.activeCategoryId ? "is-active" : ""}" type="button" data-action="change-category" data-id="${escapeHtml(category.id)}">
           <span>${escapeHtml(category.shortName || category.name)}</span><small>${count}</small>
@@ -418,7 +619,7 @@ function renderHeading() {
     count = modeCount(state.activeMode, categoryId);
     if (state.activeMode === "builder") description = "选择组件加入拼装区；同一个 slot 的新选择会替换旧选择，不设置主观禁配。";
   } else {
-    count = zhuangyuanEntries().filter((entry) => entry.categoryId === categoryId).length;
+    count = zhuangyuanEntries().filter((entry) => effectiveEntry("prompt", entry).categoryId === categoryId).length;
   }
   $("#category-eyebrow").textContent = app.activeSuite === "bangyan" ? "榜眼正式数据" : "状元旧站数据";
   $("#category-title").textContent = category?.name || "Prompt";
@@ -426,39 +627,47 @@ function renderHeading() {
   $("#category-count").textContent = `${count} 条`;
 }
 
-function renderEntryCard(kind, entry, { builderAction = false } = {}) {
+function renderEntryCard(kind, entry) {
   const display = displayFor(kind, entry);
+  const view = effectiveEntry(kind, entry);
   const favorite = isFavorite(kind, entry.id);
   const pinned = isPinned(kind, entry);
-  const selected = kind === "component" && isBuilderSelected(entry.id);
   const categoryName = categoryNameFor(kind, entry);
   const subcategory = subcategoryFor(kind, entry);
   const id = escapeHtml(entry.id);
-  const addBuilder = kind === "component" || kind === "preset";
+  const edited = hasPromptEdit(kind, entry.id);
+  const editable = ["prompt", "custom", "component", "preset", "composition"].includes(kind);
+  const displayOnly = kind === "component" && isDisplayOnlyComponent(entry);
+  const copyable = !displayOnly;
+  const addBuilder = (kind === "component" || kind === "preset" || kind === "composition") && !displayOnly;
+  const inlineBuilder = kind === "preset" || kind === "composition";
+  const builderLabel = inlineBuilder ? "继续调整" : "加入拼装";
+  const favoriteAction = kind === "composition" ? "delete-composition" : "toggle-favorite";
   return `
     <article class="prompt-card ${pinned ? "is-pinned" : ""}" data-entry-kind="${kind}" data-entry-id="${id}">
       <div class="card-topline">
         <div class="card-title-block">
-          <h3><button class="entry-title" type="button" data-action="open-detail" data-kind="${kind}" data-id="${id}">${escapeHtml(entry.title)}</button></h3>
-          <span>${escapeHtml(categoryName)} · ${escapeHtml(subcategory)}${pinned ? " · 已置顶" : ""}${favorite ? " · 已收藏" : ""}</span>
+          <h3><button class="entry-title" type="button" data-action="open-detail" data-kind="${kind}" data-id="${id}">${escapeHtml(display.title)}</button></h3>
+          <span>${escapeHtml(categoryName)} · ${escapeHtml(subcategory)}${pinned ? " · 已置顶" : ""}${favorite ? " · 已收藏" : ""}${edited ? " · 已编辑" : ""}</span>
         </div>
-        <button class="favorite-button ${favorite ? "is-active" : ""}" type="button" data-action="toggle-favorite" data-kind="${kind}" data-id="${id}" aria-label="${favorite ? "取消收藏" : "收藏"}">${favorite ? "★" : "☆"}</button>
+        <button class="favorite-button ${favorite ? "is-active" : ""}" type="button" data-action="${favoriteAction}" data-kind="${kind}" data-id="${id}" aria-label="${favorite ? "取消收藏" : "收藏"}">${favorite ? "★" : "☆"}</button>
       </div>
-      <p class="card-preview">${escapeHtml(display.positive)}</p>
+      <p class="card-preview">${escapeHtml(entrySummary(kind, view, display))}</p>
       <div class="card-actions">
-        ${builderAction ? `<button class="text-action ${selected ? "is-selected" : ""}" type="button" data-action="select-component" data-id="${id}">${selected ? "已加入" : "加入拼装"}</button>` : ""}
-        ${addBuilder && !builderAction ? `<button class="text-action" type="button" data-action="add-to-builder" data-kind="${kind}" data-id="${id}">放入拼装区</button>` : ""}
-        ${(kind === "prompt" || kind === "custom") ? `<button class="text-action pin-action ${pinned ? "is-active" : ""}" type="button" data-action="toggle-pin" data-kind="${kind}" data-id="${id}">${pinned ? "取消置顶" : "置顶"}</button>` : ""}
-        <button class="text-action is-copy" type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="all">复制</button>
+        ${copyable ? `<button class="text-action is-copy" type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="all">复制</button>` : `<span class="text-action is-muted" title="该项仅用于辨认">仅供辨认</span>`}
+        ${inlineBuilder ? `<button class="text-action" type="button" data-action="add-to-builder" data-kind="${kind}" data-id="${id}">${builderLabel}</button>` : ""}
         <details class="entry-menu">
           <summary>更多</summary>
           <div class="entry-menu-panel">
-            <button type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="positive">复制正向</button>
+            ${copyable ? `<button type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="positive">复制正向</button>
             <button type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="negative">复制反向</button>
-            <button type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="all">复制全部</button>
-            <button type="button" data-action="toggle-favorite" data-kind="${kind}" data-id="${id}">${favorite ? "取消收藏" : "收藏"}</button>
-            ${addBuilder ? `<button type="button" data-action="add-to-builder" data-kind="${kind}" data-id="${id}">放入拼装区</button>` : ""}
-            ${(kind === "prompt" || kind === "custom") ? `<button type="button" data-action="edit-prompt" data-kind="${kind}" data-id="${id}">编辑</button><button class="is-danger" type="button" data-action="delete-prompt" data-kind="${kind}" data-id="${id}">删除</button>` : ""}
+            <button type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="all">复制全部</button>` : `<span class="menu-note">仅供辨认，不进入 Prompt 正文</span>`}
+            ${kind === "composition" ? `<button type="button" data-action="delete-composition" data-kind="${kind}" data-id="${id}">取消收藏</button>` : `<button type="button" data-action="toggle-favorite" data-kind="${kind}" data-id="${id}">${favorite ? "取消收藏" : "收藏"}</button>`}
+            ${(kind === "prompt" || kind === "custom") ? `<button type="button" data-action="toggle-pin" data-kind="${kind}" data-id="${id}">${pinned ? "取消置顶" : "置顶"}</button>` : ""}
+            ${addBuilder ? `<button type="button" data-action="add-to-builder" data-kind="${kind}" data-id="${id}">${builderLabel}</button>` : ""}
+            ${editable ? `<button type="button" data-action="edit-prompt" data-kind="${kind}" data-id="${id}">编辑</button>` : ""}
+            ${edited ? `<button type="button" data-action="reset-edit" data-kind="${kind}" data-id="${id}">恢复正式内容</button>` : ""}
+            ${(kind === "prompt" || kind === "custom") ? `<button class="is-danger" type="button" data-action="delete-prompt" data-kind="${kind}" data-id="${id}">删除</button>` : ""}
           </div>
         </details>
       </div>
@@ -466,12 +675,12 @@ function renderEntryCard(kind, entry, { builderAction = false } = {}) {
   `;
 }
 
-function renderList(title, items, { builderAction = false } = {}) {
+function renderList(title, items) {
   const visible = items.slice(0, app.visibleLimit);
   return `
     <section class="prompt-section">
       <div class="section-title-row"><h3>${escapeHtml(title)}</h3><span>${items.length} 条</span></div>
-      <div class="prompt-list">${visible.map(({ kind, entry }) => renderEntryCard(kind, entry, { builderAction })).join("")}</div>
+      <div class="prompt-list">${visible.map(({ kind, entry }) => renderEntryCard(kind, entry)).join("")}</div>
       ${visible.length < items.length ? `<div class="empty-state compact-load-more"><p>已显示 ${visible.length} / ${items.length} 条</p><button class="primary-button" type="button" data-action="load-more">继续加载</button></div>` : ""}
     </section>
   `;
@@ -487,29 +696,181 @@ function renderCustomSection() {
   return items.length ? renderList("自定义 Prompt", items) : "";
 }
 
-function isBuilderSelected(id) {
-  const builder = normalizeBuilder(app.states.bangyan.builder);
-  return [
-    ...builder.original,
-    ...BANGYAN_SYNTHESIS_ORDER.filter((slot) => slot !== "original").map((slot) => builder[slot]).filter(Boolean)
-  ].includes(id);
+function renderSavedCompositionSection() {
+  if (app.activeSuite !== "bangyan") return "";
+  const state = app.states.bangyan;
+  const items = sortEntries(savedCompositionEntries()
+    .filter((entry) => entry.categoryId === state.activeCategoryId)
+    .filter((entry) => searchEntry("composition", entry))
+    .map((entry) => ({ kind: "composition", entry })));
+  return items.length ? renderList("已收藏组合", items) : "";
+}
+
+function builderColorMode(builder) {
+  return BANGYAN_COLOR_MODES.find((mode) => mode.id === builder.colorMode) || null;
+}
+
+function builderUniformColor(builder) {
+  return BANGYAN_UNIFORM_COLORS.find((color) => color.id === builder.colorStyle) || null;
+}
+
+function builderMatchingPalette(builder) {
+  return BANGYAN_MATCHING_PALETTES.find((palette) => palette.id === builder.colorStyle) || null;
+}
+
+function builderCustomColorNames(builder) {
+  return [builder.colorPrimary, builder.colorSecondary, builder.colorAccent]
+    .map((id) => BANGYAN_UNIFORM_COLORS.find((color) => color.id === id)?.name)
+    .filter(Boolean);
+}
+
+function builderColorLabel(builder) {
+  if (builder.colorMode === "uniform") return builderUniformColor(builder)?.label || "";
+  if (builder.colorMode !== "matching") return "";
+  const palette = builderMatchingPalette(builder);
+  if (palette) return palette.label;
+  if (builder.colorStyle === "custom") {
+    const names = builderCustomColorNames(builder);
+    return names.length ? `自由搭配 · ${names.join(" + ")}` : "自由搭配";
+  }
+  return "";
+}
+
+function builderColorInstruction(builder) {
+  const mode = builderColorMode(builder);
+  if (!mode) return "";
+  if (mode.id === "uniform") {
+    const color = builderUniformColor(builder);
+    return color ? `服装整体采用${color.name}单一主色，呈现${color.tone}的服装气质。` : "";
+  }
+  const palette = builderMatchingPalette(builder);
+  if (palette) return `服装采用${palette.colors.join("、")}的搭配色，${palette.tone}，颜色层次自然协调。`;
+  const names = builderCustomColorNames(builder);
+  if (builder.colorStyle === "custom" && names.length >= 2) {
+    return `服装采用${names.join("、")}的自定义搭配色，以${names[0]}为主色、${names[1]}为辅色${names[2] ? `、${names[2]}作为点缀色` : ""}，整体色彩层次自然协调。`;
+  }
+  return "";
+}
+
+function composeBuilderResult(builder) {
+  const result = composeBangyanSelection({
+    components: bangyanComponentsForDisplay(),
+    selection: builder,
+    compositionRules: app.defaults.bangyan?.compositionRules
+  });
+  const colorInstruction = builderColorInstruction(builder);
+  const colorLabel = builderColorLabel(builder);
+  if (!result.positive || !colorInstruction) return result;
+  return {
+    ...result,
+    title: `${result.title} · ${colorLabel}`,
+    positive: `${result.positive}${colorInstruction}`
+  };
+}
+
+function renderBuilderCustomColors(builder) {
+  const fields = [
+    { key: "colorPrimary", label: "主色", placeholder: "选择主色" },
+    { key: "colorSecondary", label: "辅色", placeholder: "选择辅色" },
+    { key: "colorAccent", label: "点缀色", placeholder: "可选点缀色" }
+  ];
+  return `
+    <div class="builder-custom-color-grid">
+      ${fields.map(({ key, label, placeholder }) => `
+        <label class="builder-color-style-field">
+          <span>${label}</span>
+          <select class="builder-select" data-action="change-builder-custom-color" data-color-key="${key}" aria-label="${label}">
+            <option value="">${placeholder}</option>
+            ${BANGYAN_UNIFORM_COLORS.map((color) => `<option value="${color.id}" ${builder[key] === color.id ? "selected" : ""}>${escapeHtml(color.label)}</option>`).join("")}
+          </select>
+        </label>
+      `).join("")}
+    </div>
+    <p class="builder-color-note">自由搭配至少选择主色和辅色，点缀色可选。</p>
+  `;
+}
+
+function renderBuilderColorPicker(categoryId, builder) {
+  if (categoryId !== "姿势穿搭场景") return "";
+  const mode = builderColorMode(builder);
+  const choices = mode?.id === "uniform" ? BANGYAN_UNIFORM_COLORS : mode?.id === "matching" ? BANGYAN_MATCHING_PALETTES : [];
+  const isCustomMatching = mode?.id === "matching" && builder.colorStyle === "custom";
+  return `
+    <section class="builder-color-picker" aria-label="服装颜色选择">
+      <div class="builder-picker-heading">
+        <strong>服装颜色</strong>
+        <p>先选择统一方式，再选择一种常用色彩风格；只作用于穿搭和领口，不新增组件。</p>
+      </div>
+      <div class="builder-color-mode" role="group" aria-label="颜色统一方式">
+        ${BANGYAN_COLOR_MODES.map((item) => `
+          <button class="color-mode-button ${item.id === builder.colorMode ? "is-active" : ""}" type="button" data-action="change-builder-color-mode" data-color-mode="${item.id}" aria-pressed="${item.id === builder.colorMode}">
+            ${escapeHtml(item.label)}
+          </button>
+          `).join("")}
+      </div>
+      <label class="builder-color-style-field">
+        <span>${mode?.id === "uniform" ? "统一色" : "搭配方案"}</span>
+        <select class="builder-select" data-action="change-builder-color-style" aria-label="选择颜色方案" ${mode ? "" : "disabled"}>
+          <option value="">${mode ? (mode.id === "uniform" ? "选择一种颜色" : "选择一组搭配色") : "先选择颜色模式"}</option>
+          ${choices.map((choice) => `<option value="${choice.id}" ${choice.id === builder.colorStyle ? "selected" : ""}>${escapeHtml(choice.label)}</option>`).join("")}
+          ${mode?.id === "matching" ? `<option value="custom" ${isCustomMatching ? "selected" : ""}>自由搭配 · 自选颜色组合</option>` : ""}
+        </select>
+      </label>
+      ${isCustomMatching ? renderBuilderCustomColors(builder) : ""}
+    </section>
+  `;
+}
+
+function renderBuilderPicker(categoryId, components, builder) {
+  const groups = BUILDER_SLOT_GROUPS[categoryId] || [];
+  if (!groups.length) return `<p class="builder-picker-note">当前分类暂未提供可拼装的组件 slot。</p>`;
+
+  const renderOptions = (slot) => {
+    const selectedId = slot === "original" ? "" : builder[slot] || "";
+    const options = components
+      .filter((component) => component.category === categoryId && componentSlot(component) === slot)
+      .filter((component) => searchEntry("component", component) || component.id === selectedId);
+    if (slot !== "pose") {
+      options.sort((left, right) => String(left.title).localeCompare(String(right.title), "zh-CN"));
+    }
+    const placeholder = slot === "original" ? "选择后加入原图组件" : "不选择";
+    return [
+      `<option value="">${placeholder}</option>`,
+      ...options.map((component) => `<option value="${escapeHtml(component.id)}" ${component.id === selectedId ? "selected" : ""}>${escapeHtml(component.title)}</option>`)
+    ].join("");
+  };
+
+  return `
+    <section class="builder-picker" aria-label="自由拼装选择区">
+      <div class="builder-picker-heading"><div><strong>选择组件</strong><p>按 slot 选择；搜索只筛选可选项，不改变已保存的拼装逻辑。</p></div></div>
+      <div class="builder-slot-grid">
+        ${groups.map(({ slot, label }) => `
+          <label class="builder-field">
+            <span>${escapeHtml(label)}</span>
+            <select class="builder-select" data-action="change-builder-slot" data-slot="${escapeHtml(slot)}" aria-label="选择${escapeHtml(label)}">
+              ${renderOptions(slot)}
+            </select>
+          </label>
+        `).join("")}
+      </div>
+      ${renderBuilderColorPicker(categoryId, builder)}
+    </section>
+  `;
 }
 
 function renderBuilder() {
   const state = app.states.bangyan;
   const builder = normalizeBuilder(state.builder);
-  const components = bangyanComponents();
+  const components = bangyanComponentsForDisplay();
   const byId = new Map(components.map((component) => [component.id, component]));
   const selectedIds = [
     ...builder.original,
     ...BANGYAN_SYNTHESIS_ORDER.filter((slot) => slot !== "original").map((slot) => builder[slot]).filter(Boolean)
   ];
-  const selected = [...new Set(selectedIds)].map((id) => byId.get(id)).filter(Boolean);
-  const result = composeBangyanSelection({ components, selection: builder });
-  const available = components
-    .filter((component) => component.category === state.activeCategoryId)
-    .filter((component) => searchEntry("component", component))
-    .sort((left, right) => String(left.subcategory).localeCompare(String(right.subcategory), "zh-CN") || String(left.title).localeCompare(String(right.title), "zh-CN"));
+  const selected = [...new Set(selectedIds)]
+    .map((id) => byId.get(id))
+    .filter((component) => component && !isDisplayOnlyComponent(component));
+  const result = composeBuilderResult(builder);
   const chips = selected.length
     ? selected.map((component) => `<button class="builder-chip" type="button" data-action="remove-builder" data-id="${escapeHtml(component.id)}">${escapeHtml(component.title)} ×</button>`).join("")
     : `<span class="builder-empty">还没有选择组件。可以自由搭配，不设主观禁配。</span>`;
@@ -521,13 +882,14 @@ function renderBuilder() {
         <div class="prompt-block"><strong>正向 Prompt</strong><p>${escapeHtml(result.positive || "选择组件后生成稳定组合文本。")}</p></div>
         ${result.negative ? `<div class="prompt-block is-negative"><strong>反向提示词</strong><p>${escapeHtml(result.negative)}</p></div>` : ""}
         <div class="dialog-actions builder-actions">
-          <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="positive" ${result.positive ? "" : "disabled"}>复制正向</button>
-          <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="negative" ${result.negative ? "" : "disabled"}>复制反向</button>
-          <button class="primary-button" type="button" data-action="copy-builder" data-copy-type="all" ${result.positive ? "" : "disabled"}>复制全部</button>
+         <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="positive" ${result.positive ? "" : "disabled"}>复制正向</button>
+         <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="negative" ${result.negative ? "" : "disabled"}>复制反向</button>
+          <button class="quiet-button" type="button" data-action="save-builder-composition" ${result.positive ? "" : "disabled"}>收藏组合</button>
+         <button class="primary-button" type="button" data-action="copy-builder" data-copy-type="all" ${result.positive ? "" : "disabled"}>复制全部</button>
         </div>
       </div>
     </section>
-    ${renderList("当前分类组件", available.map((entry) => ({ kind: "component", entry })), { builderAction: true })}
+    ${renderBuilderPicker(state.activeCategoryId, components, builder)}
   `;
 }
 
@@ -536,7 +898,7 @@ function renderContent() {
   let content = "";
   if (app.activeSuite === "zhuangyuan") {
     const items = sortEntries(zhuangyuanEntries()
-      .filter((entry) => entry.categoryId === state.activeCategoryId)
+      .filter((entry) => effectiveEntry("prompt", entry).categoryId === state.activeCategoryId)
       .filter((entry) => searchEntry("prompt", entry))
       .map((entry) => ({ kind: "prompt", entry })));
     content = items.length ? renderList("Prompt 列表", items) : `<div class="empty-state"><h3>没有匹配的 Prompt</h3><p>换一个关键词，或清空搜索条件。</p></div>`;
@@ -551,11 +913,12 @@ function renderContent() {
   } else {
     const items = bangyanComponents()
       .filter((entry) => entry.category === state.activeCategoryId)
+      .filter((entry) => app.subcategoryFilter === "全部" || entry.subcategory === app.subcategoryFilter)
       .filter((entry) => searchEntry("component", entry))
       .map((entry) => ({ kind: "component", entry }));
     content = items.length ? renderList("单项组件", items) : `<div class="empty-state"><h3>没有匹配的组件</h3><p>换一个关键词，或清空搜索条件。</p></div>`;
   }
-  $("#prompt-sections").innerHTML = content + renderCustomSection();
+  $("#prompt-sections").innerHTML = content + renderCustomSection() + renderSavedCompositionSection();
 }
 
 function renderRecent() {
@@ -572,9 +935,9 @@ function renderRecent() {
 
 function render() {
   renderSuiteTabs();
-  renderIntro();
-  renderModeTabs();
   renderCategoryTabs();
+  renderModeTabs();
+  renderSubcategoryTabs();
   renderHeading();
   renderContent();
   renderRecent();
@@ -590,16 +953,35 @@ function fillCategoryOptions(selectedId) {
 
 function openPromptDialog(entryId = "", kind = app.activeSuite === "bangyan" ? "custom" : "prompt") {
   const entry = entryId ? findEntry(kind, entryId) : null;
-  if (entry && kind !== "prompt" && kind !== "custom") return;
-  $("#prompt-dialog-title").textContent = entry ? "编辑 Prompt" : "新增 Prompt";
-  $("#prompt-suite-hint").textContent = app.activeSuite === "bangyan" ? "榜眼自定义内容 · 与正式组件和状元数据隔离" : "状元自定义内容 · 保留旧站数据结构";
+  const allowedKinds = new Set(["prompt", "custom", "component", "preset", "composition"]);
+  if (entry && !allowedKinds.has(kind)) return;
+  const view = entry ? effectiveEntry(kind, entry) : null;
+  const display = entry ? displayFor(kind, entry) : { title: "", positive: "", negative: "" };
+  const categoryEditable = kind === "prompt" || kind === "custom";
+  const staticEdit = Boolean(entry && isStaticEditable(kind, entry.id));
+  const compositionEdit = kind === "composition";
+  const kindLabel = kind === "component" ? "单项组件" : kind === "preset" ? "推荐组合" : compositionEdit ? "已收藏组合" : "Prompt";
+  $("#prompt-dialog-title").textContent = entry ? "编辑" + kindLabel : "新增 Prompt";
+  $("#prompt-suite-hint").textContent = staticEdit
+    ? "编辑覆盖版本 · 正式数据仍保留，不会改动 JSON"
+    : compositionEdit
+      ? "已收藏组合 · 独立快照，不会改动正式组件或推荐组合"
+      : app.activeSuite === "bangyan" ? "榜眼自定义内容 · 与正式组件和状元数据隔离" : "状元自定义内容 · 保留旧站数据结构";
   $("#prompt-id").value = entry?.id || "";
   $("#prompt-kind").value = kind;
-  $("#prompt-title").value = entry?.title || "";
-  $("#prompt-positive").value = entry?.prompt || "";
-  $("#prompt-negative").value = entry?.negativePrompt || "";
-  $("#prompt-pinned").checked = Boolean(entry?.pinned);
-  fillCategoryOptions(entry?.categoryId || currentState().activeCategoryId);
+  $("#prompt-title").value = view?.title || display.title || "";
+  $("#prompt-positive").value = categoryEditable ? view?.prompt || "" : display.positive || "";
+  $("#prompt-negative").value = categoryEditable ? view?.negativePrompt || "" : display.negative || "";
+  $("#prompt-positive-label").textContent = kind === "component" ? "正向组件 Prompt" : kind === "preset" ? "组合正向 Prompt" : "完整 Prompt";
+  $("#prompt-pinned").checked = Boolean(view?.pinned);
+  fillCategoryOptions(view?.categoryId || currentState().activeCategoryId);
+  $("#prompt-category").hidden = !categoryEditable;
+  $("#prompt-category").previousElementSibling.hidden = !categoryEditable;
+  $("#prompt-pinned").closest(".pin-checkbox").hidden = !categoryEditable;
+  $("#prompt-reset-edit").hidden = !(staticEdit && hasPromptEdit(kind, entry.id));
+  $("#prompt-reset-edit").dataset.kind = kind;
+  $("#prompt-reset-edit").dataset.id = entry?.id || "";
+  $("#prompt-save-button").textContent = entry ? "保存修改" : "保存 Prompt";
   $("#prompt-dialog").showModal();
   window.setTimeout(() => $("#prompt-title").focus(), 0);
 }
@@ -607,34 +989,104 @@ function openPromptDialog(entryId = "", kind = app.activeSuite === "bangyan" ? "
 async function savePrompt() {
   const state = currentState();
   const id = $("#prompt-id").value;
+  const kind = $("#prompt-kind").value || (app.activeSuite === "bangyan" ? "custom" : "prompt");
   const title = $("#prompt-title").value.trim();
   const categoryId = $("#prompt-category").value;
-  const prompt = $("#prompt-positive").value.trim();
-  const negativePrompt = $("#prompt-negative").value.trim();
+  const positive = $("#prompt-positive").value.trim();
+  const negative = $("#prompt-negative").value.trim();
   const pinned = $("#prompt-pinned").checked;
-  if (!title || !prompt || !categoryId) return;
+  const categoryEditable = kind === "prompt" || kind === "custom";
+  if (!title || !positive || (categoryEditable && !categoryId)) return;
   const now = nowIso();
-  if (app.activeSuite === "bangyan") {
+  if (kind === "composition") {
+    const existing = state.savedCompositions.find((entry) => entry.id === id && !entry.deletedAt);
+    if (!existing) return;
+    Object.assign(existing, { title, positive, negative, updatedAt: now });
+  } else if (isStaticEditable(kind, id)) {
+    const existing = state.promptEdits.find((entry) => entry.kind === kind && entry.id === id);
+    const next = { id, kind, title, positive, negative, createdAt: existing?.createdAt || now, updatedAt: now };
+    if (kind === "prompt") next.categoryId = categoryId;
+    if (existing) {
+      Object.assign(existing, next);
+      delete existing.deletedAt;
+    } else {
+      state.promptEdits.push(next);
+    }
+  } else if (kind === "custom" && app.activeSuite === "bangyan") {
     const existing = state.customPrompts.find((entry) => entry.id === id);
     if (existing) {
-      Object.assign(existing, { title, categoryId, prompt, negativePrompt, pinned, updatedAt: now });
+      Object.assign(existing, { title, categoryId, prompt: positive, negativePrompt: negative, pinned, updatedAt: now });
     } else {
-      state.customPrompts.push({ id: makeId("bangyan-custom"), title, categoryId, prompt, negativePrompt, pinned, pinOrder: pinned ? Date.now() : 0, createdAt: now, updatedAt: now });
+      state.customPrompts.push({ id: makeId("bangyan-custom"), title, categoryId, prompt: positive, negativePrompt: negative, pinned, pinOrder: pinned ? Date.now() : 0, createdAt: now, updatedAt: now });
     }
-  } else {
+  } else if (kind === "prompt" && app.activeSuite === "zhuangyuan") {
     const existing = state.prompts.find((entry) => entry.id === id);
     if (existing) {
-      Object.assign(existing, { title, categoryId, prompt, negativePrompt, pinned, pinOrder: pinned ? existing.pinOrder || Date.now() : 0, updatedAt: now });
+      Object.assign(existing, { title, categoryId, prompt: positive, negativePrompt: negative, pinned, pinOrder: pinned ? existing.pinOrder || Date.now() : 0, updatedAt: now });
     } else {
-      state.prompts.push({ id: makeId("zhuangyuan-custom"), title, categoryId, prompt, negativePrompt, pinned, pinOrder: pinned ? Date.now() : 0, createdAt: now, updatedAt: now });
+      state.prompts.push({ id: makeId("zhuangyuan-custom"), title, categoryId, prompt: positive, negativePrompt: negative, pinned, pinOrder: pinned ? Date.now() : 0, createdAt: now, updatedAt: now });
     }
     syncZhuangyuanCustomPrompts();
+  } else {
+    return;
   }
-  state.activeCategoryId = categoryId;
+  if (categoryEditable) state.activeCategoryId = categoryId;
   $("#prompt-dialog").close();
   await persist();
   render();
-  showToast(id ? "Prompt 已更新" : "Prompt 已保存");
+  showToast(id ? "内容已更新" : "Prompt 已保存");
+}
+
+async function resetStaticEdit(kind, id) {
+  if (!isStaticEditable(kind, id) || !hasPromptEdit(kind, id)) return;
+  const entry = findEntry(kind, id);
+  if (!entry || !window.confirm("恢复「" + entry.title + "」的正式内容吗？本地编辑版本会被移除。")) return;
+  const edit = currentState().promptEdits.find((item) => item.kind === kind && item.id === id && !item.deletedAt);
+  if (!edit) return;
+  edit.deletedAt = nowIso();
+  edit.updatedAt = edit.deletedAt;
+  $("#prompt-dialog")?.close();
+  $("#detail-dialog")?.close();
+  await persist();
+  render();
+  showToast("已恢复正式内容");
+}
+
+async function saveBuilderComposition() {
+  const state = app.states.bangyan;
+  const builder = normalizeBuilder(state.builder);
+  const result = composeBuilderResult(builder);
+  if (!result.positive) return showToast("请先选择组件");
+  const now = nowIso();
+  const saved = normalizeSavedComposition({
+    id: makeId("bangyan-composition"),
+    title: result.title || "自由拼装组合",
+    categoryId: state.activeCategoryId,
+    positive: result.positive,
+    negative: result.negative,
+    builder,
+    componentIds: result.componentIds,
+    createdAt: now,
+    updatedAt: now
+  });
+  if (!saved) return;
+  state.savedCompositions.unshift(saved);
+  await persist();
+  render();
+  showToast("组合已收藏");
+}
+
+async function deleteSavedComposition(id) {
+  const entry = findEntry("composition", id);
+  if (!entry || !window.confirm("取消收藏「" + entry.title + "」吗？")) return;
+  const stored = currentState().savedCompositions.find((item) => item.id === id && !item.deletedAt);
+  if (!stored) return;
+  stored.deletedAt = nowIso();
+  stored.updatedAt = stored.deletedAt;
+  $("#detail-dialog")?.close();
+  await persist();
+  render();
+  showToast("已取消收藏");
 }
 
 async function togglePinned(kind, id) {
@@ -671,25 +1123,47 @@ function openDetail(kind, id) {
   const entry = findEntry(kind, id);
   if (!entry) return;
   const display = displayFor(kind, entry);
+  const entryId = escapeHtml(entry.id);
+  const edited = hasPromptEdit(kind, entry.id);
+  const editable = ["prompt", "custom", "component", "preset", "composition"].includes(kind);
+  const displayOnly = kind === "component" && isDisplayOnlyComponent(entry);
+  const builderTarget = app.activeSuite === "bangyan"
+    && ["component", "preset", "composition"].includes(kind)
+    && !displayOnly;
   app.detail = { kind, id };
   $("#detail-eyebrow").textContent = `${categoryNameFor(kind, entry)} · ${subcategoryFor(kind, entry)}`;
   $("#detail-title").textContent = display.title;
-  $("#detail-meta").textContent = kind === "preset" ? "推荐组合 · 可直接复制，也可放入自由拼装区继续修改" : kind === "component" ? `${entry.keywords?.join(" · ") || "单项组件"}` : "可编辑的自定义内容";
+  $("#detail-meta").textContent = displayOnly
+    ? "仅供辨认 · 不参与自由拼装、组合正文或复制"
+    : kind === "preset"
+    ? (edited ? "已编辑推荐组合 · 正式 preset 仍保留" : "推荐组合 · 可直接复制，也可放入自由拼装区继续修改")
+    : kind === "component"
+      ? (edited ? "已编辑单项组件 · 正式组件仍保留" : (entry.keywords?.join(" · ") || "单项组件"))
+      : kind === "composition"
+        ? "已收藏组合 · 可独立编辑，不会修改正式组件或推荐组合"
+        : edited ? "已编辑版本 · 正式数据仍保留" : "可编辑的自定义内容";
   $("#detail-positive").textContent = display.positive;
   $("#detail-negative").textContent = display.negative;
   $("#detail-negative-block").hidden = !display.negative;
   $("#detail-actions").innerHTML = `
-    <button class="quiet-button" type="button" data-action="detail-copy" data-copy-type="positive">复制正向</button>
+    ${displayOnly ? `<span class="detail-note">仅供辨认，不复制到 Prompt 正文</span>` : `<button class="quiet-button" type="button" data-action="detail-copy" data-copy-type="positive">复制正向</button>
     <button class="quiet-button" type="button" data-action="detail-copy" data-copy-type="negative" ${display.negative ? "" : "disabled"}>复制反向</button>
-    <button class="primary-button" type="button" data-action="detail-copy" data-copy-type="all">复制全部</button>
-    ${(kind === "component" || kind === "preset") ? `<button class="quiet-button" type="button" data-action="detail-add-builder">放入拼装区</button>` : ""}
-  `;
+    <button class="primary-button" type="button" data-action="detail-copy" data-copy-type="all">复制全部</button>`}
+    ${editable ? `<button class="quiet-button" type="button" data-action="edit-prompt" data-kind="${kind}" data-id="${entryId}">编辑</button>` : ""}
+    ${edited ? `<button class="quiet-button" type="button" data-action="reset-edit" data-kind="${kind}" data-id="${entryId}">恢复正式内容</button>` : ""}
+    ${builderTarget ? `<button class="quiet-button" type="button" data-action="detail-add-builder" data-kind="${kind}" data-id="${entryId}">${kind === "composition" || kind === "preset" ? "继续调整" : "放入拼装区"}</button>` : ""}
+    ${kind === "composition" ? `<button class="quiet-button is-danger" type="button" data-action="delete-composition" data-kind="${kind}" data-id="${entryId}">取消收藏</button>` : ""}
+ `;
   $("#detail-dialog").showModal();
 }
 
 async function addToBuilder(kind, id) {
   const entry = findEntry(kind, id);
   if (!entry || app.activeSuite !== "bangyan") return;
+  if (kind === "component" && isDisplayOnlyComponent(entry)) {
+    showToast("该项仅供辨认，不会加入自由拼装");
+    return;
+  }
   if (kind === "component") {
     app.states.bangyan.builder = selectBuilderComponent(app.states.bangyan.builder, entry);
   } else if (kind === "preset") {
@@ -699,7 +1173,11 @@ async function addToBuilder(kind, id) {
       if (component) builder = selectBuilderComponent(builder, component);
     }
     app.states.bangyan.builder = builder;
+  } else if (kind === "composition") {
+    app.states.bangyan.builder = normalizeBuilder(entry.builder);
   }
+  markBuilderUpdated();
+  if (kind === "composition" && entry.categoryId) app.states.bangyan.activeCategoryId = entry.categoryId;
   app.states.bangyan.activeMode = "builder";
   await persist();
   $("#detail-dialog")?.close();
@@ -711,18 +1189,20 @@ async function removeFromBuilder(id) {
   const component = bangyanComponents().find((entry) => entry.id === id);
   if (!component) return;
   app.states.bangyan.builder = removeBuilderComponent(app.states.bangyan.builder, component);
+  markBuilderUpdated();
   await persist();
   render();
 }
 
 async function resetBuilder() {
   app.states.bangyan.builder = emptyBuilder();
+  markBuilderUpdated();
   await persist();
   render();
 }
 
 async function copyBuilder(copyType) {
-  const result = composeBangyanSelection({ components: bangyanComponents(), selection: app.states.bangyan.builder });
+  const result = composeBuilderResult(normalizeBuilder(app.states.bangyan.builder));
   const content = copyType === "positive" ? result.positive : copyType === "negative" ? result.negative : result.negative ? `${result.positive}\n\n反向提示词：${result.negative}` : result.positive;
   if (!content) return showToast("请先选择组件");
   await copyText(content);
@@ -742,6 +1222,10 @@ function renderSyncStatus(message = "") {
   else status.textContent = "尚未设置同步码。";
 }
 
+function markBuilderUpdated() {
+  if (app.states.bangyan) app.states.bangyan.builderUpdatedAt = nowIso();
+}
+
 function openSyncDialog() {
   $("#sync-code").value = formatSyncCode(app.meta.syncCode);
   renderSyncStatus();
@@ -751,9 +1235,24 @@ function openSyncDialog() {
 function suiteSyncState(suite) {
   const state = app.states[suite];
   if (suite === "zhuangyuan") {
-    return { prompts: state.prompts, customPrompts: state.customPrompts, favoriteIds: state.favoriteIds, recent: state.recent };
+    return {
+      prompts: state.prompts,
+      customPrompts: state.customPrompts,
+      promptEdits: state.promptEdits,
+      savedCompositions: state.savedCompositions,
+      favoriteIds: state.favoriteIds,
+      recent: state.recent
+    };
   }
-  return { customPrompts: state.customPrompts, favoriteIds: state.favoriteIds, recent: state.recent, builder: state.builder };
+  return {
+    customPrompts: state.customPrompts,
+    promptEdits: state.promptEdits,
+    savedCompositions: state.savedCompositions,
+    favoriteIds: state.favoriteIds,
+    recent: state.recent,
+    builder: state.builder,
+    builderUpdatedAt: state.builderUpdatedAt
+  };
 }
 
 async function syncNow() {
@@ -774,13 +1273,23 @@ async function syncNow() {
     if (remoteZhuangyuan) {
       app.states.zhuangyuan.prompts = remoteZhuangyuan.prompts || app.states.zhuangyuan.prompts;
       app.states.zhuangyuan.customPrompts = app.states.zhuangyuan.prompts.filter((entry) => !app.defaults.zhuangyuan.prompts.some((defaultEntry) => defaultEntry.id === entry.id));
+      app.states.zhuangyuan.promptEdits = normalizePromptEdits(remoteZhuangyuan.promptEdits).filter((entry) => entry.kind === "prompt");
+      app.states.zhuangyuan.savedCompositions = normalizeSavedCompositions(remoteZhuangyuan.savedCompositions);
       app.states.zhuangyuan.favoriteIds = normalizeFavoriteIds(remoteZhuangyuan.favoriteIds);
       app.states.zhuangyuan.recent = normalizeRecent(remoteZhuangyuan.recent);
     }
     if (remoteBangyan) {
       app.states.bangyan.customPrompts = (remoteBangyan.customPrompts || []).map((entry) => normalizeCustomPrompt(entry, "bangyan")).filter(Boolean);
+      app.states.bangyan.promptEdits = normalizePromptEdits(remoteBangyan.promptEdits).filter((entry) => entry.kind === "component" || entry.kind === "preset");
+      app.states.bangyan.savedCompositions = normalizeSavedCompositions(remoteBangyan.savedCompositions);
       app.states.bangyan.favoriteIds = normalizeFavoriteIds(remoteBangyan.favoriteIds);
       app.states.bangyan.recent = normalizeRecent(remoteBangyan.recent);
+      if (remoteBangyan.builder && typeof remoteBangyan.builder === "object") {
+        app.states.bangyan.builder = normalizeBuilder(remoteBangyan.builder);
+      }
+      if (typeof remoteBangyan.builderUpdatedAt === "string") {
+        app.states.bangyan.builderUpdatedAt = remoteBangyan.builderUpdatedAt;
+      }
     }
     app.meta.lastSyncedAt = result.syncedAt;
     await persist();
@@ -844,6 +1353,7 @@ document.addEventListener("click", async (event) => {
     if (suite === "zhuangyuan" || suite === "bangyan") {
       app.activeSuite = suite;
       app.meta.activeSuite = suite;
+      app.subcategoryFilter = "全部";
       app.searchQuery = "";
       app.visibleLimit = PAGE_SIZE;
       await persist();
@@ -855,13 +1365,28 @@ document.addEventListener("click", async (event) => {
   const kind = target.dataset.kind;
   if (action === "change-category") {
     currentState().activeCategoryId = id;
+    app.subcategoryFilter = "全部";
     app.visibleLimit = PAGE_SIZE;
     await persist();
     render();
   } else if (action === "change-mode") {
     if (BANGYAN_MODES.some((mode) => mode.id === target.dataset.mode)) {
       app.states.bangyan.activeMode = target.dataset.mode;
+      app.subcategoryFilter = "全部";
       app.visibleLimit = PAGE_SIZE;
+      await persist();
+      render();
+    }
+  } else if (action === "change-subcategory") {
+    app.subcategoryFilter = target.dataset.subcategory || "全部";
+    app.visibleLimit = PAGE_SIZE;
+    render();
+  } else if (action === "change-builder-color-mode") {
+    if (BANGYAN_COLOR_MODES.some((mode) => mode.id === target.dataset.colorMode)) {
+      const builder = normalizeBuilder(app.states.bangyan.builder);
+      builder.colorMode = target.dataset.colorMode;
+      app.states.bangyan.builder = builder;
+      markBuilderUpdated();
       await persist();
       render();
     }
@@ -895,22 +1420,20 @@ document.addEventListener("click", async (event) => {
   } else if (action === "load-more") {
     app.visibleLimit += PAGE_SIZE;
     renderContent();
-  } else if (action === "select-component") {
-    const component = bangyanComponents().find((entry) => entry.id === id);
-    if (component) {
-      app.states.bangyan.builder = selectBuilderComponent(app.states.bangyan.builder, component);
-      await persist();
-      render();
-      showToast("已加入拼装区");
-    }
   } else if (action === "remove-builder") {
     await removeFromBuilder(id);
   } else if (action === "reset-builder") {
     await resetBuilder();
   } else if (action === "copy-builder") {
     await copyBuilder(target.dataset.copyType || "all");
+  } else if (action === "save-builder-composition") {
+    await saveBuilderComposition();
   } else if (action === "add-to-builder") {
     await addToBuilder(kind, id);
+  } else if (action === "reset-edit") {
+    await resetStaticEdit(kind, id);
+  } else if (action === "delete-composition") {
+    await deleteSavedComposition(id);
   } else if (action === "detail-copy") {
     if (app.detail) await copyEntry(app.detail.kind, app.detail.id, target.dataset.copyType || "all");
   } else if (action === "detail-add-builder") {
@@ -929,6 +1452,8 @@ document.addEventListener("click", async (event) => {
     if (!isValidSyncCode(code)) return renderSyncStatus("请先生成或填写正确的同步码。");
     await copyText(formatSyncCode(code));
     showToast("同步码已复制");
+  } else if (action === "export-state") {
+    exportUserState();
   } else if (action === "sync-now") {
     await syncNow();
   } else if (action === "open-theme") {
@@ -941,6 +1466,60 @@ document.addEventListener("click", async (event) => {
   } else if (action === "close-dialog") {
     target.closest("dialog")?.close();
   }
+});
+
+document.addEventListener("change", async (event) => {
+  const colorTarget = event.target.closest('[data-action="change-builder-color-style"]');
+  if (colorTarget) {
+    if (app.activeSuite !== "bangyan" || app.states.bangyan.activeMode !== "builder") return;
+    const builder = normalizeBuilder(app.states.bangyan.builder);
+    const validChoice = builder.colorMode === "uniform"
+      ? BANGYAN_UNIFORM_COLORS.some((color) => color.id === colorTarget.value)
+      : builder.colorMode === "matching"
+        ? colorTarget.value === "custom" || BANGYAN_MATCHING_PALETTES.some((palette) => palette.id === colorTarget.value)
+        : false;
+    builder.colorStyle = validChoice ? colorTarget.value : "";
+    app.states.bangyan.builder = builder;
+    markBuilderUpdated();
+    await persist();
+    render();
+    return;
+  }
+  const customColorTarget = event.target.closest('[data-action="change-builder-custom-color"]');
+  if (customColorTarget) {
+    if (app.activeSuite !== "bangyan" || app.states.bangyan.activeMode !== "builder") return;
+    const validKeys = new Set(["colorPrimary", "colorSecondary", "colorAccent"]);
+    if (!validKeys.has(customColorTarget.dataset.colorKey)) return;
+    const builder = normalizeBuilder(app.states.bangyan.builder);
+    builder[customColorTarget.dataset.colorKey] = BANGYAN_UNIFORM_COLORS.some((color) => color.id === customColorTarget.value)
+      ? customColorTarget.value
+      : "";
+    app.states.bangyan.builder = builder;
+    markBuilderUpdated();
+    await persist();
+    render();
+    return;
+  }
+  const target = event.target.closest('[data-action="change-builder-slot"]');
+  if (!target || app.activeSuite !== "bangyan" || app.states.bangyan.activeMode !== "builder") return;
+  if (!target.value) {
+    if (target.dataset.slot === "original") return;
+    const builder = normalizeBuilder(app.states.bangyan.builder);
+    builder[target.dataset.slot] = "";
+    app.states.bangyan.builder = builder;
+    markBuilderUpdated();
+    await persist();
+    render();
+    showToast("已清除该 slot");
+    return;
+  }
+  const component = bangyanComponents().find((entry) => entry.id === target.value);
+  if (!component) return;
+  app.states.bangyan.builder = selectBuilderComponent(app.states.bangyan.builder, component);
+  markBuilderUpdated();
+  await persist();
+  render();
+  showToast(target.dataset.slot === "original" ? "已加入原图组件" : "已更新拼装组件");
 });
 
 $("#prompt-form").addEventListener("submit", (event) => {
