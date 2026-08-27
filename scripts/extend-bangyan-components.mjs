@@ -348,10 +348,12 @@ data.components = data.components.map((component) => {
   return component;
 });
 
-data.schemaVersion = "1.1.0";
+data.schemaVersion = "1.2.0";
 data.generatedAt = "2026-08-24";
 data.counts.components = data.components.length;
+data.counts.directPrompts = Array.isArray(data.directPrompts) ? data.directPrompts.length : 0;
 data.categories[category].components = data.components.filter((component) => component.category === category).length;
+data.categories[category].directPrompts = data.counts.directPrompts;
 data.compositionRules.commonPrefix = "保持原图20岁以上成年女性人物身份、脸型、五官、年龄感和整体气质一致。人物整体保持身材丰满、凹凸有致、比例协调的自然体型；除用户主动选择的修改项外，其余内容保持不变。表情组件仅调整面部情绪，不改变脸型、五官结构和人物辨识度。";
 data.compositionRules.commonNegative = "避免人物身份漂移、换脸、脸型五官变化、眼距变化、鼻型变化、唇形变化、夸张表情导致嘴眼变形、人体结构错误、头身比例异常、肢体穿模、衣料与身体分离、左右镜像复制、轮廓过度外扩、独立球状结构、反重力隆起、尖锐边缘、领口结构错位、绑带穿模、衣片断裂、褶皱塑料感、极端透视、广角拉伸、走光失控、过度磨皮和明显AI痕迹。";
 data.compositionRules.slots.expression = { max: 1, subcategory: "表情", nullable: true, replaceSameSlot: true };

@@ -27,7 +27,7 @@ import {
   removeBuilderComponent
 } from "./suite-utils.js";
 
-const APP_ASSET_VERSION = "2.6.2";
+const APP_ASSET_VERSION = "2.6.5";
 const PAGE_SIZE = 48;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
@@ -47,7 +47,8 @@ const BANGYAN_CATEGORIES = [
 const BANGYAN_MODES = [
   { id: "presets", label: "推荐组合" },
   { id: "builder", label: "自由拼装" },
-  { id: "components", label: "单项库" }
+  { id: "components", label: "单项库" },
+  { id: "direct", label: "直接 Prompt" }
 ];
 
 const BANGYAN_SUBCATEGORIES = Object.freeze({
@@ -133,6 +134,7 @@ const app = {
   subcategoryFilter: "全部",
   searchQuery: "",
   visibleLimit: PAGE_SIZE,
+  collapsedSections: new Set(),
   detail: null,
   storageMode: "indexeddb",
   syncBusy: false,
@@ -183,6 +185,7 @@ function normalizeCustomPrompt(entry, suite) {
     pinOrder: Number(entry.pinOrder || 0),
     createdAt: entry.createdAt || nowIso(),
     updatedAt: entry.updatedAt || entry.createdAt || nowIso(),
+    ...(suite === "bangyan" ? { kind: entry.kind === "direct" ? "direct" : "custom" } : {}),
     ...(entry.deletedAt ? { deletedAt: entry.deletedAt } : {})
   };
 }
@@ -242,7 +245,7 @@ function normalizeBangyanState(stored) {
     .filter(Boolean);
   const validCategoryIds = new Set(BANGYAN_CATEGORIES.map((category) => category.id));
   const activeMode = BANGYAN_MODES.some((mode) => mode.id === source.activeMode) ? source.activeMode : "presets";
-  const promptEdits = normalizePromptEdits(source.promptEdits).filter((entry) => entry.kind === "component" || entry.kind === "preset");
+  const promptEdits = normalizePromptEdits(source.promptEdits).filter((entry) => entry.kind === "component" || entry.kind === "preset" || entry.kind === "direct");
   return {
     version: 2,
     suite: "bangyan",
@@ -287,6 +290,21 @@ function bangyanPresets() {
   return (app.defaults.bangyan?.presets || []).filter((entry) => entry.enabled !== false);
 }
 
+function bangyanDirectPrompts() {
+  return (app.defaults.bangyan?.directPrompts || []).filter((entry) => entry.enabled !== false);
+}
+
+function bangyanCustomDirectPrompts() {
+  return (app.states.bangyan?.customPrompts || []).filter((entry) => entry.kind === "direct" && !entry.deletedAt);
+}
+
+function bangyanDirectEntries() {
+  return [
+    ...bangyanDirectPrompts().map((entry) => ({ kind: "direct", entry })),
+    ...bangyanCustomDirectPrompts().map((entry) => ({ kind: "custom", entry }))
+  ];
+}
+
 function bangyanCustomPrompts() {
   return (app.states.bangyan?.customPrompts || []).filter((entry) => !entry.deletedAt);
 }
@@ -306,6 +324,7 @@ function findEntry(kind, id) {
   if (kind === "prompt") return zhuangyuanEntries().find((entry) => entry.id === id);
   if (kind === "component") return bangyanComponents().find((entry) => entry.id === id);
   if (kind === "preset") return bangyanPresets().find((entry) => entry.id === id);
+  if (kind === "direct") return bangyanDirectPrompts().find((entry) => entry.id === id);
   if (kind === "custom") return bangyanCustomPrompts().find((entry) => entry.id === id);
   if (kind === "composition") return savedCompositionEntries().find((entry) => entry.id === id);
   return null;
@@ -324,6 +343,7 @@ function isStaticEditable(kind, id) {
   if (kind === "prompt") return Boolean(app.defaults.zhuangyuan?.prompts?.some((entry) => entry.id === id));
   if (kind === "component") return Boolean(app.defaults.bangyan?.components?.some((entry) => entry.id === id));
   if (kind === "preset") return Boolean(app.defaults.bangyan?.presets?.some((entry) => entry.id === id));
+  if (kind === "direct") return Boolean(app.defaults.bangyan?.directPrompts?.some((entry) => entry.id === id));
   return false;
 }
 
@@ -341,7 +361,7 @@ function effectiveEntry(kind, entry) {
       updatedAt: edit.updatedAt
     };
   }
-  if (kind === "component") {
+  if (kind === "component" || kind === "direct") {
     return { ...entry, title: edit.title, positive: edit.positive, negative: edit.negative, updatedAt: edit.updatedAt };
   }
   if (kind === "preset") return { ...entry, title: edit.title, updatedAt: edit.updatedAt };
@@ -364,8 +384,8 @@ function displayFor(kind, entry) {
     return { ...composed, all: composed.negative ? `${composed.positive}\n\n反向提示词：${composed.negative}` : composed.positive };
   }
   const view = effectiveEntry(kind, entry);
-  const positive = kind === "component" || kind === "composition" ? view.positive : view.prompt;
-  const negative = kind === "component" || kind === "composition" ? view.negative : view.negativePrompt;
+  const positive = kind === "component" || kind === "direct" || kind === "composition" ? view.positive : view.prompt;
+  const negative = kind === "component" || kind === "direct" || kind === "composition" ? view.negative : view.negativePrompt;
   return {
     title: view.title,
     positive: String(positive || ""),
@@ -385,7 +405,9 @@ function categoryNameFor(kind, entry) {
 function subcategoryFor(kind, entry) {
   if (kind === "component") return entry.subcategory || "单项组件";
   if (kind === "preset") return "推荐组合";
+  if (kind === "direct") return entry.subcategory || "直接 Prompt";
   if (kind === "composition") return "已收藏组合";
+  if (kind === "custom" && entry?.kind === "direct") return "直接 Prompt";
   return kind === "custom" ? "自定义 Prompt" : "完整 Prompt";
 }
 
@@ -413,7 +435,7 @@ function compactSummary(value, limit = 68) {
 
 function entrySummary(kind, entry, display) {
   if (kind === "preset" && !hasPromptEdit(kind, entry.id)) return "可继续调整各 slot 的组件选择";
-  if (kind === "component") return compactSummary(entry.composeText || entry.positive);
+  if (kind === "component" || kind === "direct") return compactSummary(entry.composeText || entry.positive);
   return compactSummary(display.positive);
 }
 
@@ -556,6 +578,7 @@ function renderSuiteTabs() {
 
 function modeCount(mode, categoryId) {
   if (mode === "presets") return bangyanPresets().filter((entry) => entry.category === categoryId).length;
+  if (mode === "direct") return bangyanDirectEntries().filter(({ entry }) => (entry.category || entry.categoryId) === categoryId).length;
   return bangyanComponents().filter((entry) => entry.category === categoryId).length;
 }
 
@@ -573,6 +596,12 @@ function renderModeTabs() {
       ${escapeHtml(mode.label)}
     </button>
   `).join("");
+}
+
+function renderAddPromptButton() {
+  const label = $("#add-prompt-label");
+  if (!label) return;
+  label.textContent = app.activeSuite === "bangyan" && app.states.bangyan?.activeMode === "direct" ? "新增直接 Prompt" : "新增";
 }
 
 function renderSubcategoryTabs() {
@@ -618,6 +647,7 @@ function renderHeading() {
   if (app.activeSuite === "bangyan") {
     count = modeCount(state.activeMode, categoryId);
     if (state.activeMode === "builder") description = "选择组件加入拼装区；同一个 slot 的新选择会替换旧选择，不设置主观禁配。";
+    if (state.activeMode === "direct") description = "完整 Prompt 直接复制使用；不参与自由拼装，也不生成推荐组合。";
   } else {
     count = zhuangyuanEntries().filter((entry) => effectiveEntry("prompt", entry).categoryId === categoryId).length;
   }
@@ -636,7 +666,7 @@ function renderEntryCard(kind, entry) {
   const subcategory = subcategoryFor(kind, entry);
   const id = escapeHtml(entry.id);
   const edited = hasPromptEdit(kind, entry.id);
-  const editable = ["prompt", "custom", "component", "preset", "composition"].includes(kind);
+  const editable = ["prompt", "custom", "component", "preset", "direct", "composition"].includes(kind);
   const displayOnly = kind === "component" && isDisplayOnlyComponent(entry);
   const copyable = !displayOnly;
   const addBuilder = (kind === "component" || kind === "preset" || kind === "composition") && !displayOnly;
@@ -675,13 +705,20 @@ function renderEntryCard(kind, entry) {
   `;
 }
 
-function renderList(title, items) {
+function renderList(title, items, { collapsible = false, sectionKey = "" } = {}) {
   const visible = items.slice(0, app.visibleLimit);
+  const collapsed = collapsible && app.collapsedSections.has(sectionKey);
   return `
     <section class="prompt-section">
-      <div class="section-title-row"><h3>${escapeHtml(title)}</h3><span>${items.length} 条</span></div>
-      <div class="prompt-list">${visible.map(({ kind, entry }) => renderEntryCard(kind, entry)).join("")}</div>
-      ${visible.length < items.length ? `<div class="empty-state compact-load-more"><p>已显示 ${visible.length} / ${items.length} 条</p><button class="primary-button" type="button" data-action="load-more">继续加载</button></div>` : ""}
+      <div class="section-title-row">
+        <h3>${escapeHtml(title)}</h3>
+        <div class="section-title-actions">
+          <span>${items.length} 条</span>
+          ${collapsible ? `<button class="section-toggle" type="button" data-action="toggle-section" data-section-key="${escapeHtml(sectionKey)}" aria-expanded="${!collapsed}">${collapsed ? "展开" : "收起"}</button>` : ""}
+        </div>
+      </div>
+      ${collapsed ? "" : `<div class="prompt-list">${visible.map(({ kind, entry }) => renderEntryCard(kind, entry)).join("")}</div>
+      ${visible.length < items.length ? `<div class="empty-state compact-load-more"><p>已显示 ${visible.length} / ${items.length} 条</p><button class="primary-button" type="button" data-action="load-more">继续加载</button></div>` : ""}`}
     </section>
   `;
 }
@@ -690,6 +727,7 @@ function renderCustomSection() {
   if (app.activeSuite !== "bangyan") return "";
   const state = app.states.bangyan;
   const items = bangyanCustomPrompts()
+    .filter((entry) => entry.kind !== "direct")
     .filter((entry) => entry.categoryId === state.activeCategoryId)
     .filter((entry) => searchEntry("custom", entry))
     .map((entry) => ({ kind: "custom", entry }));
@@ -704,6 +742,23 @@ function renderSavedCompositionSection() {
     .filter((entry) => searchEntry("composition", entry))
     .map((entry) => ({ kind: "composition", entry })));
   return items.length ? renderList("已收藏组合", items) : "";
+}
+
+function renderDirectPrompts() {
+  const state = app.states.bangyan;
+  const groups = new Map();
+  bangyanDirectEntries()
+    .filter(({ entry }) => (entry.category || entry.categoryId) === state.activeCategoryId)
+    .filter(({ kind, entry }) => searchEntry(kind, entry))
+    .forEach(({ kind, entry }) => {
+      const group = kind === "custom" ? "我的直接 Prompt" : entry.subcategory || "直接 Prompt";
+      if (!groups.has(group)) groups.set(group, []);
+      groups.get(group).push({ kind, entry });
+    });
+  return [...groups.entries()].map(([title, items]) => renderList(title, items, {
+    collapsible: true,
+    sectionKey: `direct:${title}`
+  })).join("");
 }
 
 function builderColorMode(builder) {
@@ -910,6 +965,8 @@ function renderContent() {
       .filter((entry) => searchEntry("preset", entry))
       .map((entry) => ({ kind: "preset", entry }));
     content = items.length ? renderList("推荐组合", items) : `<div class="empty-state"><h3>当前分类没有推荐组合</h3><p>可以切换到“单项库”或“自由拼装”。</p></div>`;
+  } else if (state.activeMode === "direct") {
+    content = renderDirectPrompts() || `<div class="empty-state"><h3>没有匹配的直接 Prompt</h3><p>换一个关键词，或清空搜索条件。</p></div>`;
   } else {
     const items = bangyanComponents()
       .filter((entry) => entry.category === state.activeCategoryId)
@@ -937,6 +994,7 @@ function render() {
   renderSuiteTabs();
   renderCategoryTabs();
   renderModeTabs();
+  renderAddPromptButton();
   renderSubcategoryTabs();
   renderHeading();
   renderContent();
@@ -951,21 +1009,29 @@ function fillCategoryOptions(selectedId) {
   `).join("");
 }
 
-function openPromptDialog(entryId = "", kind = app.activeSuite === "bangyan" ? "custom" : "prompt") {
+function promptKindForAdd() {
+  if (app.activeSuite !== "bangyan") return "prompt";
+  return currentState()?.activeMode === "direct" ? "direct" : "custom";
+}
+
+function openPromptDialog(entryId = "", kind = promptKindForAdd()) {
   const entry = entryId ? findEntry(kind, entryId) : null;
-  const allowedKinds = new Set(["prompt", "custom", "component", "preset", "composition"]);
+  const allowedKinds = new Set(["prompt", "custom", "component", "preset", "direct", "composition"]);
   if (entry && !allowedKinds.has(kind)) return;
   const view = entry ? effectiveEntry(kind, entry) : null;
   const display = entry ? displayFor(kind, entry) : { title: "", positive: "", negative: "" };
-  const categoryEditable = kind === "prompt" || kind === "custom";
   const staticEdit = Boolean(entry && isStaticEditable(kind, entry.id));
+  const customDirect = kind === "direct" ? !staticEdit : kind === "custom" && entry?.kind === "direct";
+  const categoryEditable = kind === "prompt" || kind === "custom" || customDirect;
   const compositionEdit = kind === "composition";
-  const kindLabel = kind === "component" ? "单项组件" : kind === "preset" ? "推荐组合" : compositionEdit ? "已收藏组合" : "Prompt";
-  $("#prompt-dialog-title").textContent = entry ? "编辑" + kindLabel : "新增 Prompt";
+  const kindLabel = kind === "component" ? "单项组件" : kind === "preset" ? "推荐组合" : (kind === "direct" || customDirect) ? "直接 Prompt" : compositionEdit ? "已收藏组合" : "Prompt";
+  $("#prompt-dialog-title").textContent = entry ? "编辑" + kindLabel : customDirect ? "新增直接 Prompt" : "新增 Prompt";
   $("#prompt-suite-hint").textContent = staticEdit
     ? "编辑覆盖版本 · 正式数据仍保留，不会改动 JSON"
     : compositionEdit
       ? "已收藏组合 · 独立快照，不会改动正式组件或推荐组合"
+      : customDirect
+        ? "榜眼自定义直接 Prompt · 与正式直接 Prompt 和状元数据隔离"
       : app.activeSuite === "bangyan" ? "榜眼自定义内容 · 与正式组件和状元数据隔离" : "状元自定义内容 · 保留旧站数据结构";
   $("#prompt-id").value = entry?.id || "";
   $("#prompt-kind").value = kind;
@@ -995,7 +1061,9 @@ async function savePrompt() {
   const positive = $("#prompt-positive").value.trim();
   const negative = $("#prompt-negative").value.trim();
   const pinned = $("#prompt-pinned").checked;
-  const categoryEditable = kind === "prompt" || kind === "custom";
+  const customDirect = (kind === "direct" && !isStaticEditable(kind, id))
+    || (kind === "custom" && state.customPrompts.some((entry) => entry.id === id && entry.kind === "direct"));
+  const categoryEditable = kind === "prompt" || kind === "custom" || customDirect;
   if (!title || !positive || (categoryEditable && !categoryId)) return;
   const now = nowIso();
   if (kind === "composition") {
@@ -1012,12 +1080,13 @@ async function savePrompt() {
     } else {
       state.promptEdits.push(next);
     }
-  } else if (kind === "custom" && app.activeSuite === "bangyan") {
+  } else if ((kind === "custom" || customDirect) && app.activeSuite === "bangyan") {
     const existing = state.customPrompts.find((entry) => entry.id === id);
+    const storedKind = existing?.kind === "direct" || kind === "direct" ? "direct" : "custom";
     if (existing) {
-      Object.assign(existing, { title, categoryId, prompt: positive, negativePrompt: negative, pinned, updatedAt: now });
+      Object.assign(existing, { kind: storedKind, title, categoryId, prompt: positive, negativePrompt: negative, pinned, updatedAt: now });
     } else {
-      state.customPrompts.push({ id: makeId("bangyan-custom"), title, categoryId, prompt: positive, negativePrompt: negative, pinned, pinOrder: pinned ? Date.now() : 0, createdAt: now, updatedAt: now });
+      state.customPrompts.push({ id: makeId(storedKind === "direct" ? "bangyan-direct-custom" : "bangyan-custom"), kind: storedKind, title, categoryId, prompt: positive, negativePrompt: negative, pinned, pinOrder: pinned ? Date.now() : 0, createdAt: now, updatedAt: now });
     }
   } else if (kind === "prompt" && app.activeSuite === "zhuangyuan") {
     const existing = state.prompts.find((entry) => entry.id === id);
@@ -1125,7 +1194,7 @@ function openDetail(kind, id) {
   const display = displayFor(kind, entry);
   const entryId = escapeHtml(entry.id);
   const edited = hasPromptEdit(kind, entry.id);
-  const editable = ["prompt", "custom", "component", "preset", "composition"].includes(kind);
+  const editable = ["prompt", "custom", "component", "preset", "direct", "composition"].includes(kind);
   const displayOnly = kind === "component" && isDisplayOnlyComponent(entry);
   const builderTarget = app.activeSuite === "bangyan"
     && ["component", "preset", "composition"].includes(kind)
@@ -1139,8 +1208,12 @@ function openDetail(kind, id) {
     ? (edited ? "已编辑推荐组合 · 正式 preset 仍保留" : "推荐组合 · 可直接复制，也可放入自由拼装区继续修改")
     : kind === "component"
       ? (edited ? "已编辑单项组件 · 正式组件仍保留" : (entry.keywords?.join(" · ") || "单项组件"))
+      : kind === "direct"
+        ? (edited ? "已编辑直接 Prompt · 正式内容仍保留" : "完整 Prompt · 可直接复制，不参与自由拼装")
       : kind === "composition"
         ? "已收藏组合 · 可独立编辑，不会修改正式组件或推荐组合"
+        : kind === "custom" && entry.kind === "direct"
+          ? "自定义直接 Prompt · 可直接复制，不参与自由拼装"
         : edited ? "已编辑版本 · 正式数据仍保留" : "可编辑的自定义内容";
   $("#detail-positive").textContent = display.positive;
   $("#detail-negative").textContent = display.negative;
@@ -1280,7 +1353,7 @@ async function syncNow() {
     }
     if (remoteBangyan) {
       app.states.bangyan.customPrompts = (remoteBangyan.customPrompts || []).map((entry) => normalizeCustomPrompt(entry, "bangyan")).filter(Boolean);
-      app.states.bangyan.promptEdits = normalizePromptEdits(remoteBangyan.promptEdits).filter((entry) => entry.kind === "component" || entry.kind === "preset");
+      app.states.bangyan.promptEdits = normalizePromptEdits(remoteBangyan.promptEdits).filter((entry) => entry.kind === "component" || entry.kind === "preset" || entry.kind === "direct");
       app.states.bangyan.savedCompositions = normalizeSavedCompositions(remoteBangyan.savedCompositions);
       app.states.bangyan.favoriteIds = normalizeFavoriteIds(remoteBangyan.favoriteIds);
       app.states.bangyan.recent = normalizeRecent(remoteBangyan.recent);
@@ -1419,6 +1492,12 @@ document.addEventListener("click", async (event) => {
     renderRecent();
   } else if (action === "load-more") {
     app.visibleLimit += PAGE_SIZE;
+    renderContent();
+  } else if (action === "toggle-section") {
+    const sectionKey = target.dataset.sectionKey || "";
+    if (!sectionKey) return;
+    if (app.collapsedSections.has(sectionKey)) app.collapsedSections.delete(sectionKey);
+    else app.collapsedSections.add(sectionKey);
     renderContent();
   } else if (action === "remove-builder") {
     await removeFromBuilder(id);

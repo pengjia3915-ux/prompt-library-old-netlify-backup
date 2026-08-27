@@ -2238,3 +2238,28 @@ textarea:focus-visible {
   align-self: center;
   font-size: 12px;
 }
+
+.section-title-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-toggle {
+  min-height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 9px;
+  color: var(--muted);
+  background: var(--paper);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.section-toggle:hover,
+.section-toggle:active {
+  border-color: var(--tab-active-border);
+  color: var(--ink);
+  background: var(--soft);
+}

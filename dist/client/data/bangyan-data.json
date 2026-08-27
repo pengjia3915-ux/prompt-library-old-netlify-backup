@@ -1,10 +1,11 @@
 {
-  "schemaVersion": "1.1.0",
+  "schemaVersion": "1.2.0",
   "suite": "bangyan",
-  "generatedAt": "2026-08-24",
+  "generatedAt": "2026-08-26",
   "counts": {
     "components": 235,
-    "presets": 24
+    "presets": 24,
+    "directPrompts": 44
   },
   "categories": {
     "原图处理": {
@@ -16,7 +17,8 @@
     },
     "姿势穿搭场景": {
       "components": 181,
-      "presets": 12
+      "presets": 12,
+      "directPrompts": 44
     }
   },
   "components": [
@@ -4969,5 +4971,823 @@
       "migrationVersionKey": "promptLibrary.migrationVersion",
       "strategy": "首次升级检测旧版 localStorage keys，将旧收藏、最近复制、自定义 Prompt 等复制/迁移到 promptLibrary.zhuangyuan.*；第一阶段保留旧 key，不写入榜眼；迁移仅执行一次。"
     }
-  }
+  },
+  "directPrompts": [
+    {
+      "id": "direct_career_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "按摩师 × SPA理疗室 × 正面服务站姿",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色、面部比例、身份特征和整体气质完全不变，仅调整职业身份、服装、场景和姿势。人物设定为专业按摩师，身材丰满，保持真实人体比例。穿着符合SPA行业的护理制服，上身采用深U领或领口镂空设计护理服，下身搭配修身短裙，整体干净专业。人物站在高级SPA理疗室内，正面面对镜头，全身完整出镜，双手自然放置，一只手轻拿护理毛巾，表情自然温和。背景包含按摩床、香薰、护理用品和柔和灯光，呈现真实职业摄影质感。",
+      "negative": "避免改变脸型，避免改变五官，避免重新生成陌生人物，避免年龄变化，避免AI换脸感，避免身体比例异常，避免职业环境错误。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "按摩师",
+        "SPA理疗室",
+        "正面服务站姿"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "教师 × 现代教室 × 正面讲课姿势",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色、面部比例和身份特征完全不变。仅调整职业身份、服装和环境。人物设定为职业教师，身材丰满，比例自然。穿着符合教师职业气质的现代职业装，上身为深V领简约衬衫或领口镂空设计上衣，下身搭配高腰包臀裙。人物站在现代教室讲台前，正面面对镜头，全身完整出镜，一手拿教材，一手自然垂落，保持自然站姿。背景包含黑板、讲台、书籍和教室环境，呈现真实教师职业写真。",
+      "negative": "避免脸部变化，避免五官改变，避免教师身份违和，避免夸张动作，避免人体变形。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "教师",
+        "现代教室",
+        "正面讲课姿势"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "家教老师 × 家庭书房 × 正面交流姿势",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色和整体气质完全一致。人物设定为私人家教老师，身材丰满。穿着轻熟职业休闲装，上身采用深U领针织上衣或领口镂空设计，下身搭配简洁短裙。人物位于家庭书房环境，正面面对镜头，全身完整出镜，身体自然站立或坐姿交流，一手拿教材，一手自然放置，表情亲和自然。背景包含书架、书桌、学习资料和自然光，呈现真实家教工作场景。",
+      "negative": "避免改变人物身份，避免脸型漂移，避免学生化，避免背景错误，避免AI生成感。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "家教老师",
+        "家庭书房",
+        "正面交流姿势"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "大学生 × 校园教室 × 正面坐姿",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色和身份特征完全不变。人物设定为成年大学生，身材丰满，保持自然比例。穿着现代校园风夏季服装，上身为深V领、深U领或领口镂空设计短款上衣，下身搭配百褶短裙或短裤。人物坐在大学教室中，正面面对镜头，全身完整出镜，坐姿自然放松，双手可拿书本或笔记本，表情自然。背景包含课桌、书籍、窗户和校园环境。",
+      "negative": "避免改变脸型五官，避免幼态化，避免制服动漫化，避免身体比例错误。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "大学生",
+        "校园教室",
+        "正面坐姿"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "运动员 × 体育馆 × 正面展示姿势",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色、身份特征完全不变。人物设定为职业运动员，身材丰满且具有健康运动线条。穿着运动训练服，上身采用深U领运动背心设计，下身搭配运动短裤。人物站在体育馆训练区域，正面面对镜头，全身完整出镜，一手拿运动装备，另一手自然垂落，保持运动员自然站姿。背景包含运动器材、场地和灯光环境，呈现真实体育摄影效果。",
+      "negative": "避免脸部重绘，避免肌肉夸张，避免身体拉伸，避免运动环境错误。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "运动员",
+        "体育馆",
+        "正面展示姿势"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "健身教练 × 健身房 × 正面指导姿势",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型和整体气质完全不变。人物设定为健身教练，身材丰满，保持自然运动曲线。穿着专业健身服，上身采用深V领运动背心，下身搭配高腰运动短裤。人物站在健身房训练区域，正面面对镜头，全身完整出镜，一手拿毛巾，一手自然放在腰侧，呈现专业指导状态。背景包含健身器械、镜面和训练区域，真实摄影质感。",
+      "negative": "避免改变脸型，避免过度健身化，避免身体比例失真。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "健身教练",
+        "健身房",
+        "正面指导姿势"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "清洁工 × 酒店客房 × 正面工作姿势",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色和身份特征完全不变。人物设定为酒店清洁工作人员。穿着符合酒店服务行业的工作制服，上身采用深U领职业设计，下身搭配职业短裙。人物站在整洁酒店客房内，正面面对镜头，全身完整出镜，一手拿清洁工具，一手自然放置，保持自然工作状态。背景包含床铺、窗帘、清洁用品和酒店环境。",
+      "negative": "避免人物身份变化，避免脸型变化，避免环境错误，避免动作僵硬。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "清洁工",
+        "酒店客房",
+        "正面工作姿势"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "足疗师 × 足疗护理室 × 正面服务姿势",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型和整体气质完全一致。人物设定为专业足疗师，身材丰满。穿着护理职业服装，上身采用深U领或镂空领口设计，下身搭配修身短裙。人物站在现代足疗护理室内，正面面对镜头，全身完整出镜，一手拿护理用品，另一手自然放置，表情专业自然。背景包含护理椅、毛巾、灯光和整洁环境。",
+      "negative": "避免脸部变化，避免人物身份漂移，避免环境不真实。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "足疗师",
+        "足疗护理室",
+        "正面服务姿势"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_09",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "公司员工 × 办公室 × 正面职场姿势",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色和整体气质完全不变。人物设定为办公室员工，身材丰满。穿着现代职场服装，上身为深V领衬衫或领口镂空设计上衣，下身搭配包臀裙。人物站在办公区域，正面面对镜头，全身完整出镜，一手拿文件夹，另一手自然垂落。背景包含办公桌、电脑、玻璃隔断和办公室环境，呈现真实职场摄影。",
+      "negative": "避免改变人物身份，避免脸型漂移，避免办公环境错误。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "公司员工",
+        "办公室",
+        "正面职场姿势"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_10",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "写真模特 × 摄影棚 × 正面全身展示",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色、身体特征和整体气质完全不变。人物设定为专业写真模特，身材丰满，比例自然。穿着时尚写真服装，上身采用深V领、深U领或领口镂空设计，下身搭配短裙、吊带裙或修身裙。人物站在摄影棚中央，正面面对镜头，全身完整出镜，双手自然放置，表情自然。背景为专业摄影棚，柔和灯光突出真实人物质感。",
+      "negative": "避免重新生成模特，避免改变脸型，避免塑料皮肤，避免AI感。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "写真模特",
+        "摄影棚",
+        "正面全身展示"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_11",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "Coser × 漫展后台 × 正面角色展示",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色和身份特征完全不变。人物设定为专业Coser，身材丰满。根据角色设计更换服装，加入深V、深U或特殊领口设计元素，下身搭配短裙或角色裙装。人物站在漫展后台，正面面对镜头，全身完整出镜，一手拿角色道具，一手自然放置，保持角色展示姿态。背景包含化妆台、灯光设备和活动环境。",
+      "negative": "避免动漫脸替换，避免改变五官，避免角色服装错误。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "Coser",
+        "漫展后台",
+        "正面角色展示"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_career_12",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "职业 × 穿搭 × 场景 × 姿势",
+      "type": "prompt",
+      "title": "演员 × 影视片场 × 正面定妆姿势",
+      "positive": "以原图成年女性模特作为唯一人物参考，保持原人物脸型、五官、发型、肤色和整体气质完全不变。人物设定为影视演员，身材丰满。根据影视角色需求更换服装，上身采用深V领、深U领或设计感领口，下身搭配短裙、吊带裙或角色服饰。人物站在影视片场，正面面对镜头，全身完整出镜，一手拿剧本，一手自然垂落，保持自然定妆状态。背景包含摄影设备、灯光和影视布景，呈现电影级真实摄影效果。",
+      "negative": "避免改变脸型，避免五官变化，避免身份漂移，避免服装穿模，避免AI生成痕迹。",
+      "keywords": [
+        "常用 Prompt",
+        "职业 × 穿搭 × 场景 × 姿势",
+        "演员",
+        "影视片场",
+        "正面定妆姿势"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "整理头发",
+      "positive": "一只手轻轻整理耳侧头发，另一只手自然放置。头部微微偏向一侧，发丝随着动作产生自然变化。动作像日常生活中的随手行为，不刻意摆拍，保持真实摄影状态。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "整理头发"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "回眸动作",
+      "positive": "人物身体保持原方向，头部自然转向镜头，形成轻微角度变化。肩膀与身体产生自然层次，眼神与镜头交流，呈现被捕捉的自然瞬间。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "回眸动作"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "靠近镜头",
+      "positive": "人物身体自然向镜头方向靠近，保持放松姿态。眼神与镜头产生交流，动作自然不过度设计，形成近距离互动感和空间连接感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "靠近镜头"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "伸手互动",
+      "positive": "一只手自然伸向镜头方向，形成前景互动效果。手部动作轻松，不遮挡面部，增强画面的空间距离感和沉浸感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "伸手互动"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "坐姿放松",
+      "positive": "人物自然坐在椅子、沙发或床边，身体保持舒适放松状态。肩膀自然下沉，双手随意放置，呈现日常休息时的真实状态。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "坐姿放松"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "靠墙站姿",
+      "positive": "人物自然靠在墙边，一条腿轻微弯曲，身体重心自然变化。肩膀放松，一只手自然搭在墙面或身体侧面，整体姿态轻松自然。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "靠墙站姿"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "窗边站立",
+      "positive": "人物站在窗边，一只手轻扶窗框，另一只手自然垂落。身体略微侧向光源，让自然光形成柔和轮廓，呈现安静生活感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "窗边站立"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "桌边互动",
+      "positive": "人物站在桌边或坐在桌旁，一只手自然搭在桌面，另一只手保持放松状态。身体略微靠近桌面，形成真实生活空间关系。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "桌边互动"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_09",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "拨弄发尾",
+      "positive": "一只手轻轻拨弄发尾，动作缓慢自然。头部略微偏转，眼神从侧面转向镜头。发丝产生自然动态，增强轻盈和电影感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "拨弄发尾"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_10",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "轻触脸侧",
+      "positive": "一只手自然靠近脸侧或耳边，动作轻柔放松。人物保持自然表情，通过细微动作增强人物气质和情绪表达。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "轻触脸侧"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_11",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "低头整理物品",
+      "positive": "人物低头整理手中的物品或身边的小物件，动作自然连续。随后自然看向镜头，形成生活抓拍感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "低头整理物品"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_12",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "拿饮品动作",
+      "positive": "人物手持咖啡杯、饮料杯或其他生活物品，动作停留在自然瞬间。眼神从物品方向转向镜头，呈现轻松随性的生活氛围。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "拿饮品动作"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_13",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "阅读状态",
+      "positive": "人物自然坐着或趴靠阅读，双手与书本产生互动。阅读过程中偶然看向镜头，呈现安静、自然、有故事感的状态。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "阅读状态"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_14",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "轻微前倾",
+      "positive": "人物身体自然向前倾，保持放松姿态。手臂自然支撑或放置，增强空间层次和与镜头之间的距离感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "轻微前倾"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_15",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "靠椅休息",
+      "positive": "人物坐在椅子或沙发上，身体自然向后靠，呈现放松休息状态。动作舒适，不刻意摆拍，保持真实生活摄影感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "靠椅休息"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_16",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "回头抓拍",
+      "positive": "人物正在移动或进行日常动作时自然回头看向镜头。身体与头部形成轻微角度差，呈现动态抓拍效果。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "回头抓拍"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_17",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "行走状态",
+      "positive": "人物自然行走，步伐放松，衣物和发丝产生轻微动态。保持真实运动状态，避免摆拍感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "行走状态"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_18",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "调整衣物",
+      "positive": "人物自然整理衣服细节，例如调整袖口、衣角或肩部位置。动作像日常习惯行为，保持自然生活感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "调整衣物"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_19",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "闭眼感受光线",
+      "positive": "人物站在自然光环境中，轻轻闭眼感受光线，表情平静放松。随后自然睁眼看向镜头，形成柔和情绪表达。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "闭眼感受光线"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_action_20",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "模特动作与姿势",
+      "type": "prompt",
+      "title": "双手支撑",
+      "positive": "人物双手自然支撑在桌面、椅背或其他物体上，身体形成轻微前倾状态。保持姿态稳定，呈现自然互动感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "模特动作与姿势",
+        "双手支撑"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外整理发丝",
+      "positive": "采用第一人称视角，画面出现镜头外人物的一只手，轻轻帮模特整理耳侧发丝。模特自然回应，微微侧头，眼神看向镜头。动作轻柔自然，呈现熟悉关系中的温暖互动。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外整理发丝"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外牵手",
+      "positive": "采用第一人称视角，镜头外人物的一只手进入画面，与模特自然牵手。模特低头看向两人的手，然后抬头看向镜头，呈现陪伴和亲近感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外牵手"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外整理衣物",
+      "positive": "镜头外人物伸手轻轻整理模特衣物细节。动作自然、不刻意摆拍。模特保持放松状态，通过眼神和表情回应互动。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外整理衣物"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外轻扶肩膀",
+      "positive": "第一人称视角下，镜头外人物的一只手自然搭在模特肩侧。模特身体略微靠近镜头方向，表情放松，呈现被照顾的温暖感觉。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外轻扶肩膀"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外遮挡阳光",
+      "positive": "户外环境中，镜头外人物伸手挡在模特前方，为模特遮挡阳光。模特自然抬头看向镜头，形成保护感和亲密氛围。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外遮挡阳光"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外递物",
+      "positive": "镜头外人物伸手递给模特饮品、书籍或小物品。两人的手形成自然互动，模特接过物品并看向镜头，呈现共享日常瞬间的感觉。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外递物"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外邀请靠近",
+      "positive": "镜头外人物伸手邀请模特靠近镜头。模特自然靠近，保持轻松表情和眼神交流，增强空间互动感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外邀请靠近"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外共同自拍",
+      "positive": "模拟两人一起自拍的视角，镜头外人物的一只手调整手机角度或进入画面。模特靠近镜头，看向手机镜头，呈现真实记录感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外共同自拍"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_09",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外牵引同行",
+      "positive": "第一人称跟拍视角，镜头外人物伸手与模特产生互动，引导人物一起向前移动。模特自然回头看向镜头，呈现旅行或日常陪伴氛围。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外牵引同行"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_10",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外轻触手背",
+      "positive": "第一人称近距离视角，镜头外人物的手自然靠近模特手部，形成细腻互动。通过动作距离和眼神交流表达熟悉感。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外轻触手背"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_11",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外靠近观察",
+      "positive": "模拟两个人近距离相处的瞬间，镜头外人物进入空间范围，形成自然距离感。模特保持放松状态，与镜头产生情绪交流。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外靠近观察"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_interaction_12",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "镜头外互动",
+      "type": "prompt",
+      "title": "镜头外保护感",
+      "positive": "镜头外人物通过自然动作体现关心，例如挡光、递物、整理细节。模特保持自然回应，呈现温柔陪伴氛围。",
+      "negative": "",
+      "keywords": [
+        "常用 Prompt",
+        "镜头外互动",
+        "镜头外保护感"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    }
+  ]
 }

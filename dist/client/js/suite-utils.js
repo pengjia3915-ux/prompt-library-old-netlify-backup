@@ -97,7 +97,7 @@ export function normalizeBuilder(value) {
   };
 }
 
-const EDITABLE_STATIC_KINDS = new Set(["prompt", "component", "preset"]);
+const EDITABLE_STATIC_KINDS = new Set(["prompt", "component", "preset", "direct"]);
 
 export function normalizePromptEdit(value) {
   const source = value && typeof value === "object" ? value : {};
