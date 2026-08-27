@@ -27,7 +27,7 @@ import {
   removeBuilderComponent
 } from "./suite-utils.js";
 
-const APP_ASSET_VERSION = "2.6.7";
+const APP_ASSET_VERSION = "2.6.8";
 const PAGE_SIZE = 48;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
