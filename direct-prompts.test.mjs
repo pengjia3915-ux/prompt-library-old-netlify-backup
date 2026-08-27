@@ -8,7 +8,7 @@ const prototypeSource = await readFile(new URL("./js/prototype.js", import.meta.
 
 test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () => {
   const entries = bangyan.directPrompts;
-  assert.equal(entries.length, 44);
+  assert.equal(entries.length, 68);
   assert.deepEqual(
     Object.fromEntries([...new Set(entries.map((entry) => entry.subcategory))].map((group) => [
       group,
@@ -17,18 +17,24 @@ test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () 
     {
       "职业 × 穿搭 × 场景 × 姿势": 12,
       "模特动作与姿势": 20,
-      "镜头外互动": 12
+      "镜头外互动": 12,
+      "全身出镜": 24
     }
   );
-  assert.equal(new Set(entries.map((entry) => entry.id)).size, 44);
+  assert.equal(new Set(entries.map((entry) => entry.id)).size, 68);
   assert.ok(entries.every((entry) => entry.type === "prompt" && entry.combinable === false));
   const directIds = new Set(entries.map((entry) => entry.id));
   assert.ok(bangyan.presets.every((preset) => !Object.values(preset.slots || {}).some((id) => directIds.has(id))));
-  assert.equal(entries.filter((entry) => entry.negative).length, 12);
+  assert.equal(entries.filter((entry) => entry.negative).length, 36);
   assert.match(entries[0].positive, /专业按摩师/);
-  assert.match(entries.at(-1).positive, /温柔陪伴氛围/);
-  assert.equal(bangyan.counts.directPrompts, 44);
+  assert.match(entries.find((entry) => entry.id === "direct_interaction_12").positive, /温柔陪伴氛围/);
+  assert.equal(bangyan.counts.directPrompts, 68);
   assert.equal(bangyan.categories["姿势穿搭场景"].directPrompts, 44);
+  assert.equal(bangyan.categories["原图处理"].directPrompts, 24);
+  const fullbody = entries.filter((entry) => entry.category === "原图处理" && entry.subcategory === "全身出镜");
+  assert.equal(fullbody.length, 24);
+  assert.ok(fullbody.every((entry) => entry.id.startsWith("direct_fullbody_") && entry.keywords.includes("全身出镜")));
+  assert.ok(fullbody.every((entry) => !entry.positive.includes("反向提示词") && entry.negative.startsWith("避免")));
 });
 
 test("榜眼直接 Prompt 有独立模式和可编辑覆盖类型", () => {
