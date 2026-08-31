@@ -9,7 +9,8 @@ const category = "原图处理";
 const expectedCounts = new Map([
   ["纯-丝袜", 12],
   ["丝袜穿搭", 18],
-  ["性感凉爽穿搭", 20]
+  ["性感凉爽穿搭", 20],
+  ["穿搭丝袜-2", 20]
 ]);
 
 function parseSource(markdown) {
@@ -77,6 +78,7 @@ function idPrefixFor(group) {
   if (group === "纯-丝袜") return "direct_pure_socks";
   if (group === "丝袜穿搭") return "direct_stockings_outfit";
   if (group === "性感凉爽穿搭") return "direct_sexy_cool";
+  if (group === "穿搭丝袜-2") return "direct_stockings_outfit_2";
   throw new Error(`未配置的内容分组：${group}`);
 }
 
@@ -84,7 +86,7 @@ const markdown = await fs.readFile(sourcePath, "utf8");
 const parsed = parseSource(markdown);
 const actualCounts = new Map();
 for (const entry of parsed) actualCounts.set(entry.group, (actualCounts.get(entry.group) || 0) + 1);
-if (parsed.length !== 50) throw new Error(`三批 Prompt 总数应为 50，实际解析到 ${parsed.length}`);
+if (parsed.length !== 70) throw new Error(`四批 Prompt 总数应为 70，实际解析到 ${parsed.length}`);
 for (const [group, expected] of expectedCounts) {
   if (actualCounts.get(group) !== expected) throw new Error(`${group} 应为 ${expected} 条，实际解析到 ${actualCounts.get(group) || 0} 条`);
 }
@@ -176,5 +178,5 @@ const resultCounts = Object.fromEntries([...expectedCounts.keys()].map((group) =
   group,
   directPrompts.filter((entry) => entry.subcategory === group).length
 ]));
-console.log(`三批丝袜 Prompt 导入完成：新增 ${additions.length} 条，覆盖 ${replacements.size} 条，原样保留 ${unchanged.length} 条；总直接 Prompt ${directPrompts.length} 条。`);
+console.log(`四批丝袜 Prompt 导入完成：新增 ${additions.length} 条，覆盖 ${replacements.size} 条，原样保留 ${unchanged.length} 条；总直接 Prompt ${directPrompts.length} 条。`);
 console.log(JSON.stringify(resultCounts, null, 2));

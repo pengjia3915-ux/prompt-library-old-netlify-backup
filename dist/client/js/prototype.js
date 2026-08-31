@@ -4,7 +4,7 @@ import {
   isValidSyncCode,
   normalizeSyncCode,
   syncSuites
-} from "./sync.js?v=2.6.10";
+} from "./sync.js?v=2.6.11";
 import { readStorageBundle, writeStorageBundle } from "./storage.js";
 import {
   BANGYAN_SYNTHESIS_ORDER,
@@ -27,7 +27,7 @@ import {
   removeBuilderComponent
 } from "./suite-utils.js";
 
-const APP_ASSET_VERSION = "2.6.10";
+const APP_ASSET_VERSION = "2.6.11";
 const PAGE_SIZE = 48;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
