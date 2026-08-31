@@ -8,7 +8,7 @@ const prototypeSource = await readFile(new URL("./js/prototype.js", import.meta.
 
 test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () => {
   const entries = bangyan.directPrompts;
-  assert.equal(entries.length, 115);
+  assert.equal(entries.length, 165);
   assert.deepEqual(
     Object.fromEntries([...new Set(entries.map((entry) => entry.subcategory))].map((group) => [
       group,
@@ -22,19 +22,22 @@ test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () 
       "全身出镜 · 成年学院风制服": 8,
       "全身出镜 · 成年职业制服与职场": 9,
       "全身出镜 · 成人写真姿势": 10,
-      "全身出镜 · 第一视角互动": 9
+      "全身出镜 · 第一视角互动": 9,
+      "纯-丝袜": 12,
+      "丝袜穿搭": 18,
+      "性感凉爽穿搭": 20
     }
   );
-  assert.equal(new Set(entries.map((entry) => entry.id)).size, 115);
+  assert.equal(new Set(entries.map((entry) => entry.id)).size, 165);
   assert.ok(entries.every((entry) => entry.type === "prompt" && entry.combinable === false));
   const directIds = new Set(entries.map((entry) => entry.id));
   assert.ok(bangyan.presets.every((preset) => !Object.values(preset.slots || {}).some((id) => directIds.has(id))));
   assert.equal(entries.filter((entry) => entry.negative).length, 83);
   assert.match(entries[0].positive, /专业按摩师/);
   assert.match(entries.find((entry) => entry.id === "direct_interaction_12").positive, /温柔陪伴氛围/);
-  assert.equal(bangyan.counts.directPrompts, 115);
+  assert.equal(bangyan.counts.directPrompts, 165);
   assert.equal(bangyan.categories["姿势穿搭场景"].directPrompts, 44);
-  assert.equal(bangyan.categories["原图处理"].directPrompts, 71);
+  assert.equal(bangyan.categories["原图处理"].directPrompts, 121);
   const fullbody = entries.filter((entry) => entry.category === "原图处理" && entry.keywords.includes("全身出镜"));
   assert.equal(fullbody.length, 71);
   assert.ok(fullbody.every((entry) => entry.id.startsWith("direct_fullbody_") && entry.keywords.includes("全身出镜")));
@@ -61,6 +64,25 @@ test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () 
   assert.ok(imported.every((entry) => entry.combinable === false && entry.type === "prompt" && entry.subcategory.startsWith("全身出镜 · ")));
   assert.ok(imported.every((entry) => !/(乳沟|胸部|胸前饱满|高中生|大学生)/u.test(entry.positive)));
   assert.equal(imported.find((entry) => entry.title === "坐姿放松｜全身出镜")?.id, "direct_fullbody_pose_02");
+
+  const stockingBatches = entries.filter((entry) => /^direct_(pure_socks|stockings_outfit|sexy_cool)_/u.test(entry.id));
+  assert.equal(stockingBatches.length, 50);
+  assert.ok(stockingBatches.every((entry) => entry.category === "原图处理" && entry.type === "prompt" && entry.combinable === false));
+  assert.ok(stockingBatches.every((entry) => entry.negative === ""));
+  assert.deepEqual(
+    Object.fromEntries([...new Set(stockingBatches.map((entry) => entry.subcategory))].map((group) => [
+      group,
+      stockingBatches.filter((entry) => entry.subcategory === group).length
+    ])),
+    {
+      "纯-丝袜": 12,
+      "丝袜穿搭": 18,
+      "性感凉爽穿搭": 20
+    }
+  );
+  assert.equal(entries.find((entry) => entry.id === "direct_pure_socks_01").title, "膝上长筒袜｜学院轻熟");
+  assert.equal(entries.find((entry) => entry.id === "direct_stockings_outfit_01").title, "深V针织上衣 + 高腰短裙 + 黑色薄透长筒袜｜酒店轻熟写真");
+  assert.equal(entries.find((entry) => entry.id === "direct_sexy_cool_01").title, "清纯露背风");
 });
 
 test("榜眼直接 Prompt 有独立模式和可编辑覆盖类型", () => {
