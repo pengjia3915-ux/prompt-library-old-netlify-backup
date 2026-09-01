@@ -5,7 +5,7 @@
   "counts": {
     "components": 235,
     "presets": 24,
-    "directPrompts": 193
+    "directPrompts": 223
   },
   "categories": {
     "原图处理": {
@@ -19,7 +19,7 @@
     "姿势穿搭场景": {
       "components": 181,
       "presets": 12,
-      "directPrompts": 44
+      "directPrompts": 74
     }
   },
   "components": [
@@ -8585,6 +8585,546 @@
         "浴巾",
         "湿发",
         "自然互动"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "反坐椅背｜双臂搭靠回头",
+      "positive": "反坐椅子，双臂搭在椅背上，下巴轻放手臂，双腿自然向两侧打开，回头看镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "反坐椅背",
+        "双臂搭靠回头"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "沙发半躺｜屈腿伸展",
+      "positive": "半躺在沙发上，一条腿屈起，另一条腿自然伸展，身体懒散侧靠，带着轻松笑意。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "沙发半躺",
+        "屈腿伸展"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "地毯后撑｜双腿前展",
+      "positive": "坐在地毯上，双腿向前自然展开，身体微微后仰，双手撑地，抬头看向镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "地毯后撑",
+        "双腿前展"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "沙发单腿屈膝｜侧靠拨发",
+      "positive": "单腿屈膝坐在沙发上，另一条腿自然落下，身体侧靠扶手，手指轻轻拨弄头发。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "沙发单腿屈膝",
+        "侧靠拨发"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "跨坐椅子｜直视镜头",
+      "positive": "跨坐在椅子上，身体完全放松地靠着椅背，双腿自然分开，一手搭在椅背，直视镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "跨坐椅子",
+        "直视镜头"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "床中央后撑｜屈腿伸展",
+      "positive": "坐在床中央，一条腿屈起踩在床面，另一条腿自然伸展，身体向后撑，姿态慵懒随意。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "床中央后撑",
+        "屈腿伸展"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "沙发扶手坐姿｜玩味侧身",
+      "positive": "坐在沙发扶手上，双腿自然垂落并略微分开，身体侧向镜头，一手撑着沙发，露出玩味笑容。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "沙发扶手坐姿",
+        "玩味侧身"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "椅子后滑｜双腿前伸",
+      "positive": "坐在椅子上身体向后滑，双腿自然打开并向前伸展，双手随意搭在扶手上，呈现毫不拘束的姿态。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "椅子后滑",
+        "双腿前伸"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_09",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "床沿侧坐｜错腿回眸",
+      "positive": "坐在床沿，身体侧坐，双腿一前一后自然错开，一手撑床，一手轻撩头发，回眸看镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "床沿侧坐",
+        "错腿回眸"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_10",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "盘坐侧倾｜托脸眼神",
+      "positive": "盘坐后稍微向前伸展双腿，身体懒散地向一侧倾斜，一手托脸，眼神带着轻微挑逗感。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "盘坐侧倾",
+        "托脸眼神"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_11",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "沙发角落｜抱靠垫放松",
+      "positive": "坐在沙发角落，身体蜷靠在靠垫旁，双腿自然向外展开，一手抱住靠垫，另一手随意搭腿。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "沙发角落",
+        "抱靠垫放松"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_12",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "椅子前端｜不对称歪坐",
+      "positive": "坐在椅子前端，身体向一侧歪坐，一条腿屈起、另一条腿向前伸展，形成明显的不对称随性姿态。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "椅子前端",
+        "不对称歪坐"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_13",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "床边后撑｜整理头发抓拍",
+      "positive": "坐在床边，身体向后撑，双腿自然分开并向前伸，一边整理头发一边看向镜头，像被随手抓拍。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "床边后撑",
+        "整理头发抓拍"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_14",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "沙发懒坐｜一高一低",
+      "positive": "懒散地坐在沙发上，双腿一高一低自然摆放，身体歪向一侧，手臂随意搭在靠背，表情带着坏坏的笑意。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "沙发懒坐",
+        "一高一低"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_15",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "地板靠沙发｜双膝外展",
+      "positive": "坐在地板上靠着沙发，双膝自然弯曲并向两侧打开，双手向后撑地，身体放松，直视镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "地板靠沙发",
+        "双膝外展"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_16",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "厨房岛台｜持杯侧头",
+      "positive": "厨房岛台前随意坐着，双腿自然分开，一手撑在台面，另一手拿着杯子，侧头看向镜头，神态大方随性。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "厨房岛台",
+        "持杯侧头"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_17",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "阳台栏杆｜半倚回眸",
+      "positive": "阳台栏杆前半倚着，双腿自然交错，一只脚轻踩栏杆底部，身体放松，回头带着玩味笑容看镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "阳台栏杆",
+        "半倚回眸"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_18",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "落地窗地坐｜后撑拨发",
+      "positive": "落地窗前直接坐在地板上，双腿自然向两侧展开，身体后撑，一手拨弄头发，慵懒看向镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "落地窗地坐",
+        "后撑拨发"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_19",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "化妆台坐姿｜持口红回眸",
+      "positive": "化妆台前坐着，双腿自然分开，身体微微侧转，一手撑着桌沿，另一手拿着口红，回眸看镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "化妆台坐姿",
+        "持口红回眸"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_20",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "酒店吧台｜托脸侧靠",
+      "positive": "酒店吧台前坐着，身体侧靠台面，双腿自然打开，一手托着脸颊，另一手随意搭在腿上，神态轻松。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "酒店吧台",
+        "托脸侧靠"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_21",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "楼梯中段｜错腿抬眼",
+      "positive": "楼梯中段坐着，双腿自然错开，一条腿向下伸展，身体靠着扶手，低头整理头发后抬眼看镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "楼梯中段",
+        "错腿抬眼"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_22",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "汽车副驾驶｜放松侧头",
+      "positive": "汽车副驾驶座上放松坐着，双腿自然分开，一手搭在车门扶手，另一手拨弄头发，侧头看向镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "汽车副驾驶",
+        "放松侧头"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_23",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "书房地毯｜靠书架持书",
+      "positive": "书房地毯上坐着，双腿自然向两侧展开，背靠书架，手里随意拿着一本书，露出带点玩味的笑容。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "书房地毯",
+        "靠书架持书"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_24",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "酒店走廊墙边｜前伸直视",
+      "positive": "酒店走廊靠墙坐着，双腿自然分开并向前伸展，手臂随意搭在膝盖上，抬头直视镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "酒店走廊墙边",
+        "前伸直视"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_25",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "衣帽间矮柜｜整理头发",
+      "positive": "衣帽间中央坐在矮柜边缘，双腿自然打开，一手撑着柜面，另一手整理头发，表情轻松大胆。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "衣帽间矮柜",
+        "整理头发"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_26",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "咖啡馆窗边｜持杯抬眼",
+      "positive": "咖啡馆靠窗位置随意坐着，双腿自然分开，身体向一侧歪靠，一手拿咖啡杯，抬眼看向镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "咖啡馆窗边",
+        "持杯抬眼"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_27",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "工作室地面｜后仰撑地",
+      "positive": "工作室地面席地而坐，双腿自然打开，身体微微后仰，双手撑在身后，神态毫不拘束。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "工作室地面",
+        "后仰撑地"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_28",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "公寓玄关台阶｜屈腿回头",
+      "positive": "公寓玄关台阶上坐着，一条腿屈起、一条腿自然伸展，身体向侧面倾斜，回头看向镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "公寓玄关台阶",
+        "屈腿回头"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_29",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "浴室洗手台｜慵懒侧坐",
+      "positive": "浴室洗手台旁坐在台面边缘，双腿自然分开，一手撑着台面，另一手轻抚头发，神态慵懒自信。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "浴室洗手台",
+        "慵懒侧坐"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_bold_pose_30",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "大大咧咧",
+      "type": "prompt",
+      "title": "露台躺椅旁｜遮阳微笑",
+      "positive": "露台躺椅旁坐在地面上，双腿随意伸展并自然分开，身体靠着躺椅，一手遮挡阳光，笑着看向镜头。",
+      "negative": "",
+      "keywords": [
+        "大大咧咧",
+        "露台躺椅旁",
+        "遮阳微笑"
       ],
       "combinable": false,
       "enabled": true,
