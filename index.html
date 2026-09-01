@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#F2F4F5" />
     <meta name="description" content="专为 img2img 设计的极简个人 Prompt 卡片库" />
-    <link rel="manifest" href="manifest.json?v=2.6.13" />
+    <link rel="manifest" href="manifest.json?v=2.7.0" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
     <script>
       try {
@@ -15,7 +15,7 @@
         }
       } catch {}
     </script>
-    <link rel="stylesheet" href="css/prototype.css?v=2.6.13" />
+    <link rel="stylesheet" href="css/prototype.css?v=2.7.0" />
     <title>Img2Img Prompt 库</title>
   </head>
   <body>
@@ -50,37 +50,46 @@
         </button>
       </nav>
 
-      <main>
-        <nav id="category-tabs" class="category-tabs" aria-label="Prompt 一级分类"></nav>
-        <nav id="mode-tabs" class="mode-tabs" aria-label="榜眼模式" hidden></nav>
-        <nav id="subcategory-tabs" class="subcategory-tabs" aria-label="单项库子分类" hidden></nav>
+      <div class="workspace-layout">
+        <aside class="workspace-sidebar" aria-label="内容导航">
+          <p class="workspace-sidebar-label">内容分类</p>
+          <nav id="category-tabs" class="category-tabs" aria-label="Prompt 一级分类"></nav>
+          <div class="workspace-sidebar-rule"></div>
+          <p class="workspace-sidebar-label">使用说明</p>
+          <p class="workspace-sidebar-note">先选版本与分类，再选择当前内容模式。长 Prompt 在详情中查看。</p>
+        </aside>
 
-        <section class="search-row" aria-label="搜索">
-          <label class="search-control" for="search-input">
-            <span aria-hidden="true">⌕</span>
-            <input id="search-input" type="search" autocomplete="off" placeholder="搜索标题、分类、关键词或 Prompt" />
-            <button id="clear-search" type="button" aria-label="清空搜索">清除</button>
-          </label>
-        </section>
+        <main class="workspace-main">
+          <section class="category-heading" aria-live="polite">
+            <div>
+              <p id="category-eyebrow" class="eyebrow">当前栏目</p>
+              <h2 id="category-title">原图处理</h2>
+              <p id="category-description"></p>
+            </div>
+            <span id="category-count" class="count-badge">0 条</span>
+          </section>
 
-        <section class="category-heading" aria-live="polite">
-          <div>
-            <p id="category-eyebrow" class="eyebrow">当前栏目</p>
-            <h2 id="category-title">原图处理</h2>
-            <p id="category-description"></p>
-          </div>
-          <span id="category-count" class="count-badge">0 条</span>
-        </section>
+          <nav id="mode-tabs" class="mode-tabs" aria-label="当前分类模式" hidden></nav>
+          <nav id="subcategory-tabs" class="subcategory-tabs" aria-label="单项库子分类" hidden></nav>
 
-        <div id="prompt-sections" class="prompt-sections"></div>
+          <section class="search-row" aria-label="搜索">
+            <label class="search-control" for="search-input">
+              <span aria-hidden="true">⌕</span>
+              <input id="search-input" type="search" autocomplete="off" placeholder="搜索标题、分类、关键词或 Prompt" />
+              <button id="clear-search" type="button" aria-label="清空搜索">清除</button>
+            </label>
+          </section>
 
-        <section id="recent-panel" class="recent-panel" hidden>
-          <div class="section-title-row"><h3>最近复制</h3><button class="text-action" type="button" data-action="clear-recent">清空</button></div>
-          <div id="recent-list" class="recent-list"></div>
-        </section>
+          <div id="prompt-sections" class="prompt-sections"></div>
 
-        <footer class="prototype-footer">个人 Prompt 库 · 数据默认保存在当前设备</footer>
-      </main>
+          <section id="recent-panel" class="recent-panel" hidden>
+            <div class="section-title-row"><h3>最近复制</h3><button class="text-action" type="button" data-action="clear-recent">清空</button></div>
+            <div id="recent-list" class="recent-list"></div>
+          </section>
+
+          <footer class="prototype-footer">个人 Prompt 库 · 数据默认保存在当前设备</footer>
+        </main>
+      </div>
     </div>
 
     <dialog id="prompt-dialog" class="sheet-dialog">
@@ -202,6 +211,6 @@
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script type="module" src="js/prototype.js?v=2.6.13"></script>
+    <script type="module" src="js/prototype.js?v=2.7.0"></script>
   </body>
 </html>

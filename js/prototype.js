@@ -4,7 +4,7 @@ import {
   isValidSyncCode,
   normalizeSyncCode,
   syncSuites
-} from "./sync.js?v=2.6.13";
+} from "./sync.js?v=2.7.0";
 import { readStorageBundle, writeStorageBundle } from "./storage.js";
 import {
   BANGYAN_SYNTHESIS_ORDER,
@@ -27,7 +27,7 @@ import {
   removeBuilderComponent
 } from "./suite-utils.js";
 
-const APP_ASSET_VERSION = "2.6.13";
+const APP_ASSET_VERSION = "2.7.0";
 const PAGE_SIZE = 48;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
@@ -582,6 +582,10 @@ function modeCount(mode, categoryId) {
   return bangyanComponents().filter((entry) => entry.category === categoryId).length;
 }
 
+function availableBangyanModes(categoryId) {
+  return BANGYAN_MODES.filter((mode) => mode.id === "builder" || modeCount(mode.id, categoryId) > 0);
+}
+
 function renderModeTabs() {
   const container = $("#mode-tabs");
   if (app.activeSuite !== "bangyan") {
@@ -590,8 +594,10 @@ function renderModeTabs() {
     return;
   }
   const state = app.states.bangyan;
+  const modes = availableBangyanModes(state.activeCategoryId);
+  if (!modes.some((mode) => mode.id === state.activeMode)) state.activeMode = modes[0]?.id || "components";
   container.hidden = false;
-  container.innerHTML = BANGYAN_MODES.map((mode) => `
+  container.innerHTML = modes.map((mode) => `
     <button class="mode-button ${state.activeMode === mode.id ? "is-active" : ""}" type="button" data-action="change-mode" data-mode="${mode.id}" aria-pressed="${state.activeMode === mode.id}">
       ${escapeHtml(mode.label)}
     </button>
@@ -1440,6 +1446,10 @@ document.addEventListener("click", async (event) => {
     currentState().activeCategoryId = id;
     app.subcategoryFilter = "全部";
     app.visibleLimit = PAGE_SIZE;
+    if (app.activeSuite === "bangyan") {
+      const modes = availableBangyanModes(id);
+      if (!modes.some((mode) => mode.id === currentState().activeMode)) currentState().activeMode = modes[0]?.id || "components";
+    }
     await persist();
     render();
   } else if (action === "change-mode") {
