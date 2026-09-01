@@ -8,7 +8,7 @@ const prototypeSource = await readFile(new URL("./js/prototype.js", import.meta.
 
 test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () => {
   const entries = bangyan.directPrompts;
-  assert.equal(entries.length, 185);
+  assert.equal(entries.length, 193);
   assert.deepEqual(
     Object.fromEntries([...new Set(entries.map((entry) => entry.subcategory))].map((group) => [
       group,
@@ -26,19 +26,20 @@ test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () 
       "纯-丝袜": 12,
       "丝袜穿搭": 18,
       "性感凉爽穿搭": 20,
-      "穿搭丝袜-2": 20
+      "穿搭丝袜-2": 20,
+      "浴巾浴袍": 8
     }
   );
-  assert.equal(new Set(entries.map((entry) => entry.id)).size, 185);
+  assert.equal(new Set(entries.map((entry) => entry.id)).size, 193);
   assert.ok(entries.every((entry) => entry.type === "prompt" && entry.combinable === false));
   const directIds = new Set(entries.map((entry) => entry.id));
   assert.ok(bangyan.presets.every((preset) => !Object.values(preset.slots || {}).some((id) => directIds.has(id))));
   assert.equal(entries.filter((entry) => entry.negative).length, 83);
   assert.match(entries[0].positive, /专业按摩师/);
   assert.match(entries.find((entry) => entry.id === "direct_interaction_12").positive, /温柔陪伴氛围/);
-  assert.equal(bangyan.counts.directPrompts, 185);
+  assert.equal(bangyan.counts.directPrompts, 193);
   assert.equal(bangyan.categories["姿势穿搭场景"].directPrompts, 44);
-  assert.equal(bangyan.categories["原图处理"].directPrompts, 141);
+  assert.equal(bangyan.categories["原图处理"].directPrompts, 149);
   const fullbody = entries.filter((entry) => entry.category === "原图处理" && entry.keywords.includes("全身出镜"));
   assert.equal(fullbody.length, 71);
   assert.ok(fullbody.every((entry) => entry.id.startsWith("direct_fullbody_") && entry.keywords.includes("全身出镜")));
@@ -86,6 +87,13 @@ test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () 
   assert.equal(entries.find((entry) => entry.id === "direct_stockings_outfit_01").title, "深V针织上衣 + 高腰短裙 + 黑色薄透长筒袜｜酒店轻熟写真");
   assert.equal(entries.find((entry) => entry.id === "direct_sexy_cool_01").title, "清纯露背风");
   assert.equal(entries.find((entry) => entry.id === "direct_stockings_outfit_2_01").title, "深V挂脖连体衣 + 蕾丝吊带袜（侧开衩长裤）");
+
+  const bathrobeEntries = entries.filter((entry) => /^direct_bathrobe_/u.test(entry.id));
+  assert.equal(bathrobeEntries.length, 8);
+  assert.ok(bathrobeEntries.every((entry) => entry.category === "原图处理" && entry.subcategory === "浴巾浴袍"));
+  assert.ok(bathrobeEntries.every((entry) => entry.type === "prompt" && entry.combinable === false && entry.negative === ""));
+  assert.equal(bathrobeEntries[0].title, "酒店浴室｜浴袍 + 镜前整理头发");
+  assert.equal(bathrobeEntries[7].title, "浴室门口｜浴巾 + 湿发 + 自然互动");
 });
 
 test("榜眼直接 Prompt 有独立模式和可编辑覆盖类型", () => {
