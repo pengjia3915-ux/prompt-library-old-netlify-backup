@@ -4,7 +4,7 @@ import {
   isValidSyncCode,
   normalizeSyncCode,
   syncSuites
-} from "./sync.js?v=2.7.1";
+} from "./sync.js?v=2.8.1";
 import { readStorageBundle, writeStorageBundle } from "./storage.js";
 import {
   BANGYAN_SYNTHESIS_ORDER,
@@ -27,7 +27,7 @@ import {
   removeBuilderComponent
 } from "./suite-utils.js";
 
-const APP_ASSET_VERSION = "2.7.1";
+const APP_ASSET_VERSION = "2.8.1";
 const PAGE_SIZE = 48;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
@@ -131,6 +131,7 @@ const app = {
   states: { zhuangyuan: null, bangyan: null },
   meta: { schemaVersion: 2, migrationVersion: 0, activeSuite: "zhuangyuan", syncCode: "", lastSyncedAt: "" },
   activeSuite: "zhuangyuan",
+  workspaceView: "library",
   subcategoryFilter: "全部",
   searchQuery: "",
   visibleLimit: PAGE_SIZE,
@@ -568,6 +569,18 @@ function applyTheme(theme, { save = false } = {}) {
   });
 }
 
+function renderWorkspaceNav() {
+  document.documentElement.dataset.workspace = app.workspaceView;
+  document.querySelectorAll("[data-workspace-view]").forEach((button) => {
+    const active = button.dataset.workspaceView === app.workspaceView;
+    button.classList.toggle("is-active", active);
+    if (button.closest("nav")?.classList.contains("workspace-nav")) {
+      if (active) button.setAttribute("aria-current", "page");
+      else button.removeAttribute("aria-current");
+    }
+  });
+}
+
 function renderSuiteTabs() {
   document.querySelectorAll("[data-suite-tab]").forEach((button) => {
     const active = button.dataset.suiteTab === app.activeSuite;
@@ -588,18 +601,21 @@ function availableBangyanModes(categoryId) {
 
 function renderModeTabs() {
   const container = $("#mode-tabs");
-  if (app.activeSuite !== "bangyan") {
+  const navigation = $("#mode-navigation");
+  if (app.activeSuite !== "bangyan" || app.workspaceView !== "library") {
     container.hidden = true;
     container.innerHTML = "";
+    if (navigation) navigation.hidden = true;
     return;
   }
+  if (navigation) navigation.hidden = false;
   const state = app.states.bangyan;
   const modes = availableBangyanModes(state.activeCategoryId);
   if (!modes.some((mode) => mode.id === state.activeMode)) state.activeMode = modes[0]?.id || "components";
   container.hidden = false;
   container.innerHTML = modes.map((mode) => `
     <button class="mode-button ${state.activeMode === mode.id ? "is-active" : ""}" type="button" data-action="change-mode" data-mode="${mode.id}" aria-pressed="${state.activeMode === mode.id}">
-      ${escapeHtml(mode.label)}
+      <span>${escapeHtml(mode.label)}</span><small>${mode.id === "builder" ? "7 个 slot" : `${modeCount(mode.id, state.activeCategoryId)} 条`}</small>
     </button>
   `).join("");
 }
@@ -614,7 +630,7 @@ function renderSubcategoryTabs() {
   const container = $("#subcategory-tabs");
   if (!container) return;
   const options = BANGYAN_SUBCATEGORIES[app.states.bangyan?.activeCategoryId] || [];
-  const visible = app.activeSuite === "bangyan" && app.states.bangyan?.activeMode === "components" && options.length > 1;
+  const visible = app.activeSuite === "bangyan" && app.workspaceView === "library" && app.states.bangyan?.activeMode === "components" && options.length > 1;
   container.hidden = !visible;
   if (!visible) {
     container.innerHTML = "";
@@ -632,10 +648,21 @@ function renderSubcategoryTabs() {
 function renderCategoryTabs() {
   const state = currentState();
   const categories = categoryList();
+  const navigation = $("#category-navigation");
+  const visible = app.workspaceView !== "mine";
+  if (navigation) navigation.hidden = !visible;
+  if (!visible) {
+    $("#category-tabs").innerHTML = "";
+    return;
+  }
   $("#category-tabs").innerHTML = categories
     .sort((left, right) => Number(left.order || 0) - Number(right.order || 0))
     .map((category) => {
-      const count = app.activeSuite === "bangyan" ? modeCount(app.states.bangyan.activeMode, category.id) : zhuangyuanEntries().filter((entry) => effectiveEntry("prompt", entry).categoryId === category.id).length;
+      const count = app.activeSuite === "bangyan"
+        ? app.workspaceView === "builder"
+          ? (BUILDER_SLOT_GROUPS[category.id]?.length || 0)
+          : modeCount(app.states.bangyan.activeMode, category.id)
+        : zhuangyuanEntries().filter((entry) => effectiveEntry("prompt", entry).categoryId === category.id).length;
       return `
         <button class="tab-button ${category.id === state.activeCategoryId ? "is-active" : ""}" type="button" data-action="change-category" data-id="${escapeHtml(category.id)}">
           <span>${escapeHtml(category.shortName || category.name)}</span><small>${count}</small>
@@ -650,6 +677,23 @@ function renderHeading() {
   const categoryId = category?.id || "";
   let count = 0;
   let description = category?.description || "";
+  if (app.workspaceView === "mine") {
+    count = favoriteEntriesForSuite().length;
+    $("#category-eyebrow").textContent = `${app.activeSuite === "bangyan" ? "榜眼" : "状元"} · 我的内容`;
+    $("#category-title").textContent = "我的内容";
+    $("#category-description").textContent = "收藏、最近复制和自定义内容只显示当前套系，和另一套数据彼此独立。";
+    $("#category-count").textContent = `${count} 项收藏`;
+    return;
+  }
+  if (app.workspaceView === "builder") {
+    count = BUILDER_SLOT_GROUPS[categoryId]?.length || 0;
+    description = "按 slot 选择组件，组合结果会在右侧实时生成；不设置主观禁配。";
+    $("#category-eyebrow").textContent = "榜眼 · 工作台";
+    $("#category-title").textContent = "自由拼装";
+    $("#category-description").textContent = description;
+    $("#category-count").textContent = `${count} 个 slot`;
+    return;
+  }
   if (app.activeSuite === "bangyan") {
     count = modeCount(state.activeMode, categoryId);
     if (state.activeMode === "builder") description = "选择组件加入拼装区；同一个 slot 的新选择会替换旧选择，不设置主观禁配。";
@@ -663,7 +707,7 @@ function renderHeading() {
   $("#category-count").textContent = `${count} 条`;
 }
 
-function renderEntryCard(kind, entry) {
+function renderEntryCard(kind, entry, index = 0) {
   const display = displayFor(kind, entry);
   const view = effectiveEntry(kind, entry);
   const favorite = isFavorite(kind, entry.id);
@@ -680,15 +724,23 @@ function renderEntryCard(kind, entry) {
   const builderLabel = inlineBuilder ? "继续调整" : "加入拼装";
   const favoriteAction = kind === "composition" ? "delete-composition" : "toggle-favorite";
   return `
-    <article class="prompt-card ${pinned ? "is-pinned" : ""}" data-entry-kind="${kind}" data-entry-id="${id}">
-      <div class="card-topline">
-        <div class="card-title-block">
-          <h3><button class="entry-title" type="button" data-action="open-detail" data-kind="${kind}" data-id="${id}">${escapeHtml(display.title)}</button></h3>
-          <span>${escapeHtml(categoryName)} · ${escapeHtml(subcategory)}${pinned ? " · 已置顶" : ""}${favorite ? " · 已收藏" : ""}${edited ? " · 已编辑" : ""}</span>
+    <article class="prompt-card prompt-row ${pinned ? "is-pinned" : ""}" data-entry-kind="${kind}" data-entry-id="${id}">
+      <div class="entry-index" aria-hidden="true">${String(index + 1).padStart(2, "0")}</div>
+      <div class="prompt-row-main">
+        <div class="card-topline">
+          <div class="card-title-block">
+            <span class="entry-kicker">${escapeHtml(categoryName)} · ${escapeHtml(subcategory)}</span>
+            <h3><button class="entry-title" type="button" data-action="open-detail" data-kind="${kind}" data-id="${id}">${escapeHtml(display.title)}</button></h3>
+            <p class="card-preview">${escapeHtml(entrySummary(kind, view, display))}</p>
+          </div>
+          <button class="favorite-button ${favorite ? "is-active" : ""}" type="button" data-action="${favoriteAction}" data-kind="${kind}" data-id="${id}" aria-label="${favorite ? "取消收藏" : "收藏"}">${favorite ? "★" : "☆"}</button>
         </div>
-        <button class="favorite-button ${favorite ? "is-active" : ""}" type="button" data-action="${favoriteAction}" data-kind="${kind}" data-id="${id}" aria-label="${favorite ? "取消收藏" : "收藏"}">${favorite ? "★" : "☆"}</button>
       </div>
-      <p class="card-preview">${escapeHtml(entrySummary(kind, view, display))}</p>
+      <div class="card-state">
+        ${pinned ? `<span>已置顶</span>` : ""}
+        ${favorite ? `<span>已收藏</span>` : ""}
+        ${edited ? `<span>已编辑</span>` : ""}
+      </div>
       <div class="card-actions">
         ${copyable ? `<button class="text-action is-copy" type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="all">复制</button>` : `<span class="text-action is-muted" title="该项仅用于辨认">仅供辨认</span>`}
         ${inlineBuilder ? `<button class="text-action" type="button" data-action="add-to-builder" data-kind="${kind}" data-id="${id}">${builderLabel}</button>` : ""}
@@ -723,7 +775,7 @@ function renderList(title, items, { collapsible = false, sectionKey = "" } = {})
           ${collapsible ? `<button class="section-toggle" type="button" data-action="toggle-section" data-section-key="${escapeHtml(sectionKey)}" aria-expanded="${!collapsed}">${collapsed ? "展开" : "收起"}</button>` : ""}
         </div>
       </div>
-      ${collapsed ? "" : `<div class="prompt-list">${visible.map(({ kind, entry }) => renderEntryCard(kind, entry)).join("")}</div>
+      ${collapsed ? "" : `<div class="prompt-list">${visible.map(({ kind, entry }, index) => renderEntryCard(kind, entry, index)).join("")}</div>
       ${visible.length < items.length ? `<div class="empty-state compact-load-more"><p>已显示 ${visible.length} / ${items.length} 条</p><button class="primary-button" type="button" data-action="load-more">继续加载</button></div>` : ""}`}
     </section>
   `;
@@ -765,6 +817,90 @@ function renderDirectPrompts() {
     collapsible: true,
     sectionKey: `direct:${title}`
   })).join("");
+}
+
+function favoriteEntriesForSuite() {
+  if (app.activeSuite === "zhuangyuan") {
+    return sortEntries(zhuangyuanEntries()
+      .filter((entry) => isFavorite("prompt", entry.id))
+      .map((entry) => ({ kind: "prompt", entry })));
+  }
+  const items = [
+    ...bangyanComponents().map((entry) => ({ kind: "component", entry })),
+    ...bangyanPresets().map((entry) => ({ kind: "preset", entry })),
+    ...bangyanDirectEntries(),
+    ...bangyanCustomPrompts()
+      .filter((entry) => entry.kind !== "direct")
+      .map((entry) => ({ kind: "custom", entry })),
+    ...savedCompositionEntries().map((entry) => ({ kind: "composition", entry }))
+  ];
+  return sortEntries(items.filter(({ kind, entry }) => isFavorite(kind, entry.id)));
+}
+
+function mineCustomEntries() {
+  if (app.activeSuite === "zhuangyuan") {
+    const defaultIds = new Set(app.defaults.zhuangyuan?.prompts?.map((entry) => entry.id) || []);
+    return sortEntries(zhuangyuanEntries()
+      .filter((entry) => !defaultIds.has(entry.id))
+      .map((entry) => ({ kind: "prompt", entry })));
+  }
+  return sortEntries(bangyanCustomPrompts().map((entry) => ({ kind: "custom", entry })));
+}
+
+function recentEntriesForDisplay() {
+  return (currentState()?.recent || [])
+    .filter((entry) => searchMatches({ id: entry.id, title: entry.title, positive: entry.content }, app.searchQuery))
+    .slice(0, 20);
+}
+
+function renderRecentSection() {
+  const recent = recentEntriesForDisplay();
+  return `
+    <section class="recent-panel mine-recent-panel">
+      <div class="section-title-row"><h3>最近复制</h3><button class="text-action" type="button" data-action="clear-recent">清空</button></div>
+      ${recent.length ? `<div class="recent-list">${recent.map((entry) => `
+        <button class="recent-item" type="button" data-action="copy-recent" data-id="${escapeHtml(entry.id)}">
+          <span><strong>${escapeHtml(entry.title)}</strong><small>${escapeHtml(new Date(entry.copiedAt).toLocaleString("zh-CN"))}</small></span><b>复制</b>
+        </button>
+      `).join("")}</div>` : `<div class="mine-empty-inline"><strong>${app.searchQuery ? "没有匹配的复制记录" : "还没有复制记录"}</strong><span>${app.searchQuery ? "换一个关键词，或清空搜索条件。" : "复制 Prompt 后，最近使用的内容会出现在这里。"}</span></div>`}
+    </section>
+  `;
+}
+
+function renderMyWorkspace() {
+  const suiteLabel = app.activeSuite === "bangyan" ? "榜眼" : "状元";
+  const favorites = favoriteEntriesForSuite().filter(({ kind, entry }) => searchEntry(kind, entry));
+  const custom = mineCustomEntries().filter(({ kind, entry }) => searchEntry(kind, entry));
+  const compositions = app.activeSuite === "bangyan"
+    ? sortEntries(savedCompositionEntries().map((entry) => ({ kind: "composition", entry }))).filter(({ kind, entry }) => searchEntry(kind, entry))
+    : [];
+  const favoriteBlock = favorites.length
+    ? renderList("收藏内容", favorites)
+    : `<section class="mine-empty-card"><span class="mine-empty-index">01</span><div><h3>${app.searchQuery ? "没有匹配的收藏" : "还没有收藏"}</h3><p>${app.searchQuery ? "换一个关键词，或清空搜索条件。" : "在浏览库中点亮星标，常用 Prompt 会集中到这里。"}</p><button class="quiet-button" type="button" data-action="change-workspace" data-workspace-view="library">去浏览库</button></div></section>`;
+  const customBlock = custom.length
+    ? renderList("自定义内容", custom)
+    : `<section class="mine-empty-card"><span class="mine-empty-index">02</span><div><h3>${app.searchQuery ? "没有匹配的自定义内容" : "还没有自定义内容"}</h3><p>${app.searchQuery ? "换一个关键词，或清空搜索条件。" : "使用右上角“新增”创建只属于当前套系的 Prompt。"}</p></div></section>`;
+  const compositionBlock = app.activeSuite === "bangyan"
+    ? compositions.length
+      ? renderList("已保存组合", compositions)
+      : `<section class="mine-empty-card"><span class="mine-empty-index">03</span><div><h3>${app.searchQuery ? "没有匹配的保存组合" : "还没有保存组合"}</h3><p>${app.searchQuery ? "换一个关键词，或清空搜索条件。" : "在自由拼装工作区生成结果后，可以将组合保存到这里。"}</p></div></section>`
+    : "";
+  return `
+    <section class="my-workspace">
+      <div class="my-workspace-intro">
+        <div><p class="eyebrow">${suiteLabel} · PERSONAL DESK</p><h3>把常用内容放在手边</h3><p>这是当前套系的个人工作区。收藏、最近复制和自定义内容不会与另一套数据混在一起。</p></div>
+        <div class="mine-stat-grid">
+          <div><strong>${favoriteEntriesForSuite().length}</strong><span>收藏</span></div>
+          <div><strong>${currentState()?.recent?.length || 0}</strong><span>最近复制</span></div>
+          <div><strong>${mineCustomEntries().length + (app.activeSuite === "bangyan" ? savedCompositionEntries().length : 0)}</strong><span>我的内容</span></div>
+        </div>
+      </div>
+      <div class="mine-workspace-grid">
+        <div class="mine-primary-column">${favoriteBlock}</div>
+        <div class="mine-secondary-column">${renderRecentSection()}${customBlock}${compositionBlock}</div>
+      </div>
+    </section>
+  `;
 }
 
 function builderColorMode(builder) {
@@ -936,27 +1072,46 @@ function renderBuilder() {
     ? selected.map((component) => `<button class="builder-chip" type="button" data-action="remove-builder" data-id="${escapeHtml(component.id)}">${escapeHtml(component.title)} ×</button>`).join("")
     : `<span class="builder-empty">还没有选择组件。可以自由搭配，不设主观禁配。</span>`;
   return `
-    <section class="builder-panel">
-      <div class="builder-heading"><div><p class="eyebrow">自由组合</p><h3>${escapeHtml(result.title)}</h3></div><button class="quiet-button" type="button" data-action="reset-builder">重置</button></div>
-      <div class="builder-chips">${chips}</div>
-      <div class="builder-result">
-        <div class="prompt-block"><strong>正向 Prompt</strong><p>${escapeHtml(result.positive || "选择组件后生成稳定组合文本。")}</p></div>
-        ${result.negative ? `<div class="prompt-block is-negative"><strong>反向提示词</strong><p>${escapeHtml(result.negative)}</p></div>` : ""}
-        <div class="dialog-actions builder-actions">
-         <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="positive" ${result.positive ? "" : "disabled"}>复制正向</button>
-         <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="negative" ${result.negative ? "" : "disabled"}>复制反向</button>
-          <button class="quiet-button" type="button" data-action="save-builder-composition" ${result.positive ? "" : "disabled"}>收藏组合</button>
-         <button class="primary-button" type="button" data-action="copy-builder" data-copy-type="all" ${result.positive ? "" : "disabled"}>复制全部</button>
-        </div>
+    <section class="builder-workspace">
+      <header class="builder-workspace-head">
+        <div><p class="eyebrow">02 / 榜眼工作台</p><h3>自由拼装</h3><p>先选内容分类，再按 slot 组合。选择会实时反映到右侧 Prompt。</p></div>
+        <div class="builder-live-state"><span class="status-dot"></span><strong>${selected.length ? `${selected.length} 个组件已就绪` : "等待选择组件"}</strong><button class="quiet-button" type="button" data-action="reset-builder">重置</button></div>
+      </header>
+      <div class="builder-workspace-grid">
+        <section class="builder-selection-panel">
+          <div class="builder-panel-label"><span>01</span><div><strong>选择组件</strong><small>同一 slot 的新选择会替换旧选择</small></div></div>
+          <div class="builder-chips">${chips}</div>
+          ${renderBuilderPicker(state.activeCategoryId, components, builder)}
+        </section>
+        <section class="builder-output-panel">
+          <div class="builder-panel-label"><span>02</span><div><strong>实时结果</strong><small>${escapeHtml(result.title)}</small></div></div>
+          <div class="builder-result">
+            <div class="prompt-block"><strong>正向 Prompt</strong><p>${escapeHtml(result.positive || "选择组件后生成稳定组合文本。")}</p></div>
+            ${result.negative ? `<div class="prompt-block is-negative"><strong>反向提示词</strong><p>${escapeHtml(result.negative)}</p></div>` : ""}
+            <div class="dialog-actions builder-actions">
+              <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="positive" ${result.positive ? "" : "disabled"}>复制正向</button>
+              <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="negative" ${result.negative ? "" : "disabled"}>复制反向</button>
+              <button class="quiet-button" type="button" data-action="save-builder-composition" ${result.positive ? "" : "disabled"}>收藏组合</button>
+              <button class="primary-button" type="button" data-action="copy-builder" data-copy-type="all" ${result.positive ? "" : "disabled"}>复制全部</button>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
-    ${renderBuilderPicker(state.activeCategoryId, components, builder)}
   `;
 }
 
 function renderContent() {
   const state = currentState();
   let content = "";
+  if (app.workspaceView === "mine") {
+    $("#prompt-sections").innerHTML = renderMyWorkspace();
+    return;
+  }
+  if (app.workspaceView === "builder") {
+    $("#prompt-sections").innerHTML = renderBuilder();
+    return;
+  }
   if (app.activeSuite === "zhuangyuan") {
     const items = sortEntries(zhuangyuanEntries()
       .filter((entry) => effectiveEntry("prompt", entry).categoryId === state.activeCategoryId)
@@ -987,6 +1142,11 @@ function renderContent() {
 function renderRecent() {
   const panel = $("#recent-panel");
   const list = $("#recent-list");
+  if (app.workspaceView === "mine") {
+    panel.hidden = true;
+    list.innerHTML = "";
+    return;
+  }
   const recent = (currentState()?.recent || []).slice(0, 20);
   panel.hidden = !recent.length;
   list.innerHTML = recent.map((entry) => `
@@ -996,13 +1156,31 @@ function renderRecent() {
   `).join("");
 }
 
+function renderSearchContext() {
+  const input = $("#search-input");
+  const label = $(".search-row-label strong");
+  if (!input || !label) return;
+  if (app.workspaceView === "builder") {
+    input.placeholder = "筛选自由拼装可选组件";
+    label.textContent = "筛选组件";
+  } else if (app.workspaceView === "mine") {
+    input.placeholder = "搜索收藏、最近复制或自定义内容";
+    label.textContent = "搜索我的内容";
+  } else {
+    input.placeholder = "搜索标题、分类、关键词或 Prompt";
+    label.textContent = "搜索内容";
+  }
+}
+
 function render() {
+  renderWorkspaceNav();
   renderSuiteTabs();
   renderCategoryTabs();
   renderModeTabs();
   renderAddPromptButton();
   renderSubcategoryTabs();
   renderHeading();
+  renderSearchContext();
   renderContent();
   renderRecent();
   const search = $("#search-input");
@@ -1258,6 +1436,7 @@ async function addToBuilder(kind, id) {
   markBuilderUpdated();
   if (kind === "composition" && entry.categoryId) app.states.bangyan.activeCategoryId = entry.categoryId;
   app.states.bangyan.activeMode = "builder";
+  app.workspaceView = "builder";
   await persist();
   $("#detail-dialog")?.close();
   render();
@@ -1416,6 +1595,7 @@ async function initialize() {
   if (!app.meta.syncCode) app.meta.syncCode = migratedLegacy?.syncCode || app.states.zhuangyuan.syncCode || "";
   if (!app.meta.lastSyncedAt) app.meta.lastSyncedAt = migratedLegacy?.lastSyncedAt || app.states.zhuangyuan.lastSyncedAt || "";
   app.activeSuite = app.meta.activeSuite;
+  app.workspaceView = app.activeSuite === "bangyan" && app.states.bangyan.activeMode === "builder" ? "builder" : "library";
   app.storageMode = storage.storage;
   await persist();
   applyTheme(app.theme);
@@ -1432,6 +1612,8 @@ document.addEventListener("click", async (event) => {
     if (suite === "zhuangyuan" || suite === "bangyan") {
       app.activeSuite = suite;
       app.meta.activeSuite = suite;
+      app.workspaceView = "library";
+      if (suite === "bangyan" && app.states.bangyan.activeMode === "builder") app.states.bangyan.activeMode = "presets";
       app.subcategoryFilter = "全部";
       app.searchQuery = "";
       app.visibleLimit = PAGE_SIZE;
@@ -1442,7 +1624,28 @@ document.addEventListener("click", async (event) => {
   }
   const id = target.dataset.id;
   const kind = target.dataset.kind;
-  if (action === "change-category") {
+  if (action === "change-workspace") {
+    const view = target.dataset.workspaceView;
+    if (!["library", "builder", "mine"].includes(view)) return;
+    if (view === "builder") {
+      app.workspaceView = "builder";
+      app.activeSuite = "bangyan";
+      app.meta.activeSuite = "bangyan";
+      app.states.bangyan.activeMode = "builder";
+      app.subcategoryFilter = "全部";
+      app.searchQuery = "";
+    } else {
+      app.workspaceView = view;
+      if (view === "library" && app.activeSuite === "bangyan" && app.states.bangyan.activeMode === "builder") {
+        app.states.bangyan.activeMode = "presets";
+      }
+      app.searchQuery = "";
+      app.visibleLimit = PAGE_SIZE;
+    }
+    await persist();
+    render();
+    window.scrollTo(0, 0);
+  } else if (action === "change-category") {
     currentState().activeCategoryId = id;
     app.subcategoryFilter = "全部";
     app.visibleLimit = PAGE_SIZE;
@@ -1455,6 +1658,7 @@ document.addEventListener("click", async (event) => {
   } else if (action === "change-mode") {
     if (BANGYAN_MODES.some((mode) => mode.id === target.dataset.mode)) {
       app.states.bangyan.activeMode = target.dataset.mode;
+      app.workspaceView = target.dataset.mode === "builder" ? "builder" : "library";
       app.subcategoryFilter = "全部";
       app.visibleLimit = PAGE_SIZE;
       await persist();

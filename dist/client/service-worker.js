@@ -1,15 +1,15 @@
-const CACHE_NAME = "prompt-library-v2.7.1";
+const CACHE_NAME = "prompt-library-v2.8.1";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./css/prototype.css?v=2.7.1",
-  "./js/prototype.js?v=2.7.1",
-  "./js/suite-utils.js?v=2.7.1",
-  "./js/storage.js?v=2.7.1",
-  "./js/sync.js?v=2.7.1",
-  "./data/img2img-prompts.json?v=2.7.1",
-  "./data/bangyan-data.json?v=2.7.1",
-  "./manifest.json?v=2.7.1",
+  "./css/prototype.css?v=2.8.1",
+  "./js/prototype.js?v=2.8.1",
+  "./js/suite-utils.js?v=2.8.1",
+  "./js/storage.js?v=2.8.1",
+  "./js/sync.js?v=2.8.1",
+  "./data/img2img-prompts.json?v=2.8.1",
+  "./data/bangyan-data.json?v=2.8.1",
+  "./manifest.json?v=2.8.1",
   "./icons/icon.svg"
 ];
 
