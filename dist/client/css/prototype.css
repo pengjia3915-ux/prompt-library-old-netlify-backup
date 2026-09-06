@@ -2245,6 +2245,62 @@ textarea:focus-visible {
   gap: 8px;
 }
 
+/* 2.6.14: task-first navigation and one scrolling detail surface. */
+[hidden] { display:none !important; }
+body:has(dialog[open]) { overflow:hidden; }
+.category-heading { padding:10px 2px 6px; margin:8px 0; }
+#category-eyebrow { display:none; }
+.category-heading h2 { margin:0; font-size:21px; }
+.quick-nav { display:flex; gap:6px; padding:8px 0; }
+.quick-nav button { min-height:44px; border:1px solid transparent; border-radius:10px; padding:0 16px; color:var(--muted); background:transparent; cursor:pointer; font:inherit; }
+.quick-nav button[aria-pressed="true"], .quick-nav button:hover { color:var(--ink); background:var(--soft); }
+.search-scope { display:flex; align-items:center; gap:8px; min-height:36px; font-size:12px; color:var(--muted); }
+.preview-open { display:block; width:100%; text-align:left; border:0; background:transparent; font:inherit; cursor:pointer; padding:0; }
+.text-action.is-copy { background:#e5ece5; color:#3d5847; min-height:42px; padding:0 20px; border-radius:9px; }
+.text-action.is-copy:hover { background:#d7e3d8; }
+.favorite-button { min-width:44px; min-height:44px; }
+.entry-menu summary { min-width:48px; min-height:42px; white-space:nowrap; }
+button:focus-visible, summary:focus-visible, select:focus-visible { outline:2px solid var(--focus-border); outline-offset:3px; }
+.detail-dialog { overflow:hidden; max-height:90dvh; }
+.detail-dialog .dialog-form { display:flex; flex-direction:column; height: min(760px, 88dvh); max-height:none; padding:20px; overflow:hidden; gap:12px; }
+.detail-dialog .dialog-heading { flex-shrink:0; margin:0; }
+.detail-dialog .dialog-heading h2 { font-size:20px; line-height:1.45; }
+.detail-scroll { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; padding-right:6px; }
+.detail-dialog .prompt-block p { max-height:none; overflow:visible; line-height:1.85; font-size:15px; }
+#detail-actions { flex-shrink:0; margin:0; border-top:1px solid var(--line); padding-top:12px; gap:8px; }
+#detail-actions button { min-height:44px; }
+#detail-actions .primary-button { background:#e5ece5; color:#3d5847; }
+.builder-panel { display:flex; flex-direction:column; }
+.builder-result details > summary { padding:12px 0; cursor:pointer; color:var(--muted); }
+.builder-actions { position:sticky; bottom:8px; background:var(--paper); padding:12px; border:1px solid var(--line); border-radius:12px; z-index:2; }
+.import-preview { white-space:pre-wrap; color:var(--muted); font-size:13px; }
+.empty-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+@media (max-width:640px) {
+  .prototype-shell { padding-bottom:96px; }
+  .topbar { display:flex; flex-direction:row; align-items:center; gap:8px; padding-block:12px; }
+  .brand-block { width:auto; justify-content:flex-start; gap:8px; }
+  .brand-block p { display:none; }
+  .brand-block h1 { font-size:18px; white-space:nowrap; }
+  .brand-mark { width:34px; height:34px; flex-shrink:0; }
+  .topbar-actions { width:auto; margin-left:auto; gap:3px; justify-content:flex-end; }
+  .topbar-actions button { min-height:40px; padding:0 10px; }
+  .suite-tabs { margin:12px auto; }
+  .category-tabs, .mode-tabs { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; padding-bottom:6px; }
+  .category-tabs button, .mode-tabs button { flex-shrink:0; min-height:42px; }
+  .quick-nav { position:fixed; left:0; right:0; bottom:0; justify-content:space-around; padding:7px 10px calc(7px + env(safe-area-inset-bottom)); background:var(--paper); border-top:1px solid var(--line); z-index:20; }
+  .quick-nav button { flex:1; padding:0 6px; font-size:13px; }
+  .category-heading { margin-block:8px; scroll-margin-top:16px; }
+  .topbar-actions .primary-button { max-width:78px; }
+  #add-prompt-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .detail-dialog { width:100%; max-width:100%; height:88dvh; max-height:88dvh; margin:auto 0 0; border-radius:20px 20px 0 0; }
+  .detail-dialog .dialog-form { height:100%; box-sizing:border-box; padding:18px 16px calc(14px + env(safe-area-inset-bottom)); }
+  .detail-dialog .dialog-heading h2 { font-size:18px; max-height:100px; overflow:auto; }
+  #detail-actions button { flex:1 1 auto; padding-inline:10px; font-size:13px; }
+  .builder-actions { bottom:76px; }
+  .toast { bottom:90px; }
+  input[type=search], .field-control, .builder-select { font-size:16px; }
+}
+
 .section-toggle {
   min-height: 30px;
   border: 1px solid var(--line);

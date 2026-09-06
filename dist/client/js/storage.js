@@ -1,4 +1,4 @@
-import { SUITE_STATE_KEYS, clone } from "./suite-utils.js";
+import { SUITE_STATE_KEYS, clone } from "./suite-utils.js?v=2.6.15";
 
 export const DB_NAME = "prompt-library-img2img-prototype";
 export const DB_VERSION = 2;
@@ -91,8 +91,20 @@ export async function readStorageBundle() {
   try {
     const database = await openDatabase();
     const records = await readFromDatabase(database, keys);
+    // A fallback exists only after a failed IndexedDB write. Recover it even
+    // when IndexedDB becomes available again; otherwise old state wins.
+    const pending = parseLocalStorage(SUITE_FALLBACK_KEY);
     return {
       ...records,
+      zhuangyuan: records[SUITE_STATE_KEYS.zhuangyuan],
+      bangyan: records[SUITE_STATE_KEYS.bangyan],
+      meta: records[SUITE_STATE_KEYS.meta],
+      legacy: records[SUITE_STATE_KEYS.legacy],
+      ...(pending && "zhuangyuan" in pending && "bangyan" in pending &&
+        (!records[SUITE_STATE_KEYS.meta]?.storageWrittenAt || Number(pending.meta?.storageWrittenAt || 0) > Number(records[SUITE_STATE_KEYS.meta].storageWrittenAt)) ? {
+        zhuangyuan: pending.zhuangyuan, bangyan: pending.bangyan, meta: pending.meta,
+        recoveredFallback: true
+      } : {}),
       fallback: parseLocalStorage(SUITE_FALLBACK_KEY),
       legacyFallback: parseLocalStorage(LEGACY_FALLBACK_KEY),
       storage: "indexeddb"
@@ -112,7 +124,16 @@ export async function readStorageBundle() {
   }
 }
 
-export async function writeStorageBundle({ zhuangyuan, bangyan, meta } = {}) {
+let pendingWrite = Promise.resolve();
+export function writeStorageBundle(bundle = {}) {
+  const snapshot = clone(bundle);
+  const operation = pendingWrite.catch(() => {}).then(() => saveStorageBundle(snapshot));
+  pendingWrite = operation;
+  return operation;
+}
+
+async function saveStorageBundle({ zhuangyuan, bangyan, meta } = {}) {
+  meta = { ...meta, storageWrittenAt: Date.now() };
   const records = {
     [SUITE_STATE_KEYS.zhuangyuan]: zhuangyuan,
     [SUITE_STATE_KEYS.bangyan]: bangyan,
@@ -121,6 +142,7 @@ export async function writeStorageBundle({ zhuangyuan, bangyan, meta } = {}) {
   try {
     const database = await openDatabase();
     await writeToDatabase(database, records);
+    try { window.localStorage.removeItem(SUITE_FALLBACK_KEY); } catch {}
     return "indexeddb";
   } catch {
     const saved = writeLocalStorage(SUITE_FALLBACK_KEY, { zhuangyuan, bangyan, meta });

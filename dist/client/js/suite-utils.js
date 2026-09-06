@@ -414,7 +414,7 @@ export function mergeSyncedSuiteState(local = {}, remote = {}) {
     customPrompts: mergePromptEntries(local.customPrompts || [], remote.customPrompts || []),
     promptEdits: mergePromptEdits(local.promptEdits || [], remote.promptEdits || []),
     savedCompositions: mergeSavedCompositions(local.savedCompositions || [], remote.savedCompositions || []),
-    favoriteIds: normalizeFavoriteIds([...(local.favoriteIds || []), ...(remote.favoriteIds || [])]),
+    ...mergeFavorites(local, remote),
     recent: normalizeRecent([...(local.recent || []), ...(remote.recent || [])]),
     lastSyncedAt: new Date().toISOString()
   };
@@ -457,5 +457,50 @@ export function searchMatches(entry, query, extraText = "") {
     Array.isArray(entry?.keywords) ? entry.keywords.join(" ") : "",
     extraText
   ].filter(Boolean).join("\n").toLocaleLowerCase("zh-CN");
-  return haystack.includes(normalizedQuery);
+  return normalizedQuery.split(/\s+/u).every((term) => haystack.includes(term));
+}
+
+// Explicit changes outrank legacy lists. A removal is retained across syncs.
+export function mergeFavorites(local = {}, remote = {}) {
+  const favoriteChanges = {};
+  for (const source of [local.favoriteChanges, remote.favoriteChanges]) {
+    for (const [key, change] of Object.entries(source || {})) {
+      if (typeof change?.value !== "boolean" || !Number.isFinite(Date.parse(change.updatedAt))) continue;
+      const previous = favoriteChanges[key];
+      const delta = Date.parse(change.updatedAt) - Date.parse(previous?.updatedAt || 0);
+      if (!previous || delta > 0 || (delta === 0 && !change.value)) favoriteChanges[key] = clone(change);
+    }
+  }
+  const ids = new Set(normalizeFavoriteIds([...(local.favoriteIds || []), ...(remote.favoriteIds || [])]));
+  for (const [key, change] of Object.entries(favoriteChanges)) {
+    if (change.value) ids.add(key); else ids.delete(key);
+  }
+  return { favoriteIds: [...ids], favoriteChanges };
+}
+
+export function parseUserBackup(text) {
+  const data = JSON.parse(text);
+  if (data?.format !== "prompt-library-user-state" || data.version !== 1 || !data.suites || typeof data.suites !== "object") throw new Error("请选择通过“导出本机数据”生成的 JSON 备份。");
+  let found = false;
+  for (const suite of ["zhuangyuan", "bangyan"]) {
+    const state = data.suites[suite];
+    if (state == null) continue;
+    if (typeof state !== "object" || Array.isArray(state)) throw new Error("版本数据格式不正确");
+    found = true;
+    for (const key of ["prompts", "customPrompts", "promptEdits", "savedCompositions", "recent", "favoriteIds"]) {
+      if (state[key] !== undefined && !Array.isArray(state[key])) throw new Error(`${suite} 的 ${key} 不是列表`);
+      if (key === "favoriteIds") {
+        if ((state[key] || []).some((id) => typeof id !== "string")) throw new Error("收藏 ID 格式不正确");
+        continue;
+      }
+      for (const entry of state[key] || []) {
+        if (!entry || typeof entry !== "object" || typeof entry.id !== "string" || !entry.id) throw new Error(`${key} 包含缺少 ID 的记录`);
+        for (const field of ["title", "prompt", "positive", "negativePrompt", "negative", "content"]) {
+          if (entry[field] !== undefined && typeof entry[field] !== "string") throw new Error(`${key} 的 ${field} 格式错误`);
+        }
+      }
+    }
+  }
+  if (!found) throw new Error("备份没有状元或榜眼数据");
+  return data;
 }

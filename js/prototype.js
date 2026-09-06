@@ -4,8 +4,8 @@ import {
   isValidSyncCode,
   normalizeSyncCode,
   syncSuites
-} from "./sync.js?v=2.6.13";
-import { readStorageBundle, writeStorageBundle } from "./storage.js";
+} from "./sync.js?v=2.6.15";
+import { readStorageBundle, writeStorageBundle } from "./storage.js?v=2.6.15";
 import {
   BANGYAN_SYNTHESIS_ORDER,
   clone,
@@ -16,6 +16,9 @@ import {
   favoriteKey,
   isDisplayOnlyComponent,
   migrateLegacyPrototypeState,
+  mergeFavorites,
+  mergeSyncedSuiteState,
+  parseUserBackup,
   normalizeBuilder,
   normalizeFavoriteIds,
   normalizePromptEdits,
@@ -25,9 +28,9 @@ import {
   searchMatches,
   selectBuilderComponent,
   removeBuilderComponent
-} from "./suite-utils.js";
+} from "./suite-utils.js?v=2.6.15";
 
-const APP_ASSET_VERSION = "2.6.13";
+const APP_ASSET_VERSION = "2.6.15";
 const PAGE_SIZE = 48;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
@@ -133,6 +136,9 @@ const app = {
   activeSuite: "zhuangyuan",
   subcategoryFilter: "全部",
   searchQuery: "",
+  quickView: "browse",
+  quickViewSuite: "zhuangyuan",
+  searchAll: false,
   visibleLimit: PAGE_SIZE,
   collapsedSections: new Set(),
   detail: null,
@@ -231,7 +237,7 @@ function normalizeZhuangyuanState(defaultData, stored) {
     defaultDataVersion: defaultVersion,
     promptEdits,
     savedCompositions: normalizeSavedCompositions(source.savedCompositions),
-    favoriteIds,
+    ...mergeFavorites({ favoriteIds, favoriteChanges: source.favoriteChanges }),
     recent: normalizeRecent(source.recent),
     syncCode: typeof source.syncCode === "string" ? source.syncCode : "",
     lastSyncedAt: source.lastSyncedAt || ""
@@ -244,7 +250,7 @@ function normalizeBangyanState(stored) {
     .map((entry) => normalizeCustomPrompt(entry, "bangyan"))
     .filter(Boolean);
   const validCategoryIds = new Set(BANGYAN_CATEGORIES.map((category) => category.id));
-  const activeMode = BANGYAN_MODES.some((mode) => mode.id === source.activeMode) ? source.activeMode : "presets";
+  const activeMode = BANGYAN_MODES.some((mode) => mode.id === source.activeMode) ? source.activeMode : "direct";
   const promptEdits = normalizePromptEdits(source.promptEdits).filter((entry) => entry.kind === "component" || entry.kind === "preset" || entry.kind === "direct");
   return {
     version: 2,
@@ -256,7 +262,7 @@ function normalizeBangyanState(stored) {
     savedCompositions: normalizeSavedCompositions(source.savedCompositions),
     builder: normalizeBuilder(source.builder),
     builderUpdatedAt: typeof source.builderUpdatedAt === "string" ? source.builderUpdatedAt : "",
-    favoriteIds: normalizeFavoriteIds(source.favoriteIds),
+    ...mergeFavorites(source),
     recent: normalizeRecent(source.recent),
     syncCode: typeof source.syncCode === "string" ? source.syncCode : "",
     lastSyncedAt: source.lastSyncedAt || ""
@@ -434,7 +440,7 @@ function compactSummary(value, limit = 68) {
 }
 
 function entrySummary(kind, entry, display) {
-  if (kind === "preset" && !hasPromptEdit(kind, entry.id)) return "可继续调整各 slot 的组件选择";
+  if (kind === "preset" && !hasPromptEdit(kind, entry.id)) return "一键复制整套提示词，也可以继续调整其中的搭配。";
   if (kind === "component" || kind === "direct") return compactSummary(entry.composeText || entry.positive);
   return compactSummary(display.positive);
 }
@@ -495,14 +501,17 @@ function recordRecent(kind, id, title, content, recentId = `${kind}:${id}`) {
 }
 
 async function persist() {
+  if (!app.states.zhuangyuan || !app.states.bangyan) return false;
   try {
     app.storageMode = await writeStorageBundle({
       zhuangyuan: app.states.zhuangyuan,
       bangyan: app.states.bangyan,
       meta: app.meta
     });
+    return true;
   } catch {
     showToast("本地保存失败，请稍后重试");
+    return false;
   }
 }
 
@@ -548,7 +557,7 @@ async function copyEntry(kind, id, copyType = "all") {
   }
   await copyText(content);
   recordRecent(kind, id, display.title, content);
-  await persist();
+  if (!await persist()) return;
   renderRecent();
   showToast(copyType === "negative" ? "反向提示词已复制" : "Prompt 已复制");
 }
@@ -651,9 +660,9 @@ function renderHeading() {
   } else {
     count = zhuangyuanEntries().filter((entry) => effectiveEntry("prompt", entry).categoryId === categoryId).length;
   }
-  $("#category-eyebrow").textContent = app.activeSuite === "bangyan" ? "榜眼正式数据" : "状元旧站数据";
+  $("#category-eyebrow").textContent = app.activeSuite === "bangyan" ? "榜眼" : "状元";
   $("#category-title").textContent = category?.name || "Prompt";
-  $("#category-description").textContent = description;
+  $("#category-description").textContent = state.activeMode === "builder" ? "先选想改变的部分，再复制到图片对话中。未选择的部分保持原样。" : "";
   $("#category-count").textContent = `${count} 条`;
 }
 
@@ -682,7 +691,7 @@ function renderEntryCard(kind, entry) {
         </div>
         <button class="favorite-button ${favorite ? "is-active" : ""}" type="button" data-action="${favoriteAction}" data-kind="${kind}" data-id="${id}" aria-label="${favorite ? "取消收藏" : "收藏"}">${favorite ? "★" : "☆"}</button>
       </div>
-      <p class="card-preview">${escapeHtml(entrySummary(kind, view, display))}</p>
+      <button class="card-preview preview-open" type="button" data-action="open-detail" data-kind="${kind}" data-id="${id}" aria-label="查看 ${escapeHtml(display.title)} 详情">${escapeHtml(entrySummary(kind, view, display))}</button>
       <div class="card-actions">
         ${copyable ? `<button class="text-action is-copy" type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="all">复制</button>` : `<span class="text-action is-muted" title="该项仅用于辨认">仅供辨认</span>`}
         ${inlineBuilder ? `<button class="text-action" type="button" data-action="add-to-builder" data-kind="${kind}" data-id="${id}">${builderLabel}</button>` : ""}
@@ -897,7 +906,7 @@ function renderBuilderPicker(categoryId, components, builder) {
 
   return `
     <section class="builder-picker" aria-label="自由拼装选择区">
-      <div class="builder-picker-heading"><div><strong>选择组件</strong><p>按 slot 选择；搜索只筛选可选项，不改变已保存的拼装逻辑。</p></div></div>
+      <div class="builder-picker-heading"><div><strong>选择想改变的部分</strong><p>每一项都可以不选。更换选项时，其他选择会保留。</p></div></div>
       <div class="builder-slot-grid">
         ${groups.map(({ slot, label }) => `
           <label class="builder-field">
@@ -930,12 +939,15 @@ function renderBuilder() {
     ? selected.map((component) => `<button class="builder-chip" type="button" data-action="remove-builder" data-id="${escapeHtml(component.id)}">${escapeHtml(component.title)} ×</button>`).join("")
     : `<span class="builder-empty">还没有选择组件。可以自由搭配，不设主观禁配。</span>`;
   return `
+    ${renderBuilderPicker(state.activeCategoryId, components, builder)}
     <section class="builder-panel">
       <div class="builder-heading"><div><p class="eyebrow">自由组合</p><h3>${escapeHtml(result.title)}</h3></div><button class="quiet-button" type="button" data-action="reset-builder">重置</button></div>
       <div class="builder-chips">${chips}</div>
       <div class="builder-result">
+        <details><summary>查看完整组合正文</summary>
         <div class="prompt-block"><strong>正向 Prompt</strong><p>${escapeHtml(result.positive || "选择组件后生成稳定组合文本。")}</p></div>
         ${result.negative ? `<div class="prompt-block is-negative"><strong>反向提示词</strong><p>${escapeHtml(result.negative)}</p></div>` : ""}
+        </details>
         <div class="dialog-actions builder-actions">
          <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="positive" ${result.positive ? "" : "disabled"}>复制正向</button>
          <button class="quiet-button" type="button" data-action="copy-builder" data-copy-type="negative" ${result.negative ? "" : "disabled"}>复制反向</button>
@@ -944,12 +956,26 @@ function renderBuilder() {
         </div>
       </div>
     </section>
-    ${renderBuilderPicker(state.activeCategoryId, components, builder)}
   `;
 }
 
 function renderContent() {
   const state = currentState();
+  document.querySelectorAll('[data-action="quick-view"]').forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.view === app.quickView)));
+  if (app.quickView === "recent") {
+    $("#prompt-sections").innerHTML = "";
+    $("#category-title").textContent = "最近复制";
+    $("#category-count").textContent = `${(state.recent || []).length} 条`;
+    if (!state.recent?.length) $("#prompt-sections").innerHTML = '<div class="empty-state"><h3>还没有复制记录</h3><p>复制过的内容会出现在这里，方便下次直接使用。</p></div>';
+    return;
+  }
+  if (app.quickView === "favorites" || (app.searchAll && app.searchQuery.trim())) {
+    const items = allSuiteEntries().filter(({kind, entry}) => (app.quickView !== "favorites" || kind === "composition" || isFavorite(kind, entry.id)) && searchEntry(kind, entry));
+    $("#category-title").textContent = app.quickView === "favorites" ? "我的收藏" : "全部栏目搜索";
+    $("#category-count").textContent = `${items.length} 条`;
+    $("#prompt-sections").innerHTML = items.length ? renderList("", items) : '<div class="empty-state"><h3>没有找到内容</h3><p>试试更短的关键词，或收藏常用的 Prompt。</p></div>';
+    return;
+  }
   let content = "";
   if (app.activeSuite === "zhuangyuan") {
     const items = sortEntries(zhuangyuanEntries()
@@ -964,7 +990,11 @@ function renderContent() {
       .filter((entry) => entry.category === state.activeCategoryId)
       .filter((entry) => searchEntry("preset", entry))
       .map((entry) => ({ kind: "preset", entry }));
-    content = items.length ? renderList("推荐组合", items) : `<div class="empty-state"><h3>当前分类没有推荐组合</h3><p>可以切换到“单项库”或“自由拼装”。</p></div>`;
+    const emptyModes = ["direct", "components", "builder"]
+      .map((mode) => ({ mode, count: modeCount(mode, state.activeCategoryId) }))
+      .filter(({ count }) => count > 0);
+    const emptyActions = emptyModes.map(({ mode, count }) => `<button class="quiet-button" type="button" data-action="change-mode" data-mode="${mode}">${escapeHtml(BANGYAN_MODES.find((item) => item.id === mode)?.label || mode)} · ${count} 条</button>`).join("");
+    content = items.length ? renderList("推荐组合", items) : `<div class="empty-state"><h3>当前分类暂未提供推荐组合</h3><p>这不是数据丢失。可以按当前分类直接使用已有 Prompt，或进入单项库自由挑选。</p><div class="empty-actions">${emptyActions}</div></div>`;
   } else if (state.activeMode === "direct") {
     content = renderDirectPrompts() || `<div class="empty-state"><h3>没有匹配的直接 Prompt</h3><p>换一个关键词，或清空搜索条件。</p></div>`;
   } else {
@@ -976,13 +1006,28 @@ function renderContent() {
     content = items.length ? renderList("单项组件", items) : `<div class="empty-state"><h3>没有匹配的组件</h3><p>换一个关键词，或清空搜索条件。</p></div>`;
   }
   $("#prompt-sections").innerHTML = content + renderCustomSection() + renderSavedCompositionSection();
+  if (app.searchQuery.trim()) {
+    const counts = [...$("#prompt-sections").querySelectorAll(".section-title-actions > span")].map((item) => parseInt(item.textContent, 10) || 0);
+    $("#category-count").textContent = `${counts.reduce((sum, count) => sum + count, 0)} 条匹配`;
+  }
+}
+
+function allSuiteEntries() {
+  if (app.activeSuite === "zhuangyuan") return zhuangyuanEntries().map((entry) => ({ kind: "prompt", entry }));
+  return [
+    ...bangyanPresets().map((entry) => ({ kind: "preset", entry })),
+    ...bangyanComponents().map((entry) => ({ kind: "component", entry })),
+    ...bangyanDirectEntries(),
+    ...bangyanCustomPrompts().filter((entry) => entry.kind !== "direct").map((entry) => ({ kind: "custom", entry })),
+    ...(currentState().savedCompositions || []).filter((entry) => !entry.deletedAt).map((entry) => ({ kind: "composition", entry }))
+  ];
 }
 
 function renderRecent() {
   const panel = $("#recent-panel");
   const list = $("#recent-list");
   const recent = (currentState()?.recent || []).slice(0, 20);
-  panel.hidden = !recent.length;
+  panel.hidden = app.quickView !== "recent" || !recent.length;
   list.innerHTML = recent.map((entry) => `
     <button class="recent-item" type="button" data-action="copy-recent" data-id="${escapeHtml(entry.id)}">
       <span><strong>${escapeHtml(entry.title)}</strong><small>${escapeHtml(new Date(entry.copiedAt).toLocaleString("zh-CN"))}</small></span><b>复制</b>
@@ -992,6 +1037,19 @@ function renderRecent() {
 
 function render() {
   renderSuiteTabs();
+  if (app.quickViewSuite !== app.activeSuite) {
+    app.quickView = "browse";
+    app.searchAll = false;
+    app.searchQuery = "";
+    app.quickViewSuite = app.activeSuite;
+  }
+  if (!app.defaults[app.activeSuite]) {
+    ["#category-tabs", "#mode-tabs", "#subcategory-tabs", "#recent-list"].forEach((selector) => { $(selector).innerHTML = ""; });
+    $("#category-title").textContent = app.activeSuite === "bangyan" ? "榜眼" : "状元";
+    $("#category-count").textContent = "加载未完成";
+    $("#prompt-sections").innerHTML = '<div class="empty-state"><h3>这个版本暂时没有加载成功</h3><p>本机内容没有被清空。可切换另一个版本，或重新加载。</p><button class="quiet-button" type="button" data-action="retry-load">重新加载</button></div>';
+    return;
+  }
   renderCategoryTabs();
   renderModeTabs();
   renderAddPromptButton();
@@ -1001,6 +1059,26 @@ function render() {
   renderRecent();
   const search = $("#search-input");
   if (search && search.value !== app.searchQuery) search.value = app.searchQuery;
+  $("#search-all").checked = app.searchAll;
+  saveBrowsingState();
+}
+
+function saveBrowsingState() {
+  try { sessionStorage.setItem("prompt-library-browsing-v1", JSON.stringify({ suite: app.activeSuite, query: app.searchQuery, view: app.quickView, all: app.searchAll, subcategory: app.subcategoryFilter, collapsed: [...app.collapsedSections], limit: app.visibleLimit, scrollY: window.scrollY })); } catch {}
+}
+
+function restoreBrowsingState() {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem("prompt-library-browsing-v1"));
+    if (!saved || saved.suite !== app.activeSuite) return;
+    app.searchQuery = typeof saved.query === "string" ? saved.query : "";
+    app.quickView = ["browse", "favorites", "recent"].includes(saved.view) ? saved.view : "browse";
+    app.searchAll = saved.all === true;
+    app.subcategoryFilter = typeof saved.subcategory === "string" ? saved.subcategory : "全部";
+    app.collapsedSections = new Set(Array.isArray(saved.collapsed) ? saved.collapsed : []);
+    app.visibleLimit = Math.max(PAGE_SIZE, Math.min(Number(saved.limit) || PAGE_SIZE, 5000));
+    requestAnimationFrame(() => window.scrollTo(0, Number(saved.scrollY) || 0));
+  } catch {}
 }
 
 function fillCategoryOptions(selectedId) {
@@ -1101,7 +1179,7 @@ async function savePrompt() {
   }
   if (categoryEditable) state.activeCategoryId = categoryId;
   $("#prompt-dialog").close();
-  await persist();
+  if (!await persist()) return;
   render();
   showToast(id ? "内容已更新" : "Prompt 已保存");
 }
@@ -1116,7 +1194,7 @@ async function resetStaticEdit(kind, id) {
   edit.updatedAt = edit.deletedAt;
   $("#prompt-dialog")?.close();
   $("#detail-dialog")?.close();
-  await persist();
+  if (!await persist()) return;
   render();
   showToast("已恢复正式内容");
 }
@@ -1140,7 +1218,7 @@ async function saveBuilderComposition() {
   });
   if (!saved) return;
   state.savedCompositions.unshift(saved);
-  await persist();
+  if (!await persist()) return;
   render();
   showToast("组合已收藏");
 }
@@ -1153,7 +1231,7 @@ async function deleteSavedComposition(id) {
   stored.deletedAt = nowIso();
   stored.updatedAt = stored.deletedAt;
   $("#detail-dialog")?.close();
-  await persist();
+  if (!await persist()) return;
   render();
   showToast("已取消收藏");
 }
@@ -1165,7 +1243,7 @@ async function togglePinned(kind, id) {
   entry.pinOrder = entry.pinned ? Date.now() : 0;
   entry.updatedAt = nowIso();
   if (app.activeSuite === "zhuangyuan") syncZhuangyuanCustomPrompts();
-  await persist();
+  if (!await persist()) return;
   render();
 }
 
@@ -1173,7 +1251,9 @@ async function toggleFavorite(kind, id) {
   const state = currentState();
   const key = favoriteKey(kind, id);
   state.favoriteIds = state.favoriteIds.includes(key) ? state.favoriteIds.filter((value) => value !== key) : [...state.favoriteIds, key];
-  await persist();
+  state.favoriteChanges ||= {};
+  state.favoriteChanges[key] = { value: state.favoriteIds.includes(key), updatedAt: nowIso() };
+  if (!await persist()) return;
   render();
 }
 
@@ -1183,7 +1263,7 @@ async function deletePrompt(kind, id) {
   entry.deletedAt = nowIso();
   entry.updatedAt = entry.deletedAt;
   if (app.activeSuite === "zhuangyuan") syncZhuangyuanCustomPrompts();
-  await persist();
+  if (!await persist()) return;
   render();
   showToast("Prompt 已删除");
 }
@@ -1252,7 +1332,7 @@ async function addToBuilder(kind, id) {
   markBuilderUpdated();
   if (kind === "composition" && entry.categoryId) app.states.bangyan.activeCategoryId = entry.categoryId;
   app.states.bangyan.activeMode = "builder";
-  await persist();
+  if (!await persist()) return;
   $("#detail-dialog")?.close();
   render();
   showToast("已放入自由拼装区");
@@ -1263,14 +1343,14 @@ async function removeFromBuilder(id) {
   if (!component) return;
   app.states.bangyan.builder = removeBuilderComponent(app.states.bangyan.builder, component);
   markBuilderUpdated();
-  await persist();
+  if (!await persist()) return;
   render();
 }
 
 async function resetBuilder() {
   app.states.bangyan.builder = emptyBuilder();
   markBuilderUpdated();
-  await persist();
+  if (!await persist()) return;
   render();
 }
 
@@ -1280,7 +1360,7 @@ async function copyBuilder(copyType) {
   if (!content) return showToast("请先选择组件");
   await copyText(content);
   recordRecent("builder", result.componentIds.join(","), result.title, content);
-  await persist();
+  if (!await persist()) return;
   renderRecent();
   showToast("组合 Prompt 已复制");
 }
@@ -1314,6 +1394,7 @@ function suiteSyncState(suite) {
       promptEdits: state.promptEdits,
       savedCompositions: state.savedCompositions,
       favoriteIds: state.favoriteIds,
+      favoriteChanges: state.favoriteChanges,
       recent: state.recent
     };
   }
@@ -1322,6 +1403,7 @@ function suiteSyncState(suite) {
     promptEdits: state.promptEdits,
     savedCompositions: state.savedCompositions,
     favoriteIds: state.favoriteIds,
+    favoriteChanges: state.favoriteChanges,
     recent: state.recent,
     builder: state.builder,
     builderUpdatedAt: state.builderUpdatedAt
@@ -1349,6 +1431,7 @@ async function syncNow() {
       app.states.zhuangyuan.promptEdits = normalizePromptEdits(remoteZhuangyuan.promptEdits).filter((entry) => entry.kind === "prompt");
       app.states.zhuangyuan.savedCompositions = normalizeSavedCompositions(remoteZhuangyuan.savedCompositions);
       app.states.zhuangyuan.favoriteIds = normalizeFavoriteIds(remoteZhuangyuan.favoriteIds);
+      app.states.zhuangyuan.favoriteChanges = remoteZhuangyuan.favoriteChanges || {};
       app.states.zhuangyuan.recent = normalizeRecent(remoteZhuangyuan.recent);
     }
     if (remoteBangyan) {
@@ -1356,6 +1439,7 @@ async function syncNow() {
       app.states.bangyan.promptEdits = normalizePromptEdits(remoteBangyan.promptEdits).filter((entry) => entry.kind === "component" || entry.kind === "preset" || entry.kind === "direct");
       app.states.bangyan.savedCompositions = normalizeSavedCompositions(remoteBangyan.savedCompositions);
       app.states.bangyan.favoriteIds = normalizeFavoriteIds(remoteBangyan.favoriteIds);
+      app.states.bangyan.favoriteChanges = remoteBangyan.favoriteChanges || {};
       app.states.bangyan.recent = normalizeRecent(remoteBangyan.recent);
       if (remoteBangyan.builder && typeof remoteBangyan.builder === "object") {
         app.states.bangyan.builder = normalizeBuilder(remoteBangyan.builder);
@@ -1377,6 +1461,8 @@ async function syncNow() {
 }
 
 async function registerServiceWorker() {
+  // Local previews must reflect each build, not yesterday's PWA cache.
+  if (["localhost", "127.0.0.1", "::1"].includes(location.hostname)) return;
   if (!("serviceWorker" in navigator)) return;
   try {
     const hadController = Boolean(navigator.serviceWorker.controller);
@@ -1394,22 +1480,31 @@ async function registerServiceWorker() {
 }
 
 async function initialize() {
-  const [zhuangyuanResponse, bangyanResponse, storage] = await Promise.all([
-    fetch(`data/img2img-prompts.json?v=${APP_ASSET_VERSION}`, { cache: "no-store" }),
-    fetch(`data/bangyan-data.json?v=${APP_ASSET_VERSION}`, { cache: "no-store" }),
+  const loadData = async (file) => {
+    try {
+      const response = await fetch(`data/${file}?v=${APP_ASSET_VERSION}`, { cache: "no-store" });
+      if (!response.ok) return null;
+      const data = await response.json();
+      if (file === "img2img-prompts.json" ? !Array.isArray(data.prompts) || !Array.isArray(data.categories) : !Array.isArray(data.components) || !Array.isArray(data.presets) || !Array.isArray(data.directPrompts)) return null;
+      return data;
+    } catch { return null; }
+  };
+  const [zhuangyuanData, bangyanData, storage] = await Promise.all([
+    loadData("img2img-prompts.json"),
+    loadData("bangyan-data.json"),
     readStorageBundle()
   ]);
-  if (!zhuangyuanResponse.ok || !bangyanResponse.ok) throw new Error("正式数据加载失败");
-  const [zhuangyuanData, bangyanData] = await Promise.all([zhuangyuanResponse.json(), bangyanResponse.json()]);
   const migratedLegacy = !storage.zhuangyuan && migrateLegacyPrototypeState(storage.legacy || storage.legacyFallback);
   app.defaults.zhuangyuan = zhuangyuanData;
   app.defaults.bangyan = bangyanData;
-  app.states.zhuangyuan = normalizeZhuangyuanState(zhuangyuanData, storage.zhuangyuan || migratedLegacy);
-  app.states.bangyan = normalizeBangyanState(storage.bangyan);
+  app.states.zhuangyuan = zhuangyuanData ? normalizeZhuangyuanState(zhuangyuanData, storage.zhuangyuan || migratedLegacy) : storage.zhuangyuan || migratedLegacy;
+  app.states.bangyan = bangyanData ? normalizeBangyanState(storage.bangyan) : storage.bangyan;
   app.meta = normalizeMeta(storage.meta);
-  if (!app.meta.syncCode) app.meta.syncCode = migratedLegacy?.syncCode || app.states.zhuangyuan.syncCode || "";
-  if (!app.meta.lastSyncedAt) app.meta.lastSyncedAt = migratedLegacy?.lastSyncedAt || app.states.zhuangyuan.lastSyncedAt || "";
+  if (!app.meta.syncCode) app.meta.syncCode = migratedLegacy?.syncCode || app.states.zhuangyuan?.syncCode || "";
+  if (!app.meta.lastSyncedAt) app.meta.lastSyncedAt = migratedLegacy?.lastSyncedAt || app.states.zhuangyuan?.lastSyncedAt || "";
   app.activeSuite = app.meta.activeSuite;
+  restoreBrowsingState();
+  app.quickViewSuite = app.activeSuite;
   app.storageMode = storage.storage;
   await persist();
   applyTheme(app.theme);
@@ -1421,6 +1516,7 @@ document.addEventListener("click", async (event) => {
   const target = event.target.closest("[data-action], [data-suite-tab]");
   if (!target) return;
   const action = target.dataset.action;
+  if (action === "retry-load") { window.location.reload(); return; }
   if (target.dataset.suiteTab) {
     const suite = target.dataset.suiteTab;
     if (suite === "zhuangyuan" || suite === "bangyan") {
@@ -1428,7 +1524,11 @@ document.addEventListener("click", async (event) => {
       app.meta.activeSuite = suite;
       app.subcategoryFilter = "全部";
       app.searchQuery = "";
+      app.quickView = "browse";
+      app.quickViewSuite = suite;
+      app.searchAll = false;
       app.visibleLimit = PAGE_SIZE;
+      render();
       await persist();
       render();
     }
@@ -1436,13 +1536,34 @@ document.addEventListener("click", async (event) => {
   }
   const id = target.dataset.id;
   const kind = target.dataset.kind;
+  if (action === "quick-view") {
+    app.quickView = target.dataset.view;
+    app.quickViewSuite = app.activeSuite;
+    app.visibleLimit = PAGE_SIZE;
+    render();
+    $("#category-title").scrollIntoView({ block: "start" });
+    return;
+  }
+  if (!app.defaults[app.activeSuite]) return;
+  if (["sync-now", "choose-backup"].includes(action) && (!app.defaults.zhuangyuan || !app.defaults.bangyan)) { showToast("请等待两个版本的数据加载完成，再同步或导入"); return; }
+  if (action === "focus-search") {
+    $("#search-input").scrollIntoView({ block: "center" });
+    $("#search-input").focus();
+    return;
+  }
+  if (action === "choose-backup") { $("#backup-file").click(); return; }
   if (action === "change-category") {
+    app.quickView = "browse";
     currentState().activeCategoryId = id;
+    if (app.activeSuite === "bangyan" && currentState().activeMode !== "builder" && modeCount(currentState().activeMode, id) === 0) {
+      currentState().activeMode = modeCount("direct", id) ? "direct" : "components";
+    }
     app.subcategoryFilter = "全部";
     app.visibleLimit = PAGE_SIZE;
     await persist();
     render();
   } else if (action === "change-mode") {
+    app.quickView = "browse";
     if (BANGYAN_MODES.some((mode) => mode.id === target.dataset.mode)) {
       app.states.bangyan.activeMode = target.dataset.mode;
       app.subcategoryFilter = "全部";
@@ -1589,7 +1710,7 @@ document.addEventListener("change", async (event) => {
     markBuilderUpdated();
     await persist();
     render();
-    showToast("已清除该 slot");
+    showToast("已清除这一项");
     return;
   }
   const component = bangyanComponents().find((entry) => entry.id === target.value);
@@ -1619,8 +1740,60 @@ $("#sync-form").addEventListener("submit", async (event) => {
 $("#search-input").addEventListener("input", () => {
   app.searchQuery = $("#search-input").value;
   app.visibleLimit = PAGE_SIZE;
-  renderContent();
   renderHeading();
+  renderContent();
+  saveBrowsingState();
+});
+
+$("#search-all").addEventListener("change", () => {
+  app.searchAll = $("#search-all").checked;
+  render();
+});
+window.addEventListener("pagehide", saveBrowsingState);
+document.addEventListener("visibilitychange", () => { if (document.hidden) saveBrowsingState(); });
+
+let pendingBackup = null;
+$("#backup-file").addEventListener("change", async (event) => {
+  pendingBackup = null;
+  $("#apply-backup").hidden = true;
+  try {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (file.size > 20 * 1024 * 1024) throw new Error("文件超过 20 MB，请确认选择的是本机 JSON 备份");
+    const backup = parseUserBackup(await file.text());
+    const counts = ["zhuangyuan", "bangyan"].map((suite) => {
+      const value = backup.suites[suite];
+      return `${suite === "zhuangyuan" ? "状元" : "榜眼"}：${value ? `编辑 ${value.promptEdits?.length || 0}；自定义 ${value.customPrompts?.length || 0}；收藏 ${value.favoriteIds?.length || 0}；收藏组合 ${value.savedCompositions?.length || 0}；最近复制 ${value.recent?.length || 0}` : "未包含，不改变"}`;
+    });
+    $("#backup-preview").textContent = counts.join("\n") + "\n相同记录保留更新时间较新的版本，不覆盖内置 Prompt。确认时会先下载当前本机备份；同步码不会被替换。";
+    pendingBackup = backup;
+    $("#apply-backup").hidden = false;
+  } catch (error) { $("#backup-preview").textContent = error.message; }
+  finally { event.target.value = ""; }
+});
+$("#apply-backup").addEventListener("click", async () => {
+  if (!pendingBackup) return;
+  const button = $("#apply-backup");
+  button.disabled = true;
+  try {
+    exportUserState();
+    const next = clone(app.states);
+    for (const suite of ["zhuangyuan", "bangyan"]) {
+      if (!pendingBackup.suites[suite]) continue;
+      const merged = mergeSyncedSuiteState(next[suite], pendingBackup.suites[suite]);
+      merged.lastSyncedAt = next[suite].lastSyncedAt;
+      next[suite] = suite === "zhuangyuan" ? normalizeZhuangyuanState(app.defaults.zhuangyuan, merged) : normalizeBangyanState(merged);
+    }
+    const storageMode = await writeStorageBundle({ ...next, meta: app.meta });
+    app.states = next;
+    app.storageMode = storageMode;
+    pendingBackup = null;
+    button.hidden = true;
+    $("#backup-preview").textContent = "已合并导入并保存。内置数据保持不变。";
+    render();
+    showToast("备份已导入");
+  } catch (error) { $("#backup-preview").textContent = `导入未完成：${error.message}`; }
+  finally { button.disabled = false; }
 });
 
 $("#clear-search").addEventListener("click", () => {
