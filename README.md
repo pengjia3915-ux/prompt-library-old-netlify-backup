@@ -1,5 +1,9 @@
 # Prompt 库 PWA
 
+当前发布：v3.1.2，原 Netlify 站点 https://prompt-library-pengjia3915.netlify.app/ 。源码包含754条记录、15个同类组，源正文保留。发布与回退说明见 reports/release-3.1.2.md。
+
+验证：`npm ci`、`npm test`、`npm run build`。Netlify 发布目录为 `dist/client`，同步函数在 `netlify/functions`。
+
 一个仅供个人使用的轻量 Prompt 管理与组合工具。核心功能使用原生 HTML、CSS、JavaScript、IndexedDB 和 PWA，默认不需要账号，也不调用 AI API。知识库的跨设备同步是可选功能，使用当前站点配置的免费同步接口；不启用同步码时，所有数据仍只保存在本机。
 
 ## 先运行起来
@@ -14,7 +18,7 @@ python -m http.server 8080
 
 然后打开：<http://localhost:8080>
 
-也可以使用任意静态文件服务器，例如 Node.js 的 `npx serve .`。本项目没有构建步骤，也没有需要安装的前端框架。
+也可以使用任意静态文件服务器，例如 Node.js 的 `npx serve .`。本项目使用原生前端，无需安装前端框架；正式部署前运行 `npm run build`。
 
 ### 同一 Wi-Fi 下临时用手机打开
 

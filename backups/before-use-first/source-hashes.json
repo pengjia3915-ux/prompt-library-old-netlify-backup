@@ -1,0 +1,12 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8E1B3725621AD35ADCA188392765825CB82B77793EA01159FFDBFAAB119EF5F0",
+    "Path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\data\\img2img-prompts.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F65AD7057CC1FC9645A4F7720384CA36A28166207984B3F54D46FDD40D7F0B2B",
+    "Path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\data\\bangyan-data.json"
+  }
+]

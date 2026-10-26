@@ -1,20 +1,25 @@
-const CACHE_NAME = "prompt-library-v2.8.1";
+const CACHE_NAME = "prompt-library-v3.1.2-dismiss1";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./css/prototype.css?v=2.8.1",
-  "./js/prototype.js?v=2.8.1",
-  "./js/suite-utils.js?v=2.8.1",
-  "./js/storage.js?v=2.8.1",
-  "./js/sync.js?v=2.8.1",
-  "./data/img2img-prompts.json?v=2.8.1",
-  "./data/bangyan-data.json?v=2.8.1",
-  "./manifest.json?v=2.8.1",
+  "./css/prototype.css?v=3.1.2-dismiss1",
+  "./css/studio.css?v=3.1.2-dismiss1",
+  "./js/prototype.js?v=3.1.2-dismiss1",
+  "./js/catalog.js?v=3.1.2-dismiss1",
+  "./js/families.js?v=3.1.2-dismiss1",
+  "./js/suite-utils.js?v=3.1.2-dismiss1",
+  "./js/storage.js?v=3.1.2-dismiss1",
+  "./js/sync.js?v=3.1.2-dismiss1",
+  "./data/catalog-map.json?v=3.1.2-dismiss1",
+  "./data/img2img-prompts.json?v=3.1.2-dismiss1",
+  "./data/bangyan-data.json?v=3.1.2-dismiss1",
+  "./manifest.json?v=3.1.2-dismiss1",
   "./icons/icon.svg"
 ];
 
 const NETWORK_FIRST_PATHS = [
   "/index.html",
+  "/data/catalog-map.json",
   "/data/img2img-prompts.json",
   "/data/bangyan-data.json",
   "/manifest.json"
@@ -30,7 +35,9 @@ async function rememberResponse(request, response) {
 
 async function networkFirst(request) {
   try {
-    return await rememberResponse(request, await fetch(request, { cache: "no-store" }));
+    const response = await fetch(request, { cache: "no-store" });
+    if (!response.ok) throw new Error("Resource unavailable");
+    return await rememberResponse(request, response);
   } catch {
     const cached = await caches.match(request);
     if (cached) return cached;
@@ -45,7 +52,7 @@ async function cacheFirst(request) {
   try {
     return await rememberResponse(request, await fetch(request));
   } catch {
-    return caches.match("./index.html");
+    return Response.error();
   }
 }
 

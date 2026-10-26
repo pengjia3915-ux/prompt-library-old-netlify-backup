@@ -8,7 +8,7 @@ const prototypeSource = await readFile(new URL("./js/prototype.js", import.meta.
 
 test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () => {
   const entries = bangyan.directPrompts;
-  assert.equal(entries.length, 223);
+  assert.equal(entries.length, 244);
   assert.deepEqual(
     Object.fromEntries([...new Set(entries.map((entry) => entry.subcategory))].map((group) => [
       group,
@@ -28,18 +28,20 @@ test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () 
       "性感凉爽穿搭": 20,
       "穿搭丝袜-2": 20,
       "浴巾浴袍": 8,
-      "大大咧咧": 30
+      "大大咧咧": 30,
+      "cosplay": 10,
+      "站立姿势": 11
     }
   );
-  assert.equal(new Set(entries.map((entry) => entry.id)).size, 223);
+  assert.equal(new Set(entries.map((entry) => entry.id)).size, 244);
   assert.ok(entries.every((entry) => entry.type === "prompt" && entry.combinable === false));
   const directIds = new Set(entries.map((entry) => entry.id));
   assert.ok(bangyan.presets.every((preset) => !Object.values(preset.slots || {}).some((id) => directIds.has(id))));
   assert.equal(entries.filter((entry) => entry.negative).length, 83);
   assert.match(entries[0].positive, /专业按摩师/);
   assert.match(entries.find((entry) => entry.id === "direct_interaction_12").positive, /温柔陪伴氛围/);
-  assert.equal(bangyan.counts.directPrompts, 223);
-  assert.equal(bangyan.categories["姿势穿搭场景"].directPrompts, 74);
+  assert.equal(bangyan.counts.directPrompts, 244);
+  assert.equal(bangyan.categories["姿势穿搭场景"].directPrompts, 95);
   assert.equal(bangyan.categories["原图处理"].directPrompts, 149);
   const fullbody = entries.filter((entry) => entry.category === "原图处理" && entry.keywords.includes("全身出镜"));
   assert.equal(fullbody.length, 71);
@@ -103,6 +105,22 @@ test("常用 Prompt 作为独立直用条目导入，不参与组件组合", () 
   assert.equal(boldPoseEntries[0].title, "反坐椅背｜双臂搭靠回头");
   assert.equal(boldPoseEntries[15].title, "厨房岛台｜持杯侧头");
   assert.equal(boldPoseEntries[29].title, "露台躺椅旁｜遮阳微笑");
+
+  const cosplayEntries = entries.filter((entry) => /^direct_cosplay_/u.test(entry.id));
+  assert.equal(cosplayEntries.length, 10);
+  assert.ok(cosplayEntries.every((entry) => entry.category === "姿势穿搭场景" && entry.subcategory === "cosplay"));
+  assert.ok(cosplayEntries.every((entry) => entry.type === "prompt" && entry.combinable === false && entry.negative === ""));
+  assert.equal(cosplayEntries[0].title, "性感女仆装｜深V围裙 + 蕾丝吊带袜");
+  assert.equal(cosplayEntries[9].title, "科幻战士｜深V连体衣 + 网眼过膝袜");
+
+  const standingEntries = entries.filter((entry) => /^direct_standing_pose_/u.test(entry.id));
+  assert.equal(standingEntries.length, 11);
+  assert.ok(standingEntries.every((entry) => entry.category === "姿势穿搭场景" && entry.subcategory === "站立姿势"));
+  assert.ok(standingEntries.every((entry) => entry.type === "prompt" && entry.combinable === false && entry.negative === ""));
+  assert.ok(standingEntries.every((entry) => Array.isArray(entry.actionBreakdown) && entry.actionBreakdown.length > 0));
+  assert.ok(standingEntries.every((entry) => entry.positive.startsWith("standing pose, full body")));
+  assert.equal(standingEntries[0].title, "站立姿势 01｜左腿承重·右腿斜后点地");
+  assert.equal(standingEntries[10].title, "站立姿势 11｜抱膝抬腿·直视镜头");
 });
 
 test("榜眼直接 Prompt 有独立模式和可编辑覆盖类型", () => {

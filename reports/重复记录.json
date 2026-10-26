@@ -1,0 +1,75 @@
+{
+  "titles": [
+    {
+      "text": "卧室",
+      "ids": [
+        "zhuangyuan:prompt:default-121",
+        "zhuangyuan:prompt:default-122"
+      ]
+    },
+    {
+      "text": "浴室",
+      "ids": [
+        "zhuangyuan:prompt:default-124",
+        "zhuangyuan:prompt:default-125"
+      ]
+    },
+    {
+      "text": "厨房",
+      "ids": [
+        "zhuangyuan:prompt:default-126",
+        "zhuangyuan:prompt:default-127"
+      ]
+    },
+    {
+      "text": "工位",
+      "ids": [
+        "zhuangyuan:prompt:default-133",
+        "zhuangyuan:prompt:default-134"
+      ]
+    },
+    {
+      "text": "公交地铁",
+      "ids": [
+        "zhuangyuan:prompt:default-143",
+        "zhuangyuan:prompt:default-144"
+      ]
+    },
+    {
+      "text": "天台",
+      "ids": [
+        "zhuangyuan:prompt:default-161",
+        "zhuangyuan:prompt:default-162"
+      ]
+    },
+    {
+      "text": "皮具室",
+      "ids": [
+        "zhuangyuan:prompt:default-188",
+        "zhuangyuan:prompt:default-197"
+      ]
+    },
+    {
+      "text": "沙发侧坐",
+      "ids": [
+        "bangyan:component:pose_05",
+        "bangyan:direct:direct_fullbody_pose_04"
+      ]
+    },
+    {
+      "text": "靠墙站姿",
+      "ids": [
+        "bangyan:component:pose_08",
+        "bangyan:direct:direct_action_06"
+      ]
+    },
+    {
+      "text": "回头抓拍",
+      "ids": [
+        "bangyan:component:pose_06",
+        "bangyan:direct:direct_action_16"
+      ]
+    }
+  ],
+  "prompts": []
+}

@@ -165,7 +165,7 @@ test("重复标题不会被当成唯一身份", () => {
 });
 
 test("搜索条目渲染不引用未定义的 id", () => {
-  const searchEntrySource = prototypeSource.match(/function searchEntry\(kind, entry\) \{[\s\S]*?\n\}\n\nfunction compactSummary/)?.[0] || "";
+  const searchEntrySource = prototypeSource.replaceAll("\r\n", "\n").match(/function searchEntry\(kind, entry\) \{[\s\S]*?\n\}\n\nfunction compactSummary/)?.[0] || "";
   assert.notEqual(searchEntrySource, "");
   assert.doesNotMatch(searchEntrySource, /hasPromptEdit\(kind, id\)/);
 });

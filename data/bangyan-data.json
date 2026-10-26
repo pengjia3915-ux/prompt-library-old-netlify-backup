@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.3.0",
   "suite": "bangyan",
-  "generatedAt": "2026-09-01",
+  "generatedAt": "2026-09-06",
   "counts": {
     "components": 235,
     "presets": 24,
-    "directPrompts": 223
+    "directPrompts": 244
   },
   "categories": {
     "原图处理": {
@@ -19,7 +19,7 @@
     "姿势穿搭场景": {
       "components": 181,
       "presets": 12,
-      "directPrompts": 74
+      "directPrompts": 95
     }
   },
   "components": [
@@ -9125,6 +9125,484 @@
         "大大咧咧",
         "露台躺椅旁",
         "遮阳微笑"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "性感女仆装｜深V围裙 + 蕾丝吊带袜",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物穿着黑色深V领女仆连衣裙，面料为哑光棉混纺，深V领口，领边饰有白色细褶荷叶边，胸前有一排可解开的扣袢（实际只系至腰部），腰部系有白色宽幅围裙，围裙系带在后腰打成大蝴蝶结，裙摆为蓬松的及膝伞裙，前侧有纵向开衩至大腿中段。腿部搭配黑色蕾丝吊带袜，袜口为精致的扇形花边，与裙摆开衩相映。人物站在复古欧式厨房的岛台旁，一只手轻扶台面边缘，另一只手执一把木勺举至肩侧，身体微微前倾，双腿自然交叠站立，镜头稍低仰拍。整体呈现俏皮又性感的法式女仆写真，避免低俗，突出高级趣味。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "性感女仆装",
+        "深V围裙",
+        "蕾丝吊带袜"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "性感护士装｜深U领短上衣 + 过膝条纹袜",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物穿着白色深U领护士短上衣，面料为挺括棉质，深U领口，短袖袖口有红色镶边，前襟以一排银色按扣固定（仅扣至胸下），衣摆长度至肚脐下方，露出腰腹；下半身搭配白色高腰A字迷你裙，裙长仅及大腿根部。腿部搭配白色与淡粉色相间的竖条纹过膝长袜，袜口宽边，包裹至大腿上段。人物立于简洁的医疗布景中（白色墙壁、不锈钢推车），侧身坐在检查床边，双腿并拢微斜，一只手轻抚颈部听诊器，另一只手按在床沿，面带柔和笑意。整体呈现干净又诱惑的复古护士形象，性感藏于细节。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "性感护士装",
+        "深U领短上衣",
+        "过膝条纹袜"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "兔女郎｜深V连体衣 + 细密渔网袜",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物穿着黑色深V领连体兔女郎装，面料为弹力缎面，深V领口，领缘用细窄的银色链条装饰，背部全裸仅靠颈后系带固定，腰部两侧有挖孔设计，下身部分为高腰三角剪裁（外搭一条极短的同色系裙片）。腿部搭配黑色细密渔网连裤袜，网眼约0.8厘米。人物头戴黑色兔耳发箍，颈间系有黑色领结。她站在装饰有霓虹灯管的镜面背景前，一只手轻扶兔耳，另一只手自然垂握一根银色手杖，身体侧转，单膝微曲，姿态灵动。整体呈现复古俱乐部中的迷人兔女郎，华丽而不艳俗。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "兔女郎",
+        "深V连体衣",
+        "细密渔网袜"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "性感修女｜深V长袍 + 蕾丝长筒袜",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物穿着黑色深V领修女式长袍，面料为哑光厚雪纺，深V领口，领缘缀有细密的黑色蕾丝，长袍为长袖，袖口呈喇叭状，腰部用同色宽腰带束出曲线，裙摆及地但前侧中央有高开衩至大腿根部。腿部搭配黑色蕾丝长筒袜，袜口为宽幅弹力花边，与开衩处若隐若现。人物颈间佩戴一枚银色十字架项链，垂于深V领口中央。她站在哥特式拱窗旁，窗外有彩绘玻璃，一只手轻握胸前十字架，另一只手自然垂落，身体微微倚靠窗框，眼神低垂。整体呈现神秘而克制的暗黑修女形象，性感来自庄严中的缝隙。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "性感修女",
+        "深V长袍",
+        "蕾丝长筒袜"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "性感警服｜深U领衬衫 + 包臀皮裙",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物上半身穿着深U领蓝色警式衬衫，面料为挺括府绸，深U领口，领尖向外翻折，袖口卷至前臂，衬衫下摆随意塞入裙中，只系最下方两颗纽扣，露出胸腹间大片肌肤；下半身搭配黑色高腰包臀皮裙，裙身紧贴臀部，长度至大腿中段，前侧有金属拉链装饰。腿部搭配黑色吊带袜，袜口为简约弹力边，带有两条银色金属吊带夹链，从裙摆下隐约可见。人物站在带有警用储物柜的布景前，一只手轻扶腰间的道具手铐，另一只手按在柜门上，身体微侧，双腿分立与肩同宽。整体呈现干练又性感的执法者形象，强势中带着诱惑。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "性感警服",
+        "深U领衬衫",
+        "包臀皮裙"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "森林精灵｜深V树叶薄纱裙 + 过膝长靴",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物穿着深V领精灵风格短裙，面料为多层绿色薄纱与仿真叶片贴花拼接，深V领口，肩部为细带挂脖设计，背部镂空，裙摆前短后长，前侧裙长至大腿根部，后侧拖地。腿部搭配浅肤色透肤丝袜（极薄，几乎隐形），袜口为窄边，外穿黑色过膝长靴，靴筒包裹至膝上。人物站在森林主题的摄影棚内（仿树根、藤蔓背景），单膝跪地，身体前倾，一只手轻抚地面落叶，另一只手抬起至耳侧，仿佛在聆听自然之声。整体呈现空灵又野性的森林精灵写真，性感由裸露的肩背和长靴勾勒。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "森林精灵",
+        "深V树叶薄纱裙",
+        "过膝长靴"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "女巫｜深V紧身胸衣 + 开衩长裙",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物上半身着深V领紧身胸衣式上衣，面料为黑色天鹅绒，深V领口，内置鱼骨塑形，胸前用交叉系带收紧，肩部为无袖设计，背部为露背；下半身搭配黑色高腰长裙，裙身左侧开衩至大腿根部，裙长及地，面料为垂坠丝光棉。腿部搭配黑色后缝线连裤袜（透肤，深色缝线从脚踝延伸至袜口）。人物站立于布满蜡烛和复古书籍的暗色房间，一只手轻握羽毛笔，另一只手按在翻开的大书上，身体略微扭转，一只脚踏在矮凳上，露出开衩处的腿部线条。整体呈现神秘而强大的女巫影像，性感与力量并存。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "女巫",
+        "深V紧身胸衣",
+        "开衩长裙"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "女海盗｜深V白衬衫 + 紧身马甲 + 条纹吊带袜",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物上半身着深V领白色宽松衬衫，面料为亚麻，深V领口，因只系第二颗纽扣而自然敞开，露出锁骨与胸线，袖口宽大并卷至肘部，下摆随意塞入下装；外穿一件黑色皮质紧身马甲，马甲前侧为深U领，正好与衬衫的深V叠穿，马甲系带在背后收紧；下半身搭配黑色高腰超短皮裤，裤腿紧贴大腿根，裤脚有金属扣带装饰。腿部搭配黑白宽条纹吊带袜，袜口宽边。人物站在木质船舵背景前，头戴三角帽，一只手扶住舵轮，另一只手自然垂握一柄佩剑，身体侧转，双腿呈站立交叉状。整体呈现放荡不羁的性感女海盗，飒爽中带魅。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "女海盗",
+        "深V白衬衫",
+        "条纹吊带袜"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_09",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "哥特公主｜深U领束胸连衣裙 + 蕾丝吊带袜",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物穿着深U领哥特式束胸连衣裙，面料为暗紫色丝绒与黑色蕾丝拼接，深U领口，领缘饰有密集的黑色珍珠串，束胸部分紧裹躯干，向下延伸为蓬松的及膝伞裙，裙摆内衬硬纱，前侧有纵向开衩。腿部搭配黑色蕾丝吊带袜，袜口为宽幅扇形花边，外穿同色系过肘长手套（蕾丝材质）。人物坐在复古高背椅上，一只手轻抚椅背顶端，另一只手搭在膝上，双腿交叠，身体微侧，背景为暗色帷幔和烛台。整体呈现华丽而病娇的哥特公主写真，性感藏于繁复的细节中。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "哥特公主",
+        "深U领束胸连衣裙",
+        "蕾丝吊带袜"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_cosplay_10",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "cosplay",
+      "type": "prompt",
+      "title": "科幻战士｜深V连体衣 + 网眼过膝袜",
+      "positive": "保持人物脸型、五官、发型和整体气质一致。人物穿着深V领银灰色紧身连体衣，面料为高弹力哑光涂层布料，深V领口，领缘有金属拉链，肩部为不对称垫肩设计，腰部两侧有镂空，下身部分为高腰三角剪裁（外罩一条极短的金属色裙甲）。腿部搭配黑色大网眼过膝袜（网眼约2厘米），袜口为宽边，包裹至大腿上段。人物站在充满未来感的光带背景前（模拟太空舱），一只手扶住腰侧的武器挂件，另一只手抬至头部附近，做出调整耳麦的动作，身体呈动态站姿，一条腿弯曲点地。整体呈现冷峻又性感的星际战士形象，性感由紧身衣与网眼袜的冲突感营造。",
+      "negative": "",
+      "keywords": [
+        "cosplay",
+        "科幻战士",
+        "深V连体衣",
+        "网眼过膝袜"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_01",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 01｜左腿承重·右腿斜后点地",
+      "positive": "standing pose, full body, weight on left straight leg, right leg extended back with toe touching ground, leg straight, upper body leaning forward 25 degrees, right hand pulling loose dress neckline down to expose shoulder and collarbone, left hand on waist with fingers pressing fabric, seductive gaze, chin up, slightly open mouth, loose maxi dress, dramatic side light, sensual, fashion photo, high quality",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "左腿承重",
+        "右腿斜后点地",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "面对镜头，重心完全在左腿（伸直，全脚掌着地）。",
+        "右腿向斜后方伸直，脚尖点地，脚背绷直，膝盖不弯。",
+        "上半身大幅度前倾（约 25°），同时右手拉住连衣裙领口向下扯（露出锁骨和一侧肩膀），左手反手叉腰，用力掐出腰线。",
+        "头部上扬，眼神从下方向上看向镜头，嘴唇微张。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_02",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 02｜侧身弓步·扭转撩发",
+      "positive": "standing pose, full body, side view, deep lunge stance, front leg bent with foot flat, back leg straight with foot flat, hips pushed forward, torso twisted toward camera, one hand running through hair from neck, other hand pulling dress fabric over thigh, arched back, S-curve, smoldering expression, loose dress clinging by tension, sensual lighting, editorial style",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "侧身弓步",
+        "扭转撩发",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "侧身 90° 对镜头，双腿前后大弓步——前腿屈膝（全脚掌着地），后腿伸直（脚掌踩实）。",
+        "胯部向前腿方向猛烈顶出，臀部后翘，形成夸张 S 弧。",
+        "上身向反方向扭转，胸腔转向镜头，同时靠近镜头的手从颈侧插入发根，向后撩发，另一只手自然搭在大腿根部，轻轻把裙摆往后拉，勒出大腿轮廓。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_03",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 03｜交叉腿微蹲·抱臂看镜头",
+      "positive": "standing pose, full body, front view, legs crossed at ankles, both feet flat on ground, knees slightly bent, hips pushed back, arms crossed under bust, squeezing fabric to highlight bust line, head tilted, biting lip, seductive stare, loose dress, cleavage hinted, low angle shot, alluring atmosphere",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "交叉腿微蹲",
+        "抱臂看镜头",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "面对镜头，双腿交叉（左腿在右腿前），双脚均全掌着地，膝盖微屈。",
+        "重心下降一点（微蹲但仍是站姿），臀部向后撅，上半身挺直。",
+        "双手交叉抱臂，但抱的位置在胸部下方，用力往上推挤，同时小臂夹紧，把裙摆前侧勒出褶皱，凸显胸部轮廓。",
+        "头部微侧，咬下唇或舌尖轻触上颚。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_04",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 04｜背身回眸·侧向提裙",
+      "positive": "standing pose, full body, back side view 45 degrees, weight on back foot flat, front toe touching, hips pushed to one side, near hand pulling dress hem up to upper thigh, exposing leg, other hand on hip, head turned back over shoulder looking at camera, intense eye contact, loose dress gathered at side, dramatic shadows, glamorous, high fashion",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "背身回眸",
+        "侧向提裙",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "背对镜头约 45°，双脚前后站立（后脚承重全掌，前脚虚点地）。",
+        "臀部向一侧顶出，同时靠近镜头的手从身后拉住裙摆侧面，用力向上提拉至大腿根部，露出整条腿外侧。",
+        "另一只手扶在臀部或腰侧。",
+        "头部强力向镜头方向扭转，眼神斜睨，脖颈筋络微显。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_05",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 05｜桌边后仰·脚尖搭边",
+      "positive": "standing pose, full body, leaning back against table edge, both feet on ground, one leg straight supporting weight, other leg bent with toe resting on table edge (not sitting), hands gripping table behind, chest pushed forward, head tilted back, eyes closed, sensual relaxation, loose dress draping down, elegant curves, soft romantic lighting",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "桌边后仰",
+        "脚尖搭边",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "侧身靠近一个矮桌或栏杆（高度约在臀部），双腿直立，重心在左腿。",
+        "右腿屈膝抬起，脚尖轻轻搭在桌面边缘（但绝不可坐上去），保持站姿。",
+        "双手向后撑在桌面上，身体后仰，胸腔挺起，腹部收紧。",
+        "头部后仰，闭眼或看向天花板，露出颈部和锁骨。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_06",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 06｜背身收拢裙摆·回眸",
+      "positive": "standing pose, full body, back facing camera, feet shoulder-width apart, both flat on ground, both hands reaching behind back, pulling loose dress fabric from both sides toward the center of lower back, cinching waist, head turned back over shoulder looking at camera, intense gaze, exposed full back, shoulder blades slightly squeezed, arched lower back, sensual, dramatic backlight, high fashion",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "背身收拢裙摆",
+        "回眸",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "背对镜头（完全背对），双脚分开与肩同宽，全脚掌着地。",
+        "双手从身体两侧伸向背后，各捏住裙摆的一侧布料，用力向腰后中央拉拢，把宽松的裙摆勒紧在腰后，形成一个“收紧的蝴蝶结”效果。",
+        "头部强力扭转 180° 回看镜头，下巴微收，眼神从肩膀上方斜射过来。",
+        "核心：收腹、提臀，背部肌肉（肩胛骨）微微内收。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_07",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 07｜墙面弓步·后仰听光",
+      "positive": "standing pose, full body, side view, facing wall, both hands pressing against wall at shoulder height, front leg bent with foot flat, back leg straight back with toe on ground and heel up, upper body leaning backward away from wall, hips pushed back, head tilted back, eyes closed, neck exposed, loose dress pulled tight over hips, dramatic side light, sensual, editorial",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "墙面弓步",
+        "后仰",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立，借助墙面）：",
+        "侧身对镜头（90°），面对墙壁，双手撑在墙面上（与肩同高）。",
+        "双腿呈大弓箭步——前腿（靠近墙）屈膝，脚掌踩实；后腿（远离墙）向后伸直，脚尖点地，脚跟抬离。",
+        "上半身向后仰（离开墙面），臀部向后顶，把裙摆后侧拉出紧绷的线条。",
+        "头部后仰，闭眼或看向天花板，颈部完全暴露。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_08",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 08｜旁点腿侧倾·慵懒微笑",
+      "positive": "standing pose, full body, facing camera, weight on right straight leg (foot flat), left leg extended far to the side, inner edge of foot touching ground, leg straight, upper body leaning sharply to the right (toward weight leg), left hand resting on left hip bone with fingers pointing down, right hand loosely holding dress hem, lazy, alluring gaze, slight smile, relaxed but sexy, loose dress, soft lighting",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "旁点腿侧倾",
+        "慵懒微笑",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "面对镜头，重心完全在右腿（伸直，全脚掌着地）。",
+        "左腿向左侧方伸出（不是前方），脚内侧着地（像芭蕾的“旁点地”），膝盖伸直。",
+        "上半身向重心腿方向（右侧）大幅度侧倾（约 30°），头部也跟着歪向右侧。",
+        "左手搭在左胯骨上（手指朝下），右手自然垂落或轻轻捏住裙摆侧边向上提拉。",
+        "表情：慵懒地看向镜头，嘴唇微闭但带一丝笑意。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_09",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 09｜宽腿微蹲·抓裙蓄力",
+      "positive": "standing pose, full body, front view, feet wider than shoulders, both flat on ground, knees slightly bent (15 degrees), hips slightly lowered (like squat prep), both hands gripping dress fabric from outer thighs, pulling upward to make fabric cling to hips and thighs, chest pushed forward, lower back arched, head tilted up, half-closed eyes, slightly open mouth, powerful, athletic sensuality, dramatic lighting, high quality",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "宽腿微蹲",
+        "抓裙蓄力",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立，但微蹲蓄力）：",
+        "面对镜头，双腿分开略宽于肩，膝盖微屈（约 15°，像准备起跳），双脚全掌着地。",
+        "双手从大腿外侧（靠近胯骨的位置）向内抓住裙摆布料，向上拉紧，让布料紧贴大腿和胯部轮廓。",
+        "胸部挺起（想象有人在背后拉你肩膀），臀部微微向后坐，腰部反弓。",
+        "头部微抬，眼神半眯，嘴唇微张。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_10",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 10｜交叉抱臂·指尖触锁骨",
+      "positive": "standing pose, full body, 45 degree side view, one leg forward with full foot on ground (weight), other leg back with toe touching, arms crossed in front of chest, fingertips pressing on opposite collarbones, upper body slightly leaning back, collarbones prominent, head turned toward camera, gaze through crossed arms, loose dress gathered at front by arm tension, mysterious, elegant seduction, soft rim light, fashion photography",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "交叉抱臂",
+        "指尖触锁骨",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "侧身 45° 对镜头，双腿一前一后站立（前脚全掌承重，后脚虚点地）。",
+        "双手在胸前交叉（左臂在上，右臂在下），但指尖不是握臂，而是各自按压在对侧锁骨上，手指微微张开。",
+        "上半身略微后仰，锁骨因手臂上抬而明显突出。",
+        "头部转向镜头，下巴微收，眼神从交叉的手指缝隙间看过来。",
+        "核心：手臂交叉的动作会将裙摆前侧布料向中间收拢，勒出胸部和腰部的轮廓。"
+      ],
+      "combinable": false,
+      "enabled": true,
+      "exposureLevel": "medium"
+    },
+    {
+      "id": "direct_standing_pose_11",
+      "suite": "bangyan",
+      "category": "姿势穿搭场景",
+      "subcategory": "站立姿势",
+      "type": "prompt",
+      "title": "站立姿势 11｜抱膝抬腿·直视镜头",
+      "positive": "standing pose, full body, front view, weight on left straight leg (foot flat), right leg bent and raised up to hip level, toe pointed, both arms hugging right knee, pulling it toward chest, dress fabric gathered at upper thigh, exposed inner leg, upper body straight, hips slightly pushed back, head tilted, direct eye contact, slightly open mouth, graceful, bold sensuality, high key lighting",
+      "negative": "",
+      "keywords": [
+        "站立姿势",
+        "抱膝抬腿",
+        "直视镜头",
+        "standing pose"
+      ],
+      "actionBreakdown": [
+        "动作拆解（站立）：",
+        "面对镜头，重心完全在左腿（伸直，全脚掌着地）。",
+        "右腿屈膝向上提起（大腿抬至水平），脚尖绷直，膝盖朝向镜头左侧。",
+        "双手抱住右膝（左手在上，右手在下），将膝盖向胸口拉近，裙摆因腿部抬起而自然堆叠在大腿根部，露出整条右腿内侧线条。",
+        "上半身挺直，臀部略后翘，腰部自然弯曲。",
+        "头部微侧，眼神直视镜头，嘴唇微张。"
       ],
       "combinable": false,
       "enabled": true,
