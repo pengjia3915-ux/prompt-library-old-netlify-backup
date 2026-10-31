@@ -13,6 +13,7 @@ await fs.mkdir(path.join(dist, ".openai"), { recursive: true });
 
 for (const file of [
   "index.html",
+  "_redirects",
   "pose-reference.html",
   "css/pose-reference.css",
   "js/pose-reference.js",

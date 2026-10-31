@@ -1,0 +1,214 @@
+{
+  "checkedAt": "2026-10-31T00:27:57.366651+00:00",
+  "siteId": "b897359f-4774-462c-96f6-4f5263da9211",
+  "deployId": "6ae535f6ae40343afe208cee",
+  "results": [
+    {
+      "path": "",
+      "status": 200,
+      "bytes": 14200,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 14200,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "css/prototype.css?v=4.1.0",
+      "status": 200,
+      "bytes": 47875,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "css/studio.css?v=4.1.0",
+      "status": 200,
+      "bytes": 20407,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "css/workbench.css?v=4.1.0",
+      "status": 200,
+      "bytes": 14003,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/prototype.js?v=4.1.0",
+      "status": 200,
+      "bytes": 120057,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/catalog.js?v=4.1.0",
+      "status": 200,
+      "bytes": 8437,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/browse-model.js?v=4.1.0",
+      "status": 200,
+      "bytes": 1231,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/families.js?v=4.1.0",
+      "status": 200,
+      "bytes": 5962,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/suite-utils.js?v=4.1.0",
+      "status": 200,
+      "bytes": 20437,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/storage.js?v=4.1.0",
+      "status": 200,
+      "bytes": 5730,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/sync.js?v=4.1.0",
+      "status": 200,
+      "bytes": 7230,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/catalog-map.json?v=4.1.0",
+      "status": 200,
+      "bytes": 529639,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/img2img-prompts.json?v=4.1.0",
+      "status": 200,
+      "bytes": 175839,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/bangyan-data.json?v=4.1.0",
+      "status": 200,
+      "bytes": 519770,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "manifest.json?v=4.1.0",
+      "status": 200,
+      "bytes": 479,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "icons/icon.svg",
+      "status": 200,
+      "bytes": 415,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "pose-reference.html",
+      "status": 200,
+      "bytes": 4505,
+      "sha256Matches": false,
+      "expectedNetlifyLinkRewrite": true
+    },
+    {
+      "path": "css/pose-reference.css?v=4.1.0",
+      "status": 200,
+      "bytes": 7517,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/pose-reference.js?v=4.1.0",
+      "status": 200,
+      "bytes": 9772,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "js/pose-model.js?v=4.1.0",
+      "status": 200,
+      "bytes": 3224,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/catalog.json",
+      "status": 200,
+      "bytes": 555505,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/action-prompts.json",
+      "status": 200,
+      "bytes": 36550,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/catalog.json",
+      "status": 200,
+      "bytes": 555505,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/action-prompts.json",
+      "status": 200,
+      "bytes": 36550,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/img/pair60_P030_diag.png",
+      "status": 200,
+      "bytes": 511003,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "service-worker.js",
+      "status": 200,
+      "bytes": 3494,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/img/full_single_P001_front.png",
+      "status": 200,
+      "bytes": 273032,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/img/full_single_P049_side.png",
+      "status": 200,
+      "bytes": 74851,
+      "sha256Matches": true,
+      "expectedNetlifyLinkRewrite": false
+    }
+  ],
+  "syncUnauthenticatedStatus": 400,
+  "sourceRecords": 754,
+  "poseGroups": 251,
+  "posePromptGroups": 25
+}

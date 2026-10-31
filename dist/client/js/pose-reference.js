@@ -1,4 +1,4 @@
-import {groupPoses,filterPoses,normalizePoseState,CATEGORIES,resolveActionPrompt,categoryLabel,FAMILIES,displayCategory} from './pose-model.js?v=4.1.0-local2';
+import {groupPoses,filterPoses,normalizePoseState,CATEGORIES,resolveActionPrompt,categoryLabel,FAMILIES,displayCategory} from './pose-model.js?v=4.1.0';
 const $=s=>document.querySelector(s),KEY='prompt-library-pose-reference-v1';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let promptEntries={},promptOnly=false,family='';
