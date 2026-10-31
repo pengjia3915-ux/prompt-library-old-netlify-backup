@@ -7,3 +7,15 @@ data/**/*.json -text
 dist/client/data/**/*.json -text
 
 backups/**/*.json -text
+
+dist/client/** -text
+
+js/** -text
+
+css/** -text
+
+*.html -text
+
+service-worker.js -text
+
+manifest.json -text
