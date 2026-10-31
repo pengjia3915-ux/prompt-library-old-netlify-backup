@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#F2F1ED" />
     <meta name="description" content="专为 img2img 设计的极简个人 Prompt 卡片库" />
-    <link rel="manifest" href="manifest.json?v=3.0.0" />
+    <link rel="manifest" href="manifest.json?v=4.1.0-local2" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
     <script>
       try {
@@ -15,9 +15,10 @@
         }
       } catch {}
     </script>
-    <link rel="stylesheet" href="css/prototype.css?v=3.0.0" />
-    <link rel="stylesheet" href="css/studio.css?v=3.1.2-dismiss1" />
-    <title>Img2Img Prompt 库</title>
+    <link rel="stylesheet" href="css/prototype.css?v=4.1.0-local2" />
+    <link rel="stylesheet" href="css/studio.css?v=4.1.0-local2" />
+    <link rel="stylesheet" href="css/workbench.css?v=4.1.0-local2" />
+    <title>Prompt 库 · v4.1 本地预览</title>
   </head>
   <body>
     <div class="prototype-shell">
@@ -38,7 +39,7 @@
         </button>
       </nav>
       <nav id="studio-nav" class="studio-nav" aria-label="工作区"></nav>
-      <p class="sidebar-note">Img2Img Prompt Library<br>v3.1.2 · 使用优先版</p>
+      <p class="sidebar-note">Img2Img Prompt Library<br>v4.1 · 本地扩充预览</p>
       </aside>
       <main>
         <header class="topbar">
@@ -49,6 +50,7 @@
             <button class="primary-button" type="button" data-action="add-prompt"><span aria-hidden="true">＋</span><span id="add-prompt-label">新增</span></button>
           </div>
         </header>
+        <nav id="path-cards" class="path-cards" aria-label="使用路径"><button type="button" data-action="studio-workspace" data-value="browse"><strong>直接使用</strong><span>多项修改方案 · 推荐组合</span></button><button type="button" data-action="studio-workspace" data-value="goals"><strong>按目标找</strong><span>姿势 · 穿搭 · 原图 · 场景</span></button><button type="button" data-action="studio-workspace" data-value="builder"><strong>自由组合</strong><span>组件与颜色，自己搭配</span></button></nav>
         <div id="catalog-controls" class="catalog-controls"></div>
         <nav id="category-tabs" class="category-tabs" aria-label="Prompt 一级分类"></nav>
         <nav id="mode-tabs" class="mode-tabs" aria-label="榜眼模式" hidden></nav>
@@ -86,7 +88,7 @@
           <div id="recent-list" class="recent-list"></div>
         </section>
 
-        <footer class="prototype-footer">个人 Prompt 库 · 数据默认保存在当前设备</footer>
+        <footer class="prototype-footer">个人 Prompt 库 · 数据保存在当前设备 · 跨设备请使用同步或导入备份</footer>
       </main>
     </div>
 
@@ -175,17 +177,17 @@
         <div class="theme-grid" role="radiogroup" aria-label="配色主题">
           <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="sage">
             <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-            <span><strong>冷白＋石墨灰</strong><small>克制、清晰、耐看</small></span>
+            <span><strong>暖白与鼠尾草</strong><small>克制、清晰、耐看</small></span>
             <b aria-hidden="true">✓</b>
           </button>
           <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="wine">
             <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-            <span><strong>冷白＋石墨黑</strong><small>清晰、克制、适合长时间使用</small></span>
+            <span><strong>暖白与陶土</strong><small>清晰、克制、适合长时间使用</small></span>
             <b aria-hidden="true">✓</b>
           </button>
           <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="blue">
             <span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-            <span><strong>雾蓝灰＋深靛青</strong><small>清爽、理性、工具感</small></span>
+            <span><strong>雾灰与青绿</strong><small>清爽、理性、工具感</small></span>
             <b aria-hidden="true">✓</b>
           </button>
           <button class="theme-option" type="button" role="radio" aria-checked="false" data-action="set-theme" data-theme="studio">
@@ -206,7 +208,7 @@
           </div>
           <button class="icon-button" type="button" data-action="close-dialog" aria-label="关闭">×</button>
         </div>
-        <p class="dialog-copy">手机和电脑保存同一个同步码后，点击“立即同步”即可合并 Prompt 的新增、编辑、置顶和删除，以及榜眼自由拼装和颜色方案。内容会先在设备端加密。</p>
+        <p class="dialog-copy">手机和电脑保存同一个同步码后，点击“立即同步”即可合并 Prompt 的新增、编辑、置顶和删除，以及榜眼自由拼装和颜色方案。内容会先在设备端加密。只有点击“立即同步”才发起请求。动作参考区的收藏可单独导入导出，暂不参与同步。</p>
         <label class="field-label" for="sync-code">同步码</label>
         <input id="sync-code" class="field-control" type="text" maxlength="39" autocomplete="off" placeholder="输入手机和电脑共用的同步码" />
         <p id="sync-status" class="dialog-copy" aria-live="polite">尚未设置同步码。</p>
@@ -226,6 +228,6 @@
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script type="module" src="js/prototype.js?v=3.1.2-dismiss1"></script>
+    <script type="module" src="js/prototype.js?v=4.1.0-local2"></script>
   </body>
 </html>

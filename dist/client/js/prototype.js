@@ -1,13 +1,14 @@
-import { familyFor, familyUnits } from './families.js?v=3.1.2-dismiss1';
-import { classify, recordKey, CATEGORIES } from './catalog.js?v=3.1.2-dismiss1';
+import { contentType, contentLabel, belongsToWorkspace } from './browse-model.js?v=4.1.0-local2';
+import { familyFor, familyUnits } from './families.js?v=4.1.0-local2';
+import { classify, recordKey, CATEGORIES } from './catalog.js?v=4.1.0-local2';
 import {
   createSyncCode,
   formatSyncCode,
   isValidSyncCode,
   normalizeSyncCode,
   syncSuites
-} from "./sync.js?v=3.0.0";
-import { readStorageBundle, writeStorageBundle } from "./storage.js?v=3.0.0";
+} from "./sync.js?v=4.1.0-local2";
+import { readStorageBundle, writeStorageBundle } from "./storage.js?v=4.1.0-local2";
 import {
   BANGYAN_SYNTHESIS_ORDER,
   clone,
@@ -31,10 +32,10 @@ import {
   searchMatches,
   selectBuilderComponent,
   removeBuilderComponent
-} from "./suite-utils.js?v=3.1.2-dismiss1";
+} from "./suite-utils.js?v=4.1.0-local2";
 
-const APP_ASSET_VERSION = "3.1.2-dismiss1";
-const PAGE_SIZE = 48;
+const APP_ASSET_VERSION = "4.1.0-local2";
+const PAGE_SIZE = 8;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
 const THEME_COLORS = {
@@ -1100,20 +1101,20 @@ function render() {
 }
 
 function saveBrowsingState() {
-  try { sessionStorage.setItem('prompt-library-studio-v1', JSON.stringify({...studio, scrollY: window.scrollY, detail: app.detail, suite: app.activeSuite})); } catch {}
-  try { sessionStorage.setItem("prompt-library-browsing-v1", JSON.stringify({ suite: app.activeSuite, query: app.searchQuery, view: app.quickView, all: app.searchAll, subcategory: app.subcategoryFilter, collapsed: [...app.collapsedSections], limit: app.visibleLimit, scrollY: window.scrollY })); } catch {}
+  try { sessionStorage.setItem('prompt-library-v4-view', JSON.stringify({...studio, scrollY: window.scrollY, detail: app.detail, suite: app.activeSuite})); } catch {}
+  try { sessionStorage.setItem("prompt-library-v4-browsing", JSON.stringify({ suite: app.activeSuite, query: app.searchQuery, view: app.quickView, all: app.searchAll, subcategory: app.subcategoryFilter, collapsed: [...app.collapsedSections], limit: app.visibleLimit, scrollY: window.scrollY })); } catch {}
 }
 
 function restoreBrowsingState() {
   try {
-    const state = JSON.parse(sessionStorage.getItem('prompt-library-studio-v1'));
+    const state = JSON.parse(sessionStorage.getItem('prompt-library-v4-view'));
     if (state && state.suite === app.activeSuite) {
       for (const key of ['source','only','workspace','category','type','theme','mine','legacy']) if(typeof state[key] === (['legacy','only'].includes(key) ? 'boolean' : 'string')) studio[key] = state[key];
       requestAnimationFrame(() => { if (state.detail) openDetail(state.detail.kind, state.detail.id); else window.scrollTo(0,state.scrollY||0); });
     }
   } catch {}
   try {
-    const saved = JSON.parse(sessionStorage.getItem("prompt-library-browsing-v1"));
+    const saved = JSON.parse(sessionStorage.getItem("prompt-library-v4-browsing"));
     if (!saved || saved.suite !== app.activeSuite) return;
     app.searchQuery = typeof saved.query === "string" ? saved.query : "";
     app.quickView = ["browse", "favorites", "recent"].includes(saved.view) ? saved.view : "browse";
@@ -1366,6 +1367,10 @@ function openDetail(kind, id) {
         : kind === "custom" && entry.kind === "direct"
           ? "自定义直接 Prompt · 可直接复制，不参与自由拼装"
         : edited ? "已编辑版本 · 正式数据仍保留" : "可编辑的自定义内容";
+  if (!displayOnly && !['component','preset','composition'].includes(kind)) {
+    const origin=isStaticEditable(kind,id)?(edited?'本机编辑版本，可恢复内置原文':'内置原文保留，编辑保存到本机'):'我的内容，已保存到当前设备';
+    $('#detail-meta').textContent=`${contentLabel(kind,metadata)} · ${origin}`;
+  }
   $("#detail-positive").textContent = display.positive;
   $("#detail-negative").textContent = display.negative;
   $("#detail-negative-block").hidden = !display.negative;
@@ -1556,21 +1561,23 @@ async function registerServiceWorker() {
 }
 
 async function initialize() {
-  try { const response = await fetch('data/catalog-map.json?v=3.1.2-dismiss1'); if(response.ok) catalogMap = (await response.json()).entries || {}; } catch {}
+  const catalogRequest = fetch('data/catalog-map.json?v=4.1.0-local2').then(response=>response.ok?response.json():null).catch(()=>null);
   const loadData = async (file) => {
     try {
-      const response = await fetch(`data/${file}?v=${APP_ASSET_VERSION}`, { cache: "no-store" });
+      const response = await fetch(`data/${file}?v=${APP_ASSET_VERSION}`);
       if (!response.ok) return null;
       const data = await response.json();
       if (file === "img2img-prompts.json" ? !Array.isArray(data.prompts) || !Array.isArray(data.categories) : !Array.isArray(data.components) || !Array.isArray(data.presets) || !Array.isArray(data.directPrompts)) return null;
       return data;
     } catch { return null; }
   };
-  const [zhuangyuanData, bangyanData, storage] = await Promise.all([
+  const [zhuangyuanData, bangyanData, storage, catalogData] = await Promise.all([
     loadData("img2img-prompts.json"),
     loadData("bangyan-data.json"),
-    readStorageBundle()
+    readStorageBundle(),
+    catalogRequest
   ]);
+  catalogMap = catalogData?.entries || {};
   const migratedLegacy = !storage.zhuangyuan && migrateLegacyPrototypeState(storage.legacy || storage.legacyFallback);
   app.defaults.zhuangyuan = zhuangyuanData;
   app.defaults.bangyan = bangyanData;
@@ -1832,6 +1839,7 @@ $("#search-input").addEventListener("input", () => {
   app.visibleLimit = PAGE_SIZE;
   renderHeading();
   renderContent();
+  renderStudioChrome();
   saveBrowsingState();
 });
 
@@ -1926,7 +1934,7 @@ function catalogItems() {
   let items = catalogUniverse();
   if(studio.workspace === 'mine') {
     if(studio.mine === 'favorites') items = items.filter(({kind,entry,suite})=>inSuite(suite,()=>isFavorite(kind,entry.id)));
-    if(studio.mine === 'custom') items = items.filter(({kind,entry,suite})=>inSuite(suite,()=>kind==='custom'||hasPromptEdit(kind,entry.id)||!catalogMap[recordKey(suite,kind,entry)]));
+    if(studio.mine === 'custom') items = items.filter(({kind,entry,suite})=>kind!=='composition'&&inSuite(suite,()=>kind==='custom'||hasPromptEdit(kind,entry.id)||!catalogMap[recordKey(suite,kind,entry)]));
   }
   if(studio.workspace==='mine'&&studio.mine==='saved') items=items.filter(item=>item.kind==='composition');
   return items.filter(({kind,entry,suite})=> inSuite(suite,()=>{
@@ -1935,6 +1943,7 @@ function catalogItems() {
     if(studio.type==='component' && kind!=='component') return false;
     if(studio.type==='all' && studio.workspace!=='mine' && kind==='component') return false;
     const m=catalogMeta(kind,entry);
+    if(!belongsToWorkspace(studio.workspace,kind,m))return false;
     if(studio.category!=='全部' && (studio.legacy ? categoryNameFor(kind,entry)!==studio.category : m.category!==studio.category && !m.scopes.includes(studio.category)))return false;
     if(studio.only&&studio.category!=='全部'&&m.scopes.length!==1)return false;
     if(studio.theme && !m.themes.includes(studio.theme))return false;
@@ -1953,7 +1962,7 @@ function renderStudioCard(kind,entry) {
   const excerpt=view.description||d.positive||'';
   const member=familyFor(app.activeSuite,kind,entry,hasPromptEdit(kind,entry.id));
   return `<article class="prompt-card studio-card" data-entry-kind="${kind}" data-entry-id="${id}" data-owner-suite="${app.activeSuite}">
-    <div class="studio-card-main"><div class="studio-entry-heading"><h3><button type="button" class="entry-title" data-action="open-detail" data-kind="${kind}" data-id="${id}">${escapeHtml(d.title)}</button></h3><span class="entry-type">${app.activeSuite==='bangyan'?'榜眼':'状元'} · ${kindLabels[kind]}${isPinned(kind,entry)?' · 置顶':''}${hasPromptEdit(kind,entry.id)?' · 已编辑':''}</span></div>
+    <div class="studio-card-main"><div class="studio-entry-heading"><h3><button type="button" class="entry-title" data-action="open-detail" data-kind="${kind}" data-id="${id}">${escapeHtml(d.title)}</button></h3><span class="entry-type">${app.activeSuite==='bangyan'?'榜眼':'状元'} · ${contentLabel(kind,m)}${isPinned(kind,entry)?' · 置顶':''}${hasPromptEdit(kind,entry.id)?' · 已编辑':''}</span></div>
     <button type="button" class="studio-preview" data-action="open-detail" data-kind="${kind}" data-id="${id}" aria-label="查看 ${escapeHtml(d.title)} 详情"><span class="scope-tags">${labels.map(s=>`<span>${escapeHtml(s)}</span>`).join('')}</span><span class="variant-difference">${member?`区别 · ${escapeHtml(member.difference)}`:''}</span><span class="real-description"><small>${view.description?'说明':'原文节选'} · </small>${escapeHtml(excerpt)}</span></button></div>
     <div class="card-actions"><button type="button" class="favorite-button ${favorite?'is-active':''}" data-action="toggle-favorite" data-kind="${kind}" data-id="${id}" aria-label="${favorite?'取消收藏':'收藏'}" aria-pressed="${favorite}">${favorite?'★':'☆'}<span>${favorite?'已收藏':'收藏'}</span></button>
     ${readOnly?'<span class="readonly-label">仅供辨认</span>':`<button class="text-action is-copy" type="button" data-action="copy-entry" data-kind="${kind}" data-id="${id}" data-copy-type="all">${kind==='preset'?'复制组合 Prompt':'复制'}</button>`}</div></article>`;
@@ -1963,6 +1972,7 @@ function renderCatalog() {
     app.quickView='browse'; $('#recent-panel').hidden=true;
     const recent=(studio.source==='all'?['zhuangyuan','bangyan']:[studio.source]).flatMap(suite=>(app.states[suite]?.recent||[]).map(entry=>({...entry,suite}))).filter(entry=>app.searchQuery.trim().split(/\s+/).every(t=>(entry.title+' '+entry.content).toLowerCase().includes(t.toLowerCase()))).sort((a,b)=>new Date(b.copiedAt)-new Date(a.copiedAt));
     $('#prompt-sections').innerHTML=recent.length?`<div class="recent-list">${recent.map(entry=>`<button class="recent-item" data-owner-suite="${entry.suite}" data-action="copy-recent" data-id="${escapeHtml(entry.id)}"><span><strong>${escapeHtml(entry.title)}</strong><small>${escapeHtml(new Date(entry.copiedAt).toLocaleString('zh-CN'))}</small></span><b>复制</b></button>`).join('')}</div>`:'<div class="empty-state"><h3>还没有匹配的复制记录</h3><p>复制过的内容会在这里，方便接着用。</p></div>';
+    if(recent.length)$('#prompt-sections').insertAdjacentHTML('afterbegin','<div class="recent-tools"><button class="quiet-button" data-action="studio-clear-recent">清空最近复制</button></div>');
     $('#category-title').textContent='最近复制';$('#category-count').textContent=`${recent.length} 条`;return;
   }
   app.quickView='browse'; $('#recent-panel').hidden=true;
@@ -1972,12 +1982,12 @@ function renderCatalog() {
     return {pinned:Number(isPinned(item.kind,item.entry)),match:terms.reduce((n,t)=>n+(String(view.title).toLowerCase().includes(t)?3:0)+((view.tags||[]).some(tag=>tag.toLowerCase().includes(t))?2:0),0),date:new Date(view.updatedAt||view.createdAt||0).getTime()||0};
   });
   const items=catalogItems().map(item=>({...item,rank:rank(item)})).sort((a,b)=>b.rank.pinned-a.rank.pinned||b.rank.match-a.rank.match||b.rank.date-a.rank.date);
-  $('#category-title').textContent=studio.workspace==='mine'?(studio.mine==='custom'?'我的新增与修改':studio.mine==='saved'?'保存的组合':'我的收藏'):(studio.category==='全部'?'浏览内容':studio.category);
+  $('#category-title').textContent=studio.workspace==='mine'?(studio.mine==='custom'?'我的新增与修改':studio.mine==='saved'?'保存的组合':'我的收藏'):(studio.workspace==='browse'?'可直接使用':studio.workspace==='components'?'单项组件库':studio.category==='全部'?'按目标找':studio.category);
   $('#category-eyebrow').textContent=app.activeSuite==='bangyan'?'榜眼':'状元';
   $('#category-description').textContent='';
   $('#category-count').textContent=`${items.length} 条${app.searchQuery?'匹配':''}`;
   const memberFor=item=>inSuite(item.suite,()=>familyFor(item.suite,item.kind,item.entry,hasPromptEdit(item.kind,item.entry.id)));
-  const units=groupSimilar&&studio.workspace==='browse'?familyUnits(items,memberFor):items.map(item=>({items:[item]}));
+  const units=groupSimilar&&['browse','goals','components'].includes(studio.workspace)?familyUnits(items,memberFor):items.map(item=>({items:[item]}));
   const groupCount=units.filter(unit=>unit.family&&unit.items.length>1).length;
   const card=item=>inSuite(item.suite,()=>renderStudioCard(item.kind,item.entry));
   const unitHtml=unit=>{
@@ -1985,45 +1995,52 @@ function renderCatalog() {
     const f=unit.family;
     return `<details class="prompt-family" data-family-id="${escapeHtml(f.id)}" ${expandedFamilies.has(f.id)?'open':''}><summary><span class="family-heading"><strong>${escapeHtml(f.title)}</strong><span class="family-count">${unit.items.length} 条独立内容</span></span><span class="family-basis">${escapeHtml(f.basis)}</span><span class="family-preview">${unit.items.map(item=>escapeHtml(memberFor(item).difference)).join(' / ')}</span><span class="family-disclosure">${expandedFamilies.has(f.id)?'收起同类内容':'展开逐条查看与复制'}</span></summary><div class="family-entries">${unit.items.map(card).join('')}</div></details>`;
   };
-  const groupControl=studio.workspace==='browse'?`<div class="family-toolbar"><span>${groupSimilar?`已归为 ${groupCount} 个同类组，其余逐条显示`:'逐条显示全部内容'}</span><button class="quiet-button" data-action="toggle-families" aria-pressed="${groupSimilar}">${groupSimilar?'逐条浏览':'同类归组'}</button></div>`:'';
+  const groupControl=['browse','goals','components'].includes(studio.workspace)?`<div class="family-toolbar"><span>${groupSimilar?`已归为 ${groupCount} 个同类组，其余逐条显示`:'逐条显示全部内容'}</span><button class="quiet-button" data-action="toggle-families" aria-pressed="${groupSimilar}">${groupSimilar?'逐条浏览':'同类归组'}</button></div>`:'';
   $('#prompt-sections').innerHTML=items.length?`${groupControl}<section class="prompt-section"><div class="prompt-list">${units.slice(0,app.visibleLimit).map(unitHtml).join('')}</div>${units.length>app.visibleLimit?'<button class="quiet-button load-more" data-action="load-more">显示更多</button>':''}</section>`:`<div class="empty-state"><h3>这里暂时没有匹配内容</h3><p>可以减少筛选条件，或试试另一个关键词。</p><button class="quiet-button" data-action="studio-reset">清除筛选</button></div>`;
 }
 function renderStudioChrome() {
-  const builder=studio.workspace==='builder';
+  const builder=studio.workspace==='builder', mine=studio.workspace==='mine';
   document.body.dataset.workspace=studio.workspace;
   const entries=catalogUniverse();
-  const navItem=(value,label,icon,count=null)=>`<button type="button" data-action="studio-shortcut" data-value="${value}" aria-current="${(value==='browse'||value==='builder'?studio.workspace===value:studio.workspace==='mine')?'page':'false'}"><span class="nav-icon" aria-hidden="true">${icon}</span><span>${label}</span>${count===null?'':`<small>${count}</small>`}</button>`;
-  $('#studio-nav').innerHTML=navItem('browse','找 Prompt','⌕')+navItem('builder','自由拼装','⊞')+navItem('favorites','我的','☆');
-  $('#workspace-title').textContent=builder?'自由拼装':studio.workspace==='mine'?{favorites:'我的收藏',recent:'最近复制',custom:'新增与修改',saved:'保存的组合'}[studio.mine]:'找 Prompt';
-  $('#workspace-subtitle').textContent=builder?'选择组件，组成你自己的 Prompt。':studio.workspace==='mine'?'收藏、使用和修改过的内容，接着用。':'选一条 → 复制 → 回到生图工具粘贴。';
+  const navItem=(value,label,icon)=>`<button type="button" data-action="studio-workspace" data-value="${value}" aria-current="${studio.workspace===value?'page':'false'}"><span class="nav-icon" aria-hidden="true">${icon}</span><span>${label}</span></button>`;
+  $('#studio-nav').innerHTML=navItem('browse','直接使用','⌕')+navItem('goals','按目标找','⌑')+navItem('builder','自由组合','⊞')+navItem('mine','我的','☆')+'<a class="pose-nav-link" href="pose-reference.html"><span aria-hidden="true">♧</span><span>动作参考</span></a>';
+  const titles={browse:'选一条，带回图片对话。',goals:'这张图片，你想改什么？',builder:'选组件，组成你的 Prompt。',components:'单项组件库',mine:{favorites:'我的收藏',recent:'最近复制',custom:'新增与修改',saved:'保存的组合'}[studio.mine]};
+  const shortTitle={browse:'直接使用',goals:'按目标找',builder:'自由组合',components:'单项组件库',mine:titles.mine}[studio.workspace]||'Prompt 库';
+  $('#workspace-title').innerHTML=`<span class="title-wide">${escapeHtml(titles[studio.workspace]||'Prompt 库')}</span><span class="title-compact">${escapeHtml(shortTitle)}</span>`;
+  $('#add-prompt-label').textContent='新增';
+  $('#workspace-subtitle').textContent=builder?'沿用原榜眼组合规则；未选项目保持不变。':mine?'收藏、历史和个人修改，随时接着用。':studio.workspace==='goals'?'选一个目标；需要保留其他内容时，打开“仅修改此项”。':'多项修改方案和推荐组合；姿势、穿搭等单项从“按目标找”进入。';
   $('#category-tabs').hidden=!builder;$('#mode-tabs').hidden=true;$('#subcategory-tabs').hidden=true;
   $('.search-row').hidden=builder;
-  if(builder) { $('#catalog-controls').innerHTML='<button class="quiet-button" data-action="studio-components">浏览单项组件库</button>'; return; }
-  const categories=studio.legacy?['全部',...new Set(entries.map(({suite,kind,entry})=>inSuite(suite,()=>categoryNameFor(kind,entry))))]:CATEGORIES;
+  $('#path-cards').hidden=mine||builder||studio.workspace==='components';
+  $('#path-cards').querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.value===studio.workspace)));
+  const buttons=(values,action,selected)=>values.map(([value,label])=>`<button type="button" data-action="${action}" data-value="${escapeHtml(value)}" aria-pressed="${selected===value}">${escapeHtml(label)}</button>`).join('');
+  const source=`<div class="source-filter" aria-label="数据来源"><span>来源</span>${buttons([['all','全部'],['zhuangyuan','状元'],['bangyan','榜眼']],'studio-source',studio.source)}</div>`;
+  if(builder){$('#catalog-controls').innerHTML='<div class="builder-library-link"><span>组件只在这里组合，不与完整方案混排。</span><button class="quiet-button" data-action="studio-components">浏览单项组件库</button></div>';return;}
+  const recent=mine&&studio.mine==='recent';
+  const categories=studio.legacy?['全部',...new Set(entries.map(({suite,kind,entry})=>inSuite(suite,()=>categoryNameFor(kind,entry))))]:CATEGORIES.filter(c=>c!=='仅供辨认');
   const themes=[...new Set(entries.flatMap(({kind,entry,suite})=>inSuite(suite,()=>catalogMeta(kind,entry).themes)))];
-  const filterButtons=(values,action,selected,counts=null)=>values.map(([value,label])=>`<button type="button" data-action="${action}" data-value="${escapeHtml(value)}" aria-pressed="${selected===value}"><span>${escapeHtml(label)}</span>${counts&&Number.isFinite(counts[value])?`<small>${counts[value]}</small>`:''}</button>`).join('');
-  const recentView=studio.workspace==='mine'&&studio.mine==='recent';
-  const typeIncludes=kind=>studio.type==='all'?kind!=='component':studio.type==='direct'?['prompt','direct','custom','composition'].includes(kind):studio.type==='preset'?kind==='preset':kind==='component';
-  const scopeCounts=Object.fromEntries(CATEGORIES.map(category=>[category,entries.filter(({kind,entry,suite})=>inSuite(suite,()=>{
-    if(!typeIncludes(kind))return false;
-    const m=catalogMeta(kind,entry);
-    return category==='全部'||m.category===category||m.scopes.includes(category);
-  })).length]));
-  const visibleCategories=categories.filter(category=>studio.legacy||category==='全部'||category===studio.category||scopeCounts[category]>0);
-  $('#catalog-controls').innerHTML=`${studio.workspace==='mine'?`<div class="mine-tabs">${filterButtons([['favorites','收藏'],['recent','最近使用'],['custom','新增与修改'],['saved','保存的组合']],'studio-mine',studio.mine)}</div>`:''}<div class="scope-filter" aria-label="修改范围" ${recentView?'hidden':''}>${filterButtons(visibleCategories.map(s=>[s,s]),'studio-category',studio.category,scopeCounts)}</div>
-    ${studio.category!=='全部'&&!recentView?`<button class="quiet-button only-scope" data-action="studio-only" aria-pressed="${studio.only}">${studio.only?'✓ ':''}仅修改此项</button>`:''}<details class="advanced-filters"><summary>筛选 · ${{all:'全部来源',zhuangyuan:'状元',bangyan:'榜眼'}[studio.source]}${studio.theme?' · '+escapeHtml(studio.theme):''}</summary><div class="filter-tools"><details class="filter-popover"><summary>来源：${{all:'全部',zhuangyuan:'状元',bangyan:'榜眼'}[studio.source]} ⌄</summary><div>${filterButtons([['all','全部来源'],['zhuangyuan','状元'],['bangyan','榜眼']],'studio-source',studio.source)}</div></details><details class="filter-popover" ${recentView?'hidden':''}><summary>${{all:'直接内容与组合',direct:'直接 Prompt',preset:'推荐组合',component:'单项组件'}[studio.type]} <span>⌄</span></summary><div>${filterButtons([['all','直接内容与组合'],['direct','直接 Prompt'],['preset','推荐组合'],['component','单项组件']],'studio-type',studio.type)}</div></details>
-    <details class="filter-popover" ${recentView?'hidden':''}><summary>${escapeHtml(studio.theme||'主题筛选')} <span>⌄</span></summary><div>${filterButtons([['','所有主题'],...themes.map(s=>[s,s])],'studio-theme',studio.theme)}</div></details>
-    <button ${recentView?'hidden':''} class="legacy-switch" type="button" data-action="studio-legacy" aria-pressed="${studio.legacy}">${studio.legacy?'返回新分类':'原分类'}</button><button class="quiet-button" data-action="studio-reset">重置筛选</button></div></details>`;
+  const target=studio.workspace==='goals'||studio.workspace==='components';
+  const scopes=target?`<div class="scope-filter" aria-label="修改范围">${buttons(categories.map(c=>[c,c==='全部'?'全部目标':c]),'studio-category',studio.category)}</div>${studio.category!=='全部'?`<button class="quiet-button only-scope" data-action="studio-only" aria-pressed="${studio.only}">${studio.only?'✓ ':''}仅修改此项</button>`:''}`:'';
+  const modes=studio.workspace==='browse'?`<div class="content-tabs" aria-label="内容类型">${buttons([['all','全部'],['direct','多项方案'],['preset','推荐组合']],'studio-type',studio.type)}</div>`:'';
+  const myTabs=mine?`<div class="mine-tabs">${buttons([['favorites','收藏'],['recent','最近复制'],['custom','新增与修改'],['saved','保存的组合']],'studio-mine',studio.mine)}</div>`:'';
+  $('#catalog-controls').innerHTML=`${myTabs}${scopes}<div class="catalog-filter-row">${modes}${source}</div><details class="advanced-filters"><summary>主题与原分类</summary><div class="filter-tools">${recent?'':`<details class="filter-popover"><summary>${escapeHtml(studio.theme||'全部主题')} ⌄</summary><div>${buttons([['','全部主题'],...themes.map(x=>[x,x])],'studio-theme',studio.theme)}</div></details><button class="quiet-button" data-action="studio-legacy" aria-pressed="${studio.legacy}">${studio.legacy?'返回用途分类':'按原分类查看'}</button>`}<button class="quiet-button" data-action="studio-reset">重置筛选</button></div></details>${!target&&studio.legacy&&!recent?`<div class="scope-filter" aria-label="原分类">${buttons(categories.map(c=>[c,c]),'studio-category',studio.category)}</div>`:''}`;
 }
 async function studioAction(action,target) {
+  if(action==='studio-clear-recent') {
+    if(!await confirmAction('清空当前来源的最近复制记录？Prompt 正文、收藏和编辑不会被删除。'))return;
+    for(const suite of (studio.source==='all'?['zhuangyuan','bangyan']:[studio.source]))if(app.states[suite])app.states[suite].recent=[];
+    if(!await persist())return;
+    render();return;
+  }
+
   if(action==='studio-shortcut') {
     const value=target.dataset.value;
-    if(value==='browse'||value==='builder')return studioAction('studio-workspace',target);
+    if(['browse','goals','builder','mine','components'].includes(value))return studioAction('studio-workspace',target);
     studio.workspace='mine';studio.mine=value;studio.category='全部';studio.theme='';studio.type='all';app.searchQuery='';
     $('#search-input').value='';window.scrollTo(0,0);
   }
   if(action==='studio-workspace') {
-    studio.workspace=target.dataset.value; app.searchQuery=''; studio.category='全部'; studio.theme='';studio.type='all';
+    studio.workspace=target.dataset.value; app.searchQuery=''; studio.category='全部'; studio.theme='';studio.type='all';studio.only=false;studio.legacy=false;
     if(studio.workspace==='builder') {
       app.activeSuite='bangyan';app.meta.activeSuite='bangyan';app.quickViewSuite='bangyan';
       app.states.bangyan.activeMode='builder';app.states.bangyan.activeCategoryId='姿势穿搭场景';app.quickView='browse';app.searchAll=false;
@@ -2031,10 +2048,10 @@ async function studioAction(action,target) {
     }
     window.scrollTo(0,0);
   }
-  if(action==='studio-components'){studio.workspace='browse';studio.source='bangyan';studio.type='component';studio.category='全部';studio.theme='';}
+  if(action==='studio-components'){studio.workspace='components';studio.source='bangyan';studio.type='component';studio.category='全部';studio.theme='';}
   if(action==='studio-only')studio.only=!studio.only;
-  if(action==='studio-source')studio.source=target.dataset.value;
-  if(action==='studio-category')studio.category=target.dataset.value;
+  if(action==='studio-source'){studio.source=target.dataset.value;studio.category='全部';studio.only=false;}
+  if(action==='studio-category'){studio.category=target.dataset.value;studio.only=false;}
   if(action==='studio-theme'){studio.theme=target.dataset.value;target.closest('details')?.removeAttribute('open');}
   if(action==='studio-type'){studio.type=target.dataset.value;target.closest('details')?.removeAttribute('open');}
   if(action==='studio-mine'){studio.mine=target.dataset.value;studio.category='全部';studio.type='all';studio.theme='';}

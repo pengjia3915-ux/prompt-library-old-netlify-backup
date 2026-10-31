@@ -13,11 +13,17 @@ await fs.mkdir(path.join(dist, ".openai"), { recursive: true });
 
 for (const file of [
   "index.html",
+  "pose-reference.html",
+  "css/pose-reference.css",
+  "js/pose-reference.js",
+  "js/pose-model.js",
   "manifest.json",
   "service-worker.js",
   "css/prototype.css",
   "css/studio.css",
+  "css/workbench.css",
   "js/catalog.js",
+  "js/browse-model.js",
   "js/families.js",
   "data/catalog-map.json",
   "js/prototype.js",
@@ -36,4 +42,5 @@ for (const file of [
 await fs.copyFile(path.join(root, "server", "index.js"), path.join(server, "index.js"));
 await fs.copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", "hosting.json"));
 
+await fs.cp(path.join(root,"data/pose-reference"),path.join(client,"data/pose-reference"),{recursive:true});
 console.log("正式站点构建完成");

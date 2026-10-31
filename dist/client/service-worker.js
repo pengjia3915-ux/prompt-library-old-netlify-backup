@@ -1,20 +1,28 @@
-const CACHE_NAME = "prompt-library-v3.1.2-dismiss1";
+const CACHE_NAME = "prompt-library-v4.1.0-local2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./css/prototype.css?v=3.1.2-dismiss1",
-  "./css/studio.css?v=3.1.2-dismiss1",
-  "./js/prototype.js?v=3.1.2-dismiss1",
-  "./js/catalog.js?v=3.1.2-dismiss1",
-  "./js/families.js?v=3.1.2-dismiss1",
-  "./js/suite-utils.js?v=3.1.2-dismiss1",
-  "./js/storage.js?v=3.1.2-dismiss1",
-  "./js/sync.js?v=3.1.2-dismiss1",
-  "./data/catalog-map.json?v=3.1.2-dismiss1",
-  "./data/img2img-prompts.json?v=3.1.2-dismiss1",
-  "./data/bangyan-data.json?v=3.1.2-dismiss1",
-  "./manifest.json?v=3.1.2-dismiss1",
-  "./icons/icon.svg"
+  "./css/prototype.css?v=4.1.0-local2",
+  "./css/studio.css?v=4.1.0-local2",
+  "./css/workbench.css?v=4.1.0-local2",
+  "./js/prototype.js?v=4.1.0-local2",
+  "./js/catalog.js?v=4.1.0-local2",
+  "./js/browse-model.js?v=4.1.0-local2",
+  "./js/families.js?v=4.1.0-local2",
+  "./js/suite-utils.js?v=4.1.0-local2",
+  "./js/storage.js?v=4.1.0-local2",
+  "./js/sync.js?v=4.1.0-local2",
+  "./data/catalog-map.json?v=4.1.0-local2",
+  "./data/img2img-prompts.json?v=4.1.0-local2",
+  "./data/bangyan-data.json?v=4.1.0-local2",
+  "./manifest.json?v=4.1.0-local2",
+  "./icons/icon.svg",
+  "./pose-reference.html",
+  "./css/pose-reference.css?v=4.1.0-local2",
+  "./js/pose-reference.js?v=4.1.0-local2",
+  "./js/pose-model.js?v=4.1.0-local2",
+  "./data/pose-reference/catalog.json",
+  "./data/pose-reference/action-prompts.json"
 ];
 
 const NETWORK_FIRST_PATHS = [
@@ -39,15 +47,17 @@ async function networkFirst(request) {
     if (!response.ok) throw new Error("Resource unavailable");
     return await rememberResponse(request, response);
   } catch {
-    const cached = await caches.match(request);
+    const cached = await (await caches.open(CACHE_NAME)).match(request);
     if (cached) return cached;
     if (request.mode === "navigate") return caches.match("./index.html");
     return Response.error();
   }
 }
 
-async function cacheFirst(request) {
-  const cached = await caches.match(request);
+async function cacheFirst(request, navigation = false) {
+  // Release-specific cache: a new worker precaches the next release atomically.
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request, { ignoreSearch: navigation });
   if (cached) return cached;
   try {
     return await rememberResponse(request, await fetch(request));
@@ -67,7 +77,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys.filter((key) => key.startsWith('prompt-library-') && key !== CACHE_NAME).map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
@@ -78,8 +88,13 @@ self.addEventListener("fetch", (event) => {
   if (requestUrl.origin !== self.location.origin) return;
   if (requestUrl.pathname.startsWith("/api/")) return;
 
-  const useNetworkFirst = event.request.mode === "navigate"
-    || NETWORK_FIRST_PATHS.some((path) => requestUrl.pathname.endsWith(path));
-
-  event.respondWith(useNetworkFirst ? networkFirst(event.request) : cacheFirst(event.request));
+  // Large original references use the browser HTTP cache, never the PWA cache.
+  if (requestUrl.pathname.includes('/data/pose-reference/img/') || requestUrl.pathname.includes('/data/pose-reference/thumbs/')) return;
+  const versioned = requestUrl.searchParams.has('v');
+  const navigation = event.request.mode === 'navigate';
+  const poseMetadata = requestUrl.pathname.includes('/data/pose-reference/');
+  const networkData = NETWORK_FIRST_PATHS.some(path=>requestUrl.pathname.endsWith(path));
+  event.respondWith(navigation || versioned || poseMetadata || !networkData
+    ? cacheFirst(event.request, navigation)
+    : networkFirst(event.request));
 });
