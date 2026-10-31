@@ -13,9 +13,9 @@ export function groupPoses(records){
  }
  return [...map.values()].map(group=>({...group,views:group.views.sort((a,b)=>ANGLES.indexOf(a['角度'])-ANGLES.indexOf(b['角度']))}));
 }
-export function filterPoses(groups,{category='',family='',query='',favoriteOnly=false,favorites=[]}={}){
+export function filterPoses(groups,{category='',family='',query='',favoriteOnly=false,favorites=[],entries={}}={}){
  const words=query.trim().toLowerCase().split(/\s+/).filter(Boolean);
- return groups.filter(g=>(!family||g.family===family)&&(!category||g.category===category||displayCategory(g)===category)&&(!favoriteOnly||favorites.includes(g.key))&&words.every(w=>`${g.title} ${g.category} ${displayCategory(g)} ${g.system} ${g.number} ${g.views.map(v=>v['角度']).join(' ')}`.toLowerCase().includes(w)));
+ return groups.filter(g=>(!family||g.family===family)&&(!category||g.category===category||displayCategory(g)===category)&&(!favoriteOnly||favorites.includes(g.key))&&words.every(w=>`${g.title} ${g.category} ${displayCategory(g)} ${g.system} ${g.number} ${g.views.map(v=>v['角度']).join(' ')} ${entries[g.key]?.pose||''} ${Object.values(entries[g.key]?.views||{}).join(' ')}`.toLowerCase().includes(w)));
 }
 export function normalizePoseState(value,groups){
  if(!value||value.format!=='prompt-library-pose-state'||value.version!==1||!Array.isArray(value.favorites))throw new Error('请选择动作参考区导出的收藏备份。');
@@ -27,5 +27,7 @@ export function resolveActionPrompt(group,view,entries={}){
  const angle=entry?.views?.[view.id];
  if(!entry?.pose||!angle)return null;
  const action=`${entry.pose}\n\n${angle}`;
+ if(group.family==='upper')return {action,instruction:`以原图中的成年人物为唯一人物参考，保持人物身份、脸型、五官、发型、面部表情、身材比例、服装和场景不变，仅调整可见的上半身动作与拍摄视角。\n\n${action}\n\n保持肩、肘、腕和手指连接自然。参考图被裁切或遮挡的部位不凭空补造；保留原图下肢状态，不因上半身参考强制扩为全身。避免额外手指、肢体穿模、面部变化和极端透视。`};
+ if(group.family==='pair')return {action,instruction:`以原图中两位成年人物为人物参考，分别保持各自身份、脸型、五官、发型、面部表情、身材比例、服装和场景不变，仅调整两人的姿势与拍摄视角。若原图不是双人，请同时提供两位人物参考，不凭空增添或复制人物。\n\n${action}\n\n两人的手臂、腿部和支撑关系须分别清楚，避免肢体归属混淆、穿模、额外手脚和极端透视。保留动作所需接触面，不额外改变穿搭或人物数量。`};
  return {action,instruction:`以原图中的成年人物为唯一人物参考，保持人物身份、脸型、五官、发型、面部表情、身材比例、服装和场景不变，仅调整姿势与拍摄视角。\n\n${action}\n\n保持真实人体比例、合理关节角度和稳定支撑关系，避免手脚增生、肢体穿模、面部变化和极端透视。完整保留动作所需的手脚与接触面，不额外改变穿搭或添加人物。`};
 }

@@ -1,4 +1,4 @@
-import { SUITE_STATE_KEYS, clone } from "./suite-utils.js?v=4.1.0";
+import { SUITE_STATE_KEYS, clone } from "./suite-utils.js?v=4.2.0";
 
 export const DB_NAME = "prompt-library-img2img-prototype";
 export const DB_VERSION = 2;

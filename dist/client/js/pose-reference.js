@@ -1,4 +1,4 @@
-import {groupPoses,filterPoses,normalizePoseState,CATEGORIES,resolveActionPrompt,categoryLabel,FAMILIES,displayCategory} from './pose-model.js?v=4.1.0';
+import {groupPoses,filterPoses,normalizePoseState,CATEGORIES,resolveActionPrompt,categoryLabel,FAMILIES,displayCategory} from './pose-model.js?v=4.2.0';
 const $=s=>document.querySelector(s),KEY='prompt-library-pose-reference-v1';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let promptEntries={},promptOnly=false,family='';
@@ -7,7 +7,7 @@ function toast(text){$('#toast').textContent=text;$('#toast').classList.add('vis
 function save(next){try{localStorage.setItem(KEY,JSON.stringify(next));state=next;return true}catch{toast('本机保存失败，请先导出收藏备份。');return false}}
 function star(key){const favorites=state.favorites.includes(key)?state.favorites.filter(k=>k!==key):[...state.favorites,key];if(save({...state,favorites})){render();if(current)$('#detail-star').textContent=state.favorites.includes(current.key)?'★ 已收藏':'☆ 收藏动作'}}
 function render(){
- const found=filterPoses(groups,{family,category,query:$('#query').value,favoriteOnly,favorites:state.favorites}).filter(g=>!promptOnly||promptEntries[g.key]);
+ const found=filterPoses(groups,{family,category,query:$('#query').value,favoriteOnly,favorites:state.favorites,entries:promptEntries}).filter(g=>!promptOnly||promptEntries[g.key]);
  $('#with-prompts').setAttribute('aria-pressed',String(promptOnly));$('#with-prompts').textContent=`有动作词 · ${Object.keys(promptEntries).length}组`;
  const familyPool=groups.filter(g=>!family||g.family===family);
  $('#families').innerHTML=FAMILIES.map(([key,label])=>`<button data-family="${key}" aria-pressed="${family===key}">${label}<small>${groups.filter(g=>!key||g.family===key).length}</small></button>`).join('');
@@ -40,13 +40,20 @@ $('#with-prompts').onclick=()=>{promptOnly=!promptOnly;limit=24;render()};
 $('#query').addEventListener('input',()=>{limit=24;render()});$('#favorites').onclick=()=>{favoriteOnly=!favoriteOnly;limit=24;render()};$('#more').onclick=()=>{limit+=24;render()};
 $('#angles').onclick=e=>{const b=e.target.closest('[data-angle]');if(b)showView(Number(b.dataset.angle))};$('#detail-star').onclick=()=>star(current.key);$('#close').onclick=close;
 $('#detail').addEventListener('click',e=>{if(e.target===$('#detail')){const r=$('#detail').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close()}});
-$('#detail').addEventListener('cancel',e=>{e.preventDefault();close()});$('#detail').addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();showView(viewIndex+1)}if(e.key==='ArrowLeft'){e.preventDefault();showView(viewIndex-1)}});
+$('#detail').addEventListener('cancel',e=>{e.preventDefault();close()});$('#detail').addEventListener('keydown',e=>{if(e.target.closest('textarea,input,[contenteditable=true]'))return;if(e.key==='ArrowRight'){e.preventDefault();showView(viewIndex+1)}if(e.key==='ArrowLeft'){e.preventDefault();showView(viewIndex-1)}});
 $('#large').onerror=()=>{$('#image-status').textContent='参考图未能加载，请重试或查看来源原站。'};
 async function copyText(text,message){
- try{await navigator.clipboard.writeText(text);toast(message)}catch{
-  const area=$('#prompt-preview');area.value=text;area.focus();area.select();
-  try{if(document.execCommand('copy'))toast(message);else toast('复制失败，文字已选中，可手动复制。')}catch{toast('文字已选中，请手动复制。')}
+ try{await navigator.clipboard.writeText(text);toast(message);return}catch{}
+ let dialog=$('#copy-fallback');
+ if(!dialog){
+  dialog=document.createElement('dialog');dialog.id='copy-fallback';
+  const label=document.createElement('p');label.textContent='自动复制不可用，文字已选中，可长按或按 Ctrl / Cmd + C 复制。';
+  const area=document.createElement('textarea');area.readOnly=true;area.setAttribute('aria-label','手动复制内容');area.style.cssText='width:100%;min-height:240px;font:inherit;line-height:1.8';
+  const button=document.createElement('button');button.textContent='关闭手动复制';button.onclick=()=>dialog.close();
+  dialog.append(label,area,button);document.body.append(dialog);
  }
+ const area=dialog.querySelector('textarea');area.value=text;dialog.showModal();area.focus();area.select();
+ try{if(document.execCommand('copy')){dialog.close();toast(message)}}catch{}
 }
 $('#copy').onclick=()=>copyText(current.title,'已复制动作名称');
 $('#copy-action').onclick=()=>{const value=resolveActionPrompt(current,current.views[viewIndex],promptEntries);if(value)copyText(value.action,'已复制当前视角动作')};
@@ -56,8 +63,21 @@ $('#import').onclick=()=>$('#import-file').click();$('#import-file').onchange=as
 $('#source').onclick=()=>$('#source-dialog').showModal();$('#source-close').onclick=()=>$('#source-dialog').close();
 try{
  const promptRequest=fetch('data/pose-reference/action-prompts.json').then(r=>{if(!r.ok)throw new Error();return r.json()}).catch(()=>null);
- const response=await fetch('data/pose-reference/catalog.json');if(!response.ok)throw new Error();const catalog=await response.json();groups=groupPoses(catalog.records).map(group=>({...group,sourceNote:catalog.sourceNotes?.[group.key]||''}));$('#source-scope-description').textContent=`本地选集共${groups.length}组、${catalog.records.length}个视角。最多五个视角；缺失视角按原库实际保留，不补造图片。25组已补充可复制动作词，新增条目仅提供图片参考。`;
+ const response=await fetch('data/pose-reference/catalog.json');if(!response.ok)throw new Error();const catalog=await response.json();groups=groupPoses(catalog.records).map(group=>({...group,sourceNote:catalog.sourceNotes?.[group.key]||''}));$('#source-scope-description').textContent=`当前选集共${groups.length}组、${catalog.records.length}个视角。最多五个视角；缺失视角按原库实际保留，不补造图片。动作词按当前视角提供，图像存在差异时以所选参考图为准。`;
  const prompts=await promptRequest;if(prompts)promptEntries=prompts.entries||{};else toast('动作词暂未加载，图片参考仍可使用。');
+ $('#prompt-coverage').textContent=`${Object.keys(promptEntries).length}组已有各视角中文动作词。`;
  try{const value=localStorage.getItem(KEY);if(value)state=normalizePoseState(JSON.parse(value),groups)}catch{toast('收藏读取失败，已有存储未覆盖；可尝试导入备份。')}
  render();
 }catch{$('#result').textContent='动作数据加载失败，请刷新重试。'}
+
+// Opening the reference page directly must also discover the next release.
+async function watchPoseUpdates(){
+ if(['localhost','127.0.0.1','::1'].includes(location.hostname)||!('serviceWorker' in navigator))return;
+ try{
+  const hadController=Boolean(navigator.serviceWorker.controller);let reloading=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController&&!reloading){reloading=true;location.reload()}});
+  const registration=await navigator.serviceWorker.register('service-worker.js?v=4.2.0',{updateViaCache:'none'});
+  await registration.update();
+ }catch{/* Online browsing and existing local state remain available. */}
+}
+watchPoseUpdates();

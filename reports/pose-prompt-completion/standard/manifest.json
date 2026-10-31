@@ -1,0 +1,2850 @@
+{
+  "groups": {
+    "全身单人・标准系:P008": [
+      {
+        "id": "full_single_P008_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P008",
+        "分类": "坐姿",
+        "姿势名称": "单膝立起・双手抱头后",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P008_front.jpg",
+        "原图": "img/full_single_P008_front.png",
+        "检索": "full_single_P008_front 全身单人・标准系坐姿单膝立起・双手抱头后正面"
+      },
+      {
+        "id": "full_single_P008_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P008",
+        "分类": "坐姿",
+        "姿势名称": "单膝立起・双手抱头后",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P008_high.jpg",
+        "原图": "img/full_single_P008_high.png",
+        "检索": "full_single_P008_high 全身单人・标准系坐姿单膝立起・双手抱头后俯视"
+      },
+      {
+        "id": "full_single_P008_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P008",
+        "分类": "坐姿",
+        "姿势名称": "单膝立起・双手抱头后",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P008_low.jpg",
+        "原图": "img/full_single_P008_low.png",
+        "检索": "full_single_P008_low 全身单人・标准系坐姿单膝立起・双手抱头后仰视"
+      },
+      {
+        "id": "full_single_P008_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P008",
+        "分类": "坐姿",
+        "姿势名称": "单膝立起・双手抱头后",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P008_side.jpg",
+        "原图": "img/full_single_P008_side.png",
+        "检索": "full_single_P008_side 全身单人・标准系坐姿单膝立起・双手抱头后侧面"
+      },
+      {
+        "id": "full_single_P008_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P008",
+        "分类": "坐姿",
+        "姿势名称": "单膝立起・双手抱头后",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P008_diag.jpg",
+        "原图": "img/full_single_P008_diag.png",
+        "检索": "full_single_P008_diag 全身单人・标准系坐姿单膝立起・双手抱头后斜侧"
+      }
+    ],
+    "全身单人・标准系:P009": [
+      {
+        "id": "full_single_P009_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P009",
+        "分类": "坐姿",
+        "姿势名称": "向右倾・肘部支撑",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P009_front.jpg",
+        "原图": "img/full_single_P009_front.png",
+        "检索": "full_single_P009_front 全身单人・标准系坐姿向右倾・肘部支撑正面"
+      },
+      {
+        "id": "full_single_P009_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P009",
+        "分类": "坐姿",
+        "姿势名称": "向右倾・肘部支撑",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P009_high.jpg",
+        "原图": "img/full_single_P009_high.png",
+        "检索": "full_single_P009_high 全身单人・标准系坐姿向右倾・肘部支撑俯视"
+      },
+      {
+        "id": "full_single_P009_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P009",
+        "分类": "坐姿",
+        "姿势名称": "向右倾・肘部支撑",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P009_low.jpg",
+        "原图": "img/full_single_P009_low.png",
+        "检索": "full_single_P009_low 全身单人・标准系坐姿向右倾・肘部支撑仰视"
+      },
+      {
+        "id": "full_single_P009_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P009",
+        "分类": "坐姿",
+        "姿势名称": "向右倾・肘部支撑",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P009_side.jpg",
+        "原图": "img/full_single_P009_side.png",
+        "检索": "full_single_P009_side 全身单人・标准系坐姿向右倾・肘部支撑侧面"
+      },
+      {
+        "id": "full_single_P009_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P009",
+        "分类": "坐姿",
+        "姿势名称": "向右倾・肘部支撑",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P009_diag.jpg",
+        "原图": "img/full_single_P009_diag.png",
+        "检索": "full_single_P009_diag 全身单人・标准系坐姿向右倾・肘部支撑斜侧"
+      }
+    ],
+    "全身单人・标准系:P011": [
+      {
+        "id": "full_single_P011_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P011",
+        "分类": "坐姿",
+        "姿势名称": "双手抱头・挺胸后仰",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P011_front.jpg",
+        "原图": "img/full_single_P011_front.png",
+        "检索": "full_single_P011_front 全身单人・标准系坐姿双手抱头・挺胸后仰正面"
+      },
+      {
+        "id": "full_single_P011_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P011",
+        "分类": "坐姿",
+        "姿势名称": "双手抱头・挺胸后仰",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P011_high.jpg",
+        "原图": "img/full_single_P011_high.png",
+        "检索": "full_single_P011_high 全身单人・标准系坐姿双手抱头・挺胸后仰俯视"
+      },
+      {
+        "id": "full_single_P011_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P011",
+        "分类": "坐姿",
+        "姿势名称": "双手抱头・挺胸后仰",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P011_low.jpg",
+        "原图": "img/full_single_P011_low.png",
+        "检索": "full_single_P011_low 全身单人・标准系坐姿双手抱头・挺胸后仰仰视"
+      },
+      {
+        "id": "full_single_P011_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P011",
+        "分类": "坐姿",
+        "姿势名称": "双手抱头・挺胸后仰",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P011_side.jpg",
+        "原图": "img/full_single_P011_side.png",
+        "检索": "full_single_P011_side 全身单人・标准系坐姿双手抱头・挺胸后仰侧面"
+      },
+      {
+        "id": "full_single_P011_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P011",
+        "分类": "坐姿",
+        "姿势名称": "双手抱头・挺胸后仰",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P011_diag.jpg",
+        "原图": "img/full_single_P011_diag.png",
+        "检索": "full_single_P011_diag 全身单人・标准系坐姿双手抱头・挺胸后仰斜侧"
+      }
+    ],
+    "全身单人・标准系:P013": [
+      {
+        "id": "full_single_P013_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P013",
+        "分类": "坐姿",
+        "姿势名称": "双腿悬空后倚",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P013_front.jpg",
+        "原图": "img/full_single_P013_front.png",
+        "检索": "full_single_P013_front 全身单人・标准系坐姿双腿悬空后倚正面"
+      },
+      {
+        "id": "full_single_P013_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P013",
+        "分类": "坐姿",
+        "姿势名称": "双腿悬空后倚",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P013_high.jpg",
+        "原图": "img/full_single_P013_high.png",
+        "检索": "full_single_P013_high 全身单人・标准系坐姿双腿悬空后倚俯视"
+      },
+      {
+        "id": "full_single_P013_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P013",
+        "分类": "坐姿",
+        "姿势名称": "双腿悬空后倚",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P013_low.jpg",
+        "原图": "img/full_single_P013_low.png",
+        "检索": "full_single_P013_low 全身单人・标准系坐姿双腿悬空后倚仰视"
+      },
+      {
+        "id": "full_single_P013_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P013",
+        "分类": "坐姿",
+        "姿势名称": "双腿悬空后倚",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P013_side.jpg",
+        "原图": "img/full_single_P013_side.png",
+        "检索": "full_single_P013_side 全身单人・标准系坐姿双腿悬空后倚侧面"
+      },
+      {
+        "id": "full_single_P013_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P013",
+        "分类": "坐姿",
+        "姿势名称": "双腿悬空后倚",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P013_diag.jpg",
+        "原图": "img/full_single_P013_diag.png",
+        "检索": "full_single_P013_diag 全身单人・标准系坐姿双腿悬空后倚斜侧"
+      }
+    ],
+    "全身单人・标准系:P014": [
+      {
+        "id": "full_single_P014_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P014",
+        "分类": "坐姿",
+        "姿势名称": "握脚踝・单膝立起",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P014_front.jpg",
+        "原图": "img/full_single_P014_front.png",
+        "检索": "full_single_P014_front 全身单人・标准系坐姿握脚踝・单膝立起正面"
+      },
+      {
+        "id": "full_single_P014_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P014",
+        "分类": "坐姿",
+        "姿势名称": "握脚踝・单膝立起",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P014_high.jpg",
+        "原图": "img/full_single_P014_high.png",
+        "检索": "full_single_P014_high 全身单人・标准系坐姿握脚踝・单膝立起俯视"
+      },
+      {
+        "id": "full_single_P014_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P014",
+        "分类": "坐姿",
+        "姿势名称": "握脚踝・单膝立起",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P014_low.jpg",
+        "原图": "img/full_single_P014_low.png",
+        "检索": "full_single_P014_low 全身单人・标准系坐姿握脚踝・单膝立起仰视"
+      },
+      {
+        "id": "full_single_P014_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P014",
+        "分类": "坐姿",
+        "姿势名称": "握脚踝・单膝立起",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P014_side.jpg",
+        "原图": "img/full_single_P014_side.png",
+        "检索": "full_single_P014_side 全身单人・标准系坐姿握脚踝・单膝立起侧面"
+      },
+      {
+        "id": "full_single_P014_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P014",
+        "分类": "坐姿",
+        "姿势名称": "握脚踝・单膝立起",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P014_diag.jpg",
+        "原图": "img/full_single_P014_diag.png",
+        "检索": "full_single_P014_diag 全身单人・标准系坐姿握脚踝・单膝立起斜侧"
+      }
+    ],
+    "全身单人・标准系:P022": [
+      {
+        "id": "full_single_P022_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P022",
+        "分类": "站姿",
+        "姿势名称": "站立・双臂后展挺胸",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P022_front.jpg",
+        "原图": "img/full_single_P022_front.png",
+        "检索": "full_single_P022_front 全身单人・标准系站姿站立・双臂后展挺胸正面"
+      },
+      {
+        "id": "full_single_P022_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P022",
+        "分类": "站姿",
+        "姿势名称": "站立・双臂后展挺胸",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P022_high.jpg",
+        "原图": "img/full_single_P022_high.png",
+        "检索": "full_single_P022_high 全身单人・标准系站姿站立・双臂后展挺胸俯视"
+      },
+      {
+        "id": "full_single_P022_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P022",
+        "分类": "站姿",
+        "姿势名称": "站立・双臂后展挺胸",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P022_low.jpg",
+        "原图": "img/full_single_P022_low.png",
+        "检索": "full_single_P022_low 全身单人・标准系站姿站立・双臂后展挺胸仰视"
+      },
+      {
+        "id": "full_single_P022_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P022",
+        "分类": "站姿",
+        "姿势名称": "站立・双臂后展挺胸",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P022_side.jpg",
+        "原图": "img/full_single_P022_side.png",
+        "检索": "full_single_P022_side 全身单人・标准系站姿站立・双臂后展挺胸侧面"
+      },
+      {
+        "id": "full_single_P022_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P022",
+        "分类": "站姿",
+        "姿势名称": "站立・双臂后展挺胸",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P022_diag.jpg",
+        "原图": "img/full_single_P022_diag.png",
+        "检索": "full_single_P022_diag 全身单人・标准系站姿站立・双臂后展挺胸斜侧"
+      }
+    ],
+    "全身单人・标准系:P024": [
+      {
+        "id": "full_single_P024_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P024",
+        "分类": "站姿",
+        "姿势名称": "站立・单腿后抬",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P024_front.jpg",
+        "原图": "img/full_single_P024_front.png",
+        "检索": "full_single_P024_front 全身单人・标准系站姿站立・单腿后抬正面"
+      },
+      {
+        "id": "full_single_P024_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P024",
+        "分类": "站姿",
+        "姿势名称": "站立・单腿后抬",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P024_high.jpg",
+        "原图": "img/full_single_P024_high.png",
+        "检索": "full_single_P024_high 全身单人・标准系站姿站立・单腿后抬俯视"
+      },
+      {
+        "id": "full_single_P024_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P024",
+        "分类": "站姿",
+        "姿势名称": "站立・单腿后抬",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P024_low.jpg",
+        "原图": "img/full_single_P024_low.png",
+        "检索": "full_single_P024_low 全身单人・标准系站姿站立・单腿后抬仰视"
+      },
+      {
+        "id": "full_single_P024_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P024",
+        "分类": "站姿",
+        "姿势名称": "站立・单腿后抬",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P024_side.jpg",
+        "原图": "img/full_single_P024_side.png",
+        "检索": "full_single_P024_side 全身单人・标准系站姿站立・单腿后抬侧面"
+      },
+      {
+        "id": "full_single_P024_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P024",
+        "分类": "站姿",
+        "姿势名称": "站立・单腿后抬",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P024_diag.jpg",
+        "原图": "img/full_single_P024_diag.png",
+        "检索": "full_single_P024_diag 全身单人・标准系站姿站立・单腿后抬斜侧"
+      }
+    ],
+    "全身单人・标准系:P026": [
+      {
+        "id": "full_single_P026_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P026",
+        "分类": "站姿",
+        "姿势名称": "站立・单臂上举顶胯",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P026_front.jpg",
+        "原图": "img/full_single_P026_front.png",
+        "检索": "full_single_P026_front 全身单人・标准系站姿站立・单臂上举顶胯正面"
+      },
+      {
+        "id": "full_single_P026_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P026",
+        "分类": "站姿",
+        "姿势名称": "站立・单臂上举顶胯",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P026_high.jpg",
+        "原图": "img/full_single_P026_high.png",
+        "检索": "full_single_P026_high 全身单人・标准系站姿站立・单臂上举顶胯俯视"
+      },
+      {
+        "id": "full_single_P026_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P026",
+        "分类": "站姿",
+        "姿势名称": "站立・单臂上举顶胯",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P026_low.jpg",
+        "原图": "img/full_single_P026_low.png",
+        "检索": "full_single_P026_low 全身单人・标准系站姿站立・单臂上举顶胯仰视"
+      },
+      {
+        "id": "full_single_P026_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P026",
+        "分类": "站姿",
+        "姿势名称": "站立・单臂上举顶胯",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P026_side.jpg",
+        "原图": "img/full_single_P026_side.png",
+        "检索": "full_single_P026_side 全身单人・标准系站姿站立・单臂上举顶胯侧面"
+      },
+      {
+        "id": "full_single_P026_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P026",
+        "分类": "站姿",
+        "姿势名称": "站立・单臂上举顶胯",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P026_diag.jpg",
+        "原图": "img/full_single_P026_diag.png",
+        "检索": "full_single_P026_diag 全身单人・标准系站姿站立・单臂上举顶胯斜侧"
+      }
+    ],
+    "全身单人・标准系:P027": [
+      {
+        "id": "full_single_P027_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P027",
+        "分类": "站姿",
+        "姿势名称": "站立・双手抚后颈",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P027_front.jpg",
+        "原图": "img/full_single_P027_front.png",
+        "检索": "full_single_P027_front 全身单人・标准系站姿站立・双手抚后颈正面"
+      },
+      {
+        "id": "full_single_P027_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P027",
+        "分类": "站姿",
+        "姿势名称": "站立・双手抚后颈",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P027_high.jpg",
+        "原图": "img/full_single_P027_high.png",
+        "检索": "full_single_P027_high 全身单人・标准系站姿站立・双手抚后颈俯视"
+      },
+      {
+        "id": "full_single_P027_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P027",
+        "分类": "站姿",
+        "姿势名称": "站立・双手抚后颈",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P027_low.jpg",
+        "原图": "img/full_single_P027_low.png",
+        "检索": "full_single_P027_low 全身单人・标准系站姿站立・双手抚后颈仰视"
+      },
+      {
+        "id": "full_single_P027_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P027",
+        "分类": "站姿",
+        "姿势名称": "站立・双手抚后颈",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P027_side.jpg",
+        "原图": "img/full_single_P027_side.png",
+        "检索": "full_single_P027_side 全身单人・标准系站姿站立・双手抚后颈侧面"
+      },
+      {
+        "id": "full_single_P027_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P027",
+        "分类": "站姿",
+        "姿势名称": "站立・双手抚后颈",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P027_diag.jpg",
+        "原图": "img/full_single_P027_diag.png",
+        "检索": "full_single_P027_diag 全身单人・标准系站姿站立・双手抚后颈斜侧"
+      }
+    ],
+    "全身单人・标准系:P029": [
+      {
+        "id": "full_single_P029_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P029",
+        "分类": "站姿",
+        "姿势名称": "站立・发丝飘扬",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P029_front.jpg",
+        "原图": "img/full_single_P029_front.png",
+        "检索": "full_single_P029_front 全身单人・标准系站姿站立・发丝飘扬正面"
+      },
+      {
+        "id": "full_single_P029_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P029",
+        "分类": "站姿",
+        "姿势名称": "站立・发丝飘扬",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P029_high.jpg",
+        "原图": "img/full_single_P029_high.png",
+        "检索": "full_single_P029_high 全身单人・标准系站姿站立・发丝飘扬俯视"
+      },
+      {
+        "id": "full_single_P029_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P029",
+        "分类": "站姿",
+        "姿势名称": "站立・发丝飘扬",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P029_low.jpg",
+        "原图": "img/full_single_P029_low.png",
+        "检索": "full_single_P029_low 全身单人・标准系站姿站立・发丝飘扬仰视"
+      },
+      {
+        "id": "full_single_P029_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P029",
+        "分类": "站姿",
+        "姿势名称": "站立・发丝飘扬",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P029_side.jpg",
+        "原图": "img/full_single_P029_side.png",
+        "检索": "full_single_P029_side 全身单人・标准系站姿站立・发丝飘扬侧面"
+      },
+      {
+        "id": "full_single_P029_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P029",
+        "分类": "站姿",
+        "姿势名称": "站立・发丝飘扬",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P029_diag.jpg",
+        "原图": "img/full_single_P029_diag.png",
+        "检索": "full_single_P029_diag 全身单人・标准系站姿站立・发丝飘扬斜侧"
+      }
+    ],
+    "全身单人・标准系:P030": [
+      {
+        "id": "full_single_P030_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P030",
+        "分类": "站姿",
+        "姿势名称": "站立・踮脚双臂V字",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P030_front.jpg",
+        "原图": "img/full_single_P030_front.png",
+        "检索": "full_single_P030_front 全身单人・标准系站姿站立・踮脚双臂V字正面"
+      },
+      {
+        "id": "full_single_P030_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P030",
+        "分类": "站姿",
+        "姿势名称": "站立・踮脚双臂V字",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P030_high.jpg",
+        "原图": "img/full_single_P030_high.png",
+        "检索": "full_single_P030_high 全身单人・标准系站姿站立・踮脚双臂V字俯视"
+      },
+      {
+        "id": "full_single_P030_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P030",
+        "分类": "站姿",
+        "姿势名称": "站立・踮脚双臂V字",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P030_low.jpg",
+        "原图": "img/full_single_P030_low.png",
+        "检索": "full_single_P030_low 全身单人・标准系站姿站立・踮脚双臂V字仰视"
+      },
+      {
+        "id": "full_single_P030_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P030",
+        "分类": "站姿",
+        "姿势名称": "站立・踮脚双臂V字",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P030_side.jpg",
+        "原图": "img/full_single_P030_side.png",
+        "检索": "full_single_P030_side 全身单人・标准系站姿站立・踮脚双臂V字侧面"
+      },
+      {
+        "id": "full_single_P030_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P030",
+        "分类": "站姿",
+        "姿势名称": "站立・踮脚双臂V字",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P030_diag.jpg",
+        "原图": "img/full_single_P030_diag.png",
+        "检索": "full_single_P030_diag 全身单人・标准系站姿站立・踮脚双臂V字斜侧"
+      }
+    ],
+    "全身单人・标准系:P032": [
+      {
+        "id": "full_single_P032_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P032",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手抱头后",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P032_front.jpg",
+        "原图": "img/full_single_P032_front.png",
+        "检索": "full_single_P032_front 全身单人・标准系跪立跪立・双手抱头后正面"
+      },
+      {
+        "id": "full_single_P032_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P032",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手抱头后",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P032_high.jpg",
+        "原图": "img/full_single_P032_high.png",
+        "检索": "full_single_P032_high 全身单人・标准系跪立跪立・双手抱头后俯视"
+      },
+      {
+        "id": "full_single_P032_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P032",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手抱头后",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P032_low.jpg",
+        "原图": "img/full_single_P032_low.png",
+        "检索": "full_single_P032_low 全身单人・标准系跪立跪立・双手抱头后仰视"
+      },
+      {
+        "id": "full_single_P032_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P032",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手抱头后",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P032_side.jpg",
+        "原图": "img/full_single_P032_side.png",
+        "检索": "full_single_P032_side 全身单人・标准系跪立跪立・双手抱头后侧面"
+      },
+      {
+        "id": "full_single_P032_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P032",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手抱头后",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P032_diag.jpg",
+        "原图": "img/full_single_P032_diag.png",
+        "检索": "full_single_P032_diag 全身单人・标准系跪立跪立・双手抱头后斜侧"
+      }
+    ],
+    "全身单人・标准系:P034": [
+      {
+        "id": "full_single_P034_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P034",
+        "分类": "跪立",
+        "姿势名称": "跪立・上体后仰",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P034_front.jpg",
+        "原图": "img/full_single_P034_front.png",
+        "检索": "full_single_P034_front 全身单人・标准系跪立跪立・上体后仰正面"
+      },
+      {
+        "id": "full_single_P034_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P034",
+        "分类": "跪立",
+        "姿势名称": "跪立・上体后仰",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P034_high.jpg",
+        "原图": "img/full_single_P034_high.png",
+        "检索": "full_single_P034_high 全身单人・标准系跪立跪立・上体后仰俯视"
+      },
+      {
+        "id": "full_single_P034_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P034",
+        "分类": "跪立",
+        "姿势名称": "跪立・上体后仰",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P034_low.jpg",
+        "原图": "img/full_single_P034_low.png",
+        "检索": "full_single_P034_low 全身单人・标准系跪立跪立・上体后仰仰视"
+      },
+      {
+        "id": "full_single_P034_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P034",
+        "分类": "跪立",
+        "姿势名称": "跪立・上体后仰",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P034_side.jpg",
+        "原图": "img/full_single_P034_side.png",
+        "检索": "full_single_P034_side 全身单人・标准系跪立跪立・上体后仰侧面"
+      },
+      {
+        "id": "full_single_P034_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P034",
+        "分类": "跪立",
+        "姿势名称": "跪立・上体后仰",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P034_diag.jpg",
+        "原图": "img/full_single_P034_diag.png",
+        "检索": "full_single_P034_diag 全身单人・标准系跪立跪立・上体后仰斜侧"
+      }
+    ],
+    "全身单人・标准系:P035": [
+      {
+        "id": "full_single_P035_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P035",
+        "分类": "跪立",
+        "姿势名称": "跪立・双臂上举",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P035_front.jpg",
+        "原图": "img/full_single_P035_front.png",
+        "检索": "full_single_P035_front 全身单人・标准系跪立跪立・双臂上举正面"
+      },
+      {
+        "id": "full_single_P035_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P035",
+        "分类": "跪立",
+        "姿势名称": "跪立・双臂上举",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P035_high.jpg",
+        "原图": "img/full_single_P035_high.png",
+        "检索": "full_single_P035_high 全身单人・标准系跪立跪立・双臂上举俯视"
+      },
+      {
+        "id": "full_single_P035_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P035",
+        "分类": "跪立",
+        "姿势名称": "跪立・双臂上举",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P035_low.jpg",
+        "原图": "img/full_single_P035_low.png",
+        "检索": "full_single_P035_low 全身单人・标准系跪立跪立・双臂上举仰视"
+      },
+      {
+        "id": "full_single_P035_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P035",
+        "分类": "跪立",
+        "姿势名称": "跪立・双臂上举",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P035_side.jpg",
+        "原图": "img/full_single_P035_side.png",
+        "检索": "full_single_P035_side 全身单人・标准系跪立跪立・双臂上举侧面"
+      },
+      {
+        "id": "full_single_P035_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P035",
+        "分类": "跪立",
+        "姿势名称": "跪立・双臂上举",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P035_diag.jpg",
+        "原图": "img/full_single_P035_diag.png",
+        "检索": "full_single_P035_diag 全身单人・标准系跪立跪立・双臂上举斜侧"
+      }
+    ],
+    "全身单人・标准系:P036": [
+      {
+        "id": "full_single_P036_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P036",
+        "分类": "跪立",
+        "姿势名称": "跪立・一手撩发一手扶腰",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P036_front.jpg",
+        "原图": "img/full_single_P036_front.png",
+        "检索": "full_single_P036_front 全身单人・标准系跪立跪立・一手撩发一手扶腰正面"
+      },
+      {
+        "id": "full_single_P036_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P036",
+        "分类": "跪立",
+        "姿势名称": "跪立・一手撩发一手扶腰",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P036_high.jpg",
+        "原图": "img/full_single_P036_high.png",
+        "检索": "full_single_P036_high 全身单人・标准系跪立跪立・一手撩发一手扶腰俯视"
+      },
+      {
+        "id": "full_single_P036_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P036",
+        "分类": "跪立",
+        "姿势名称": "跪立・一手撩发一手扶腰",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P036_low.jpg",
+        "原图": "img/full_single_P036_low.png",
+        "检索": "full_single_P036_low 全身单人・标准系跪立跪立・一手撩发一手扶腰仰视"
+      },
+      {
+        "id": "full_single_P036_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P036",
+        "分类": "跪立",
+        "姿势名称": "跪立・一手撩发一手扶腰",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P036_side.jpg",
+        "原图": "img/full_single_P036_side.png",
+        "检索": "full_single_P036_side 全身单人・标准系跪立跪立・一手撩发一手扶腰侧面"
+      },
+      {
+        "id": "full_single_P036_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P036",
+        "分类": "跪立",
+        "姿势名称": "跪立・一手撩发一手扶腰",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P036_diag.jpg",
+        "原图": "img/full_single_P036_diag.png",
+        "检索": "full_single_P036_diag 全身单人・标准系跪立跪立・一手撩发一手扶腰斜侧"
+      }
+    ],
+    "全身单人・标准系:P037": [
+      {
+        "id": "full_single_P037_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P037",
+        "分类": "跪立",
+        "姿势名称": "单膝跪・仰望",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P037_front.jpg",
+        "原图": "img/full_single_P037_front.png",
+        "检索": "full_single_P037_front 全身单人・标准系跪立单膝跪・仰望正面"
+      },
+      {
+        "id": "full_single_P037_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P037",
+        "分类": "跪立",
+        "姿势名称": "单膝跪・仰望",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P037_high.jpg",
+        "原图": "img/full_single_P037_high.png",
+        "检索": "full_single_P037_high 全身单人・标准系跪立单膝跪・仰望俯视"
+      },
+      {
+        "id": "full_single_P037_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P037",
+        "分类": "跪立",
+        "姿势名称": "单膝跪・仰望",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P037_low.jpg",
+        "原图": "img/full_single_P037_low.png",
+        "检索": "full_single_P037_low 全身单人・标准系跪立单膝跪・仰望仰视"
+      },
+      {
+        "id": "full_single_P037_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P037",
+        "分类": "跪立",
+        "姿势名称": "单膝跪・仰望",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P037_side.jpg",
+        "原图": "img/full_single_P037_side.png",
+        "检索": "full_single_P037_side 全身单人・标准系跪立单膝跪・仰望侧面"
+      },
+      {
+        "id": "full_single_P037_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P037",
+        "分类": "跪立",
+        "姿势名称": "单膝跪・仰望",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P037_diag.jpg",
+        "原图": "img/full_single_P037_diag.png",
+        "检索": "full_single_P037_diag 全身单人・标准系跪立单膝跪・仰望斜侧"
+      }
+    ],
+    "全身单人・标准系:P038": [
+      {
+        "id": "full_single_P038_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P038",
+        "分类": "跪立",
+        "姿势名称": "跪立・侧倾・手触地",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P038_front.jpg",
+        "原图": "img/full_single_P038_front.png",
+        "检索": "full_single_P038_front 全身单人・标准系跪立跪立・侧倾・手触地正面"
+      },
+      {
+        "id": "full_single_P038_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P038",
+        "分类": "跪立",
+        "姿势名称": "跪立・侧倾・手触地",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P038_high.jpg",
+        "原图": "img/full_single_P038_high.png",
+        "检索": "full_single_P038_high 全身单人・标准系跪立跪立・侧倾・手触地俯视"
+      },
+      {
+        "id": "full_single_P038_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P038",
+        "分类": "跪立",
+        "姿势名称": "跪立・侧倾・手触地",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P038_low.jpg",
+        "原图": "img/full_single_P038_low.png",
+        "检索": "full_single_P038_low 全身单人・标准系跪立跪立・侧倾・手触地仰视"
+      },
+      {
+        "id": "full_single_P038_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P038",
+        "分类": "跪立",
+        "姿势名称": "跪立・侧倾・手触地",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P038_side.jpg",
+        "原图": "img/full_single_P038_side.png",
+        "检索": "full_single_P038_side 全身单人・标准系跪立跪立・侧倾・手触地侧面"
+      },
+      {
+        "id": "full_single_P038_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P038",
+        "分类": "跪立",
+        "姿势名称": "跪立・侧倾・手触地",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P038_diag.jpg",
+        "原图": "img/full_single_P038_diag.png",
+        "检索": "full_single_P038_diag 全身单人・标准系跪立跪立・侧倾・手触地斜侧"
+      }
+    ],
+    "全身单人・标准系:P039": [
+      {
+        "id": "full_single_P039_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P039",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手扶腰后仰",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P039_front.jpg",
+        "原图": "img/full_single_P039_front.png",
+        "检索": "full_single_P039_front 全身单人・标准系跪立跪立・双手扶腰后仰正面"
+      },
+      {
+        "id": "full_single_P039_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P039",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手扶腰后仰",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P039_high.jpg",
+        "原图": "img/full_single_P039_high.png",
+        "检索": "full_single_P039_high 全身单人・标准系跪立跪立・双手扶腰后仰俯视"
+      },
+      {
+        "id": "full_single_P039_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P039",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手扶腰后仰",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P039_low.jpg",
+        "原图": "img/full_single_P039_low.png",
+        "检索": "full_single_P039_low 全身单人・标准系跪立跪立・双手扶腰后仰仰视"
+      },
+      {
+        "id": "full_single_P039_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P039",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手扶腰后仰",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P039_side.jpg",
+        "原图": "img/full_single_P039_side.png",
+        "检索": "full_single_P039_side 全身单人・标准系跪立跪立・双手扶腰后仰侧面"
+      },
+      {
+        "id": "full_single_P039_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P039",
+        "分类": "跪立",
+        "姿势名称": "跪立・双手扶腰后仰",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P039_diag.jpg",
+        "原图": "img/full_single_P039_diag.png",
+        "检索": "full_single_P039_diag 全身单人・标准系跪立跪立・双手扶腰后仰斜侧"
+      }
+    ],
+    "全身单人・标准系:P040": [
+      {
+        "id": "full_single_P040_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P040",
+        "分类": "跪立",
+        "姿势名称": "跪立・摆胯・单臂上举",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P040_front.jpg",
+        "原图": "img/full_single_P040_front.png",
+        "检索": "full_single_P040_front 全身单人・标准系跪立跪立・摆胯・单臂上举正面"
+      },
+      {
+        "id": "full_single_P040_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P040",
+        "分类": "跪立",
+        "姿势名称": "跪立・摆胯・单臂上举",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P040_high.jpg",
+        "原图": "img/full_single_P040_high.png",
+        "检索": "full_single_P040_high 全身单人・标准系跪立跪立・摆胯・单臂上举俯视"
+      },
+      {
+        "id": "full_single_P040_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P040",
+        "分类": "跪立",
+        "姿势名称": "跪立・摆胯・单臂上举",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P040_low.jpg",
+        "原图": "img/full_single_P040_low.png",
+        "检索": "full_single_P040_low 全身单人・标准系跪立跪立・摆胯・单臂上举仰视"
+      },
+      {
+        "id": "full_single_P040_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P040",
+        "分类": "跪立",
+        "姿势名称": "跪立・摆胯・单臂上举",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P040_side.jpg",
+        "原图": "img/full_single_P040_side.png",
+        "检索": "full_single_P040_side 全身单人・标准系跪立跪立・摆胯・单臂上举侧面"
+      },
+      {
+        "id": "full_single_P040_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P040",
+        "分类": "跪立",
+        "姿势名称": "跪立・摆胯・单臂上举",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P040_diag.jpg",
+        "原图": "img/full_single_P040_diag.png",
+        "检索": "full_single_P040_diag 全身单人・标准系跪立跪立・摆胯・单臂上举斜侧"
+      }
+    ],
+    "全身单人・标准系:P042": [
+      {
+        "id": "full_single_P042_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P042",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手前撑",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P042_front.jpg",
+        "原图": "img/full_single_P042_front.png",
+        "检索": "full_single_P042_front 全身单人・标准系侧坐・女孩坐女孩坐・双手前撑正面"
+      },
+      {
+        "id": "full_single_P042_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P042",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手前撑",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P042_high.jpg",
+        "原图": "img/full_single_P042_high.png",
+        "检索": "full_single_P042_high 全身单人・标准系侧坐・女孩坐女孩坐・双手前撑俯视"
+      },
+      {
+        "id": "full_single_P042_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P042",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手前撑",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P042_low.jpg",
+        "原图": "img/full_single_P042_low.png",
+        "检索": "full_single_P042_low 全身单人・标准系侧坐・女孩坐女孩坐・双手前撑仰视"
+      },
+      {
+        "id": "full_single_P042_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P042",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手前撑",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P042_side.jpg",
+        "原图": "img/full_single_P042_side.png",
+        "检索": "full_single_P042_side 全身单人・标准系侧坐・女孩坐女孩坐・双手前撑侧面"
+      },
+      {
+        "id": "full_single_P042_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P042",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手前撑",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P042_diag.jpg",
+        "原图": "img/full_single_P042_diag.png",
+        "检索": "full_single_P042_diag 全身单人・标准系侧坐・女孩坐女孩坐・双手前撑斜侧"
+      }
+    ],
+    "全身单人・标准系:P043": [
+      {
+        "id": "full_single_P043_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P043",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手抱头后",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P043_front.jpg",
+        "原图": "img/full_single_P043_front.png",
+        "检索": "full_single_P043_front 全身单人・标准系侧坐・女孩坐女孩坐・双手抱头后正面"
+      },
+      {
+        "id": "full_single_P043_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P043",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手抱头后",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P043_high.jpg",
+        "原图": "img/full_single_P043_high.png",
+        "检索": "full_single_P043_high 全身单人・标准系侧坐・女孩坐女孩坐・双手抱头后俯视"
+      },
+      {
+        "id": "full_single_P043_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P043",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手抱头后",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P043_low.jpg",
+        "原图": "img/full_single_P043_low.png",
+        "检索": "full_single_P043_low 全身单人・标准系侧坐・女孩坐女孩坐・双手抱头后仰视"
+      },
+      {
+        "id": "full_single_P043_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P043",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手抱头后",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P043_side.jpg",
+        "原图": "img/full_single_P043_side.png",
+        "检索": "full_single_P043_side 全身单人・标准系侧坐・女孩坐女孩坐・双手抱头后侧面"
+      },
+      {
+        "id": "full_single_P043_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P043",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手抱头后",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P043_diag.jpg",
+        "原图": "img/full_single_P043_diag.png",
+        "检索": "full_single_P043_diag 全身单人・标准系侧坐・女孩坐女孩坐・双手抱头后斜侧"
+      }
+    ],
+    "全身单人・标准系:P044": [
+      {
+        "id": "full_single_P044_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P044",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手后撑",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P044_front.jpg",
+        "原图": "img/full_single_P044_front.png",
+        "检索": "full_single_P044_front 全身单人・标准系侧坐・女孩坐女孩坐・双手后撑正面"
+      },
+      {
+        "id": "full_single_P044_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P044",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手后撑",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P044_high.jpg",
+        "原图": "img/full_single_P044_high.png",
+        "检索": "full_single_P044_high 全身单人・标准系侧坐・女孩坐女孩坐・双手后撑俯视"
+      },
+      {
+        "id": "full_single_P044_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P044",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手后撑",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P044_low.jpg",
+        "原图": "img/full_single_P044_low.png",
+        "检索": "full_single_P044_low 全身单人・标准系侧坐・女孩坐女孩坐・双手后撑仰视"
+      },
+      {
+        "id": "full_single_P044_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P044",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手后撑",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P044_side.jpg",
+        "原图": "img/full_single_P044_side.png",
+        "检索": "full_single_P044_side 全身单人・标准系侧坐・女孩坐女孩坐・双手后撑侧面"
+      },
+      {
+        "id": "full_single_P044_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P044",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・双手后撑",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P044_diag.jpg",
+        "原图": "img/full_single_P044_diag.png",
+        "检索": "full_single_P044_diag 全身单人・标准系侧坐・女孩坐女孩坐・双手后撑斜侧"
+      }
+    ],
+    "全身单人・标准系:P046": [
+      {
+        "id": "full_single_P046_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P046",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・手扶脸颊",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P046_front.jpg",
+        "原图": "img/full_single_P046_front.png",
+        "检索": "full_single_P046_front 全身单人・标准系侧坐・女孩坐侧坐・手扶脸颊正面"
+      },
+      {
+        "id": "full_single_P046_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P046",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・手扶脸颊",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P046_high.jpg",
+        "原图": "img/full_single_P046_high.png",
+        "检索": "full_single_P046_high 全身单人・标准系侧坐・女孩坐侧坐・手扶脸颊俯视"
+      },
+      {
+        "id": "full_single_P046_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P046",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・手扶脸颊",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P046_low.jpg",
+        "原图": "img/full_single_P046_low.png",
+        "检索": "full_single_P046_low 全身单人・标准系侧坐・女孩坐侧坐・手扶脸颊仰视"
+      },
+      {
+        "id": "full_single_P046_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P046",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・手扶脸颊",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P046_side.jpg",
+        "原图": "img/full_single_P046_side.png",
+        "检索": "full_single_P046_side 全身单人・标准系侧坐・女孩坐侧坐・手扶脸颊侧面"
+      },
+      {
+        "id": "full_single_P046_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P046",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・手扶脸颊",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P046_diag.jpg",
+        "原图": "img/full_single_P046_diag.png",
+        "检索": "full_single_P046_diag 全身单人・标准系侧坐・女孩坐侧坐・手扶脸颊斜侧"
+      }
+    ],
+    "全身单人・标准系:P047": [
+      {
+        "id": "full_single_P047_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P047",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・单臂上伸",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P047_front.jpg",
+        "原图": "img/full_single_P047_front.png",
+        "检索": "full_single_P047_front 全身单人・标准系侧坐・女孩坐侧坐・单臂上伸正面"
+      },
+      {
+        "id": "full_single_P047_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P047",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・单臂上伸",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P047_high.jpg",
+        "原图": "img/full_single_P047_high.png",
+        "检索": "full_single_P047_high 全身单人・标准系侧坐・女孩坐侧坐・单臂上伸俯视"
+      },
+      {
+        "id": "full_single_P047_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P047",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・单臂上伸",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P047_low.jpg",
+        "原图": "img/full_single_P047_low.png",
+        "检索": "full_single_P047_low 全身单人・标准系侧坐・女孩坐侧坐・单臂上伸仰视"
+      },
+      {
+        "id": "full_single_P047_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P047",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・单臂上伸",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P047_side.jpg",
+        "原图": "img/full_single_P047_side.png",
+        "检索": "full_single_P047_side 全身单人・标准系侧坐・女孩坐侧坐・单臂上伸侧面"
+      },
+      {
+        "id": "full_single_P047_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P047",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "侧坐・单臂上伸",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P047_diag.jpg",
+        "原图": "img/full_single_P047_diag.png",
+        "检索": "full_single_P047_diag 全身单人・标准系侧坐・女孩坐侧坐・单臂上伸斜侧"
+      }
+    ],
+    "全身单人・标准系:P048": [
+      {
+        "id": "full_single_P048_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P048",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・手抚颈侧",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P048_front.jpg",
+        "原图": "img/full_single_P048_front.png",
+        "检索": "full_single_P048_front 全身单人・标准系侧坐・女孩坐女孩坐・手抚颈侧正面"
+      },
+      {
+        "id": "full_single_P048_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P048",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・手抚颈侧",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P048_high.jpg",
+        "原图": "img/full_single_P048_high.png",
+        "检索": "full_single_P048_high 全身单人・标准系侧坐・女孩坐女孩坐・手抚颈侧俯视"
+      },
+      {
+        "id": "full_single_P048_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P048",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・手抚颈侧",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P048_low.jpg",
+        "原图": "img/full_single_P048_low.png",
+        "检索": "full_single_P048_low 全身单人・标准系侧坐・女孩坐女孩坐・手抚颈侧仰视"
+      },
+      {
+        "id": "full_single_P048_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P048",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・手抚颈侧",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P048_side.jpg",
+        "原图": "img/full_single_P048_side.png",
+        "检索": "full_single_P048_side 全身单人・标准系侧坐・女孩坐女孩坐・手抚颈侧侧面"
+      },
+      {
+        "id": "full_single_P048_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P048",
+        "分类": "侧坐・女孩坐",
+        "姿势名称": "女孩坐・手抚颈侧",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P048_diag.jpg",
+        "原图": "img/full_single_P048_diag.png",
+        "检索": "full_single_P048_diag 全身单人・标准系侧坐・女孩坐女孩坐・手抚颈侧斜侧"
+      }
+    ],
+    "全身单人・标准系:P051": [
+      {
+        "id": "full_single_P051_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P051",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・抬腿",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P051_front.jpg",
+        "原图": "img/full_single_P051_front.png",
+        "检索": "full_single_P051_front 全身单人・标准系趴卧俯卧・抬腿正面"
+      },
+      {
+        "id": "full_single_P051_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P051",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・抬腿",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P051_high.jpg",
+        "原图": "img/full_single_P051_high.png",
+        "检索": "full_single_P051_high 全身单人・标准系趴卧俯卧・抬腿俯视"
+      },
+      {
+        "id": "full_single_P051_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P051",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・抬腿",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P051_low.jpg",
+        "原图": "img/full_single_P051_low.png",
+        "检索": "full_single_P051_low 全身单人・标准系趴卧俯卧・抬腿仰视"
+      },
+      {
+        "id": "full_single_P051_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P051",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・抬腿",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P051_side.jpg",
+        "原图": "img/full_single_P051_side.png",
+        "检索": "full_single_P051_side 全身单人・标准系趴卧俯卧・抬腿侧面"
+      },
+      {
+        "id": "full_single_P051_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P051",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・抬腿",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P051_diag.jpg",
+        "原图": "img/full_single_P051_diag.png",
+        "检索": "full_single_P051_diag 全身单人・标准系趴卧俯卧・抬腿斜侧"
+      }
+    ],
+    "全身单人・标准系:P052": [
+      {
+        "id": "full_single_P052_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P052",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・单膝立起",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P052_front.jpg",
+        "原图": "img/full_single_P052_front.png",
+        "检索": "full_single_P052_front 全身单人・标准系趴卧仰卧・单膝立起正面"
+      },
+      {
+        "id": "full_single_P052_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P052",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・单膝立起",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P052_high.jpg",
+        "原图": "img/full_single_P052_high.png",
+        "检索": "full_single_P052_high 全身单人・标准系趴卧仰卧・单膝立起俯视"
+      },
+      {
+        "id": "full_single_P052_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P052",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・单膝立起",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P052_low.jpg",
+        "原图": "img/full_single_P052_low.png",
+        "检索": "full_single_P052_low 全身单人・标准系趴卧仰卧・单膝立起仰视"
+      },
+      {
+        "id": "full_single_P052_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P052",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・单膝立起",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P052_side.jpg",
+        "原图": "img/full_single_P052_side.png",
+        "检索": "full_single_P052_side 全身单人・标准系趴卧仰卧・单膝立起侧面"
+      },
+      {
+        "id": "full_single_P052_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P052",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・单膝立起",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P052_diag.jpg",
+        "原图": "img/full_single_P052_diag.png",
+        "检索": "full_single_P052_diag 全身单人・标准系趴卧仰卧・单膝立起斜侧"
+      }
+    ],
+    "全身单人・标准系:P054": [
+      {
+        "id": "full_single_P054_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P054",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・腰线曲线",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P054_front.jpg",
+        "原图": "img/full_single_P054_front.png",
+        "检索": "full_single_P054_front 全身单人・标准系趴卧侧卧・腰线曲线正面"
+      },
+      {
+        "id": "full_single_P054_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P054",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・腰线曲线",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P054_high.jpg",
+        "原图": "img/full_single_P054_high.png",
+        "检索": "full_single_P054_high 全身单人・标准系趴卧侧卧・腰线曲线俯视"
+      },
+      {
+        "id": "full_single_P054_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P054",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・腰线曲线",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P054_low.jpg",
+        "原图": "img/full_single_P054_low.png",
+        "检索": "full_single_P054_low 全身单人・标准系趴卧侧卧・腰线曲线仰视"
+      },
+      {
+        "id": "full_single_P054_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P054",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・腰线曲线",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P054_side.jpg",
+        "原图": "img/full_single_P054_side.png",
+        "检索": "full_single_P054_side 全身单人・标准系趴卧侧卧・腰线曲线侧面"
+      },
+      {
+        "id": "full_single_P054_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P054",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・腰线曲线",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P054_diag.jpg",
+        "原图": "img/full_single_P054_diag.png",
+        "检索": "full_single_P054_diag 全身单人・标准系趴卧侧卧・腰线曲线斜侧"
+      }
+    ],
+    "全身单人・标准系:P056": [
+      {
+        "id": "full_single_P056_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P056",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・双腿竖直向上",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P056_front.jpg",
+        "原图": "img/full_single_P056_front.png",
+        "检索": "full_single_P056_front 全身单人・标准系趴卧仰卧・双腿竖直向上正面"
+      },
+      {
+        "id": "full_single_P056_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P056",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・双腿竖直向上",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P056_high.jpg",
+        "原图": "img/full_single_P056_high.png",
+        "检索": "full_single_P056_high 全身单人・标准系趴卧仰卧・双腿竖直向上俯视"
+      },
+      {
+        "id": "full_single_P056_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P056",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・双腿竖直向上",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P056_low.jpg",
+        "原图": "img/full_single_P056_low.png",
+        "检索": "full_single_P056_low 全身单人・标准系趴卧仰卧・双腿竖直向上仰视"
+      },
+      {
+        "id": "full_single_P056_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P056",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・双腿竖直向上",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P056_side.jpg",
+        "原图": "img/full_single_P056_side.png",
+        "检索": "full_single_P056_side 全身单人・标准系趴卧仰卧・双腿竖直向上侧面"
+      },
+      {
+        "id": "full_single_P056_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P056",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・双腿竖直向上",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P056_diag.jpg",
+        "原图": "img/full_single_P056_diag.png",
+        "检索": "full_single_P056_diag 全身单人・标准系趴卧仰卧・双腿竖直向上斜侧"
+      }
+    ],
+    "全身单人・标准系:P057": [
+      {
+        "id": "full_single_P057_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P057",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・单臂过头",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P057_front.jpg",
+        "原图": "img/full_single_P057_front.png",
+        "检索": "full_single_P057_front 全身单人・标准系趴卧侧卧・单臂过头正面"
+      },
+      {
+        "id": "full_single_P057_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P057",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・单臂过头",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P057_high.jpg",
+        "原图": "img/full_single_P057_high.png",
+        "检索": "full_single_P057_high 全身单人・标准系趴卧侧卧・单臂过头俯视"
+      },
+      {
+        "id": "full_single_P057_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P057",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・单臂过头",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P057_low.jpg",
+        "原图": "img/full_single_P057_low.png",
+        "检索": "full_single_P057_low 全身单人・标准系趴卧侧卧・单臂过头仰视"
+      },
+      {
+        "id": "full_single_P057_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P057",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・单臂过头",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P057_side.jpg",
+        "原图": "img/full_single_P057_side.png",
+        "检索": "full_single_P057_side 全身单人・标准系趴卧侧卧・单臂过头侧面"
+      },
+      {
+        "id": "full_single_P057_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P057",
+        "分类": "趴卧",
+        "姿势名称": "侧卧・单臂过头",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P057_diag.jpg",
+        "原图": "img/full_single_P057_diag.png",
+        "检索": "full_single_P057_diag 全身单人・标准系趴卧侧卧・单臂过头斜侧"
+      }
+    ],
+    "全身单人・标准系:P058": [
+      {
+        "id": "full_single_P058_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P058",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・以臂枕头",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P058_front.jpg",
+        "原图": "img/full_single_P058_front.png",
+        "检索": "full_single_P058_front 全身单人・标准系趴卧俯卧・以臂枕头正面"
+      },
+      {
+        "id": "full_single_P058_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P058",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・以臂枕头",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P058_high.jpg",
+        "原图": "img/full_single_P058_high.png",
+        "检索": "full_single_P058_high 全身单人・标准系趴卧俯卧・以臂枕头俯视"
+      },
+      {
+        "id": "full_single_P058_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P058",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・以臂枕头",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P058_low.jpg",
+        "原图": "img/full_single_P058_low.png",
+        "检索": "full_single_P058_low 全身单人・标准系趴卧俯卧・以臂枕头仰视"
+      },
+      {
+        "id": "full_single_P058_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P058",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・以臂枕头",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P058_side.jpg",
+        "原图": "img/full_single_P058_side.png",
+        "检索": "full_single_P058_side 全身单人・标准系趴卧俯卧・以臂枕头侧面"
+      },
+      {
+        "id": "full_single_P058_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P058",
+        "分类": "趴卧",
+        "姿势名称": "俯卧・以臂枕头",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P058_diag.jpg",
+        "原图": "img/full_single_P058_diag.png",
+        "检索": "full_single_P058_diag 全身单人・标准系趴卧俯卧・以臂枕头斜侧"
+      }
+    ],
+    "全身单人・标准系:P059": [
+      {
+        "id": "full_single_P059_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P059",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・胸口上挺",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P059_front.jpg",
+        "原图": "img/full_single_P059_front.png",
+        "检索": "full_single_P059_front 全身单人・标准系趴卧仰卧・胸口上挺正面"
+      },
+      {
+        "id": "full_single_P059_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P059",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・胸口上挺",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P059_high.jpg",
+        "原图": "img/full_single_P059_high.png",
+        "检索": "full_single_P059_high 全身单人・标准系趴卧仰卧・胸口上挺俯视"
+      },
+      {
+        "id": "full_single_P059_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P059",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・胸口上挺",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P059_low.jpg",
+        "原图": "img/full_single_P059_low.png",
+        "检索": "full_single_P059_low 全身单人・标准系趴卧仰卧・胸口上挺仰视"
+      },
+      {
+        "id": "full_single_P059_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P059",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・胸口上挺",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P059_side.jpg",
+        "原图": "img/full_single_P059_side.png",
+        "检索": "full_single_P059_side 全身单人・标准系趴卧仰卧・胸口上挺侧面"
+      },
+      {
+        "id": "full_single_P059_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P059",
+        "分类": "趴卧",
+        "姿势名称": "仰卧・胸口上挺",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P059_diag.jpg",
+        "原图": "img/full_single_P059_diag.png",
+        "检索": "full_single_P059_diag 全身单人・标准系趴卧仰卧・胸口上挺斜侧"
+      }
+    ],
+    "全身单人・标准系:P062": [
+      {
+        "id": "full_single_P062_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P062",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・单手触地",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P062_front.jpg",
+        "原图": "img/full_single_P062_front.png",
+        "检索": "full_single_P062_front 全身单人・标准系蹲姿蹲姿・单手触地正面"
+      },
+      {
+        "id": "full_single_P062_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P062",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・单手触地",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P062_high.jpg",
+        "原图": "img/full_single_P062_high.png",
+        "检索": "full_single_P062_high 全身单人・标准系蹲姿蹲姿・单手触地俯视"
+      },
+      {
+        "id": "full_single_P062_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P062",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・单手触地",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P062_low.jpg",
+        "原图": "img/full_single_P062_low.png",
+        "检索": "full_single_P062_low 全身单人・标准系蹲姿蹲姿・单手触地仰视"
+      },
+      {
+        "id": "full_single_P062_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P062",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・单手触地",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P062_side.jpg",
+        "原图": "img/full_single_P062_side.png",
+        "检索": "full_single_P062_side 全身单人・标准系蹲姿蹲姿・单手触地侧面"
+      },
+      {
+        "id": "full_single_P062_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P062",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・单手触地",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P062_diag.jpg",
+        "原图": "img/full_single_P062_diag.png",
+        "检索": "full_single_P062_diag 全身单人・标准系蹲姿蹲姿・单手触地斜侧"
+      }
+    ],
+    "全身单人・标准系:P063": [
+      {
+        "id": "full_single_P063_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P063",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・托腮",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P063_front.jpg",
+        "原图": "img/full_single_P063_front.png",
+        "检索": "full_single_P063_front 全身单人・标准系蹲姿蹲姿・托腮正面"
+      },
+      {
+        "id": "full_single_P063_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P063",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・托腮",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P063_high.jpg",
+        "原图": "img/full_single_P063_high.png",
+        "检索": "full_single_P063_high 全身单人・标准系蹲姿蹲姿・托腮俯视"
+      },
+      {
+        "id": "full_single_P063_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P063",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・托腮",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P063_low.jpg",
+        "原图": "img/full_single_P063_low.png",
+        "检索": "full_single_P063_low 全身单人・标准系蹲姿蹲姿・托腮仰视"
+      },
+      {
+        "id": "full_single_P063_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P063",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・托腮",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P063_side.jpg",
+        "原图": "img/full_single_P063_side.png",
+        "检索": "full_single_P063_side 全身单人・标准系蹲姿蹲姿・托腮侧面"
+      },
+      {
+        "id": "full_single_P063_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P063",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・托腮",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P063_diag.jpg",
+        "原图": "img/full_single_P063_diag.png",
+        "检索": "full_single_P063_diag 全身单人・标准系蹲姿蹲姿・托腮斜侧"
+      }
+    ],
+    "全身单人・标准系:P064": [
+      {
+        "id": "full_single_P064_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P064",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・手抚发",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P064_front.jpg",
+        "原图": "img/full_single_P064_front.png",
+        "检索": "full_single_P064_front 全身单人・标准系蹲姿蹲姿・手抚发正面"
+      },
+      {
+        "id": "full_single_P064_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P064",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・手抚发",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P064_high.jpg",
+        "原图": "img/full_single_P064_high.png",
+        "检索": "full_single_P064_high 全身单人・标准系蹲姿蹲姿・手抚发俯视"
+      },
+      {
+        "id": "full_single_P064_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P064",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・手抚发",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P064_low.jpg",
+        "原图": "img/full_single_P064_low.png",
+        "检索": "full_single_P064_low 全身单人・标准系蹲姿蹲姿・手抚发仰视"
+      },
+      {
+        "id": "full_single_P064_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P064",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・手抚发",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P064_side.jpg",
+        "原图": "img/full_single_P064_side.png",
+        "检索": "full_single_P064_side 全身单人・标准系蹲姿蹲姿・手抚发侧面"
+      },
+      {
+        "id": "full_single_P064_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P064",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・手抚发",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P064_diag.jpg",
+        "原图": "img/full_single_P064_diag.png",
+        "检索": "full_single_P064_diag 全身单人・标准系蹲姿蹲姿・手抚发斜侧"
+      }
+    ],
+    "全身单人・标准系:P065": [
+      {
+        "id": "full_single_P065_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P065",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・踮脚双手触地",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P065_front.jpg",
+        "原图": "img/full_single_P065_front.png",
+        "检索": "full_single_P065_front 全身单人・标准系蹲姿蹲姿・踮脚双手触地正面"
+      },
+      {
+        "id": "full_single_P065_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P065",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・踮脚双手触地",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P065_high.jpg",
+        "原图": "img/full_single_P065_high.png",
+        "检索": "full_single_P065_high 全身单人・标准系蹲姿蹲姿・踮脚双手触地俯视"
+      },
+      {
+        "id": "full_single_P065_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P065",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・踮脚双手触地",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P065_low.jpg",
+        "原图": "img/full_single_P065_low.png",
+        "检索": "full_single_P065_low 全身单人・标准系蹲姿蹲姿・踮脚双手触地仰视"
+      },
+      {
+        "id": "full_single_P065_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P065",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・踮脚双手触地",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P065_side.jpg",
+        "原图": "img/full_single_P065_side.png",
+        "检索": "full_single_P065_side 全身单人・标准系蹲姿蹲姿・踮脚双手触地侧面"
+      },
+      {
+        "id": "full_single_P065_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P065",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・踮脚双手触地",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P065_diag.jpg",
+        "原图": "img/full_single_P065_diag.png",
+        "检索": "full_single_P065_diag 全身单人・标准系蹲姿蹲姿・踮脚双手触地斜侧"
+      }
+    ],
+    "全身单人・标准系:P066": [
+      {
+        "id": "full_single_P066_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P066",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・回头",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P066_front.jpg",
+        "原图": "img/full_single_P066_front.png",
+        "检索": "full_single_P066_front 全身单人・标准系蹲姿蹲姿・回头正面"
+      },
+      {
+        "id": "full_single_P066_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P066",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・回头",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P066_high.jpg",
+        "原图": "img/full_single_P066_high.png",
+        "检索": "full_single_P066_high 全身单人・标准系蹲姿蹲姿・回头俯视"
+      },
+      {
+        "id": "full_single_P066_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P066",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・回头",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P066_low.jpg",
+        "原图": "img/full_single_P066_low.png",
+        "检索": "full_single_P066_low 全身单人・标准系蹲姿蹲姿・回头仰视"
+      },
+      {
+        "id": "full_single_P066_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P066",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・回头",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P066_side.jpg",
+        "原图": "img/full_single_P066_side.png",
+        "检索": "full_single_P066_side 全身单人・标准系蹲姿蹲姿・回头侧面"
+      },
+      {
+        "id": "full_single_P066_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P066",
+        "分类": "蹲姿",
+        "姿势名称": "蹲姿・回头",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P066_diag.jpg",
+        "原图": "img/full_single_P066_diag.png",
+        "检索": "full_single_P066_diag 全身单人・标准系蹲姿蹲姿・回头斜侧"
+      }
+    ],
+    "全身单人・标准系:P068": [
+      {
+        "id": "full_single_P068_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P068",
+        "分类": "前倾",
+        "姿势名称": "前倾・手触小腿",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P068_front.jpg",
+        "原图": "img/full_single_P068_front.png",
+        "检索": "full_single_P068_front 全身单人・标准系前倾前倾・手触小腿正面"
+      },
+      {
+        "id": "full_single_P068_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P068",
+        "分类": "前倾",
+        "姿势名称": "前倾・手触小腿",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P068_high.jpg",
+        "原图": "img/full_single_P068_high.png",
+        "检索": "full_single_P068_high 全身单人・标准系前倾前倾・手触小腿俯视"
+      },
+      {
+        "id": "full_single_P068_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P068",
+        "分类": "前倾",
+        "姿势名称": "前倾・手触小腿",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P068_low.jpg",
+        "原图": "img/full_single_P068_low.png",
+        "检索": "full_single_P068_low 全身单人・标准系前倾前倾・手触小腿仰视"
+      },
+      {
+        "id": "full_single_P068_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P068",
+        "分类": "前倾",
+        "姿势名称": "前倾・手触小腿",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P068_side.jpg",
+        "原图": "img/full_single_P068_side.png",
+        "检索": "full_single_P068_side 全身单人・标准系前倾前倾・手触小腿侧面"
+      },
+      {
+        "id": "full_single_P068_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P068",
+        "分类": "前倾",
+        "姿势名称": "前倾・手触小腿",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P068_diag.jpg",
+        "原图": "img/full_single_P068_diag.png",
+        "检索": "full_single_P068_diag 全身单人・标准系前倾前倾・手触小腿斜侧"
+      }
+    ],
+    "全身单人・标准系:P069": [
+      {
+        "id": "full_single_P069_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P069",
+        "分类": "前倾",
+        "姿势名称": "前倾・单手扶腰・仰望",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P069_front.jpg",
+        "原图": "img/full_single_P069_front.png",
+        "检索": "full_single_P069_front 全身单人・标准系前倾前倾・单手扶腰・仰望正面"
+      },
+      {
+        "id": "full_single_P069_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P069",
+        "分类": "前倾",
+        "姿势名称": "前倾・单手扶腰・仰望",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P069_high.jpg",
+        "原图": "img/full_single_P069_high.png",
+        "检索": "full_single_P069_high 全身单人・标准系前倾前倾・单手扶腰・仰望俯视"
+      },
+      {
+        "id": "full_single_P069_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P069",
+        "分类": "前倾",
+        "姿势名称": "前倾・单手扶腰・仰望",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P069_low.jpg",
+        "原图": "img/full_single_P069_low.png",
+        "检索": "full_single_P069_low 全身单人・标准系前倾前倾・单手扶腰・仰望仰视"
+      },
+      {
+        "id": "full_single_P069_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P069",
+        "分类": "前倾",
+        "姿势名称": "前倾・单手扶腰・仰望",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P069_side.jpg",
+        "原图": "img/full_single_P069_side.png",
+        "检索": "full_single_P069_side 全身单人・标准系前倾前倾・单手扶腰・仰望侧面"
+      },
+      {
+        "id": "full_single_P069_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P069",
+        "分类": "前倾",
+        "姿势名称": "前倾・单手扶腰・仰望",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P069_diag.jpg",
+        "原图": "img/full_single_P069_diag.png",
+        "检索": "full_single_P069_diag 全身单人・标准系前倾前倾・单手扶腰・仰望斜侧"
+      }
+    ],
+    "全身单人・标准系:P070": [
+      {
+        "id": "full_single_P070_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P070",
+        "分类": "前倾",
+        "姿势名称": "前倾・手扶大腿・臀部后坐",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P070_front.jpg",
+        "原图": "img/full_single_P070_front.png",
+        "检索": "full_single_P070_front 全身单人・标准系前倾前倾・手扶大腿・臀部后坐正面"
+      },
+      {
+        "id": "full_single_P070_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P070",
+        "分类": "前倾",
+        "姿势名称": "前倾・手扶大腿・臀部后坐",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P070_high.jpg",
+        "原图": "img/full_single_P070_high.png",
+        "检索": "full_single_P070_high 全身单人・标准系前倾前倾・手扶大腿・臀部后坐俯视"
+      },
+      {
+        "id": "full_single_P070_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P070",
+        "分类": "前倾",
+        "姿势名称": "前倾・手扶大腿・臀部后坐",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P070_low.jpg",
+        "原图": "img/full_single_P070_low.png",
+        "检索": "full_single_P070_low 全身单人・标准系前倾前倾・手扶大腿・臀部后坐仰视"
+      },
+      {
+        "id": "full_single_P070_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P070",
+        "分类": "前倾",
+        "姿势名称": "前倾・手扶大腿・臀部后坐",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P070_side.jpg",
+        "原图": "img/full_single_P070_side.png",
+        "检索": "full_single_P070_side 全身单人・标准系前倾前倾・手扶大腿・臀部后坐侧面"
+      },
+      {
+        "id": "full_single_P070_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P070",
+        "分类": "前倾",
+        "姿势名称": "前倾・手扶大腿・臀部后坐",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P070_diag.jpg",
+        "原图": "img/full_single_P070_diag.png",
+        "检索": "full_single_P070_diag 全身单人・标准系前倾前倾・手扶大腿・臀部后坐斜侧"
+      }
+    ],
+    "全身单人・标准系:P071": [
+      {
+        "id": "full_single_P071_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P071",
+        "分类": "前倾",
+        "姿势名称": "前倾・双臂自然下垂",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P071_front.jpg",
+        "原图": "img/full_single_P071_front.png",
+        "检索": "full_single_P071_front 全身单人・标准系前倾前倾・双臂自然下垂正面"
+      },
+      {
+        "id": "full_single_P071_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P071",
+        "分类": "前倾",
+        "姿势名称": "前倾・双臂自然下垂",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P071_high.jpg",
+        "原图": "img/full_single_P071_high.png",
+        "检索": "full_single_P071_high 全身单人・标准系前倾前倾・双臂自然下垂俯视"
+      },
+      {
+        "id": "full_single_P071_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P071",
+        "分类": "前倾",
+        "姿势名称": "前倾・双臂自然下垂",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P071_low.jpg",
+        "原图": "img/full_single_P071_low.png",
+        "检索": "full_single_P071_low 全身单人・标准系前倾前倾・双臂自然下垂仰视"
+      },
+      {
+        "id": "full_single_P071_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P071",
+        "分类": "前倾",
+        "姿势名称": "前倾・双臂自然下垂",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P071_side.jpg",
+        "原图": "img/full_single_P071_side.png",
+        "检索": "full_single_P071_side 全身单人・标准系前倾前倾・双臂自然下垂侧面"
+      },
+      {
+        "id": "full_single_P071_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P071",
+        "分类": "前倾",
+        "姿势名称": "前倾・双臂自然下垂",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P071_diag.jpg",
+        "原图": "img/full_single_P071_diag.png",
+        "检索": "full_single_P071_diag 全身单人・标准系前倾前倾・双臂自然下垂斜侧"
+      }
+    ],
+    "全身单人・标准系:P072": [
+      {
+        "id": "full_single_P072_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P072",
+        "分类": "前倾",
+        "姿势名称": "前倾・单腿后抬",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P072_front.jpg",
+        "原图": "img/full_single_P072_front.png",
+        "检索": "full_single_P072_front 全身单人・标准系前倾前倾・单腿后抬正面"
+      },
+      {
+        "id": "full_single_P072_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P072",
+        "分类": "前倾",
+        "姿势名称": "前倾・单腿后抬",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P072_high.jpg",
+        "原图": "img/full_single_P072_high.png",
+        "检索": "full_single_P072_high 全身单人・标准系前倾前倾・单腿后抬俯视"
+      },
+      {
+        "id": "full_single_P072_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P072",
+        "分类": "前倾",
+        "姿势名称": "前倾・单腿后抬",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P072_low.jpg",
+        "原图": "img/full_single_P072_low.png",
+        "检索": "full_single_P072_low 全身单人・标准系前倾前倾・单腿后抬仰视"
+      },
+      {
+        "id": "full_single_P072_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P072",
+        "分类": "前倾",
+        "姿势名称": "前倾・单腿后抬",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P072_side.jpg",
+        "原图": "img/full_single_P072_side.png",
+        "检索": "full_single_P072_side 全身单人・标准系前倾前倾・单腿后抬侧面"
+      },
+      {
+        "id": "full_single_P072_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P072",
+        "分类": "前倾",
+        "姿势名称": "前倾・单腿后抬",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P072_diag.jpg",
+        "原图": "img/full_single_P072_diag.png",
+        "检索": "full_single_P072_diag 全身单人・标准系前倾前倾・单腿后抬斜侧"
+      }
+    ],
+    "全身单人・标准系:P073": [
+      {
+        "id": "full_single_P073_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P073",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・站姿挺背",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P073_front.jpg",
+        "原图": "img/full_single_P073_front.png",
+        "检索": "full_single_P073_front 全身单人・标准系后仰・挺背后仰・站姿挺背正面"
+      },
+      {
+        "id": "full_single_P073_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P073",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・站姿挺背",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P073_high.jpg",
+        "原图": "img/full_single_P073_high.png",
+        "检索": "full_single_P073_high 全身单人・标准系后仰・挺背后仰・站姿挺背俯视"
+      },
+      {
+        "id": "full_single_P073_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P073",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・站姿挺背",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P073_low.jpg",
+        "原图": "img/full_single_P073_low.png",
+        "检索": "full_single_P073_low 全身单人・标准系后仰・挺背后仰・站姿挺背仰视"
+      },
+      {
+        "id": "full_single_P073_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P073",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・站姿挺背",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P073_side.jpg",
+        "原图": "img/full_single_P073_side.png",
+        "检索": "full_single_P073_side 全身单人・标准系后仰・挺背后仰・站姿挺背侧面"
+      },
+      {
+        "id": "full_single_P073_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P073",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・站姿挺背",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P073_diag.jpg",
+        "原图": "img/full_single_P073_diag.png",
+        "检索": "full_single_P073_diag 全身单人・标准系后仰・挺背后仰・站姿挺背斜侧"
+      }
+    ],
+    "全身单人・标准系:P074": [
+      {
+        "id": "full_single_P074_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P074",
+        "分类": "后仰・挺背",
+        "姿势名称": "跪立・双手后撑后仰",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P074_front.jpg",
+        "原图": "img/full_single_P074_front.png",
+        "检索": "full_single_P074_front 全身单人・标准系后仰・挺背跪立・双手后撑后仰正面"
+      },
+      {
+        "id": "full_single_P074_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P074",
+        "分类": "后仰・挺背",
+        "姿势名称": "跪立・双手后撑后仰",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P074_high.jpg",
+        "原图": "img/full_single_P074_high.png",
+        "检索": "full_single_P074_high 全身单人・标准系后仰・挺背跪立・双手后撑后仰俯视"
+      },
+      {
+        "id": "full_single_P074_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P074",
+        "分类": "后仰・挺背",
+        "姿势名称": "跪立・双手后撑后仰",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P074_low.jpg",
+        "原图": "img/full_single_P074_low.png",
+        "检索": "full_single_P074_low 全身单人・标准系后仰・挺背跪立・双手后撑后仰仰视"
+      },
+      {
+        "id": "full_single_P074_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P074",
+        "分类": "后仰・挺背",
+        "姿势名称": "跪立・双手后撑后仰",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P074_side.jpg",
+        "原图": "img/full_single_P074_side.png",
+        "检索": "full_single_P074_side 全身单人・标准系后仰・挺背跪立・双手后撑后仰侧面"
+      },
+      {
+        "id": "full_single_P074_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P074",
+        "分类": "后仰・挺背",
+        "姿势名称": "跪立・双手后撑后仰",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P074_diag.jpg",
+        "原图": "img/full_single_P074_diag.png",
+        "检索": "full_single_P074_diag 全身单人・标准系后仰・挺背跪立・双手后撑后仰斜侧"
+      }
+    ],
+    "全身单人・标准系:P075": [
+      {
+        "id": "full_single_P075_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P075",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・双臂上举挺身",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P075_front.jpg",
+        "原图": "img/full_single_P075_front.png",
+        "检索": "full_single_P075_front 全身单人・标准系后仰・挺背后仰・双臂上举挺身正面"
+      },
+      {
+        "id": "full_single_P075_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P075",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・双臂上举挺身",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P075_high.jpg",
+        "原图": "img/full_single_P075_high.png",
+        "检索": "full_single_P075_high 全身单人・标准系后仰・挺背后仰・双臂上举挺身俯视"
+      },
+      {
+        "id": "full_single_P075_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P075",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・双臂上举挺身",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P075_low.jpg",
+        "原图": "img/full_single_P075_low.png",
+        "检索": "full_single_P075_low 全身单人・标准系后仰・挺背后仰・双臂上举挺身仰视"
+      },
+      {
+        "id": "full_single_P075_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P075",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・双臂上举挺身",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P075_side.jpg",
+        "原图": "img/full_single_P075_side.png",
+        "检索": "full_single_P075_side 全身单人・标准系后仰・挺背后仰・双臂上举挺身侧面"
+      },
+      {
+        "id": "full_single_P075_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P075",
+        "分类": "后仰・挺背",
+        "姿势名称": "后仰・双臂上举挺身",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P075_diag.jpg",
+        "原图": "img/full_single_P075_diag.png",
+        "检索": "full_single_P075_diag 全身单人・标准系后仰・挺背后仰・双臂上举挺身斜侧"
+      }
+    ],
+    "全身单人・标准系:P077": [
+      {
+        "id": "full_single_P077_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P077",
+        "分类": "扭身",
+        "姿势名称": "扭身・站姿展臂",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P077_front.jpg",
+        "原图": "img/full_single_P077_front.png",
+        "检索": "full_single_P077_front 全身单人・标准系扭身扭身・站姿展臂正面"
+      },
+      {
+        "id": "full_single_P077_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P077",
+        "分类": "扭身",
+        "姿势名称": "扭身・站姿展臂",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P077_high.jpg",
+        "原图": "img/full_single_P077_high.png",
+        "检索": "full_single_P077_high 全身单人・标准系扭身扭身・站姿展臂俯视"
+      },
+      {
+        "id": "full_single_P077_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P077",
+        "分类": "扭身",
+        "姿势名称": "扭身・站姿展臂",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P077_low.jpg",
+        "原图": "img/full_single_P077_low.png",
+        "检索": "full_single_P077_low 全身单人・标准系扭身扭身・站姿展臂仰视"
+      },
+      {
+        "id": "full_single_P077_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P077",
+        "分类": "扭身",
+        "姿势名称": "扭身・站姿展臂",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P077_side.jpg",
+        "原图": "img/full_single_P077_side.png",
+        "检索": "full_single_P077_side 全身单人・标准系扭身扭身・站姿展臂侧面"
+      },
+      {
+        "id": "full_single_P077_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P077",
+        "分类": "扭身",
+        "姿势名称": "扭身・站姿展臂",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P077_diag.jpg",
+        "原图": "img/full_single_P077_diag.png",
+        "检索": "full_single_P077_diag 全身单人・标准系扭身扭身・站姿展臂斜侧"
+      }
+    ],
+    "全身单人・标准系:P078": [
+      {
+        "id": "full_single_P078_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P078",
+        "分类": "扭身",
+        "姿势名称": "扭身・跪立回望",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P078_front.jpg",
+        "原图": "img/full_single_P078_front.png",
+        "检索": "full_single_P078_front 全身单人・标准系扭身扭身・跪立回望正面"
+      },
+      {
+        "id": "full_single_P078_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P078",
+        "分类": "扭身",
+        "姿势名称": "扭身・跪立回望",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P078_high.jpg",
+        "原图": "img/full_single_P078_high.png",
+        "检索": "full_single_P078_high 全身单人・标准系扭身扭身・跪立回望俯视"
+      },
+      {
+        "id": "full_single_P078_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P078",
+        "分类": "扭身",
+        "姿势名称": "扭身・跪立回望",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P078_low.jpg",
+        "原图": "img/full_single_P078_low.png",
+        "检索": "full_single_P078_low 全身单人・标准系扭身扭身・跪立回望仰视"
+      },
+      {
+        "id": "full_single_P078_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P078",
+        "分类": "扭身",
+        "姿势名称": "扭身・跪立回望",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P078_side.jpg",
+        "原图": "img/full_single_P078_side.png",
+        "检索": "full_single_P078_side 全身单人・标准系扭身扭身・跪立回望侧面"
+      },
+      {
+        "id": "full_single_P078_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P078",
+        "分类": "扭身",
+        "姿势名称": "扭身・跪立回望",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P078_diag.jpg",
+        "原图": "img/full_single_P078_diag.png",
+        "检索": "full_single_P078_diag 全身单人・标准系扭身扭身・跪立回望斜侧"
+      }
+    ],
+    "全身单人・标准系:P079": [
+      {
+        "id": "full_single_P079_front",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P079",
+        "分类": "扭身",
+        "姿势名称": "扭身・坐姿上体扭转",
+        "角度": "正面",
+        "缩略图": "thumbs/full_single_P079_front.jpg",
+        "原图": "img/full_single_P079_front.png",
+        "检索": "full_single_P079_front 全身单人・标准系扭身扭身・坐姿上体扭转正面"
+      },
+      {
+        "id": "full_single_P079_high",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P079",
+        "分类": "扭身",
+        "姿势名称": "扭身・坐姿上体扭转",
+        "角度": "俯视",
+        "缩略图": "thumbs/full_single_P079_high.jpg",
+        "原图": "img/full_single_P079_high.png",
+        "检索": "full_single_P079_high 全身单人・标准系扭身扭身・坐姿上体扭转俯视"
+      },
+      {
+        "id": "full_single_P079_low",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P079",
+        "分类": "扭身",
+        "姿势名称": "扭身・坐姿上体扭转",
+        "角度": "仰视",
+        "缩略图": "thumbs/full_single_P079_low.jpg",
+        "原图": "img/full_single_P079_low.png",
+        "检索": "full_single_P079_low 全身单人・标准系扭身扭身・坐姿上体扭转仰视"
+      },
+      {
+        "id": "full_single_P079_side",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P079",
+        "分类": "扭身",
+        "姿势名称": "扭身・坐姿上体扭转",
+        "角度": "侧面",
+        "缩略图": "thumbs/full_single_P079_side.jpg",
+        "原图": "img/full_single_P079_side.png",
+        "检索": "full_single_P079_side 全身单人・标准系扭身扭身・坐姿上体扭转侧面"
+      },
+      {
+        "id": "full_single_P079_diag",
+        "体系": "全身单人・标准系",
+        "姿势编号": "P079",
+        "分类": "扭身",
+        "姿势名称": "扭身・坐姿上体扭转",
+        "角度": "斜侧",
+        "缩略图": "thumbs/full_single_P079_diag.jpg",
+        "原图": "img/full_single_P079_diag.png",
+        "检索": "full_single_P079_diag 全身单人・标准系扭身扭身・坐姿上体扭转斜侧"
+      }
+    ]
+  },
+  "sheets": [
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-01.jpg",
+      "keys": [
+        "全身单人・标准系:P008",
+        "全身单人・标准系:P009",
+        "全身单人・标准系:P011",
+        "全身单人・标准系:P013"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-02.jpg",
+      "keys": [
+        "全身单人・标准系:P014",
+        "全身单人・标准系:P022",
+        "全身单人・标准系:P024",
+        "全身单人・标准系:P026"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-03.jpg",
+      "keys": [
+        "全身单人・标准系:P027",
+        "全身单人・标准系:P029",
+        "全身单人・标准系:P030",
+        "全身单人・标准系:P032"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-04.jpg",
+      "keys": [
+        "全身单人・标准系:P034",
+        "全身单人・标准系:P035",
+        "全身单人・标准系:P036",
+        "全身单人・标准系:P037"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-05.jpg",
+      "keys": [
+        "全身单人・标准系:P038",
+        "全身单人・标准系:P039",
+        "全身单人・标准系:P040",
+        "全身单人・标准系:P042"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-06.jpg",
+      "keys": [
+        "全身单人・标准系:P043",
+        "全身单人・标准系:P044",
+        "全身单人・标准系:P046",
+        "全身单人・标准系:P047"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-07.jpg",
+      "keys": [
+        "全身单人・标准系:P048",
+        "全身单人・标准系:P051",
+        "全身单人・标准系:P052",
+        "全身单人・标准系:P054"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-08.jpg",
+      "keys": [
+        "全身单人・标准系:P056",
+        "全身单人・标准系:P057",
+        "全身单人・标准系:P058",
+        "全身单人・标准系:P059"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-09.jpg",
+      "keys": [
+        "全身单人・标准系:P062",
+        "全身单人・标准系:P063",
+        "全身单人・标准系:P064",
+        "全身单人・标准系:P065"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-10.jpg",
+      "keys": [
+        "全身单人・标准系:P066",
+        "全身单人・标准系:P068",
+        "全身单人・标准系:P069",
+        "全身单人・标准系:P070"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-11.jpg",
+      "keys": [
+        "全身单人・标准系:P071",
+        "全身单人・标准系:P072",
+        "全身单人・标准系:P073",
+        "全身单人・标准系:P074"
+      ]
+    },
+    {
+      "path": "D:\\Codex\\Prompt-Library\\prompt-library-3.0-local\\designs\\prompt-library-v4\\app\\reports\\pose-prompt-completion\\standard\\sheet-12.jpg",
+      "keys": [
+        "全身单人・标准系:P075",
+        "全身单人・标准系:P077",
+        "全身单人・标准系:P078",
+        "全身单人・标准系:P079"
+      ]
+    }
+  ]
+}

@@ -105,3 +105,5 @@ body[data-workspace="builder"] #category-tabs{order:2;margin-bottom:12px}.builde
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
 .studio-nav .pose-nav-link{display:flex;align-items:center;gap:12px;padding:14px 16px;text-decoration:none;color:inherit;border-radius:12px;font-size:14px}.studio-nav .pose-nav-link:hover{background:#e0e8df}@media(max-width:700px){.studio-nav .pose-nav-link{flex:1;justify-content:center;flex-direction:column;gap:3px;padding:7px 2px;font-size:11px}.studio-nav .pose-nav-link>span:first-child{display:none}.studio-nav{grid-template-columns:repeat(5,1fr)!important}}
+
+.back-to-top{position:fixed;right:16px;bottom:24px;width:44px;height:44px;min-height:44px;padding:0;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--accent);font-size:23px;line-height:1;z-index:7;box-shadow:0 2px 8px #26352b0c}.back-to-top[hidden]{display:none!important}.back-to-top:hover{background:var(--accent-soft)}.back-to-top:focus-visible{outline:2px solid var(--accent);outline-offset:3px}

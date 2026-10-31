@@ -17,7 +17,7 @@ test('已缓存页面及同版本数据立即可用，不等待网络，不读�
   const saved=new Response('cached release'),w=worker(saved);let result;
   w.listeners.fetch({request,respondWith:value=>result=value});
   assert.equal(await(await result).text(),'cached release');assert.equal(w.fetches,0);
-  assert.ok(w.queries.every(q=>q.name==='prompt-library-v4.1.0-local2'));
+  assert.ok(w.queries.every(q=>q.name===source.match(/const CACHE_NAME = "([^"]+)"/)[1]));
   assert.equal(w.queries[0].options.ignoreSearch,request.mode==='navigate');
  }
 });

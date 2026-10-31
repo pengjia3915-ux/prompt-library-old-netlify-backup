@@ -1,0 +1,65 @@
+{
+  "checkedAt": "2026-10-31T11:38:43.367Z",
+  "localOnly": true,
+  "testsPassed": true,
+  "buildPassed": true,
+  "groups": 251,
+  "views": 1254,
+  "promptGroups": 251,
+  "files": 2536,
+  "totalBytes": 601564179,
+  "comparedWith": "D:\\Codex\\Prompt-Library\\prompt-library-old-netlify-publish\\dist\\client",
+  "changedFiles": 12,
+  "changedBytes": 450729,
+  "changedImages": 0,
+  "delta": [
+    {
+      "path": "css/workbench.css",
+      "bytes": 14473
+    },
+    {
+      "path": "data/pose-reference/action-prompts.json",
+      "bytes": 261644
+    },
+    {
+      "path": "data/pose-reference/SOURCE.md",
+      "bytes": 1953
+    },
+    {
+      "path": "index.html",
+      "bytes": 14387
+    },
+    {
+      "path": "js/back-to-top.js",
+      "bytes": 1534
+    },
+    {
+      "path": "js/pose-model.js",
+      "bytes": 4391
+    },
+    {
+      "path": "js/pose-reference.js",
+      "bytes": 11280
+    },
+    {
+      "path": "js/prototype.js",
+      "bytes": 120057
+    },
+    {
+      "path": "js/storage.js",
+      "bytes": 5730
+    },
+    {
+      "path": "js/sync.js",
+      "bytes": 7230
+    },
+    {
+      "path": "pose-reference.html",
+      "bytes": 4522
+    },
+    {
+      "path": "service-worker.js",
+      "bytes": 3528
+    }
+  ]
+}

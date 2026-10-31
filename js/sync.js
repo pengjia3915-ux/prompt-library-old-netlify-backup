@@ -4,7 +4,7 @@ import {
   mergePromptEntries,
   mergeSyncedSuiteState,
   normalizeCloudPayload
-} from "./suite-utils.js?v=4.1.0";
+} from "./suite-utils.js?v=4.2.0";
 
 const SYNC_ENDPOINT = "/api/sync";
 const SYNC_CODE_BYTES = 16;

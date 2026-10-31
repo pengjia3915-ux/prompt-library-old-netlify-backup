@@ -1,14 +1,14 @@
-import { contentType, contentLabel, belongsToWorkspace } from './browse-model.js?v=4.1.0';
-import { familyFor, familyUnits } from './families.js?v=4.1.0';
-import { classify, recordKey, CATEGORIES } from './catalog.js?v=4.1.0';
+import { contentType, contentLabel, belongsToWorkspace } from './browse-model.js?v=4.2.0';
+import { familyFor, familyUnits } from './families.js?v=4.2.0';
+import { classify, recordKey, CATEGORIES } from './catalog.js?v=4.2.0';
 import {
   createSyncCode,
   formatSyncCode,
   isValidSyncCode,
   normalizeSyncCode,
   syncSuites
-} from "./sync.js?v=4.1.0";
-import { readStorageBundle, writeStorageBundle } from "./storage.js?v=4.1.0";
+} from "./sync.js?v=4.2.0";
+import { readStorageBundle, writeStorageBundle } from "./storage.js?v=4.2.0";
 import {
   BANGYAN_SYNTHESIS_ORDER,
   clone,
@@ -32,9 +32,9 @@ import {
   searchMatches,
   selectBuilderComponent,
   removeBuilderComponent
-} from "./suite-utils.js?v=4.1.0";
+} from "./suite-utils.js?v=4.2.0";
 
-const APP_ASSET_VERSION = "4.1.0";
+const APP_ASSET_VERSION = "4.2.0";
 const PAGE_SIZE = 8;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
@@ -1561,7 +1561,7 @@ async function registerServiceWorker() {
 }
 
 async function initialize() {
-  const catalogRequest = fetch('data/catalog-map.json?v=4.1.0').then(response=>response.ok?response.json():null).catch(()=>null);
+  const catalogRequest = fetch('data/catalog-map.json?v=4.2.0').then(response=>response.ok?response.json():null).catch(()=>null);
   const loadData = async (file) => {
     try {
       const response = await fetch(`data/${file}?v=${APP_ASSET_VERSION}`);

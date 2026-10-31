@@ -1,0 +1,103 @@
+{
+  "checks": [
+    {
+      "group": "standard:P008",
+      "angle": "正面",
+      "copyMatches": true,
+      "chars": 84,
+      "recheckedAfterClipboardCompletion": true
+    },
+    {
+      "group": "standard:P008",
+      "angle": "斜侧",
+      "copyMatches": true,
+      "chars": 80
+    },
+    {
+      "group": "standard:P008",
+      "angle": "侧面",
+      "copyMatches": true,
+      "chars": 83
+    },
+    {
+      "group": "standard:P008",
+      "angle": "俯视",
+      "copyMatches": true,
+      "chars": 97
+    },
+    {
+      "group": "standard:P008",
+      "angle": "仰视",
+      "copyMatches": true,
+      "chars": 94
+    },
+    {
+      "group": "upper:P060",
+      "angle": "正面",
+      "copyMatches": true,
+      "chars": 88
+    },
+    {
+      "group": "upper:P060",
+      "angle": "斜侧",
+      "copyMatches": true,
+      "chars": 83
+    },
+    {
+      "group": "upper:P060",
+      "angle": "侧面",
+      "copyMatches": true,
+      "chars": 92
+    },
+    {
+      "group": "upper:P060",
+      "angle": "俯视",
+      "copyMatches": true,
+      "chars": 102
+    },
+    {
+      "group": "upper:P060",
+      "angle": "仰视",
+      "copyMatches": true,
+      "chars": 98
+    },
+    {
+      "group": "pair:P030",
+      "angle": "正面",
+      "copyMatches": true
+    },
+    {
+      "group": "pair:P030",
+      "angle": "斜侧",
+      "copyMatches": true
+    },
+    {
+      "group": "pair:P030",
+      "angle": "侧面",
+      "copyMatches": true
+    },
+    {
+      "group": "pair:P030",
+      "angle": "俯视",
+      "copyMatches": true
+    },
+    {
+      "group": "pair:P030",
+      "angle": "仰视",
+      "copyMatches": true
+    }
+  ],
+  "missingViewButtons": [
+    "正面",
+    "斜侧",
+    "侧面",
+    "俯视"
+  ],
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "horizontalOverflow": false,
+    "copyButtonsVisible": true
+  },
+  "consoleErrors": []
+}

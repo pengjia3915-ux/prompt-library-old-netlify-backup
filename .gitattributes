@@ -1,3 +1,9 @@
 # Preserve exact source bytes; catalog integrity checks include original line endings.
 data/*.json -text
 dist/client/data/*.json -text
+
+data/**/*.json -text
+
+dist/client/data/**/*.json -text
+
+backups/**/*.json -text

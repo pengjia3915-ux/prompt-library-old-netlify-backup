@@ -28,6 +28,7 @@ for (const file of [
   "js/families.js",
   "data/catalog-map.json",
   "js/prototype.js",
+  "js/back-to-top.js",
   "js/suite-utils.js",
   "js/storage.js",
   "js/sync.js",
