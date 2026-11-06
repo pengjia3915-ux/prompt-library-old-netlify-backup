@@ -1,0 +1,257 @@
+{
+  "checkedAt": "2026-11-06T04:04:49.016597+00:00",
+  "version": "4.3",
+  "deployId": "6aed51831851986da2b1cc2f",
+  "verified": 34,
+  "allMatched": true,
+  "results": [
+    {
+      "path": "",
+      "status": 200,
+      "bytes": 14515,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 14515,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "css/prototype.css?v=4.3.0",
+      "status": 200,
+      "bytes": 47875,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "css/studio.css?v=4.3.0",
+      "status": 200,
+      "bytes": 20407,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "css/workbench.css?v=4.3.0",
+      "status": 200,
+      "bytes": 16396,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/prototype.js?v=4.3.0",
+      "status": 200,
+      "bytes": 121825,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/back-to-top.js?v=4.3.0",
+      "status": 200,
+      "bytes": 1534,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/catalog.js?v=4.3.0",
+      "status": 200,
+      "bytes": 8437,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/browse-model.js?v=4.3.0",
+      "status": 200,
+      "bytes": 1584,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/families.js?v=4.3.0",
+      "status": 200,
+      "bytes": 5962,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/suite-utils.js?v=4.3.0",
+      "status": 200,
+      "bytes": 20437,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/storage.js?v=4.3.0",
+      "status": 200,
+      "bytes": 5730,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/sync.js?v=4.3.0",
+      "status": 200,
+      "bytes": 7230,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/catalog-map.json?v=4.3.0",
+      "status": 200,
+      "bytes": 529639,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/img2img-prompts.json?v=4.3.0",
+      "status": 200,
+      "bytes": 175839,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/bangyan-data.json?v=4.3.0",
+      "status": 200,
+      "bytes": 519770,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "manifest.json?v=4.3.0",
+      "status": 200,
+      "bytes": 514,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "icons/icon.svg",
+      "status": 200,
+      "bytes": 415,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "pose-reference.html",
+      "status": 200,
+      "bytes": 4807,
+      "sha256Matches": false,
+      "expectedHtmlLinkRewrite": true
+    },
+    {
+      "path": "css/pose-reference.css?v=4.3.0",
+      "status": 200,
+      "bytes": 8163,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/pose-reference.js?v=4.3.0",
+      "status": 200,
+      "bytes": 12262,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/pose-model.js?v=4.3.0",
+      "status": 200,
+      "bytes": 6773,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/catalog.json",
+      "status": 200,
+      "bytes": 555505,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/action-prompts.json",
+      "status": 200,
+      "bytes": 261644,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "costume-reference.html",
+      "status": 200,
+      "bytes": 5503,
+      "sha256Matches": false,
+      "expectedHtmlLinkRewrite": true
+    },
+    {
+      "path": "css/costume-reference.css?v=4.3.0",
+      "status": 200,
+      "bytes": 9140,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/costume-reference.js?v=4.3.0",
+      "status": 200,
+      "bytes": 9475,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "js/costume-model.js?v=4.3.0",
+      "status": 200,
+      "bytes": 3387,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/costume-reference/catalog.json",
+      "status": 200,
+      "bytes": 1550373,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/costume-reference/text-prompts.json?v=4.3.0",
+      "status": 200,
+      "bytes": 848618,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "service-worker.js",
+      "status": 200,
+      "bytes": 3778,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/img/full_single_P001_front.png",
+      "status": 200,
+      "bytes": 273032,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/img/pair60_P030_diag.png",
+      "status": 200,
+      "bytes": 511003,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    },
+    {
+      "path": "data/pose-reference/img/full_single_P049_side.png",
+      "status": 200,
+      "bytes": 74851,
+      "sha256Matches": true,
+      "expectedHtmlLinkRewrite": false
+    }
+  ],
+  "excludedUrls": {
+    "scene-reference.html": 404,
+    "data/scene-reference/catalog.json": 404,
+    "data/scene-reference/images/scn-001.png": 404,
+    "reports/costume-caption-review/README.md": 404,
+    "reports/scene-reference/desktop.png": 404
+  },
+  "syncUnauthenticatedStatus": 400,
+  "costumes": 1407,
+  "captions": 1407
+}

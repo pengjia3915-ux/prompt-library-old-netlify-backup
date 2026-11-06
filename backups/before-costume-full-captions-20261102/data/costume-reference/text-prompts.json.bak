@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "description": "看图补写的服装中文描述，与目录标签近似版分开记录。未进行生成测试。",
+  "entries": {
+    "SPR-0001": {
+      "description": "上身穿米白色一字肩针织上衣，领口带荷叶边；外搭浅米色长款外套，前襟自然敞开。下身搭配高腰浅粉色牛仔短裙，裙身线条简洁；配白色长袜和白色运动鞋。搭配草编遮阳帽与浅色编织手袋，保留柔和浅色系和春季层次感。",
+      "review": "reference-checked",
+      "generationTested": false,
+      "sourceImage": "https://ai-costume-gallery.pages.dev/png/SPR-0001.png"
+    }
+  }
+}

@@ -1,65 +1,85 @@
 {
-  "checkedAt": "2026-10-31T11:38:43.367Z",
+  "checkedAt": "2026-11-06T04:01:36.113Z",
   "localOnly": true,
   "testsPassed": true,
   "buildPassed": true,
   "groups": 251,
   "views": 1254,
   "promptGroups": 251,
-  "files": 2536,
-  "totalBytes": 601564179,
+  "files": 2543,
+  "totalBytes": 604000316,
   "comparedWith": "D:\\Codex\\Prompt-Library\\prompt-library-old-netlify-publish\\dist\\client",
-  "changedFiles": 12,
-  "changedBytes": 450729,
+  "changedFiles": 17,
+  "changedBytes": 2618002,
   "changedImages": 0,
   "delta": [
     {
+      "path": "costume-reference.html",
+      "bytes": 5516
+    },
+    {
+      "path": "css/costume-reference.css",
+      "bytes": 9140
+    },
+    {
+      "path": "css/pose-reference.css",
+      "bytes": 8163
+    },
+    {
       "path": "css/workbench.css",
-      "bytes": 14473
+      "bytes": 16396
     },
     {
-      "path": "data/pose-reference/action-prompts.json",
-      "bytes": 261644
+      "path": "data/costume-reference/catalog.json",
+      "bytes": 1550373
     },
     {
-      "path": "data/pose-reference/SOURCE.md",
-      "bytes": 1953
+      "path": "data/costume-reference/SOURCE.md",
+      "bytes": 863
+    },
+    {
+      "path": "data/costume-reference/text-prompts.json",
+      "bytes": 848618
     },
     {
       "path": "index.html",
-      "bytes": 14387
+      "bytes": 14515
     },
     {
-      "path": "js/back-to-top.js",
-      "bytes": 1534
+      "path": "js/browse-model.js",
+      "bytes": 1584
+    },
+    {
+      "path": "js/costume-model.js",
+      "bytes": 3387
+    },
+    {
+      "path": "js/costume-reference.js",
+      "bytes": 9475
     },
     {
       "path": "js/pose-model.js",
-      "bytes": 4391
+      "bytes": 6773
     },
     {
       "path": "js/pose-reference.js",
-      "bytes": 11280
+      "bytes": 12262
     },
     {
       "path": "js/prototype.js",
-      "bytes": 120057
+      "bytes": 121825
     },
     {
-      "path": "js/storage.js",
-      "bytes": 5730
-    },
-    {
-      "path": "js/sync.js",
-      "bytes": 7230
+      "path": "manifest.json",
+      "bytes": 514
     },
     {
       "path": "pose-reference.html",
-      "bytes": 4522
+      "bytes": 4820
     },
     {
       "path": "service-worker.js",
-      "bytes": 3528
+      "bytes": 3778
     }
   ]
 }

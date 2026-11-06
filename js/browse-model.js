@@ -15,8 +15,14 @@ export function contentLabel(kind, metadata) {
 }
 export function belongsToWorkspace(workspace, kind, metadata) {
   const type=contentType(kind,metadata);
-  if(workspace==='browse')return ['multi','preset','composition'].includes(type);
+  if(workspace==='browse')return type!=='component';
   if(workspace==='goals')return type!=='component';
   if(workspace==='components')return type==='component';
   return true;
+}
+
+// Recent snapshots contain their suite separately; never match equal IDs across suites.
+export function copyPriority({suite,kind,entry},states,{pinned=false,favorite=false}={}) {
+  const recent=(states[suite]?.recent||[]).find(record=>record.id===`${kind}:${entry.id}`);
+  return {pinned:Number(pinned),favorite:Number(favorite),copiedAt:Date.parse(recent?.copiedAt)||0};
 }

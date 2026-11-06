@@ -1,7 +1,7 @@
-import {groupPoses,filterPoses,normalizePoseState,CATEGORIES,resolveActionPrompt,categoryLabel,FAMILIES,displayCategory} from './pose-model.js?v=4.2.0';
+import {groupPoses,filterPoses,normalizePoseState,CATEGORIES,resolveActionPrompt,categoryLabel,FAMILIES,displayCategory,poseReferenceInstruction} from './pose-model.js?v=4.3.0';
 const $=s=>document.querySelector(s),KEY='prompt-library-pose-reference-v1';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let promptEntries={},promptOnly=false,family='';
+let promptEntries={},promptOnly=false,family='',promptMode='image';
 let groups=[],state={format:'prompt-library-pose-state',version:1,favorites:[]},category='',favoriteOnly=false,limit=24,current=null,viewIndex=0,timer;
 function toast(text){$('#toast').textContent=text;$('#toast').classList.add('visible');clearTimeout(timer);timer=setTimeout(()=>$('#toast').classList.remove('visible'),3000)}
 function save(next){try{localStorage.setItem(KEY,JSON.stringify(next));state=next;return true}catch{toast('本机保存失败，请先导出收藏备份。');return false}}
@@ -23,14 +23,27 @@ function render(){
 function showView(index){
  viewIndex=(index+current.views.length)%current.views.length;const view=current.views[viewIndex];const source='data/pose-reference/'+view['原图'];
  $('#large').src=source;$('#large').alt=`${current.title} · ${view['角度']}`;$('#image-status').textContent=`${view['角度']} · ${viewIndex+1} / ${current.views.length}`;
- const resolved=resolveActionPrompt(current,view,promptEntries);
- $('#prompt-preview').value=resolved?.action||'本动作尚未整理文字提示词，请使用参考图或复制名称。';
- $('#copy-action').disabled=!resolved;$('#copy-instruction').disabled=!resolved;
- $('#prompt-status').textContent=resolved?'已对照参考图核对 · 未实测出图；复制内容随当前视角切换。':'仅已核对动作提供正文，不根据标题自动补写。';
+ updatePrompt();
  $('#reference-note').hidden=!current.sourceNote;$('#reference-note').textContent=current.sourceNote||'';
  $('#download').href=source;$('#download').download=view['id']+'.png';
  $('#angles').innerHTML=current.views.map((v,i)=>`<button data-angle="${i}" aria-pressed="${i===viewIndex}">${esc(v['角度'])}</button>`).join('');
 }
+function selectedInstruction(){
+ const view=current.views[viewIndex];
+ return promptMode==='image'?poseReferenceInstruction(current,view,promptEntries):resolveActionPrompt(current,view,promptEntries)?.instruction;
+}
+function updatePrompt(){
+ const resolved=resolveActionPrompt(current,current.views[viewIndex],promptEntries),imageMode=promptMode==='image';
+ const instruction=selectedInstruction();
+ $('#prompt-preview').value=instruction||'本动作尚未整理文字提示词，可切换参考图模式。';
+ $('#mode-image').setAttribute('aria-pressed',String(imageMode));$('#mode-text').setAttribute('aria-pressed',String(!imageMode));
+ $('#copy-action').disabled=!resolved;$('#copy-instruction').disabled=!instruction;
+ $('#copy-instruction').textContent=imageMode?'复制参考图换姿势指令':'复制文字改姿势指令';
+ $('#pose-usage').textContent=imageMode?'上传人物原图（图1）＋当前视角的姿势参考图（图2），再粘贴下方指令。仅复制文字不会同时上传参考图。':'只上传人物原图，再粘贴下方文字指令；不需要第二张姿势图。';
+ $('#prompt-status').textContent='指令随当前视角切换；图片核对不代表已实测出图。';
+}
+$('#mode-image').onclick=()=>{promptMode='image';if(current)updatePrompt()};
+$('#mode-text').onclick=()=>{promptMode='text';if(current)updatePrompt()};
 function open(key){current=groups.find(g=>g.key===key);if(!current)return;$('#detail-title').textContent=current.title;$('#detail-category').textContent=`${displayCategory(current)} · ${current.number}`;$('#source-record-info').textContent=`原体系：${current.system}；原分类：${current.category}；原编号：${current.number}`;$('#detail-star').textContent=state.favorites.includes(key)?'★ 已收藏':'☆ 收藏动作';showView(0);$('#detail').showModal();document.body.style.overflow='hidden'}
 function close(){ $('#detail').close();document.body.style.overflow='';current=null }
 $('#grid').addEventListener('click',e=>{const starButton=e.target.closest('[data-star]'),openButton=e.target.closest('[data-open]');if(starButton)star(starButton.dataset.star);else if(openButton)open(openButton.dataset.open)});
@@ -57,7 +70,7 @@ async function copyText(text,message){
 }
 $('#copy').onclick=()=>copyText(current.title,'已复制动作名称');
 $('#copy-action').onclick=()=>{const value=resolveActionPrompt(current,current.views[viewIndex],promptEntries);if(value)copyText(value.action,'已复制当前视角动作')};
-$('#copy-instruction').onclick=()=>{const value=resolveActionPrompt(current,current.views[viewIndex],promptEntries);if(value)copyText(value.instruction,'已复制图生图指令')};
+$('#copy-instruction').onclick=()=>{const value=selectedInstruction();if(value)copyText(value,promptMode==='image'?'已复制参考图换姿势指令':'已复制文字改姿势指令')};
 $('#export').onclick=()=>{const blob=new Blob([JSON.stringify({...state,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`prompt-library-pose-favorites-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 $('#import').onclick=()=>$('#import-file').click();$('#import-file').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>1000000)throw new Error('备份文件过大。');const value=normalizePoseState(JSON.parse(await file.text()),groups);if(save({...state,favorites:[...new Set([...state.favorites,...value.favorites])]})){render();toast('收藏已合并，原有收藏保留。')}}catch(error){toast(error.message||'无法读取备份。')}finally{e.target.value=''}};
 $('#source').onclick=()=>$('#source-dialog').showModal();$('#source-close').onclick=()=>$('#source-dialog').close();
@@ -76,7 +89,7 @@ async function watchPoseUpdates(){
  try{
   const hadController=Boolean(navigator.serviceWorker.controller);let reloading=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController&&!reloading){reloading=true;location.reload()}});
-  const registration=await navigator.serviceWorker.register('service-worker.js?v=4.2.0',{updateViaCache:'none'});
+  const registration=await navigator.serviceWorker.register('service-worker.js?v=4.3.0',{updateViaCache:'none'});
   await registration.update();
  }catch{/* Online browsing and existing local state remain available. */}
 }

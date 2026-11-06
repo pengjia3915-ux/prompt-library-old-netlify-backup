@@ -2,21 +2,32 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {classify,sourceRows} from '../js/catalog.js';
-import {contentType,belongsToWorkspace} from '../js/browse-model.js';
+import {contentType,belongsToWorkspace,copyPriority} from '../js/browse-model.js';
 import {createPreviewServer} from '../scripts/preview-server.mjs';
 import {createServer} from 'node:http';
 const z=JSON.parse(await readFile(new URL('../data/img2img-prompts.json',import.meta.url)));
 const b=JSON.parse(await readFile(new URL('../data/bangyan-data.json',import.meta.url)));
 const rows=sourceRows(z,b).map(row=>({...row,meta:classify(row.entry,row.kind,b.components)}));
-test('三条路径覆盖754条源记录；单项和组件不混入直接使用',()=>{
+test('直接复制覆盖全部519条完整内容，235条组件仍可独立查找',()=>{
   assert.equal(rows.length,754);
   const direct=rows.filter(r=>belongsToWorkspace('browse',r.kind,r.meta));
   const goals=rows.filter(r=>belongsToWorkspace('goals',r.kind,r.meta));
   const components=rows.filter(r=>belongsToWorkspace('components',r.kind,r.meta));
   assert.equal(goals.length+components.length,754);assert.equal(components.length,235);
   assert.equal(direct.filter(r=>r.kind==='preset').length,24);
-  assert.ok(direct.every(r=>!['single','component'].includes(contentType(r.kind,r.meta))));
+  assert.equal(direct.length,519);
+  assert.ok(direct.some(r=>contentType(r.kind,r.meta)==='single'));
+  assert.ok(direct.every(r=>contentType(r.kind,r.meta)!=='component'));
   for(const r of rows)assert.ok(belongsToWorkspace('mine',r.kind,r.meta));
+});
+
+test('常用排序读取真实复制记录，来源与内容类型隔离，不凭相同ID串用',()=>{
+ const states={zhuangyuan:{recent:[{id:'prompt:same',copiedAt:'2026-11-06T01:00:00Z'}]},bangyan:{recent:[{id:'direct:same',copiedAt:'2026-11-05T01:00:00Z'}]}};
+ assert.equal(copyPriority({suite:'zhuangyuan',kind:'prompt',entry:{id:'same'}},states).copiedAt,Date.parse('2026-11-06T01:00:00Z'));
+ assert.equal(copyPriority({suite:'bangyan',kind:'prompt',entry:{id:'same'}},states).copiedAt,0);
+ const saved=copyPriority({suite:'bangyan',kind:'direct',entry:{id:'same'}},states,{favorite:true,pinned:true});
+ assert.equal(saved.favorite,1);assert.equal(saved.pinned,1);assert.equal(saved.copiedAt,Date.parse('2026-11-05T01:00:00Z'));
+ assert.equal(copyPriority({suite:'zhuangyuan',kind:'prompt',entry:{id:'unused'}},states).copiedAt,0);
 });
 test('本地预览只转发原同步协议；失败时可返回错误，不伪造同步成功',async()=>{
   const received=[];

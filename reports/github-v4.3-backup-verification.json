@@ -1,0 +1,15 @@
+{
+  "verifiedDate": "2026-11-06",
+  "version": "4.3",
+  "deployId": "6aed51831851986da2b1cc2f",
+  "verifiedFiles": 2543,
+  "sourceAndBuildHashesMatch": true,
+  "tests": {
+    "passed": 68,
+    "failed": 0
+  },
+  "sceneTrialExcluded": true,
+  "reviewImagesExcluded": true,
+  "repository": "https://github.com/pengjia3915-ux/prompt-library-old-netlify-backup",
+  "branch": "main"
+}

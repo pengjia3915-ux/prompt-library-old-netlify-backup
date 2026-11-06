@@ -1,7 +1,7 @@
 {
   "name": "Prompt 库",
   "short_name": "Prompt 库",
-  "description": "轻量、离线可用的个人 Prompt 组合工作台",
+  "description": "个人 Img2Img Prompt 库，快速查找、收藏与复制，支持动作和服装参考",
   "lang": "zh-CN",
   "start_url": "./",
   "scope": "./",

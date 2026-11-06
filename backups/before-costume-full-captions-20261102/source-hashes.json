@@ -1,0 +1,9 @@
+{
+  "data/img2img-prompts.json": "8e1b3725621ad35adca188392765825cb82b77793ea01159ffdbfaab119ef5f0",
+  "data/bangyan-data.json": "f65ad7057cc1fc9645a4f7720384ca36a28166207984b3f54d46fdd40d7f0b2b",
+  "data/pose-reference/catalog.json": "1f81f97b9d7ba68cbc6b64cc452bc18b187e8c41ff74f2528e5a839b8ffc2f2a",
+  "data/pose-reference/action-prompts.json": "c48537102d25c00b9fd9becc4c779b5ab99478720a6dcd9d280d26881d65e6e3",
+  "data/costume-reference/catalog.json": "00cfedb67f03f3905d28fcfa8f790407562466d986a813a07df9b3c7ae57cab1",
+  "js/storage.js": "31a8964bfe8969d62651c40c345d8d4bdefe598c317a9c82db9b3040b9caf6d7",
+  "js/sync.js": "f7570c7f9a1b66565c304bc42006bcbf724524474e320b1013b36c4e090f0a7b"
+}

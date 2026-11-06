@@ -107,3 +107,21 @@ body[data-workspace="builder"] #category-tabs{order:2;margin-bottom:12px}.builde
 .studio-nav .pose-nav-link{display:flex;align-items:center;gap:12px;padding:14px 16px;text-decoration:none;color:inherit;border-radius:12px;font-size:14px}.studio-nav .pose-nav-link:hover{background:#e0e8df}@media(max-width:700px){.studio-nav .pose-nav-link{flex:1;justify-content:center;flex-direction:column;gap:3px;padding:7px 2px;font-size:11px}.studio-nav .pose-nav-link>span:first-child{display:none}.studio-nav{grid-template-columns:repeat(5,1fr)!important}}
 
 .back-to-top{position:fixed;right:16px;bottom:24px;width:44px;height:44px;min-height:44px;padding:0;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--accent);font-size:23px;line-height:1;z-index:7;box-shadow:0 2px 8px #26352b0c}.back-to-top[hidden]{display:none!important}.back-to-top:hover{background:var(--accent-soft)}.back-to-top:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Local costume reference entry, six touch targets on mobile. */
+@media(max-width:760px){.studio-nav{grid-template-columns:repeat(6,minmax(0,1fr))!important}.studio-nav>button,.studio-nav>.pose-nav-link{padding:8px 2px;min-width:0;font-size:11px;white-space:nowrap;justify-content:center;gap:0}.studio-nav .pose-nav-link>span:first-child{display:none}}
+
+/* Copy-first local preview. Composition remains available as a secondary tool. */
+.studio-secondary{margin-top:24px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12px}
+.studio-secondary summary{cursor:pointer;min-height:40px;display:list-item;align-content:center;margin-left:14px}
+#studio-secondary{display:grid;gap:4px;margin-top:6px}
+#studio-secondary button{display:flex;gap:10px;align-items:center;min-height:44px;text-align:left;border:0;background:transparent;color:var(--muted);border-radius:8px;padding:10px 12px}
+#studio-secondary button:hover,#studio-secondary button[aria-current="page"]{background:var(--soft);color:var(--text)}
+.studio-card .is-copy{background:var(--accent);color:var(--field);min-width:78px;font-weight:600}
+.copy-tabs{gap:6px}.copy-tabs button{min-height:44px}
+.copy-shortcuts button[aria-pressed="true"]{background:var(--accent-soft)}
+.advanced-filters .content-tabs{display:inline-flex}
+.recent-item{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.recent-item>span{min-width:0}.recent-item strong{display:block;line-height:1.7}.recent-item small{display:block;line-height:1.8;margin-top:4px}
+.recent-item b{flex:none;background:var(--accent);color:var(--field);border-radius:8px;padding:10px 16px;font-size:12px}
+@media(max-width:760px){.studio-secondary{display:none}.studio-nav>button[data-value="browse"]{font-weight:650}.copy-tabs button{padding:8px 11px}.recent-item{padding:13px}.recent-item strong{font-size:13px}.recent-item b{padding:10px 13px}}

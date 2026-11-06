@@ -2,11 +2,23 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {groupPoses,resolveActionPrompt,filterPoses} from '../js/pose-model.js';
+import {groupPoses,resolveActionPrompt,filterPoses,poseReferenceInstruction} from '../js/pose-model.js';
 const root=new URL('../data/pose-reference/',import.meta.url);
 const groups=groupPoses(JSON.parse(fs.readFileSync(new URL('catalog.json',root),'utf8')).records);
 const entries=JSON.parse(fs.readFileSync(new URL('action-prompts.json',root),'utf8')).entries;
 const baseline=JSON.parse(fs.readFileSync(new URL('../backups/before-pose-prompts-20261031/action-prompts.json',import.meta.url),'utf8')).entries;
+
+test('参考图指令逐视角对应图1身份图2动作，双人和上半身约束独立',()=>{
+ for(const g of groups)for(const view of g.views){
+  const text=poseReferenceInstruction(g,view,entries);
+  assert.ok(text.includes('图1'));assert.ok(text.includes('图2'));assert.ok(text.includes(view['角度']));
+  assert.ok(text.includes(entries[g.key].views[view.id]));assert.ok(text.includes('姿势与视角以图2为准'));
+  if(g.family==='upper'){assert.ok(text.includes('保留原图下肢状态'));assert.ok(!text.includes('、腿部位置'));}
+  if(g.family==='pair'){assert.ok(text.includes('两位成年人物'));assert.ok(text.includes('分别保持'));assert.ok(text.includes('对应关系'));assert.ok(!text.includes('唯一人物身份参考'));}
+ }
+ assert.equal(poseReferenceInstruction(groups[0],{id:'missing'},entries),null);
+ assert.ok(poseReferenceInstruction(groups[0],groups[0].views[0],{}).includes('以实际上传的图2为准'));
+});
 
 test('251组1254真实视角都有独立中文动作词，不补造缺失视角',()=>{
  assert.equal(Object.keys(entries).length,251);let count=0;

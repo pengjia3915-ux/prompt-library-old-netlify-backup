@@ -32,7 +32,7 @@ const sw=read('service-worker.js').toString();
 const section=sw.slice(sw.indexOf('const CORE_ASSETS'),sw.indexOf('const NETWORK_FIRST_PATHS'));
 for(const [,url] of section.matchAll(/"(\.\/[^"]*)"/g)){const rel=url.split('?')[0].replace(/^\.\//,'')||'index.html';if(!fs.existsSync(path.join(client,rel)))throw Error('缓存资源不存在:'+rel)}
 const references=[];
-for(const rel of ['index.html','pose-reference.html'])if(/本地.*预览|尚未发布/.test(read(rel).toString()))throw Error('发布页面仍含预览标识:'+rel);
+for(const rel of ['index.html','pose-reference.html','costume-reference.html'])if(/本地.*预览|尚未发布/.test(read(rel).toString()))throw Error('发布页面仍含预览标识:'+rel);
 const release=sw.match(/const CACHE_NAME = "prompt-library-([^"]+)"/)[1];
 if(release.includes('local'))throw Error('发布资源仍使用本地版本号');
 

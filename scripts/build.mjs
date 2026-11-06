@@ -15,6 +15,13 @@ for (const file of [
   "index.html",
   "_redirects",
   "pose-reference.html",
+  "costume-reference.html",
+  "css/costume-reference.css",
+  "js/costume-reference.js",
+  "js/costume-model.js",
+  "data/costume-reference/catalog.json",
+  "data/costume-reference/text-prompts.json",
+  "data/costume-reference/SOURCE.md",
   "css/pose-reference.css",
   "js/pose-reference.js",
   "js/pose-model.js",
@@ -45,4 +52,14 @@ await fs.copyFile(path.join(root, "server", "index.js"), path.join(server, "inde
 await fs.copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", "hosting.json"));
 
 await fs.cp(path.join(root,"data/pose-reference"),path.join(client,"data/pose-reference"),{recursive:true});
-console.log("正式站点构建完成");
+const forbidden = /(^|\/)(?:reports|backups|scene-reference|costume-caption-review)(?:\/|\.)|(?:^|\/)sheet-\d+\.jpg$/i;
+async function verifyReleaseFiles(dir) {
+  for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
+    const target = path.join(dir, entry.name);
+    const relative = path.relative(client, target).replaceAll('\\', '/');
+    if (forbidden.test(relative)) throw new Error(`试用或复核材料不能发布: ${relative}`);
+    if (entry.isDirectory()) await verifyReleaseFiles(target);
+  }
+}
+await verifyReleaseFiles(client);
+console.log("正式站点构建完成（场景试用和复核材料已排除）");
