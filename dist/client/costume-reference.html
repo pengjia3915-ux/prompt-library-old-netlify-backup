@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#eeebe4"><title>服装参考 · Prompt 库</title><link rel="icon" href="icons/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/costume-reference.css?v=4.3.0"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#eeebe4"><title>服装参考 · Prompt 库</title><link rel="icon" href="icons/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/costume-reference.css?v=4.4.0"></head>
 <body>
 <header class="top"><a href="index.html">← 返回 Prompt 库</a><nav aria-label="参考区"><a href="pose-reference.html">动作参考</a><span aria-current="page">服装参考</span></nav></header>
 <main>
 <section class="intro"><div><p class="eyebrow">WARDROBE / 服装参考</p><h1>选好穿搭，人物还是原来的你。</h1><p>有服装参考图：选“参考图换装”，上传人物图＋服装图；没有服装图也可用纯文字换装。</p></div><button id="help-button" type="button">怎么使用 ↗</button></section>
-<section class="search-row" aria-label="服装搜索"><label for="query">⌕<input id="query" type="search" placeholder="搜编号、颜色、单品，例如：白色 针织" autocomplete="off" aria-label="搜索服装"></label><button id="clear" type="button">清空</button></section>
+<section class="search-row" aria-label="服装搜索"><label for="query">⌕<input id="query" type="search" placeholder="搜款名、款式、编号，例如：马面裙" autocomplete="off" aria-label="搜索服装"></label><button id="clear" type="button">清空</button></section>
 <nav id="categories" class="categories" aria-label="服装分类"></nav>
 <div class="result-row"><p id="result" role="status">正在载入服装目录…</p><span>只换衣服，保留人物与姿势</span></div>
 <div id="error-panel" class="empty" hidden><p id="error-text"></p><button id="retry-catalog" type="button">重新加载</button></div>
 <section id="grid" class="grid" aria-label="服装参考列表" aria-busy="true"></section>
 <div id="empty" class="empty" hidden><h2>没有找到这套穿搭</h2><p>换个关键词，或清空分类与搜索。</p><button id="reset" type="button">查看全部服装</button></div>
 <button id="more" class="more" type="button" hidden>再看24套</button>
-<footer><p>目录与中文标签：<a href="https://github.com/sleepy-zone/ai-ref-library-cn" target="_blank" rel="noopener noreferrer">sleepy-zone</a> · 图片原作者：<a href="https://x.com/giaaibusi" target="_blank" rel="noopener noreferrer">ギア</a></p><p>图片按需从来源站点加载，本项目不保存服装原图。<a href="https://ai-costume-gallery.pages.dev/" target="_blank" rel="noopener noreferrer">查看原库与使用说明 ↗</a></p></footer>
+<footer><p>外部服装目录与中文标签：<a href="https://github.com/sleepy-zone/ai-ref-library-cn" target="_blank" rel="noopener noreferrer">sleepy-zone</a> · 图片原作者：<a href="https://x.com/giaaibusi" target="_blank" rel="noopener noreferrer">ギア</a></p><p>外部服装图片按需加载，本库服装设计图可直接打开。<a href="https://ai-costume-gallery.pages.dev/" target="_blank" rel="noopener noreferrer">查看原库与使用说明 ↗</a></p></footer>
 </main>
 <dialog id="detail" aria-labelledby="detail-title">
  <header class="dialog-head"><div><p id="detail-category" class="eyebrow"></p><h2 id="detail-title"></h2></div><button id="close" type="button" aria-label="关闭服装详情">×</button></header>
@@ -20,6 +20,6 @@
  <section class="details"><p class="section-label">参考标签</p><div id="tags" class="tags"></div><details class="source-details"><summary>英文关键词与来源</summary><p id="keywords"></p><a id="source-link" target="_blank" rel="noopener noreferrer">在原库查看这张图 ↗</a></details><div class="prompt-modes" role="group" aria-label="换装方式"><button type="button" id="mode-text" aria-pressed="true">纯文字换装</button><button type="button" id="mode-image" aria-pressed="false">参考图换装</button></div><div class="usage"><strong id="usage-title"></strong><p id="usage-copy"></p><p id="text-quality" class="text-quality"></p></div><label for="instruction" class="section-label">换装指令</label><textarea id="instruction" readonly aria-label="换装指令"></textarea><p id="copy-status" class="hint" role="status"></p></section></div>
  <footer class="dialog-actions"><div class="item-nav"><button id="previous" type="button" aria-label="上一套服装">←</button><span id="position"></span><button id="next" type="button" aria-label="下一套服装">→</button></div><a id="open-original" target="_blank" rel="noopener noreferrer">打开服装原图 ↗</a><button id="copy-instruction" class="primary" type="button">复制换装指令</button></footer>
 </dialog>
-<dialog id="help" aria-labelledby="help-title"><header class="dialog-head"><h2 id="help-title">两种换装方式</h2><button id="close-help" type="button" aria-label="关闭使用说明">×</button></header><div class="help-content"><p><strong>没有服装图片：</strong>选择“纯文字换装”，只上传人物原图并粘贴中文指令。中文描述按参考图中可见的单品、配色和搭配补写；细小纹样可能有差异。</p><p><strong>能提供服装图片：</strong>选择“参考图换装”，依次上传人物原图（图1）和服装图（图2），再复制对应指令。</p><p>这里不使用脸库。身份、长相、体型、姿势和场景以你的人物原图为准，只借用参考图中的服装。</p><p>中文标签用于查找，不代替实际服装图片。图片由外部来源按需提供。</p><a href="https://ai-costume-gallery.pages.dev/" target="_blank" rel="noopener noreferrer">查看原作者使用说明 ↗</a></div></dialog>
-<div id="toast" role="status" aria-live="polite"></div><script type="module" src="js/costume-reference.js?v=4.3.0"></script>
+<dialog id="help" aria-labelledby="help-title"><header class="dialog-head"><h2 id="help-title">两种换装方式</h2><button id="close-help" type="button" aria-label="关闭使用说明">×</button></header><div class="help-content"><p><strong>没有服装图片：</strong>选择“纯文字换装”，只上传人物原图并粘贴中文指令。中文描述按参考图中可见的单品、配色和搭配补写；细小纹样可能有差异。</p><p><strong>能提供服装图片：</strong>选择“参考图换装”，依次上传人物原图（图1）和服装图（图2），再复制对应指令。</p><p>这里不使用脸库。身份、长相、体型、姿势和场景以你的人物原图为准，只借用参考图中的服装。</p><p>可按款名、编号和服装标签查找。详情中可以打开对应的服装大图。</p><a href="https://ai-costume-gallery.pages.dev/" target="_blank" rel="noopener noreferrer">查看原作者使用说明 ↗</a></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div><script type="module" src="js/costume-reference.js?v=4.4.0"></script>
 </body></html>

@@ -373,7 +373,7 @@ function builderUpdatedAt(value) {
 function builderHasContent(builder) {
   if (!builder || typeof builder !== "object") return false;
   if (Array.isArray(builder.original) && builder.original.length) return true;
-  return ["pose", "outfit", "neckline", "scene", "hairstyle", "hairColor", "glasses", "colorMode", "colorStyle", "colorPrimary", "colorSecondary", "colorAccent"]
+  return ["expression", "cameraPosition", "cameraView", "pose", "outfit", "neckline", "scene", "hairstyle", "hairColor", "glasses", "colorMode", "colorStyle", "colorPrimary", "colorSecondary", "colorAccent"]
     .some((key) => Boolean(builder[key]));
 }
 
@@ -513,4 +513,16 @@ export function parseUserBackup(text) {
   }
   if (!found) throw new Error("备份没有状元或榜眼数据");
   return data;
+}
+
+// Only refresh known old default values; local edits and user state stay intact.
+export function applyApprovedContentRevisions(entry, revisions = []) {
+  const result = clone(entry);
+  for (const revision of revisions) {
+    if (revision.id === result.id && ['title', 'prompt'].includes(revision.field)
+        && result[revision.field] === revision.before) {
+      result[revision.field] = revision.after;
+    }
+  }
+  return result;
 }

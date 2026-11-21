@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-26T06:14:41.461Z",
+  "generatedAt": "2026-11-11T02:16:08.735Z",
   "sourceHashes": {
-    "img2img-prompts.json": "8e1b3725621ad35adca188392765825cb82b77793ea01159ffdbfaab119ef5f0",
-    "bangyan-data.json": "f65ad7057cc1fc9645a4f7720384ca36a28166207984b3f54d46fdd40d7f0b2b"
+    "img2img-prompts.json": "238942225fc0ae5ef4d4bf4aac2db45fbed16fd6a4e00efc12802937ac722c0c",
+    "bangyan-data.json": "270ea10a7573729ef6fdb8cc31cf333a2d6c672d788221e2418b2682b0e075a1"
   },
   "entries": {
     "zhuangyuan:prompt:default-001": {
@@ -27,12 +27,11 @@
         },
         {
           "scope": "姿势与表情",
-          "text": "眼神自然的看向镜头",
+          "text": "眼神自然地看向镜头",
           "basis": "explicit-clause"
         }
       ],
       "issues": [
-        "正文内部重复片段 11 处（保留原文）",
         "反向约束嵌在正向正文，未自动拆分"
       ],
       "originalCategory": "image-edit",
@@ -60,12 +59,11 @@
         },
         {
           "scope": "姿势与表情",
-          "text": "眼神自然的看向镜头",
+          "text": "眼神自然地看向镜头",
           "basis": "explicit-clause"
         }
       ],
       "issues": [
-        "正文内部重复片段 11 处（保留原文）",
         "反向约束嵌在正向正文，未自动拆分"
       ],
       "originalCategory": "image-edit",
@@ -474,7 +472,7 @@
         },
         {
           "scope": "穿搭调整",
-          "text": "换成浅色针织短裙",
+          "text": "换成浅色针织连衣短裙",
           "basis": "explicit-clause"
         },
         {
@@ -3732,8 +3730,7 @@
       ],
       "themes": [
         "躺卧",
-        "自拍",
-        "居家"
+        "自拍"
       ],
       "evidence": [
         {
@@ -4381,7 +4378,9 @@
         "姿势与表情",
         "场景与光线"
       ],
-      "themes": [],
+      "themes": [
+        "坐姿"
+      ],
       "evidence": [
         {
           "scope": "姿势与表情",
@@ -4411,7 +4410,9 @@
         "姿势与表情",
         "场景与光线"
       ],
-      "themes": [],
+      "themes": [
+        "站姿"
+      ],
       "evidence": [
         {
           "scope": "穿搭调整",
@@ -13524,12 +13525,10 @@
           "basis": "descriptive-instruction"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_02": {
       "category": "综合方案",
@@ -13565,12 +13564,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_03": {
       "category": "综合方案",
@@ -13765,12 +13762,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_08": {
       "category": "综合方案",
@@ -13807,12 +13802,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_09": {
       "category": "综合方案",
@@ -13843,12 +13836,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_10": {
       "category": "综合方案",
@@ -14004,12 +13995,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_14": {
       "category": "综合方案",
@@ -14039,12 +14028,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_15": {
       "category": "综合方案",
@@ -14113,12 +14100,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_17": {
       "category": "综合方案",
@@ -14272,12 +14257,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "全身构图与95%占比的含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_21": {
       "category": "综合方案",
@@ -14864,12 +14847,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "交错与不交叉的动作含义需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "全身出镜",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_fullbody_academic_01": {
       "category": "综合方案",
@@ -17253,12 +17234,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "前领与后背开口位置需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "穿搭丝袜-2",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_stockings_outfit_2_05": {
       "category": "综合方案",
@@ -17566,12 +17545,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "裤长与露腿描述可能冲突"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "穿搭丝袜-2",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_stockings_outfit_2_15": {
       "category": "综合方案",
@@ -17620,6 +17597,7 @@
         "场景与光线"
       ],
       "themes": [
+        "丝袜",
         "酒店"
       ],
       "evidence": [
@@ -17639,12 +17617,10 @@
           "basis": "descriptive-instruction"
         }
       ],
-      "issues": [
-        "前领与后背开口位置需核对"
-      ],
+      "issues": [],
       "originalCategory": "原图处理",
       "originalSubcategory": "穿搭丝袜-2",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_stockings_outfit_2_17": {
       "category": "综合方案",
@@ -19235,12 +19211,10 @@
           "basis": "explicit-clause"
         }
       ],
-      "issues": [
-        "转头180度需核对人体可行性"
-      ],
+      "issues": [],
       "originalCategory": "姿势穿搭场景",
       "originalSubcategory": "站立姿势",
-      "status": "需人工核对"
+      "status": "规则归类"
     },
     "bangyan:direct:direct_standing_pose_07": {
       "category": "综合方案",

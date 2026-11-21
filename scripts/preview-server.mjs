@@ -26,9 +26,9 @@ export function createPreviewServer({root=appRoot,syncEndpoint='https://prompt-l
     try {
       const rel=decodeURIComponent(url.pathname).replace(/^\/+/, '');
       const resolved=path.resolve(root,rel||'index.html');
-      if(!resolved.startsWith(root+path.sep)||rel.split('/').some(p=>p.startsWith('.'))){res.writeHead(403);res.end();return;}
+      if(!resolved.startsWith(root+path.sep)||rel.split(/[\\/]/).some(p=>p.startsWith('.'))){res.writeHead(403);res.end();return;}
       const info=await stat(resolved);const file=info.isDirectory()?path.join(resolved,'index.html'):resolved;
-      const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml'};
+      const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon'};
       const bytes=await readFile(file);res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(req.method==='HEAD'?undefined:bytes);
     }catch{res.writeHead(404);res.end('Not found');}
   });

@@ -1,3 +1,4 @@
+import {approvedContentBaseline} from './approved-content-baseline.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -59,7 +60,7 @@ test('双人指令分别保持两人身份，不再要求不添加人物却只�
 
 test('主库和图片目录源数据字节不受动作词补齐影响',()=>{
  const baseline=JSON.parse(fs.readFileSync(new URL('../backups/before-pose-prompts-20261031/source-hashes.json',import.meta.url),'utf8'));
- for(const [file,hash] of Object.entries(baseline))assert.equal(createHash('sha256').update(fs.readFileSync(new URL('../'+file,import.meta.url))).digest('hex'),hash,file);
+ for(const [file,hash] of Object.entries(baseline))assert.equal(createHash('sha256').update(approvedContentBaseline(file)).digest('hex'),hash,file);
 });
 
 test('上半身指令不虚构看不到的下肢或强制扩成全身',()=>{

@@ -1,4 +1,4 @@
-import {groupPoses,filterPoses,normalizePoseState,CATEGORIES,resolveActionPrompt,categoryLabel,FAMILIES,displayCategory,poseReferenceInstruction} from './pose-model.js?v=4.3.0';
+import {groupPoses,filterPoses,normalizePoseState,CATEGORIES,resolveActionPrompt,categoryLabel,FAMILIES,displayCategory,poseReferenceInstruction} from './pose-model.js?v=4.4.0';
 const $=s=>document.querySelector(s),KEY='prompt-library-pose-reference-v1';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let promptEntries={},promptOnly=false,family='',promptMode='image';
@@ -89,7 +89,7 @@ async function watchPoseUpdates(){
  try{
   const hadController=Boolean(navigator.serviceWorker.controller);let reloading=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController&&!reloading){reloading=true;location.reload()}});
-  const registration=await navigator.serviceWorker.register('service-worker.js?v=4.3.0',{updateViaCache:'none'});
+  const registration=await navigator.serviceWorker.register('service-worker.js?v=4.4.0',{updateViaCache:'none'});
   await registration.update();
  }catch{/* Online browsing and existing local state remain available. */}
 }

@@ -19,3 +19,10 @@ css/** -text
 service-worker.js -text
 
 manifest.json -text
+
+/data/pose-reference/UPSTREAM-LICENSE.txt -text
+/reports/project-audit-20261111/content-applied/before/data/*.json -text
+/_redirects -text
+/data/costume-reference/SOURCE.md -text
+/data/pose-reference/SOURCE.md -text
+/icons/icon.svg -text

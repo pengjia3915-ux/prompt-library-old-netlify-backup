@@ -1,15 +1,16 @@
-import { contentType, contentLabel, belongsToWorkspace, copyPriority } from './browse-model.js?v=4.3.0';
-import { familyFor, familyUnits } from './families.js?v=4.3.0';
-import { classify, recordKey, CATEGORIES } from './catalog.js?v=4.3.0';
+import { contentType, contentLabel, belongsToWorkspace, copyPriority } from './browse-model.js?v=4.4.0';
+import { familyFor, familyUnits } from './families.js?v=4.4.0';
+import { classify, recordKey, CATEGORIES } from './catalog.js?v=4.4.0';
 import {
   createSyncCode,
   formatSyncCode,
   isValidSyncCode,
   normalizeSyncCode,
   syncSuites
-} from "./sync.js?v=4.3.0";
-import { readStorageBundle, writeStorageBundle } from "./storage.js?v=4.3.0";
+} from "./sync.js?v=4.4.0";
+import { readStorageBundle, writeStorageBundle } from "./storage.js?v=4.4.0";
 import {
+  applyApprovedContentRevisions,
   BANGYAN_SYNTHESIS_ORDER,
   clone,
   composeBangyanPreset,
@@ -32,9 +33,9 @@ import {
   searchMatches,
   selectBuilderComponent,
   removeBuilderComponent
-} from "./suite-utils.js?v=4.3.0";
+} from "./suite-utils.js?v=4.4.0";
 
-const APP_ASSET_VERSION = "4.3.0";
+const APP_ASSET_VERSION = "4.4.0";
 const PAGE_SIZE = 8;
 const THEME_KEY = "prompt-library-prototype-theme";
 const THEMES = new Set(["sage", "wine", "blue", "studio"]);
@@ -220,7 +221,7 @@ function normalizeZhuangyuanState(defaultData, stored) {
         ...(storedEntry.deletedAt ? { deletedAt: storedEntry.deletedAt } : {})
       };
     }
-    return clone(storedEntry);
+    return applyApprovedContentRevisions(storedEntry, defaultData.contentRevisions);
   });
   const customPrompts = storedPrompts
     .filter((entry) => !defaultsById.has(entry.id))
@@ -503,8 +504,9 @@ function fallbackCopy(value) {
   textarea.style.opacity = "0";
   document.body.append(textarea);
   textarea.select();
-  const copied=document.execCommand("copy");
-  textarea.remove();
+  let copied = false;
+  try { copied = document.execCommand("copy"); } catch {}
+  finally { textarea.remove(); }
   if(!copied) {
     const dialog=document.createElement('dialog');dialog.className='sheet-dialog';
     dialog.innerHTML='<form method="dialog"><h2>请手动复制</h2><p>浏览器未允许自动复制，请选择下面的完整内容。</p><textarea class="field-control field-textarea" readonly aria-label="手动复制正文"></textarea><button class="quiet-button">关闭</button></form>';
@@ -564,6 +566,7 @@ function exportUserState() {
 }
 
 async function copyEntry(kind, id, copyType = "all") {
+  const suite = app.activeSuite;
   const entry = findEntry(kind, id);
   if (kind === "component" && isDisplayOnlyComponent(entry)) {
     showToast("该项仅供辨认，不会复制到 Prompt 正文");
@@ -577,7 +580,7 @@ async function copyEntry(kind, id, copyType = "all") {
     return;
   }
   if(!await copyText(content))return;
-  recordRecent(kind, id, display.title, content);
+  inSuite(suite, () => recordRecent(kind, id, display.title, content));
   if (!await persist()) return;
   renderRecent();
   showToast(copyType === "negative" ? "反向提示词已复制" : "Prompt 已复制");
@@ -1440,7 +1443,7 @@ async function copyBuilder(copyType) {
   const content = copyType === "positive" ? result.positive : copyType === "negative" ? result.negative : result.negative ? `${result.positive}\n\n反向提示词：${result.negative}` : result.positive;
   if (!content) return showToast("请先选择组件");
   if(!await copyText(content))return;
-  recordRecent("builder", result.componentIds.join(","), result.title, content);
+  inSuite("bangyan", () => recordRecent("builder", result.componentIds.join(","), result.title, content));
   if (!await persist()) return;
   renderRecent();
   showToast("组合 Prompt 已复制");
@@ -1492,6 +1495,8 @@ function suiteSyncState(suite) {
 }
 
 async function syncNow() {
+  if (app.syncBusy) return;
+  let failureMessage = "";
   const code = normalizeSyncCode($("#sync-code").value || app.meta.syncCode);
   if (!isValidSyncCode(code)) return renderSyncStatus("请先生成或填写正确的 32 位同步码。");
   app.meta.syncCode = code;
@@ -1507,7 +1512,8 @@ async function syncNow() {
     const remoteZhuangyuan = result.suites.zhuangyuan;
     const remoteBangyan = result.suites.bangyan;
     if (remoteZhuangyuan) {
-      app.states.zhuangyuan.prompts = remoteZhuangyuan.prompts || app.states.zhuangyuan.prompts;
+      app.states.zhuangyuan.prompts = (remoteZhuangyuan.prompts || app.states.zhuangyuan.prompts)
+        .map(entry => applyApprovedContentRevisions(entry, app.defaults.zhuangyuan.contentRevisions));
       app.states.zhuangyuan.customPrompts = app.states.zhuangyuan.prompts.filter((entry) => !app.defaults.zhuangyuan.prompts.some((defaultEntry) => defaultEntry.id === entry.id));
       app.states.zhuangyuan.promptEdits = normalizePromptEdits(remoteZhuangyuan.promptEdits).filter((entry) => entry.kind === "prompt");
       app.states.zhuangyuan.savedCompositions = normalizeSavedCompositions(remoteZhuangyuan.savedCompositions);
@@ -1530,14 +1536,14 @@ async function syncNow() {
       }
     }
     app.meta.lastSyncedAt = result.syncedAt;
-    await persist();
+    if (!await persist()) throw new Error("云端已同步，但本机保存失败，请导出本机备份后重试");
     render();
     showToast("状元与榜眼数据已同步");
   } catch (error) {
-    renderSyncStatus(error.message || "同步失败，请稍后重试");
+    failureMessage = error.message || "同步失败，请稍后重试";
   } finally {
     app.syncBusy = false;
-    renderSyncStatus();
+    renderSyncStatus(failureMessage);
   }
 }
 
@@ -1561,7 +1567,7 @@ async function registerServiceWorker() {
 }
 
 async function initialize() {
-  const catalogRequest = fetch('data/catalog-map.json?v=4.3.0').then(response=>response.ok?response.json():null).catch(()=>null);
+  const catalogRequest = fetch('data/catalog-map.json?v=4.4.0').then(response=>response.ok?response.json():null).catch(()=>null);
   const loadData = async (file) => {
     try {
       const response = await fetch(`data/${file}?v=${APP_ASSET_VERSION}`);
@@ -1690,10 +1696,11 @@ document.addEventListener("click", async (event) => {
   } else if (action === "copy-entry") {
     await copyEntry(kind, id, target.dataset.copyType || "all");
   } else if (action === "copy-recent") {
+    const suite = app.activeSuite;
     const record = currentState().recent.find((entry) => entry.id === id);
     if (record) {
       if(!await copyText(record.content))return;
-      recordRecent(record.kind, record.id, record.title, record.content, record.id);
+      inSuite(suite, () => recordRecent(record.kind, record.id, record.title, record.content, record.id));
       await persist();
       render();
       showToast("最近 Prompt 已复制");
@@ -1741,8 +1748,7 @@ document.addEventListener("click", async (event) => {
   } else if (action === "copy-sync-code") {
     const code = normalizeSyncCode($("#sync-code").value || app.meta.syncCode);
     if (!isValidSyncCode(code)) return renderSyncStatus("请先生成或填写正确的同步码。");
-    await copyText(formatSyncCode(code));
-    showToast("同步码已复制");
+    if (await copyText(formatSyncCode(code))) showToast("同步码已复制");
   } else if (action === "export-state") {
     exportUserState();
   } else if (action === "sync-now") {
@@ -1828,7 +1834,7 @@ $("#sync-form").addEventListener("submit", async (event) => {
   const code = normalizeSyncCode($("#sync-code").value);
   if (!isValidSyncCode(code)) return renderSyncStatus("同步码应为 32 位字符，请检查后再保存。");
   app.meta.syncCode = code;
-  await persist();
+  if (!await persist()) return;
   renderSyncStatus();
   showToast("同步码已保存");
 });
@@ -1941,7 +1947,6 @@ function catalogItems() {
     if(studio.type==='direct' && !['prompt','direct','custom','composition'].includes(kind)) return false;
     if(studio.type==='preset' && kind!=='preset') return false;
     if(studio.type==='component' && kind!=='component') return false;
-    if(studio.type==='all' && studio.workspace!=='mine' && kind==='component') return false;
     const priority=copyPriority({suite,kind,entry},app.states,{pinned:isPinned(kind,entry),favorite:isFavorite(kind,entry.id)});
     if(studio.workspace==='browse'&&studio.quick==='common'&&!priority.pinned&&!priority.favorite&&!priority.copiedAt)return false;
     const m=catalogMeta(kind,entry);
@@ -1951,7 +1956,7 @@ function catalogItems() {
     if(studio.theme && !m.themes.includes(studio.theme))return false;
     const tokens=app.searchQuery.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
     const family=familyFor(suite,kind,entry,hasPromptEdit(kind,entry.id));
-    const text=[family?.family.title||'',family?.difference||'',displayFor(kind,entry).title,displayFor(kind,entry).positive,categoryNameFor(kind,entry),entry.subcategory,...m.scopes,...m.themes,...(entry.keywords||[]),...(effectiveEntry(kind,entry).tags||[]),effectiveEntry(kind,entry).description||''].join(' ').toLocaleLowerCase();
+    const text=[entry.id,family?.family.title||'',family?.difference||'',displayFor(kind,entry).title,displayFor(kind,entry).positive,categoryNameFor(kind,entry),entry.subcategory,...m.scopes,...m.themes,...(entry.keywords||[]),...(effectiveEntry(kind,entry).tags||[]),effectiveEntry(kind,entry).description||''].join(' ').toLocaleLowerCase();
     return tokens.every(token=>text.includes(token));
   }));
 }

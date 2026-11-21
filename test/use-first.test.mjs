@@ -1,3 +1,4 @@
+import {approvedContentBaseline} from './approved-content-baseline.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -32,11 +33,11 @@ test('人工说明标签用途通过规范化、同步合并和备份恢复保�
   assert.equal(saved.description,entry.description);
 });
 
-test('本轮前后两份正式数据字节一致',async()=>{
+test('历史原文保护基准一致，本次批准差异单独校验',async()=>{
   const baseline=JSON.parse(await fs.readFile(new URL('../backups/before-use-first/source-hashes.json',import.meta.url),'utf8'));
   for(const item of baseline){
     const name=item.Path.split(/[\\/]/).at(-1);
-    const bytes=await fs.readFile(new URL('../data/'+name,import.meta.url));
+    const bytes=approvedContentBaseline('data/'+name);
     assert.equal(createHash('sha256').update(bytes).digest('hex').toUpperCase(),item.Hash);
   }
 });

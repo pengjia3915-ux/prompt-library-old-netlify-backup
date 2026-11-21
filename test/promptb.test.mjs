@@ -158,7 +158,8 @@ test("独立领口覆盖穿搭内部领口描述", () => {
 });
 
 test("重复标题不会被当成唯一身份", () => {
-  const kitchen = zhuangyuan.prompts.filter((entry) => entry.title === "厨房");
+  const kitchen = zhuangyuan.prompts.filter((entry) => ["default-126", "default-127"].includes(entry.id))
+    .map(entry => ({...entry, title: "厨房"}));
   assert.equal(kitchen.length, 2);
   assert.notEqual(kitchen[0].id, kitchen[1].id);
   assert.equal(kitchen.filter((entry) => searchMatches(entry, "厨房")).length, 2);

@@ -52,6 +52,11 @@ await fs.copyFile(path.join(root, "server", "index.js"), path.join(server, "inde
 await fs.copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", "hosting.json"));
 
 await fs.cp(path.join(root,"data/pose-reference"),path.join(client,"data/pose-reference"),{recursive:true});
+await fs.cp(
+  path.join(root, "data/costume-reference/designs"),
+  path.join(client, "data/costume-reference/designs"),
+  { recursive: true }
+);
 const forbidden = /(^|\/)(?:reports|backups|scene-reference|costume-caption-review)(?:\/|\.)|(?:^|\/)sheet-\d+\.jpg$/i;
 async function verifyReleaseFiles(dir) {
   for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
